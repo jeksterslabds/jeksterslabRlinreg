@@ -15,7 +15,8 @@ before_install:
 - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install -y libpoppler-cpp-dev; fi
 - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update; fi
 - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install imagemagick; fi
-- if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install poppler; fi
+# uncomment if poppler is not already installed in travis
+# - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install poppler; fi
 - Rscript -e 'if (!require("covr")) install.packages("covr")'
 - Rscript -e 'if (!require("pkgdown")) install.packages("pkgdown")'
 after_success:
