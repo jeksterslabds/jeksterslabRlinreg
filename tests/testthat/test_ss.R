@@ -104,6 +104,8 @@ results_rss_lm <- lm_anova[["Sum Sq"]][2]
 results_tss_lm <- results_ess_lm + results_rss_lm
 results_r_sqr_lm <- summary(lm_object)$r.squared
 results_r_bar_sqr_lm <- summary(lm_object)$adj.r.squared
+results_mse_lm <- mean(lm_object$residuals^2)
+results_rmse_lm <- sqrt(results_mse_lm)
 results_ss_r <- ss_r(
   beta_hat = NULL,
   X = X,
@@ -145,15 +147,51 @@ results_r_bar_sqr_ess <- r_bar_sqr(
   y = y,
   rss = FALSE
 )
+results_mse <- mse(
+  beta_hat = NULL,
+  X = X,
+  y = y,
+  n = nrow(X)
+)
+results_rmse <- rmse(
+  beta_hat = NULL,
+  X = X,
+  y = y,
+  n = nrow(X)
+)
 #'
 #' ## Summarize Results
 #'
 #+ results
 knitr::kable(
   x = data.frame(
-    Item = c("$RSS$", "$ESS$", "$TSS$", "$R^2$", "$\\bar{R}^{2}$"),
-    lm = c(results_rss_lm, results_ess_lm, results_tss_lm, results_r_sqr_lm, results_r_bar_sqr_lm),
-    linreg = c(results_ss_r, results_ss_e, results_ss_t, results_r_sqr_rss, results_r_bar_sqr_rss)
+    Item = c(
+      "$RSS$",
+      "$ESS$",
+      "$TSS$",
+      "$R^2$",
+      "$\\bar{R}^{2}$",
+      "$MSE$",
+      "$RMSE$"
+    ),
+    lm = c(
+      results_rss_lm,
+      results_ess_lm,
+      results_tss_lm,
+      results_r_sqr_lm,
+      results_r_bar_sqr_lm,
+      results_mse_lm,
+      results_rmse_lm
+    ),
+    linreg = c(
+      results_ss_r,
+      results_ss_e,
+      results_ss_t,
+      results_r_sqr_rss,
+      results_r_bar_sqr_rss,
+      results_mse,
+      results_rmse
+    )
   ),
   row.names = FALSE
 )
@@ -245,6 +283,34 @@ test_that("r_bar_sqr", {
     ),
     round(
       x = results_r_bar_sqr_ess,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_06, echo=TRUE
+test_that("mse", {
+  expect_equivalent(
+    round(
+      x = results_mse_lm,
+      digits = 2
+    ),
+    round(
+      x = results_mse,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_07, echo=TRUE
+test_that("rmse", {
+  expect_equivalent(
+    round(
+      x = results_rmse_lm,
+      digits = 2
+    ),
+    round(
+      x = results_rmse,
       digits = 2
     )
   )
