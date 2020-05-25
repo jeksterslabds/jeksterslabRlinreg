@@ -1,0 +1,152 @@
+#' ---
+#' title: "Test: Projection Matrix"
+#' author: "Ivan Jacob Agaloos Pesigan"
+#' date: "`r Sys.Date()`"
+#' output: rmarkdown::html_vignette
+#' vignette: >
+#'   %\VignetteIndexEntry{Test: Projection Matrix}
+#'   %\VignetteEngine{knitr::rmarkdown}
+#'   %\VignetteEncoding{UTF-8}
+#' ---
+#'
+#+ knitr_options, include=FALSE, cache=FALSE
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+#'
+#+ setup
+library(testthat)
+library(microbenchmark)
+library(jeksterslabRlinreg)
+context("Test Projection Matrix.")
+#'
+#' ## Parameters
+#'
+#+ parameters
+n <- 100
+sigma2 <- runif(
+  n = 1,
+  min = 9,
+  max = 15
+)
+beta <- runif(
+  n = sample(
+    x = 2:5,
+    size = 1
+  ),
+  min = 1,
+  max = 3
+)
+Variable <- c(
+  "`n`",
+  "`sigma2`",
+  "`beta`"
+)
+Description <- c(
+  "Sample size ($n$).",
+  "Error variance ($\\sigma^{2}_{\\epsilon}$).",
+  "Regression coefficients ($\\beta$)."
+)
+Value <- c(
+  n,
+  sigma2,
+  paste0(beta, collapse = ", ")
+)
+knitr::kable(
+  x = data.frame(
+    Variable,
+    Description,
+    Value
+  ),
+  row.names = FALSE
+)
+#'
+#' ## Generate Data
+#'
+#+ generate_data
+X <- matrix(
+  data = NA,
+  nrow = n,
+  ncol = length(beta)
+)
+for (i in 1:length(beta)) {
+  if (i == 1) {
+    X[, i] <- rep(
+      x = 1,
+      times = n
+    )
+  } else {
+    X[, i] <- runif(
+      n = n,
+      min = -5,
+      max = 5
+    )
+  }
+}
+y <- X %*% beta + rnorm(
+  n = n,
+  sd = sqrt(sigma2)
+)
+#'
+#' ## Calculate Projection Matrices
+#'
+#+ estimate
+P <- proj_P(
+  X = X
+)
+M <- proj_M(
+  X = X,
+  P = NULL
+)
+M2 <- proj_M(
+  X = X,
+  P = P
+)
+#'
+#' ## Benchmarking
+#'
+#+ benchmark
+microbenchmark(
+  M = proj_M(X = X, P = NULL),
+  M2 = proj_M(X = X, P = P)
+)
+#'
+#' ## testthat
+#'
+#+ testthat_01, echo=TRUE
+test_that("proj_M(X = X, P = P) and proj_M(X = X, P = NULL) are equal", {
+  expect_equivalent(
+    M,
+    M2
+  )
+})
+#'
+#+ testthat_02, echo=TRUE
+test_that("P + M = I", {
+  expect_equivalent(
+    P + M,
+    P + M2,
+    diag(nrow(P))
+  )
+})
+#'
+#+ testthat_03, echo=TRUE
+test_that("Py + My = y", {
+  expect_equivalent(
+    P %*% y + M %*% y,
+    P %*% y + M2 %*% y,
+    y
+  )
+})
+#'
+#+ testthat_04, echo=TRUE
+test_that("PM = 0", {
+  expect_equivalent(
+    P %*% M,
+    P %*% M2,
+    matrix(data = 0, nrow = nrow(P), ncol = ncol(P))
+  )
+})
