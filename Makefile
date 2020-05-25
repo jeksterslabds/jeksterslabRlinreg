@@ -19,5 +19,7 @@ rm :
 	-rm -rf ${PKG}/vignettes/*.html
 	-rm -rf ${PKG}/vignettes/*.md
 	-rm -rf ${PKG}/vignettes/notes/*.html
+	-rm -rf ${PKG}/vignettes/notes/*_files
+	-rm -rf ${PKG}/vignettes/notes/*_cache
 	-rm -rf ${PKG}/vignettes/notes/*.md
 	-rm -rf ${PKG}/vignettes/tests/*
