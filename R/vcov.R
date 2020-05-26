@@ -91,6 +91,8 @@ sigma2_hat_rss <- function(rss = NULL,
       X = X,
       y = y
     )
+    n <- nrow(X)
+    k <- ncol(X)
   }
   if (type == "unbiased") {
     return(rss / (n - k))
@@ -119,8 +121,6 @@ sigma2_hat <- function(X,
                        type = "unbiased") {
   sigma2_hat_rss(
     rss = NULL,
-    n = nrow(X),
-    k = ncol(X),
     type = type,
     beta_hat = NULL,
     X = X,
