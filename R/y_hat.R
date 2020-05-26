@@ -1,6 +1,8 @@
 #' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{P} \mathbf{y}})
 #'
-#' Calculates y-hat using
+#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
+#' the predicted value of \eqn{\mathbf{y}}
+#' given \eqn{\mathbf{X}} using
 #'   \deqn{
 #'     \mathbf{\hat{y}}
 #'     =
@@ -21,6 +23,10 @@
 #' @return
 #'   Returns y-hat (\eqn{\mathbf{\hat{y}}}).
 #' @family y-hat functions
+#' @references
+#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#'
+#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #' @export
 y_hat_Py <- function(y,
                      P = NULL,
@@ -38,7 +44,9 @@ y_hat_Py <- function(y,
 
 #' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}})
 #'
-#' Calculates y-hat using
+#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
+#' the predicted value of \eqn{\mathbf{y}}
+#' given \eqn{\mathbf{X}} using
 #'   \deqn{
 #'     \mathbf{\hat{y}}
 #'     =
@@ -57,7 +65,7 @@ y_hat_Py <- function(y,
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams beta_hat_inv
 #' @inheritParams e_y_minus_y_hat
-#' @inherit y_hat_Py return
+#' @inherit y_hat_Py return references
 #' @family y-hat functions
 #' @export
 y_hat_Xbeta_hat <- function(X,
@@ -74,7 +82,9 @@ y_hat_Xbeta_hat <- function(X,
 
 #' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}})
 #'
-#' Calculates y-hat using
+#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
+#' the predicted value of \eqn{\mathbf{y}}
+#' given \eqn{\mathbf{X}} using
 #'   \deqn{
 #'     \mathbf{\hat{y}}
 #'     =
@@ -88,7 +98,7 @@ y_hat_Xbeta_hat <- function(X,
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams y_hat_Xbeta_hat
-#' @inherit y_hat_Py return
+#' @inherit y_hat_Py return references
 #' @family y-hat functions
 #' @export
 y_hat <- function(X,
@@ -103,7 +113,9 @@ y_hat <- function(X,
 
 #' y-hat for Testing Data  Set (\eqn{\mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}})
 #'
-#' Calculates y-hat using
+#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
+#' the predicted value of \eqn{\mathbf{y}}
+#' given \eqn{\mathbf{X}} using
 #'   \deqn{
 #'     \mathbf{\hat{y}}
 #'     =
@@ -140,6 +152,7 @@ y_hat <- function(X,
 #'     \item{R_squared}{Coefficient of determinism. `NA` if `y = NULL`.}
 #'     \item{adjusted_R_squared}{Adjusted R-squared. `NA` if `y = NULL`.}
 #'   }
+#' @inherit y_hat_Py references
 #' @family y-hat functions
 #' @export
 y_hat_test <- function(beta_hat,
@@ -159,7 +172,7 @@ y_hat_test <- function(beta_hat,
     mse <- mean(rss)
     rmse <- sqrt(mse)
     r2 <- 1 - (rss / tss)
-    r_bar_sqr <- r_bar_sqr(
+    rbar2_r2 <- rbar2_r2(
       r2 = r2,
       n = nrow(X),
       k = ncol(X)
@@ -171,6 +184,6 @@ y_hat_test <- function(beta_hat,
     MSE = mse,
     RMSE = rmse,
     R_squared = r2,
-    adjusted_R_squared = r_bar_sqr
+    adjusted_R_squared = rbar2_r2
   )
 }
