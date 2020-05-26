@@ -1,114 +1,215 @@
-#' Residual Variance
+#' Residual Variance (from \eqn{RSS})
 #'
-#' Calculates estimates of the residual variance
+#' Calculates estimates of the error variance
 #'   \deqn{
 #'     \mathbf{E}
 #'       \left(
 #'         \sigma^2
 #'       \right)
 #'   =
-#'   s^2
-#'   },
+#'   \hat{\sigma}^2
+#'   }
 #'   \deqn{
-#'     s_{\textrm{OLS}}^{2}
+#'     \hat{\sigma}^2_{\textrm{unbiased}}
 #'     =
 #'     \frac{
-#'       \mathbf{e^{\prime} e }
+#'     \mathbf{e}^{\prime}
+#'     \mathbf{e}
 #'     }
 #'     {
 #'       n - k
 #'     }
-#'   },
-#'   \deqn{
-#'     s_{\textrm{ML}}^{2}
 #'     =
 #'     \frac{
-#'       \mathbf{e^{\prime} e }
+#'     RSS
+#'     }
+#'     {
+#'       n - k
+#'     }
+#'   }
+#' or
+#'   \deqn{
+#'     \hat{\sigma}^2_{\textrm{biased}}
+#'     =
+#'     \frac{
+#'     \mathbf{e}^{\prime}
+#'     \mathbf{e}
 #'     }
 #'     {
 #'       n
 #'     }
-#'   }.
+#'     =
+#'     \frac{
+#'     RSS
+#'     }
+#'     {
+#'       n
+#'     }
+#'   }
+#' where
+#' \eqn{\mathbf{e}} is the vector of residuals,
+#' \eqn{RSS} is the residual sum of squares,
+#' \eqn{n} is the sample size,
+#' and \eqn{k} is the number of regressors
+#' including a regressor whose value is 1 for each observation.
+#'
+#' If `rss = NULL`,
+#' `rss` is computed
+#' using [`ss_r()`]
+#' with `X` and `y` as a required arguments
+#' and `beta_hat` as an optional argument.
+#' If `rss` is provided,
+#' `beta_hat`, `X`, and `y`
+#' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams e_y_minus_y_hat
-#' @param s_sqr_est String.
+#' @inheritParams rbar2_r2
+#' @inheritParams r2_rss
+#' @param type String.
 #'   Residual variance estimator.
-#'   If \code{"both"},
-#'   returns both OLS and ML estimates as a vector.
-#'   If \code{"ols"},
-#'   returns OLS estimate.
-#'   If \code{"ml"},
-#'   returns ML estimate.
+#'   If `type = "unbiased"`,
+#'   returns unbiased estimate.
+#'   If `type = "biased"`,
+#'   returns biased estimate.
+#'   If `type = "both"`,
+#'   returns a vector of
+#'   unbiased and biased estimates.
 #' @return Returns the estimated residual variance.
+#' @inherit y_hat references
 #' @export
-s_sqr <- function(beta_hat = NULL,
-                  X,
-                  y,
-                  s_sqr_est = "both") {
-  rss <- ss_r(
-    beta_hat = beta_hat,
+sigma2_hat_rss <- function(rss = NULL,
+                           n,
+                           k,
+                           type = "unbiased",
+                           beta_hat = NULL,
+                           X = NULL,
+                           y = NULL) {
+  if (is.null(rss)) {
+    rss <- ss_r(
+      beta_hat = beta_hat,
+      X = X,
+      y = y
+    )
+  }
+  if (type == "unbiased") {
+    return(rss / (n - k))
+  }
+  if (type == "biased") {
+    return(rss / n)
+  }
+  if (type == "both") {
+    return(
+      c(
+        unbiased = rss / (n - k),
+        biased = rss / n
+      )
+    )
+  }
+}
+
+#' Residual Variance
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @inheritParams sigma2_hat_rss
+#' @inherit sigma2_hat_rss return description references
+#' @export
+sigma2_hat <- function(X,
+                       y,
+                       type = "unbiased") {
+  sigma2_hat_rss(
+    rss = NULL,
+    n = nrow(X),
+    k = ncol(X),
+    type = type,
+    beta_hat = NULL,
     X = X,
     y = y
   )
-  ols <- rss / (nrow(X) - ncol(X))
-  ml <- rss / nrow(X)
-  out <- c(
-    ols = ols,
-    ml = ml
-  )
-  if (s_sqr_est == "ols") {
-    return(
-      ols
-    )
-  }
-  if (s_sqr_est == "ml") {
-    return(
-      ml
-    )
-  }
-  if (s_sqr_est == "both") {
-    return(
-      out
-    )
-  }
-  out
 }
 
-#' Variance-Covariance Matrix of Estimates Regression Coefficients
+#' Variance-Covariance Matrix of Estimates of Regression Coefficients (from \eqn{\hat{\sigma}^2})
 #'
-#' Calculates the variance-covariance matrix of estimates of regression coefficients
+#' Calculates the variance-covariance matrix
+#' of estimates of regression coefficients using
 #'   \deqn{
-#'     \sigma^2 \left(\mathbf{X}^{\prime} \mathbf{X} \right)^{-1}.
+#'     \hat{\sigma}^2
+#'     \left(
+#'       \mathbf{X}^{\prime}
+#'       \mathbf{X}
+#'     \right)^{-1}
 #'   }
+#' where \eqn{\hat{\sigma}^2}
+#' is the estimate of the error variance \eqn{{\sigma}^2}
+#' and \eqn{\mathbf{X}} is
+#' the data matrix,
+#' that is,
+#' an \eqn{n \times k} matrix
+#' of \eqn{n} observations
+#' of \eqn{k} regressors,
+#' which includes a regressor
+#' whose value is 1 for each observation.
+#'
+#' If `sigma2_hat = NULL`,
+#' `sigma2_hat` is computed
+#' using [`sigma2_hat()`]
+#' with `X` and `y` as a required arguments
+#' and `beta_hat` as an optional argument.
+#' If `sigma2_hat` is provided,
+#' `beta_hat`, `X`, and `y`
+#' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams s_sqr
+#' @param sigma2_hat Numeric.
+#'   Estimate of error variance.
+#' @inheritParams sigma2_hat_rss
 #' @return Returns variance-covariance matrix of estimates of regression coefficients.
+#' @inherit sigma2_hat references
 #' @export
-cov_beta_hat <- function(beta_hat = NULL,
-                         X,
-                         y,
-                         s_sqr_est = "ols") {
-  s_sqr <- s_sqr(
-    beta_hat = beta_hat,
-    X = X,
-    y = y,
-    s_sqr_est = s_sqr_est
-  )
-  mat <- solve(crossprod(X))
-  if (s_sqr_est == "both") {
+cov_beta_hat_sigma2_hat <- function(sigma2_hat = NULL,
+                                    beta_hat = NULL,
+                                    X,
+                                    y,
+                                    type = "unbiased") {
+  if (is.null(sigma2_hat)) {
+    sigma2_hat <- sigma2_hat(
+      beta_hat = beta_hat,
+      X = X,
+      y = y,
+      type = type
+    )
+  }
+  inv <- solve(crossprod(X))
+  if (type == "both") {
     return(
       list(
-        ols = s_sqr["ols"] * mat,
-        ml = s_sqr["ml"] * mat
+        unbiased = sigma2_hat["unbiased"] * inv,
+        biased = sigma2_hat["biased"] * inv
       )
     )
-  } else if (s_sqr_est == "ols" | s_sqr_est == "ml") {
+  } else if (type == "unbiased" | type == "biased") {
     return(
       unname(
-        s_sqr * mat
+        sigma2_hat * inv
       )
     )
   }
+}
+
+#' Variance-Covariance Matrix of Estimates of Regression Coefficients
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @inheritParams cov_beta_hat_sigma2_hat
+#' @inherit cov_beta_hat_sigma2_hat return description references
+#' @export
+cov_beta_hat <- function(X,
+                         y,
+                         type = "unbiased") {
+  cov_beta_hat_sigma2_hat(
+    sigma2_hat = NULL,
+    beta_hat = NULL,
+    X = X,
+    y = y,
+    type = type
+  )
 }
