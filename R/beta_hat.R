@@ -56,8 +56,8 @@ beta_hat_inv <- function(X,
 #' Beta-hat - QR Decomposition
 #'
 #' Estimates coefficients of a linear regression model
-#'   using the QR Decomposition.
-#'   The data matrix (\eqn{\mathbf{X}}) is decomposed into
+#'   using QR Decomposition.
+#'   The data matrix \eqn{\mathbf{X}} is decomposed into
 #'   \deqn{
 #'     \mathbf{X}
 #'     =
@@ -99,8 +99,8 @@ beta_hat_qr <- function(X,
 #' Beta-hat - Singular Value Decomposition
 #'
 #' Estimates coefficients of a linear regression model
-#'   using the Singular Value Decomposition.
-#'   The data matrix (\eqn{\mathbf{X}}) is decomposed into
+#'   using Singular Value Decomposition.
+#'   The data matrix \eqn{\mathbf{X}} is decomposed into
 #'   \deqn{
 #'     \mathbf{X}
 #'     =
