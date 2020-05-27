@@ -69,7 +69,7 @@ linreg <- function(X,
   )
   se <- sqrt(diag(vcov))
   t <- betahat / se
-  p.value <- 2 * pt(
+  p <- 2 * pt(
     q = t,
     df = n - k,
     lower.tail = FALSE
@@ -78,7 +78,7 @@ linreg <- function(X,
     Coefficients = betahat,
     se = se,
     t = t,
-    p = p.value
+    p = p
   )
   model <- matrix(
     data = c(
@@ -126,6 +126,8 @@ linreg <- function(X,
       k = k,
       betahat = betahat,
       se = se,
+      t = t,
+      p = p,
       rss = rss,
       ess = ess,
       tss = tss,
