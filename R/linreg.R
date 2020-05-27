@@ -1,71 +1,147 @@
 #' Linear Regression
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param beta_hat String.
-#'   How the regression coefficients are estimated.
-#'   `beta_hat = "inv"` for [`beta_hat_inv()`],
-#'   `beta_hat = "qr"` for [`beta_hat_qr()`],
-#'   `beta_hat = "svd"` for [`beta_hat_svd()`].
-#' @inheritParams beta_hat_inv
+#' @param output Character vector.
+#'   Results to print.
+#' @inheritParams betahat
+#' @importFrom stats pt
+#' @importFrom stats pf
 #' @export
 linreg <- function(X,
                    y,
-                   beta_hat = "inv") {
+                   FUN = betahat_inv,
+                   output = c("coef", "model", "anova")) {
   n <- nrow(X)
   k <- ncol(X)
-  if (beta_hat == "inv") {
-    beta_hat <- beta_hat_inv(
-      X = X,
-      y = y
-    )
-  }
-  if (beta_hat == "qr") {
-    beta_hat <- beta_hat_qr(
-      X = X,
-      y = y
-    )
-  }
-  if (beta_hat == "svd") {
-    beta_hat <- beta_hat_svd(
-      X = X,
-      y = y
-    )
-  }
-  y_hat <- y_hat_Xbeta_hat(
+  df1 <- k - 1
+  df2 <- n - k
+  betahat <- betahat(
     X = X,
-    beta_hat = beta_hat,
+    y = y,
+    FUN = FUN
+  )
+  yhat <- Xbetahat(
+    X = X,
+    betahat = betahat,
     y = NULL
   )
-  e <- e_y_minus_y_hat(
+  e <- y_minus_yhat(
     y = y,
-    y_hat = y_hat,
+    yhat = yhat,
     X = NULL,
-    beta_hat = NULL
+    betahat = NULL
   )
-  rss <- ss_r_e(e = e)
-  tss <- ss_t(y = y)
+  rss <- .rss(e = e)
+  tss <- tss(y = y)
   ess <- tss - rss
-  r2 <- r2_rss(
+  ms_model <- ess / df1
+  ms_error <- rss / df2
+  r2 <- .r2_rss(
     rss = rss,
     tss = tss
   )
-  rbar2 <- rbar2_r2(
+  F <- (r2 / (k - 1)) / ((1 - r2) / (n - k))
+  Fp <- pf(
+    q = F,
+    df1 = df1,
+    df2 = df2,
+    lower.tail = FALSE
+  )
+  rbar2 <- .rbar2(
     r2 = r2,
     n = n,
     k = k
   )
-  list(
-    X = X,
-    y = y,
-    y_hat = y_hat,
-    e = e,
+  mse <- .mse(
+    rss = rss,
+    n = n
+  )
+  rmse <- sqrt(mse)
+  sigma2hat <- .sigma2hat(
+    rss = rss,
     n = n,
     k = k,
-    beta_hat = beta_hat,
-    rss = rss,
-    ess = ess,
-    tss = tss,
-    r2 = r2,
-    rbar2 = rbar2
+    type = "unbiased"
+  )
+  vcov <- .vcov_betahat(
+    sigma2hat = sigma2hat,
+    X = X
+  )
+  se <- sqrt(diag(vcov))
+  t <- betahat / se
+  p.value <- 2 * pt(
+    q = t,
+    df = n - k,
+    lower.tail = FALSE
+  )
+  coefficients <- data.frame(
+    Coefficients = betahat,
+    se = se,
+    t = t,
+    p = p.value
+  )
+  model <- matrix(
+    data = c(
+      r2,
+      rbar2,
+      mse,
+      rmse
+    ),
+    ncol = 1
+  )
+  colnames(model) <- c("Value")
+  rownames(model) <- c(
+    "Coefficient of determination",
+    "Adjusted coefficient of determination",
+    "Mean Squared Error",
+    "Root Mean Squared Error"
+  )
+  anova <- data.frame(
+    Source = c("Model", "Error", "Total"),
+    df = c(df1, df2, df1 + df2),
+    SS = c(ess, rss, tss),
+    MS = c(ms_model, ms_error, NA),
+    F = c(F, NA, NA),
+    p = c(Fp, NA, NA)
+  )
+  if ("coef" %in% output) {
+    message("Coefficients:")
+    print(coefficients)
+  }
+  if ("model" %in% output) {
+    message("\n", "Model Evaluation:")
+    print(model)
+  }
+  if ("anova" %in% output) {
+    message("\n", "ANOVA Table:")
+    print(anova, row.names = FALSE)
+  }
+  invisible(
+    list(
+      X = X,
+      y = y,
+      yhat = yhat,
+      e = e,
+      n = n,
+      k = k,
+      betahat = betahat,
+      se = se,
+      rss = rss,
+      ess = ess,
+      tss = tss,
+      ms_model = ms_model,
+      ms_error = ms_error,
+      r2 = r2,
+      F = F,
+      Fp = Fp,
+      rbar2 = rbar2,
+      mse = mse,
+      rmse = rmse,
+      sigma2hat = sigma2hat,
+      vcov = vcov,
+      coefficients = coefficients,
+      model = model,
+      anova = anova
+    )
   )
 }
