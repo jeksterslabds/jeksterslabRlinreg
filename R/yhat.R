@@ -164,8 +164,12 @@ yhat_test <- function(betahat,
     y = NULL
   )
   if (is.null(y)) {
+    rss <- NA
+    tss <- NA
     mse <- NA
     rmse <- NA
+    r2 <- NA
+    rbar2 <- NA
   } else {
     rss <- sum((y - yhat)^2)
     tss <- tss(y = y)
