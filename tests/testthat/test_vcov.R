@@ -1,10 +1,10 @@
 #' ---
-#' title: "Test: Residuals (e)"
+#' title: "Test: vcov"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Test: Residuals (e)}
+#'   %\VignetteIndexEntry{Test: vcov}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(testthat)
 library(microbenchmark)
 library(jeksterslabRlinreg)
-context("Test Residuals (e).")
+context("Test vcov.")
 #'
 #' ## Parameters
 #'
@@ -91,52 +91,41 @@ y <- X %*% beta + rnorm(
   sd = sqrt(sigma2)
 )
 #'
-#' ## Calculate Residuals
+#' ## Estimate Sum of Squares
 #'
 #+ estimate
 lm_object <- lm(
   y ~ X[, -1]
 )
-results_e_lm <- residuals(
-  lm_object
-)
-results_My <- My(
-  y = y,
-  M = NULL,
-  X = X,
-  P = NULL
-)
-M <- M(
-  X = X,
-  P = NULL
-)
-results_My_M <- My(
-  y = y,
-  M = M,
-  X = NULL,
-  P = NULL
-)
-results_y_minus_yhat <- y_minus_yhat(
-  y = y,
-  yhat = NULL,
-  X = X,
-  betahat = NULL
-)
-yhat <- Py(
-  y = y,
-  P = NULL,
-  X = X
-)
-results_y_minus_yhat_yhat <- y_minus_yhat(
-  y = y,
-  yhat = yhat,
-  X = NULL,
-  betahat = NULL
-)
-results_e <- e(
+lm_sigma2 <- summary(lm_object)$sigma^2
+lm_vcov <- vcov(lm_object)
+# add biased tests later
+sigma2hat_unbiased <- sigma2hat(
   X = X,
   y = y,
-  betahat = NULL
+  type = "unbiased"
+)
+sigma2hat_biased <- sigma2hat(
+  X = X,
+  y = y,
+  type = "biased"
+)
+sigma2hat_both <- sigma2hat(
+  X = X,
+  y = y,
+  type = "both"
+)
+sigma2hat_both_unbiased <- sigma2hat_both[1]
+sigma2hat_both_biased <- sigma2hat_both[2]
+vcov_betahat_unbiased <- vcov_betahat(
+  X = X,
+  y = y,
+  type = "unbiased"
+)
+vcov_betahat_biased <- vcov_betahat(
+  X = X,
+  y = y,
+  type = "biased"
 )
 results_linreg <- invisible(
   linreg(
@@ -146,77 +135,80 @@ results_linreg <- invisible(
     output = c("coef", "model", "anova")
   )
 )
-results_e_linreg <- results_linreg$e
+results_sigma2hat_linreg <- results_linreg$sigma2hat
+results_vcov_linreg <- results_linreg$vcov
 #'
 #' ## Summarize Results
 #'
 #+ results
 knitr::kable(
   x = data.frame(
-    Case = 1:nrow(X),
-    lm = results_e_lm,
-    My = results_My,
-    My_M = results_My_M,
-    y_minus_yhat = results_y_minus_yhat,
-    y_minus_yhat_yhat = results_y_minus_yhat_yhat,
-    e = results_e,
-    e_linreg = results_e_linreg
+    Item = c(
+      "$\\hat{\\sigma}^2_{\\textrm{unbiased}}$",
+      "$\\hat{\\sigma}^2_{\\textrm{biased}}$"
+    ),
+    lm = c(
+      lm_sigma2,
+      NA
+    ),
+    vcov = c(
+      sigma2hat_unbiased,
+      sigma2hat_biased
+    ),
+    linreg = c(
+      results_sigma2hat_linreg,
+      NA
+    )
   ),
   row.names = FALSE
 )
-#'
-#' ## Benchmarking
-#'
-#+ benchmark
-microbenchmark(
-  lm = residuals(lm(y ~ X[, -1])),
-  My = My(y, M = NULL, X = X, P = NULL),
-  My_M = My(y = y, M = M, X = NULL, P = NULL),
-  y_minus_yhat = y_minus_yhat(y = y, yhat = NULL, X = X, betahat = NULL),
-  y_minus_yhat_yhat = y_minus_yhat(y = y, yhat = yhat, X = NULL, betahat = NULL),
-  e = e(X = X, y = y, betahat = NULL)
+knitr::kable(
+  x = lm_vcov,
+  caption = "lm vcov"
+)
+knitr::kable(
+  x = vcov_betahat_unbiased,
+  caption = "linreg vcov unbiased"
+)
+knitr::kable(
+  x = vcov_betahat_biased,
+  caption = "linreg vcov biased"
 )
 #'
 #' ## testthat
 #'
 #+ testthat_01, echo=TRUE
-test_that("My, y_minus_yhat, and e return the same values as residuals(lm())", {
+test_that("sigma2hat unbiased", {
   expect_equivalent(
     round(
-      x = results_e_lm,
+      x = lm_sigma2,
       digits = 2
     ),
     round(
-      x = results_My,
+      x = sigma2hat_unbiased,
       digits = 2
     ),
     round(
-      x = results_y_minus_yhat,
-      digits = 2
-    ),
-    round(
-      x = results_y_minus_yhat_yhat,
-      digits = 2
-    ),
-    round(
-      x = results_e,
-      digits = 2
-    ),
-    round(
-      x = results_e_linreg,
+      x = results_sigma2hat_linreg,
       digits = 2
     )
   )
 })
 #'
 #+ testthat_02, echo=TRUE
-test_that("expect_error", {
-  expect_error(
-    y_minus_yhat(
-      y,
-      yhat = NULL,
-      X = NULL,
-      betahat = NULL
+test_that("vcov unbiased", {
+  expect_equivalent(
+    round(
+      x = lm_vcov,
+      digits = 2
+    ),
+    round(
+      x = vcov_betahat_unbiased,
+      digits = 2
+    ),
+    round(
+      x = results_vcov_linreg,
+      digits = 2
     )
   )
 })

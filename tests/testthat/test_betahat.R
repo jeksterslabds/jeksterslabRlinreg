@@ -128,6 +128,18 @@ result_betahat_betahat_svd <- betahat(
   y = y,
   FUN = betahat_svd
 )
+results_linreg <- invisible(
+  linreg(
+    X = X,
+    y = y,
+    FUN = betahat_inv,
+    output = c("coef", "model", "anova")
+  )
+)
+results_betahat_linreg <- results_linreg$betahat
+results_se_linreg <- results_linreg$se
+results_t_linreg <- results_linreg$t
+results_p_linreg <- results_linreg$p
 #'
 #' ## Summarize Results
 #'
@@ -146,7 +158,8 @@ knitr::kable(
     betahat_svd = result_betahat_svd,
     betahat_betahat_inv = result_betahat_betahat_inv,
     betahat_betahat_qr = result_betahat_betahat_qr,
-    betahat_betahat_svd = result_betahat_betahat_svd
+    betahat_betahat_svd = result_betahat_betahat_svd,
+    betahat_linreg = results_betahat_linreg
   ),
   row.names = FALSE
 )
@@ -161,12 +174,13 @@ microbenchmark(
   betahat_svd = betahat_svd(X = X, y = y),
   betahat_betahat_inv = betahat(X = X, y = y, FUN = betahat_inv),
   betahat_betahat_qr = betahat(X = X, y = y, FUN = betahat_qr),
-  betahat_betahat_svd = betahat(X = X, y = y, FUN = betahat_svd)
+  betahat_betahat_svd = betahat(X = X, y = y, FUN = betahat_svd),
+  linreg = invisible(linreg(X = X, y = y, FUN = betahat_inv, output = c("coef", "model", "anova")))
 )
 #'
 #' ## testthat
 #'
-#+ testthat, echo=TRUE
+#+ testthat_01, echo=TRUE
 test_that("betahat_inv, betahat_qr, betahat_svd, and betahat return the same coefficients as lm", {
   expect_equivalent(
     round(
@@ -195,6 +209,66 @@ test_that("betahat_inv, betahat_qr, betahat_svd, and betahat return the same coe
     ),
     round(
       x = result_betahat_betahat_svd,
+      digits = 2
+    ),
+    round(
+      x = results_betahat_linreg,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_02, echo=TRUE
+test_that("linreg estimates compared to lm", {
+  expect_equivalent(
+    round(
+      x = summary(lm(y ~ X[, -1]))$coefficients[, "Estimate"],
+      digits = 2
+    ),
+    round(
+      x = results_betahat_linreg,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_03, echo=TRUE
+test_that("linreg se compared to lm", {
+  expect_equivalent(
+    round(
+      x = summary(lm(y ~ X[, -1]))$coefficients[, "Std. Error"],
+      digits = 2
+    ),
+    round(
+      x = results_se_linreg,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_04, echo=TRUE
+test_that("linreg t compared to lm", {
+  expect_equivalent(
+    round(
+      x = summary(lm(y ~ X[, -1]))$coefficients[, "t value"],
+      digits = 2
+    ),
+    round(
+      x = results_t_linreg,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_05, echo=TRUE
+test_that("linreg p compared to lm", {
+  expect_equivalent(
+    round(
+      x = summary(lm(y ~ X[, -1]))$coefficients[, "Pr(>|t|)"],
+      digits = 2
+    ),
+    round(
+      x = results_p_linreg,
       digits = 2
     )
   )

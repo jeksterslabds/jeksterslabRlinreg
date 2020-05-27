@@ -1,10 +1,10 @@
 #' ---
-#' title: "Test: Residuals (e)"
+#' title: "Test: Sum of Squares"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Test: Residuals (e)}
+#'   %\VignetteIndexEntry{Test: Sum of Squares}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(testthat)
 library(microbenchmark)
 library(jeksterslabRlinreg)
-context("Test Residuals (e).")
+context("Test Sum of Squares.")
 #'
 #' ## Parameters
 #'
@@ -91,52 +91,28 @@ y <- X %*% beta + rnorm(
   sd = sqrt(sigma2)
 )
 #'
-#' ## Calculate Residuals
+#' ## Estimate Sum of Squares
 #'
 #+ estimate
 lm_object <- lm(
   y ~ X[, -1]
 )
-results_e_lm <- residuals(
-  lm_object
-)
-results_My <- My(
-  y = y,
-  M = NULL,
+lm_anova <- anova(lm_object)
+results_ess_lm <- lm_anova[["Sum Sq"]][1]
+results_rss_lm <- lm_anova[["Sum Sq"]][2]
+results_tss_lm <- results_ess_lm + results_rss_lm
+results_rss <- rss(
+  betahat = NULL,
   X = X,
-  P = NULL
+  y = y
 )
-M <- M(
+results_ess <- ess(
+  betahat = NULL,
   X = X,
-  P = NULL
+  y = y
 )
-results_My_M <- My(
-  y = y,
-  M = M,
-  X = NULL,
-  P = NULL
-)
-results_y_minus_yhat <- y_minus_yhat(
-  y = y,
-  yhat = NULL,
-  X = X,
-  betahat = NULL
-)
-yhat <- Py(
-  y = y,
-  P = NULL,
-  X = X
-)
-results_y_minus_yhat_yhat <- y_minus_yhat(
-  y = y,
-  yhat = yhat,
-  X = NULL,
-  betahat = NULL
-)
-results_e <- e(
-  X = X,
-  y = y,
-  betahat = NULL
+results_tss <- tss(
+  y = y
 )
 results_linreg <- invisible(
   linreg(
@@ -146,77 +122,91 @@ results_linreg <- invisible(
     output = c("coef", "model", "anova")
   )
 )
-results_e_linreg <- results_linreg$e
+results_rss_linreg <- results_linreg$rss
+results_ess_linreg <- results_linreg$ess
+results_tss_linreg <- results_linreg$tss
 #'
 #' ## Summarize Results
 #'
 #+ results
 knitr::kable(
   x = data.frame(
-    Case = 1:nrow(X),
-    lm = results_e_lm,
-    My = results_My,
-    My_M = results_My_M,
-    y_minus_yhat = results_y_minus_yhat,
-    y_minus_yhat_yhat = results_y_minus_yhat_yhat,
-    e = results_e,
-    e_linreg = results_e_linreg
+    Item = c(
+      "$RSS$",
+      "$ESS$",
+      "$TSS$"
+    ),
+    lm = c(
+      results_rss_lm,
+      results_ess_lm,
+      results_tss_lm
+    ),
+    ss = c(
+      results_rss,
+      results_ess,
+      results_tss
+    ),
+    linreg = c(
+      results_rss_linreg,
+      results_ess_linreg,
+      results_tss_linreg
+    )
   ),
   row.names = FALSE
-)
-#'
-#' ## Benchmarking
-#'
-#+ benchmark
-microbenchmark(
-  lm = residuals(lm(y ~ X[, -1])),
-  My = My(y, M = NULL, X = X, P = NULL),
-  My_M = My(y = y, M = M, X = NULL, P = NULL),
-  y_minus_yhat = y_minus_yhat(y = y, yhat = NULL, X = X, betahat = NULL),
-  y_minus_yhat_yhat = y_minus_yhat(y = y, yhat = yhat, X = NULL, betahat = NULL),
-  e = e(X = X, y = y, betahat = NULL)
 )
 #'
 #' ## testthat
 #'
 #+ testthat_01, echo=TRUE
-test_that("My, y_minus_yhat, and e return the same values as residuals(lm())", {
+test_that("rss", {
   expect_equivalent(
     round(
-      x = results_e_lm,
+      x = results_rss_lm,
       digits = 2
     ),
     round(
-      x = results_My,
+      x = results_rss,
       digits = 2
     ),
     round(
-      x = results_y_minus_yhat,
-      digits = 2
-    ),
-    round(
-      x = results_y_minus_yhat_yhat,
-      digits = 2
-    ),
-    round(
-      x = results_e,
-      digits = 2
-    ),
-    round(
-      x = results_e_linreg,
+      x = results_rss_linreg,
       digits = 2
     )
   )
 })
 #'
 #+ testthat_02, echo=TRUE
-test_that("expect_error", {
-  expect_error(
-    y_minus_yhat(
-      y,
-      yhat = NULL,
-      X = NULL,
-      betahat = NULL
+test_that("ess", {
+  expect_equivalent(
+    round(
+      x = results_ess_lm,
+      digits = 2
+    ),
+    round(
+      x = results_ess,
+      digits = 2
+    ),
+    round(
+      x = results_ess_linreg,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_03, echo=TRUE
+test_that("tss", {
+  expect_equivalent(
+    round(
+      x = results_tss_lm,
+      digits = 2
+    ),
+    round(
+      x = results_tss,
+      digits = 2
+    ),
+    round(
+      x = results_tss_linreg,
+      digits = 2
     )
   )
 })

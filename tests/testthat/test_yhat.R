@@ -144,6 +144,20 @@ results_yhat_test <- yhat_test(
   X = X,
   y = y
 )
+results_yhat_test_y_null <- yhat_test(
+  betahat = betahat,
+  X = X,
+  y = NULL
+)
+results_linreg <- invisible(
+  linreg(
+    X = X,
+    y = y,
+    FUN = betahat_inv,
+    output = c("coef", "model", "anova")
+  )
+)
+results_yhat_linreg <- results_linreg$yhat
 #'
 #' ## Summarize Results
 #'
@@ -158,7 +172,9 @@ knitr::kable(
     Xbetahat_betahat = results_Xbetahat_betahat,
     yhat = results_yhat,
     yhat_betahat = results_yhat_betahat,
-    yhat_test = results_yhat_test[["yhat"]]
+    yhat_test = results_yhat_test[["yhat"]],
+    yhat_test_y_null = results_yhat_test_y_null[["yhat"]],
+    yhat_linreg = results_yhat_linreg
   ),
   row.names = FALSE
 )
@@ -174,12 +190,13 @@ microbenchmark(
   Xbetahat_betahat = Xbetahat(X = X, betahat = betahat, y = NULL),
   yhat = yhat(X = X, y = y, betahat = NULL),
   yhat_betahat = yhat(X = X, y = NULL, betahat = betahat),
-  yhat_test = yhat_test(betahat = betahat, X = X, y = y)
+  yhat_test = yhat_test(betahat = betahat, X = X, y = y),
+  yhat_test_y_null = yhat_test(betahat = betahat, X = X, y = NULL)
 )
 #'
 #' ## testthat
 #'
-#+ testthat, echo=TRUE
+#+ testthat_01, echo=TRUE
 test_that("Py, Xbetahat, and yhat return the same values as predict.lm(object = lm_object, newdata = X[, -1])", {
   expect_equivalent(
     round(
@@ -213,6 +230,25 @@ test_that("Py, Xbetahat, and yhat return the same values as predict.lm(object = 
     round(
       x = results_yhat_test[["yhat"]],
       digits = 2
+    ),
+    round(
+      x = results_yhat_test_y_null[["yhat"]],
+      digits = 2
+    ),
+    round(
+      x = results_yhat_linreg,
+      digits = 2
+    )
+  )
+})
+#'
+#+ testthat_02, echo=TRUE
+test_that("expect_error", {
+  expect_error(
+    Py(
+      y = y,
+      P = NULL,
+      X = NULL
     )
   )
 })

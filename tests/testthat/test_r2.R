@@ -1,10 +1,10 @@
 #' ---
-#' title: "Test: Residuals (e)"
+#' title: "Test: R Squared"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Test: Residuals (e)}
+#'   %\VignetteIndexEntry{Test: R Squared}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(testthat)
 library(microbenchmark)
 library(jeksterslabRlinreg)
-context("Test Residuals (e).")
+context("Test R Squared.")
 #'
 #' ## Parameters
 #'
@@ -91,52 +91,43 @@ y <- X %*% beta + rnorm(
   sd = sqrt(sigma2)
 )
 #'
-#' ## Calculate Residuals
+#' ## Estimate Sum of Squares
 #'
 #+ estimate
 lm_object <- lm(
   y ~ X[, -1]
 )
-results_e_lm <- residuals(
-  lm_object
-)
-results_My <- My(
-  y = y,
-  M = NULL,
+results_r2_lm <- summary(lm_object)$r.squared
+results_rbar2_lm <- summary(lm_object)$adj.r.squared
+results_rss <- rss(
+  betahat = NULL,
   X = X,
-  P = NULL
+  y = y
 )
-M <- M(
+results_ess <- ess(
+  betahat = NULL,
   X = X,
-  P = NULL
+  y = y
 )
-results_My_M <- My(
-  y = y,
-  M = M,
-  X = NULL,
-  P = NULL
+results_tss <- tss(
+  y = y
 )
-results_y_minus_yhat <- y_minus_yhat(
-  y = y,
-  yhat = NULL,
-  X = X,
-  betahat = NULL
-)
-yhat <- Py(
-  y = y,
-  P = NULL,
-  X = X
-)
-results_y_minus_yhat_yhat <- y_minus_yhat(
-  y = y,
-  yhat = yhat,
-  X = NULL,
-  betahat = NULL
-)
-results_e <- e(
+results_r2_rss <- r2(
+  betahat = NULL,
   X = X,
   y = y,
-  betahat = NULL
+  fromrss = TRUE
+)
+results_r2_ess <- r2(
+  betahat = NULL,
+  X = X,
+  y = y,
+  fromrss = FALSE
+)
+results_rbar2 <- rbar2(
+  betahat = NULL,
+  X = X,
+  y = y
 )
 results_linreg <- invisible(
   linreg(
@@ -146,21 +137,30 @@ results_linreg <- invisible(
     output = c("coef", "model", "anova")
   )
 )
-results_e_linreg <- results_linreg$e
+results_r2_linreg <- results_linreg$r2
+results_rbar2_linreg <- results_linreg$rbar2
 #'
 #' ## Summarize Results
 #'
 #+ results
 knitr::kable(
   x = data.frame(
-    Case = 1:nrow(X),
-    lm = results_e_lm,
-    My = results_My,
-    My_M = results_My_M,
-    y_minus_yhat = results_y_minus_yhat,
-    y_minus_yhat_yhat = results_y_minus_yhat_yhat,
-    e = results_e,
-    e_linreg = results_e_linreg
+    Item = c(
+      "$R^2$",
+      "$\\bar{R}^{2}$"
+    ),
+    lm = c(
+      results_r2_lm,
+      results_rbar2_lm
+    ),
+    r2 = c(
+      results_r2_rss,
+      results_rbar2
+    ),
+    linreg = c(
+      results_r2_linreg,
+      results_rbar2_linreg
+    )
   ),
   row.names = FALSE
 )
@@ -169,54 +169,48 @@ knitr::kable(
 #'
 #+ benchmark
 microbenchmark(
-  lm = residuals(lm(y ~ X[, -1])),
-  My = My(y, M = NULL, X = X, P = NULL),
-  My_M = My(y = y, M = M, X = NULL, P = NULL),
-  y_minus_yhat = y_minus_yhat(y = y, yhat = NULL, X = X, betahat = NULL),
-  y_minus_yhat_yhat = y_minus_yhat(y = y, yhat = yhat, X = NULL, betahat = NULL),
-  e = e(X = X, y = y, betahat = NULL)
+  rss = r2(betahat = NULL, X = X, y = y, fromrss = TRUE),
+  ess = r2(betahat = NULL, X = X, y = y, fromrss = FALSE)
 )
 #'
 #' ## testthat
 #'
 #+ testthat_01, echo=TRUE
-test_that("My, y_minus_yhat, and e return the same values as residuals(lm())", {
+test_that("r2", {
   expect_equivalent(
     round(
-      x = results_e_lm,
+      x = results_r2_lm,
       digits = 2
     ),
     round(
-      x = results_My,
+      x = results_r2_rss,
       digits = 2
     ),
     round(
-      x = results_y_minus_yhat,
+      x = results_r2_ess,
       digits = 2
     ),
     round(
-      x = results_y_minus_yhat_yhat,
-      digits = 2
-    ),
-    round(
-      x = results_e,
-      digits = 2
-    ),
-    round(
-      x = results_e_linreg,
+      x = results_r2_linreg,
       digits = 2
     )
   )
 })
 #'
 #+ testthat_02, echo=TRUE
-test_that("expect_error", {
-  expect_error(
-    y_minus_yhat(
-      y,
-      yhat = NULL,
-      X = NULL,
-      betahat = NULL
+test_that("rbar2", {
+  expect_equivalent(
+    round(
+      x = results_rbar2_lm,
+      digits = 2
+    ),
+    round(
+      x = results_rbar2,
+      digits = 2
+    ),
+    round(
+      x = results_rbar2_linreg,
+      digits = 2
     )
   )
 })
