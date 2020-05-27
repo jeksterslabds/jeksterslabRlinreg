@@ -101,17 +101,32 @@ result_lm <- drop(
     )
   )
 )
-result_beta_hat_inv <- beta_hat_inv(
+result_betahat_inv <- betahat_inv(
   X = X,
   y = y
 )
-result_beta_hat_qr <- beta_hat_qr(
+result_betahat_qr <- betahat_qr(
   X = X,
   y = y
 )
-result_beta_hat_svd <- beta_hat_svd(
+result_betahat_svd <- betahat_svd(
   X = X,
   y = y
+)
+result_betahat_betahat_inv <- betahat(
+  X = X,
+  y = y,
+  FUN = betahat_inv
+)
+result_betahat_betahat_qr <- betahat(
+  X = X,
+  y = y,
+  FUN = betahat_qr
+)
+result_betahat_betahat_svd <- betahat(
+  X = X,
+  y = y,
+  FUN = betahat_svd
 )
 #'
 #' ## Summarize Results
@@ -126,9 +141,12 @@ knitr::kable(
     ),
     Parameter = beta,
     lm = result_lm,
-    beta_hat_inv = result_beta_hat_inv,
-    beta_hat_qr = result_beta_hat_qr,
-    beta_hat_svd = result_beta_hat_svd
+    betahat_inv = result_betahat_inv,
+    betahat_qr = result_betahat_qr,
+    betahat_svd = result_betahat_svd,
+    betahat_betahat_inv = result_betahat_betahat_inv,
+    betahat_betahat_qr = result_betahat_betahat_qr,
+    betahat_betahat_svd = result_betahat_betahat_svd
   ),
   row.names = FALSE
 )
@@ -138,30 +156,45 @@ knitr::kable(
 #+ benchmark
 microbenchmark(
   lm = lm(y ~ X[, -1]),
-  beta_hat_inv = beta_hat_inv(X = X, y = y),
-  beta_hat_qr = beta_hat_qr(X = X, y = y),
-  beta_hat_svd = beta_hat_svd(X = X, y = y)
+  betahat_inv = betahat_inv(X = X, y = y),
+  betahat_qr = betahat_qr(X = X, y = y),
+  betahat_svd = betahat_svd(X = X, y = y),
+  betahat_betahat_inv = betahat(X = X, y = y, FUN = betahat_inv),
+  betahat_betahat_qr = betahat(X = X, y = y, FUN = betahat_qr),
+  betahat_betahat_svd = betahat(X = X, y = y, FUN = betahat_svd)
 )
 #'
 #' ## testthat
 #'
 #+ testthat, echo=TRUE
-test_that("beta_hat_inv, beta_hat_qr, and beta_hat_svd return the same coefficients as lm", {
+test_that("betahat_inv, betahat_qr, betahat_svd, and betahat return the same coefficients as lm", {
   expect_equivalent(
     round(
       x = result_lm,
       digits = 2
     ),
     round(
-      x = result_beta_hat_inv,
+      x = result_betahat_inv,
       digits = 2
     ),
     round(
-      x = result_beta_hat_qr,
+      x = result_betahat_qr,
       digits = 2
     ),
     round(
-      x = result_beta_hat_svd,
+      x = result_betahat_svd,
+      digits = 2
+    ),
+    round(
+      x = result_betahat_betahat_inv,
+      digits = 2
+    ),
+    round(
+      x = result_betahat_betahat_qr,
+      digits = 2
+    ),
+    round(
+      x = result_betahat_betahat_svd,
       digits = 2
     )
   )
