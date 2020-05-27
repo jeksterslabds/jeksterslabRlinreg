@@ -26,3 +26,9 @@ You can install the released version of `jeksterslabRlinreg` from
 library(devtools)
 install_github("jeksterslabds/jeksterslabRlinreg")
 ```
+
+## Example
+
+See [GitHub
+Pages](https://jeksterslabds.github.io/jeksterslabRlinreg/index.html)
+for package documentation.
