@@ -154,9 +154,9 @@ sigma2hat <- function(X,
 #' `sigma2hat` is computed
 #' using [`sigma2hat()`]
 #' with `X` and `y` as a required arguments
-#' and `betahat` as an optional argument.
+#' and `betahat` and `rss` as an optional argument.
 #' If `sigma2hat` is provided,
-#' `betahat`, `X`, and `y`
+#' `rss`, `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
@@ -167,16 +167,18 @@ sigma2hat <- function(X,
 #' @inherit sigma2hat references
 #' @export
 .vcov_betahat <- function(sigma2hat = NULL,
+                          rss = NULL,
                           betahat = NULL,
                           X,
                           y,
                           type = "unbiased") {
   if (is.null(sigma2hat)) {
-    sigma2hat <- sigma2hat(
+    sigma2hat <- .sigma2hat(
+      rss = rss,
+      type = type,
       betahat = betahat,
       X = X,
-      y = y,
-      type = type
+      y = y
     )
   }
   inv <- solve(crossprod(X))
