@@ -1,0 +1,221 @@
+---
+title: "Test: Residuals (e)"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Test: Residuals (e)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r knitr_options, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+
+
+```{r setup}
+library(testthat)
+library(microbenchmark)
+library(jeksterslabRlinreg)
+context("Test Residuals (e).")
+```
+
+
+## Parameters
+
+
+```{r parameters}
+n <- 100
+sigma2 <- runif(
+  n = 1,
+  min = 9,
+  max = 15
+)
+beta <- runif(
+  n = sample(
+    x = 2:5,
+    size = 1
+  ),
+  min = 1,
+  max = 3
+)
+Variable <- c(
+  "`n`",
+  "`sigma2`",
+  "`beta`"
+)
+Description <- c(
+  "Sample size ($n$).",
+  "Error variance ($\\sigma^{2}_{\\epsilon}$).",
+  "Regression coefficients ($\\beta$)."
+)
+Value <- c(
+  n,
+  sigma2,
+  paste0(beta, collapse = ", ")
+)
+knitr::kable(
+  x = data.frame(
+    Variable,
+    Description,
+    Value
+  ),
+  row.names = FALSE
+)
+```
+
+
+## Generate Data
+
+
+```{r generate_data}
+X <- matrix(
+  data = NA,
+  nrow = n,
+  ncol = length(beta)
+)
+for (i in 1:length(beta)) {
+  if (i == 1) {
+    X[, i] <- rep(
+      x = 1,
+      times = n
+    )
+  } else {
+    X[, i] <- runif(
+      n = n,
+      min = -5,
+      max = 5
+    )
+  }
+}
+y <- X %*% beta + rnorm(
+  n = n,
+  sd = sqrt(sigma2)
+)
+```
+
+
+## Calculate Residuals
+
+
+```{r estimate}
+lm_object <- lm(
+  y ~ X[, -1]
+)
+lm_coeff <- coef(lm_object)
+results_e_lm <- residuals(
+  lm_object
+)
+results_My <- My(
+  y = y,
+  M = NULL,
+  X = X,
+  P = NULL
+)
+M <- M(
+  X = X,
+  P = NULL
+)
+results_My_M <- My(
+  y = y,
+  M = M,
+  X = NULL,
+  P = NULL
+)
+results_y_minus_yhat <- y_minus_yhat(
+  y = y,
+  yhat = NULL,
+  X = X,
+  betahat = NULL
+)
+yhat <- Py(
+  y = y,
+  P = NULL,
+  X = X
+)
+results_y_minus_yhat_yhat <- y_minus_yhat(
+  y = y,
+  yhat = yhat,
+  X = NULL,
+  betahat = NULL
+)
+results_e <- e(
+  X = X,
+  y = y,
+  betahat = NULL
+)
+```
+
+
+## Summarize Results
+
+
+```{r results}
+knitr::kable(
+  x = data.frame(
+    Case = 1:nrow(X),
+    lm = results_e_lm,
+    My = results_My,
+    My_M = results_My_M,
+    y_minus_yhat = results_y_minus_yhat,
+    y_minus_yhat_yhat = results_y_minus_yhat_yhat,
+    e = results_e
+  ),
+  row.names = FALSE
+)
+```
+
+
+## Benchmarking
+
+
+```{r benchmark}
+microbenchmark(
+  lm = residuals(lm(y ~ X[, -1])),
+  My = My(y, M = NULL, X = X, P = NULL),
+  My_M = My(y = y, M = M, X = NULL, P = NULL),
+  y_minus_yhat = y_minus_yhat(y = y, yhat = NULL, X = X, betahat = NULL),
+  y_minus_yhat_yhat = y_minus_yhat(y = y, yhat = yhat, X = NULL, betahat = NULL),
+  e = e(X = X, y = y, betahat = NULL)
+)
+```
+
+
+## testthat
+
+
+```{r testthat, echo=TRUE}
+test_that("My, y_minus_yhat, and e return the same values as residuals(lm())", {
+  expect_equivalent(
+    round(
+      x = results_e_lm,
+      digits = 2
+    ),
+    round(
+      x = results_My,
+      digits = 2
+    ),
+    round(
+      x = results_y_minus_yhat,
+      digits = 2
+    ),
+    round(
+      x = results_y_minus_yhat_yhat,
+      digits = 2
+    ),
+    round(
+      x = results_e,
+      digits = 2
+    )
+  )
+})
+```
+
