@@ -101,43 +101,43 @@ lm_coeff <- coef(lm_object)
 results_e_lm <- residuals(
   lm_object
 )
-results_e_My <- e_My(
+results_My <- My(
   y = y,
   M = NULL,
   X = X,
   P = NULL
 )
-M <- proj_M(
+M <- M(
   X = X,
   P = NULL
 )
-results_e_My_M <- e_My(
+results_My_M <- My(
   y = y,
   M = M,
   X = NULL,
   P = NULL
 )
-results_e_y_minus_y_hat <- e_y_minus_y_hat(
+results_y_minus_yhat <- y_minus_yhat(
   y = y,
-  y_hat = NULL,
+  yhat = NULL,
   X = X,
-  beta_hat = NULL
+  betahat = NULL
 )
-y_hat <- y_hat_Py(
+yhat <- Py(
   y = y,
   P = NULL,
   X = X
 )
-results_e_y_minus_y_hat_y_hat <- e_y_minus_y_hat(
+results_y_minus_yhat_yhat <- y_minus_yhat(
   y = y,
-  y_hat = y_hat,
+  yhat = yhat,
   X = NULL,
-  beta_hat = NULL
+  betahat = NULL
 )
 results_e <- e(
   X = X,
   y = y,
-  beta_hat = NULL
+  betahat = NULL
 )
 #'
 #' ## Summarize Results
@@ -147,10 +147,10 @@ knitr::kable(
   x = data.frame(
     Case = 1:nrow(X),
     lm = results_e_lm,
-    e_My = results_e_My,
-    e_My_M = results_e_My_M,
-    e_y_minus_y_hat = results_e_y_minus_y_hat,
-    e_y_minus_y_hat_y_hat = results_e_y_minus_y_hat_y_hat,
+    My = results_My,
+    My_M = results_My_M,
+    y_minus_yhat = results_y_minus_yhat,
+    y_minus_yhat_yhat = results_y_minus_yhat_yhat,
     e = results_e
   ),
   row.names = FALSE
@@ -161,32 +161,32 @@ knitr::kable(
 #+ benchmark
 microbenchmark(
   lm = residuals(lm(y ~ X[, -1])),
-  e_My = e_My(y, M = NULL, X = X, P = NULL),
-  e_My_M = e_My(y = y, M = M, X = NULL, P = NULL),
-  e_y_minus_y_hat = e_y_minus_y_hat(y = y, y_hat = NULL, X = X, beta_hat = NULL),
-  e_y_minus_y_hat_y_hat = e_y_minus_y_hat(y = y, y_hat = y_hat, X = NULL, beta_hat = NULL),
-  e = e(X = X, y = y, beta_hat = NULL)
+  My = My(y, M = NULL, X = X, P = NULL),
+  My_M = My(y = y, M = M, X = NULL, P = NULL),
+  y_minus_yhat = y_minus_yhat(y = y, yhat = NULL, X = X, betahat = NULL),
+  y_minus_yhat_yhat = y_minus_yhat(y = y, yhat = yhat, X = NULL, betahat = NULL),
+  e = e(X = X, y = y, betahat = NULL)
 )
 #'
 #' ## testthat
 #'
 #+ testthat, echo=TRUE
-test_that("e_My, e_y_minus_y_hat, and e return the same values as residuals(lm())", {
+test_that("My, y_minus_yhat, and e return the same values as residuals(lm())", {
   expect_equivalent(
     round(
       x = results_e_lm,
       digits = 2
     ),
     round(
-      x = results_e_My,
+      x = results_My,
       digits = 2
     ),
     round(
-      x = results_e_y_minus_y_hat,
+      x = results_y_minus_yhat,
       digits = 2
     ),
     round(
-      x = results_e_y_minus_y_hat_y_hat,
+      x = results_y_minus_yhat_yhat,
       digits = 2
     ),
     round(

@@ -94,14 +94,14 @@ y <- X %*% beta + rnorm(
 #' ## Calculate Projection Matrices
 #'
 #+ estimate
-P <- proj_P(
+P <- P(
   X = X
 )
-M <- proj_M(
+M <- M(
   X = X,
   P = NULL
 )
-M2 <- proj_M(
+M2 <- M(
   X = X,
   P = P
 )
@@ -110,14 +110,14 @@ M2 <- proj_M(
 #'
 #+ benchmark
 microbenchmark(
-  M = proj_M(X = X, P = NULL),
-  M2 = proj_M(X = X, P = P)
+  M = M(X = X, P = NULL),
+  M2 = M(X = X, P = P)
 )
 #'
 #' ## testthat
 #'
 #+ testthat_01, echo=TRUE
-test_that("proj_M(X = X, P = P) and proj_M(X = X, P = NULL) are equal", {
+test_that("M(X = X, P = P) and M(X = X, P = NULL) are equal", {
   expect_equivalent(
     M,
     M2

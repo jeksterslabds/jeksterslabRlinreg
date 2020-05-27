@@ -1,10 +1,10 @@
 #' ---
-#' title: "Test: y-hat (y_hat)"
+#' title: "Test: y-hat (yhat)"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Test: y-hat (y_hat)}
+#'   %\VignetteIndexEntry{Test: y-hat (yhat)}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(testthat)
 library(microbenchmark)
 library(jeksterslabRlinreg)
-context("Test y-hat (y_hat).")
+context("Test y-hat (yhat).")
 #'
 #' ## Parameters
 #'
@@ -98,49 +98,49 @@ lm_object <- lm(
   y ~ X[, -1]
 )
 lm_coeff <- coef(lm_object)
-results_y_hat_lm <- predict.lm(
+results_yhat_lm <- predict.lm(
   object = lm_object,
   newdata = as.data.frame(X[, -1])
 )
-results_y_hat_Py <- y_hat_Py(
+results_Py <- Py(
   y = y,
   P = NULL,
   X = X
 )
-P <- proj_P(
+P <- P(
   X = X
 )
-results_y_hat_Py_P <- y_hat_Py(
+results_Py_P <- Py(
   y = y,
   P = P,
   X = NULL
 )
-results_y_hat_Xbeta_hat <- y_hat_Xbeta_hat(
+results_Xbetahat <- Xbetahat(
   X = X,
-  beta_hat = NULL,
+  betahat = NULL,
   y = y
 )
-beta_hat <- beta_hat_inv(
+betahat <- betahat_inv(
   X = X,
   y = y
 )
-results_y_hat_Xbeta_hat_beta_hat <- y_hat_Xbeta_hat(
+results_Xbetahat_betahat <- Xbetahat(
   X = X,
-  beta_hat = beta_hat,
+  betahat = betahat,
   y = NULL
 )
-results_y_hat <- y_hat(
+results_yhat <- yhat(
   X = X,
   y = y,
-  beta_hat = NULL
+  betahat = NULL
 )
-results_y_hat_beta_hat <- y_hat(
+results_yhat_betahat <- yhat(
   X = X,
   y = NULL,
-  beta_hat = beta_hat
+  betahat = betahat
 )
-results_y_hat_test <- y_hat_test(
-  beta_hat = beta_hat,
+results_yhat_test <- yhat_test(
+  betahat = betahat,
   X = X,
   y = y
 )
@@ -151,14 +151,14 @@ results_y_hat_test <- y_hat_test(
 knitr::kable(
   x = data.frame(
     Case = 1:nrow(X),
-    lm = results_y_hat_lm,
-    y_hat_Py = results_y_hat_Py,
-    y_hat_Py_P = results_y_hat_Py_P,
-    y_hat_Xbeta_hat = results_y_hat_Xbeta_hat,
-    y_hat_Xbeta_hat_beta_hat = results_y_hat_Xbeta_hat_beta_hat,
-    y_hat = results_y_hat,
-    y_hat_beta_hat = results_y_hat_beta_hat,
-    y_hat_test = results_y_hat_test[["y_hat"]]
+    lm = results_yhat_lm,
+    Py = results_Py,
+    Py_P = results_Py_P,
+    Xbetahat = results_Xbetahat,
+    Xbetahat_betahat = results_Xbetahat_betahat,
+    yhat = results_yhat,
+    yhat_betahat = results_yhat_betahat,
+    yhat_test = results_yhat_test[["yhat"]]
   ),
   row.names = FALSE
 )
@@ -168,50 +168,50 @@ knitr::kable(
 #+ benchmark
 microbenchmark(
   lm = predict.lm(object = lm_object, newdata = as.data.frame(X[, -1])),
-  y_hat_Py = y_hat_Py(y = y, P = NULL, X = X),
-  y_hat_Py_P = y_hat_Py(y = y, P = P, X = NULL),
-  y_hat_Xbeta_hat = y_hat_Xbeta_hat(X = X, beta_hat = NULL, y = y),
-  y_hat_Xbeta_hat_beta_hat = y_hat_Xbeta_hat(X = X, beta_hat = beta_hat, y = NULL),
-  y_hat = y_hat(X = X, y = y, beta_hat = NULL),
-  y_hat_beta_hat = y_hat(X = X, y = NULL, beta_hat = beta_hat),
-  y_hat_test = y_hat_test(beta_hat = beta_hat, X = X, y = y)
+  Py = Py(y = y, P = NULL, X = X),
+  Py_P = Py(y = y, P = P, X = NULL),
+  Xbetahat = Xbetahat(X = X, betahat = NULL, y = y),
+  Xbetahat_betahat = Xbetahat(X = X, betahat = betahat, y = NULL),
+  yhat = yhat(X = X, y = y, betahat = NULL),
+  yhat_betahat = yhat(X = X, y = NULL, betahat = betahat),
+  yhat_test = yhat_test(betahat = betahat, X = X, y = y)
 )
 #'
 #' ## testthat
 #'
 #+ testthat, echo=TRUE
-test_that("y_hat_Py, y_hat_Xbeta_hat, and y_hat return the same values as predict.lm(object = lm_object, newdata = X[, -1])", {
+test_that("Py, Xbetahat, and yhat return the same values as predict.lm(object = lm_object, newdata = X[, -1])", {
   expect_equivalent(
     round(
-      x = results_y_hat_lm,
+      x = results_yhat_lm,
       digits = 2
     ),
     round(
-      x = results_y_hat_Py,
+      x = results_Py,
       digits = 2
     ),
     round(
-      x = results_y_hat_Py_P,
+      x = results_Py_P,
       digits = 2
     ),
     round(
-      x = results_y_hat_Xbeta_hat,
+      x = results_Xbetahat,
       digits = 2
     ),
     round(
-      x = results_y_hat_Xbeta_hat_beta_hat,
+      x = results_Xbetahat_betahat,
       digits = 2
     ),
     round(
-      x = results_y_hat,
+      x = results_yhat,
       digits = 2
     ),
     round(
-      x = results_y_hat_beta_hat,
+      x = results_yhat_betahat,
       digits = 2
     ),
     round(
-      x = results_y_hat_test[["y_hat"]],
+      x = results_yhat_test[["yhat"]],
       digits = 2
     )
   )
