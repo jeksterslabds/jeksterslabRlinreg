@@ -1,4 +1,4 @@
-#' Beta-hat - Inverse of X
+#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - Inverse of X
 #'
 #' Estimates coefficients of a linear regression model
 #'   using
@@ -43,8 +43,8 @@
 #'   [Wikipedia: Inverting the matrix of the normal equations](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations)
 #' @family beta-hat functions
 #' @export
-beta_hat_inv <- function(X,
-                         y) {
+betahat_inv <- function(X,
+                        y) {
   drop(
     solve(
       crossprod(X),
@@ -53,7 +53,7 @@ beta_hat_inv <- function(X,
   )
 }
 
-#' Beta-hat - QR Decomposition
+#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - QR Decomposition
 #'
 #' Estimates coefficients of a linear regression model
 #'   using QR Decomposition.
@@ -73,8 +73,8 @@ beta_hat_inv <- function(X,
 #'     \mathbf{y}.
 #'   }
 #'
-#' @inheritParams beta_hat_inv
-#' @inherit beta_hat_inv return
+#' @inheritParams betahat_inv
+#' @inherit betahat_inv return
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
@@ -85,8 +85,8 @@ beta_hat_inv <- function(X,
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #' @family beta-hat functions
 #' @export
-beta_hat_qr <- function(X,
-                        y) {
+betahat_qr <- function(X,
+                       y) {
   Xqr <- qr(X)
   drop(
     backsolve(
@@ -96,7 +96,7 @@ beta_hat_qr <- function(X,
   )
 }
 
-#' Beta-hat - Singular Value Decomposition
+#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - Singular Value Decomposition
 #'
 #' Estimates coefficients of a linear regression model
 #'   using Singular Value Decomposition.
@@ -119,8 +119,8 @@ beta_hat_qr <- function(X,
 #'   }
 #'   where the superscript \eqn{+} indicates the pseudoinverse.
 #'
-#' @inheritParams beta_hat_inv
-#' @inherit beta_hat_inv return
+#' @inheritParams betahat_inv
+#' @inherit betahat_inv return
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
@@ -131,10 +131,44 @@ beta_hat_qr <- function(X,
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #' @family beta-hat functions
 #' @export
-beta_hat_svd <- function(X,
-                         y) {
+betahat_svd <- function(X,
+                        y) {
   Xsvd <- svd(X)
   drop(
     (Xsvd$v %*% (1 / Xsvd$d * t(Xsvd$u))) %*% y
+  )
+}
+
+#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}})
+#'
+#' See [`betahat_inv()`] for inverse of X,
+#' [`betahat_qr()`] for QR decomposition, and
+#' [`betahat_svd()`] for singular value decomposition.
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @param FUN Function.
+#'   Beta-hat function to use.
+#'   [`betahat_inv()`] is used by default.
+#' @inheritParams betahat_inv
+#' @references
+#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#'
+#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+#'
+#'   [Wikipedia: Inverting the matrix of the normal equations](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations)
+#'
+#'   [Wikipedia: QR Decomposition](https://en.wikipedia.org/wiki/QR_decomposition)
+#'
+#'   [Wikipedia: Singular Value Decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)
+#'
+#'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
+#' @family beta-hat functions
+#' @export
+betahat <- function(X,
+                    y,
+                    FUN = betahat_inv) {
+  FUN(
+    X = X,
+    y = y
   )
 }
