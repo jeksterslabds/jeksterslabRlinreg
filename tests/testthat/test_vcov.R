@@ -97,36 +97,43 @@ y <- X %*% beta + rnorm(
 lm_object <- lm(
   y ~ X[, -1]
 )
-lm_sigma2 <- summary(lm_object)$sigma^2
-lm_vcov <- vcov(lm_object)
+results_lm_sigma2 <- summary(lm_object)$sigma^2
+results_lm_vcov <- vcov(lm_object)
 # add biased tests later
-sigma2hat_unbiased <- sigma2hat(
+results_sigma2hat_unbiased <- sigma2hat(
   X = X,
   y = y,
   type = "unbiased"
 )
-sigma2hat_biased <- sigma2hat(
+results_sigma2hat_biased <- sigma2hat(
   X = X,
   y = y,
   type = "biased"
 )
-sigma2hat_both <- sigma2hat(
+results_sigma2hat_both <- sigma2hat(
   X = X,
   y = y,
   type = "both"
 )
-sigma2hat_both_unbiased <- sigma2hat_both[1]
-sigma2hat_both_biased <- sigma2hat_both[2]
-vcov_betahat_unbiased <- vcov_betahat(
+results_sigma2hat_both_unbiased <- results_sigma2hat_both[1]
+results_sigma2hat_both_biased <- results_sigma2hat_both[2]
+results_vcov_betahat_unbiased <- vcov_betahat(
   X = X,
   y = y,
   type = "unbiased"
 )
-vcov_betahat_biased <- vcov_betahat(
+results_vcov_betahat_biased <- vcov_betahat(
   X = X,
   y = y,
   type = "biased"
 )
+results_vcov_betahat_both <- vcov_betahat(
+  X = X,
+  y = y,
+  type = "both"
+)
+results_vcov_betahat_both_unbiased <- results_vcov_betahat_both[["unbiased"]]
+results_vcov_betahat_both_biased <- results_vcov_betahat_both[["biased"]]
 results_linreg <- invisible(
   linreg(
     X = X,
@@ -148,12 +155,12 @@ knitr::kable(
       "$\\hat{\\sigma}^2_{\\textrm{biased}}$"
     ),
     lm = c(
-      lm_sigma2,
+      results_lm_sigma2,
       NA
     ),
     vcov = c(
-      sigma2hat_unbiased,
-      sigma2hat_biased
+      results_sigma2hat_unbiased,
+      results_sigma2hat_biased
     ),
     linreg = c(
       results_sigma2hat_linreg,
@@ -163,15 +170,15 @@ knitr::kable(
   row.names = FALSE
 )
 knitr::kable(
-  x = lm_vcov,
+  x = results_lm_vcov,
   caption = "lm vcov"
 )
 knitr::kable(
-  x = vcov_betahat_unbiased,
+  x = results_vcov_betahat_unbiased,
   caption = "linreg vcov unbiased"
 )
 knitr::kable(
-  x = vcov_betahat_biased,
+  x = results_vcov_betahat_biased,
   caption = "linreg vcov biased"
 )
 #'
@@ -181,11 +188,11 @@ knitr::kable(
 test_that("sigma2hat unbiased", {
   expect_equivalent(
     round(
-      x = lm_sigma2,
+      x = results_lm_sigma2,
       digits = 2
     ),
     round(
-      x = sigma2hat_unbiased,
+      x = results_sigma2hat_unbiased,
       digits = 2
     ),
     round(
@@ -199,11 +206,11 @@ test_that("sigma2hat unbiased", {
 test_that("vcov unbiased", {
   expect_equivalent(
     round(
-      x = lm_vcov,
+      x = results_lm_vcov,
       digits = 2
     ),
     round(
-      x = vcov_betahat_unbiased,
+      x = results_vcov_betahat_unbiased,
       digits = 2
     ),
     round(
