@@ -55,17 +55,17 @@
 #'
 #' If `rss = NULL`,
 #' `rss` is computed
-#' using [`ss_r()`]
+#' using [`rss()`]
 #' with `X` and `y` as a required arguments
-#' and `beta_hat` as an optional argument.
+#' and `betahat` as an optional argument.
 #' If `rss` is provided,
-#' `beta_hat`, `X`, and `y`
+#' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams e_y_minus_y_hat
-#' @inheritParams rbar2_r2
-#' @inheritParams r2_rss
+#' @inheritParams y_minus_yhat
+#' @inheritParams .rbar2
+#' @inheritParams .r2_rss
 #' @param type String.
 #'   Residual variance estimator.
 #'   If `type = "unbiased"`,
@@ -76,18 +76,18 @@
 #'   returns a vector of
 #'   unbiased and biased estimates.
 #' @return Returns the estimated residual variance.
-#' @inherit y_hat references
+#' @inherit yhat references
 #' @export
-sigma2_hat_rss <- function(rss = NULL,
-                           n,
-                           k,
-                           type = "unbiased",
-                           beta_hat = NULL,
-                           X = NULL,
-                           y = NULL) {
+.sigma2hat <- function(rss = NULL,
+                       n,
+                       k,
+                       type = "unbiased",
+                       betahat = NULL,
+                       X = NULL,
+                       y = NULL) {
   if (is.null(rss)) {
-    rss <- ss_r(
-      beta_hat = beta_hat,
+    rss <- rss(
+      betahat = betahat,
       X = X,
       y = y
     )
@@ -113,16 +113,16 @@ sigma2_hat_rss <- function(rss = NULL,
 #' Residual Variance
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams sigma2_hat_rss
-#' @inherit sigma2_hat_rss return description references
+#' @inheritParams .sigma2hat
+#' @inherit .sigma2hat return description references
 #' @export
-sigma2_hat <- function(X,
-                       y,
-                       type = "unbiased") {
-  sigma2_hat_rss(
+sigma2hat <- function(X,
+                      y,
+                      type = "unbiased") {
+  .sigma2hat(
     rss = NULL,
     type = type,
-    beta_hat = NULL,
+    betahat = NULL,
     X = X,
     y = y
   )
@@ -150,30 +150,30 @@ sigma2_hat <- function(X,
 #' which includes a regressor
 #' whose value is 1 for each observation.
 #'
-#' If `sigma2_hat = NULL`,
-#' `sigma2_hat` is computed
-#' using [`sigma2_hat()`]
+#' If `sigma2hat = NULL`,
+#' `sigma2hat` is computed
+#' using [`sigma2hat()`]
 #' with `X` and `y` as a required arguments
-#' and `beta_hat` as an optional argument.
-#' If `sigma2_hat` is provided,
-#' `beta_hat`, `X`, and `y`
+#' and `betahat` as an optional argument.
+#' If `sigma2hat` is provided,
+#' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param sigma2_hat Numeric.
+#' @param sigma2hat Numeric.
 #'   Estimate of error variance.
-#' @inheritParams sigma2_hat_rss
+#' @inheritParams .sigma2hat
 #' @return Returns variance-covariance matrix of estimates of regression coefficients.
-#' @inherit sigma2_hat references
+#' @inherit sigma2hat references
 #' @export
-cov_beta_hat_sigma2_hat <- function(sigma2_hat = NULL,
-                                    beta_hat = NULL,
-                                    X,
-                                    y,
-                                    type = "unbiased") {
-  if (is.null(sigma2_hat)) {
-    sigma2_hat <- sigma2_hat(
-      beta_hat = beta_hat,
+.vcov_betahat <- function(sigma2hat = NULL,
+                          betahat = NULL,
+                          X,
+                          y,
+                          type = "unbiased") {
+  if (is.null(sigma2hat)) {
+    sigma2hat <- sigma2hat(
+      betahat = betahat,
       X = X,
       y = y,
       type = type
@@ -183,14 +183,14 @@ cov_beta_hat_sigma2_hat <- function(sigma2_hat = NULL,
   if (type == "both") {
     return(
       list(
-        unbiased = sigma2_hat["unbiased"] * inv,
-        biased = sigma2_hat["biased"] * inv
+        unbiased = sigma2hat["unbiased"] * inv,
+        biased = sigma2hat["biased"] * inv
       )
     )
   } else if (type == "unbiased" | type == "biased") {
     return(
       unname(
-        sigma2_hat * inv
+        sigma2hat * inv
       )
     )
   }
@@ -199,15 +199,15 @@ cov_beta_hat_sigma2_hat <- function(sigma2_hat = NULL,
 #' Variance-Covariance Matrix of Estimates of Regression Coefficients
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams cov_beta_hat_sigma2_hat
-#' @inherit cov_beta_hat_sigma2_hat return description references
+#' @inheritParams .vcov_betahat
+#' @inherit .vcov_betahat return description references
 #' @export
-cov_beta_hat <- function(X,
+vcov_betahat <- function(X,
                          y,
                          type = "unbiased") {
-  cov_beta_hat_sigma2_hat(
-    sigma2_hat = NULL,
-    beta_hat = NULL,
+  .vcov_betahat(
+    sigma2hat = NULL,
+    betahat = NULL,
     X = X,
     y = y,
     type = type

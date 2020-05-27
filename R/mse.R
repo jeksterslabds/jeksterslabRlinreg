@@ -1,4 +1,4 @@
-#' Mean Square Error (from \eqn{RSS})
+#' Mean Squared Error (from \eqn{RSS})
 #'
 #' Calculates the mean square error (MSE) using
 #'   \deqn{
@@ -15,29 +15,29 @@
 #'
 #' If `rss = NULL`,
 #' the `rss` vector is computed
-#' using [`ss_r()`]
+#' using [`rss()`]
 #' with `X` and `y` as required arguments
-#' and `beta_hat` as an optional argument.
+#' and `betahat` as an optional argument.
 #' If `rss` is provided,
-#' `beta_hat`, `X`, and `y`
+#' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams rbar2_r2
-#' @inheritParams r2_rss
+#' @inheritParams .rbar2
+#' @inheritParams .r2_rss
 #' @references
 #'   [Wikipedia: Mean Squared Error](https://en.wikipedia.org/wiki/Mean_squared_error)
 #' @family assessment of model quality functions
 #' @return Returns the mean square error.
 #' @export
-mse_rss <- function(rss = NULL,
-                    n,
-                    beta_hat = NULL,
-                    X,
-                    y) {
+.mse <- function(rss = NULL,
+                 n,
+                 betahat = NULL,
+                 X,
+                 y) {
   if (is.null(rss)) {
-    rss <- ss_r(
-      beta_hat = beta_hat,
+    rss <- rss(
+      betahat = betahat,
       X = X,
       y = y
     )
@@ -46,24 +46,24 @@ mse_rss <- function(rss = NULL,
   rss / n
 }
 
-#' Mean Square
+#' Mean Squared Error
 #'
-#' @inheritParams mse_rss
-#' @inherit mse_rss description references return
+#' @inheritParams .mse
+#' @inherit .mse description references return
 #' @family assessment of model quality functions
 #' @export
-mse <- function(beta_hat = NULL,
+mse <- function(betahat = NULL,
                 X,
                 y) {
-  mse_rss(
+  .mse(
     rss = NULL,
-    beta_hat = beta_hat,
+    betahat = betahat,
     X = X,
     y = y
   )
 }
 
-#' Root Mean Square Error (from \eqn{RSS})
+#' Root Mean Squared Error (from \eqn{RSS})
 #'
 #' Calculates the root mean square error (RMSE) using
 #'   \deqn{
@@ -81,21 +81,21 @@ mse <- function(beta_hat = NULL,
 #'   }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams mse_rss
-#' @inherit mse_rss details
+#' @inheritParams .mse
+#' @inherit .mse details
 #' @references
 #'   [Wikipedia: Root Mean Square Deviation](https://en.wikipedia.org/wiki/Root-mean-square_deviation)
 #' @return Returns the root mean square error.
 #' @family assessment of model quality functions
 #' @export
-rmse_rss <- function(rss = NULL,
-                     n,
-                     beta_hat = NULL,
-                     X,
-                     y) {
+.rmse <- function(rss = NULL,
+                  n,
+                  betahat = NULL,
+                  X,
+                  y) {
   if (is.null(rss)) {
-    rss <- ss_r(
-      beta_hat = beta_hat,
+    rss <- rss(
+      betahat = betahat,
       X = X,
       y = y
     )
@@ -104,19 +104,19 @@ rmse_rss <- function(rss = NULL,
   sqrt(rss / n)
 }
 
-#' Root Mean Square Error
+#' Root Mean Squared Error
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams rmse_rss
-#' @inherit rmse_rss decription details return references
+#' @inheritParams .rmse
+#' @inherit .rmse decription details return references
 #' @family assessment of model quality functions
 #' @export
-rmse <- function(beta_hat = NULL,
+rmse <- function(betahat = NULL,
                  X,
                  y) {
-  rmse_rss(
+  .rmse(
     rss = NULL,
-    beta_hat = beta_hat,
+    betahat = betahat,
     X = X,
     y = y
   )

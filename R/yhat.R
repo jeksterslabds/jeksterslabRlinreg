@@ -12,14 +12,14 @@
 #'
 #' If `P = NULL`,
 #' the `P` matrix is computed
-#' using [`proj_P()`]
+#' using [`P()`]
 #' with `X` as its argument.
 #' If `P` is provided,
 #' `X` is not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams beta_hat_inv
-#' @inheritParams proj_M
+#' @inheritParams betahat_inv
+#' @inheritParams M
 #' @return
 #'   Returns y-hat (\eqn{\mathbf{\hat{y}}}).
 #' @family y-hat functions
@@ -28,16 +28,16 @@
 #'
 #'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #' @export
-y_hat_Py <- function(y,
-                     P = NULL,
-                     X = NULL) {
+Py <- function(y,
+               P = NULL,
+               X = NULL) {
   if (is.null(P)) {
     if (is.null(X)) {
       stop(
         "If `P` is NULL, `X` should be provided."
       )
     }
-    P <- proj_P(X = X)
+    P <- P(X = X)
   }
   P %*% y
 }
@@ -54,30 +54,30 @@ y_hat_Py <- function(y,
 #'     \boldsymbol{\hat{\beta}}.
 #'   }
 #'
-#' If `beta_hat = NULL`,
-#' the `beta_hat` vector is computed
-#' using [`beta_hat_inv()`]
+#' If `betahat = NULL`,
+#' the `betahat` vector is computed
+#' using [`betahat_inv()`]
 #' with `X` and `y`
 #' as arguments.
-#' If `beta_hat` is provided,
+#' If `betahat` is provided,
 #' `y` is not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams beta_hat_inv
-#' @inheritParams e_y_minus_y_hat
-#' @inherit y_hat_Py return references
+#' @inheritParams betahat_inv
+#' @inheritParams y_minus_yhat
+#' @inherit Py return references
 #' @family y-hat functions
 #' @export
-y_hat_Xbeta_hat <- function(X,
-                            beta_hat = NULL,
-                            y = NULL) {
-  if (is.null(beta_hat)) {
-    beta_hat <- beta_hat_inv(
+Xbetahat <- function(X,
+                     betahat = NULL,
+                     y = NULL) {
+  if (is.null(betahat)) {
+    betahat <- betahat_inv(
       X = X,
       y = y
     )
   }
-  X %*% beta_hat
+  X %*% betahat
 }
 
 #' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}})
@@ -92,21 +92,21 @@ y_hat_Xbeta_hat <- function(X,
 #'     \boldsymbol{\hat{\beta}}.
 #'   }
 #'
-#' If `beta_hat = NULL`,
-#' the `beta_hat` vector is computed
-#' using [`beta_hat_inv()`].
+#' If `betahat = NULL`,
+#' the `betahat` vector is computed
+#' using [`betahat_inv()`].
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams y_hat_Xbeta_hat
-#' @inherit y_hat_Py return references
+#' @inheritParams Xbetahat
+#' @inherit Py return references
 #' @family y-hat functions
 #' @export
-y_hat <- function(X,
-                  y,
-                  beta_hat = NULL) {
-  y_hat_Xbeta_hat(
+yhat <- function(X,
+                 y,
+                 betahat = NULL) {
+  Xbetahat(
     X = X,
-    beta_hat = beta_hat,
+    betahat = betahat,
     y = y
   )
 }
@@ -125,7 +125,7 @@ y_hat <- function(X,
 #' for the **testing data set**.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param beta_hat Vector or `k` by `1` matrix.
+#' @param betahat Vector or `k` by `1` matrix.
 #'   \eqn{k \times 1} vector of estimates
 #'   of \eqn{k} unknown regression coefficients
 #'   (\eqn{\boldsymbol{\hat{\beta}}}).
@@ -145,45 +145,45 @@ y_hat <- function(X,
 #' @return
 #'   Returns a list with the following elements
 #'   \describe{
-#'     \item{y_hat}{Predicted values of \eqn{\mathbf{y}} using the `beta_hat` (\eqn{\mathbf{\hat{\beta}}}) from traning data set and `X` (\eqn{\mathbf{X}}) from testing data set.}
+#'     \item{yhat}{Predicted values of \eqn{\mathbf{y}} using the `betahat` (\eqn{\mathbf{\hat{\beta}}}) from traning data set and `X` (\eqn{\mathbf{X}}) from testing data set.}
 #'     \item{RSS}{Residual sum of squares. `NA` if `y = NULL`.}
 #'     \item{MSE}{Mean-square error. `NA` if `y = NULL`.}
 #'     \item{RMSE}{Root-mean-square error. `NA` if `y = NULL`.}
 #'     \item{R_squared}{Coefficient of determinism. `NA` if `y = NULL`.}
 #'     \item{adjusted_R_squared}{Adjusted R-squared. `NA` if `y = NULL`.}
 #'   }
-#' @inherit y_hat_Py references
+#' @inherit Py references
 #' @family y-hat functions
 #' @export
-y_hat_test <- function(beta_hat,
-                       X,
-                       y = NULL) {
-  y_hat <- y_hat_Xbeta_hat(
+yhat_test <- function(betahat,
+                      X,
+                      y = NULL) {
+  yhat <- Xbetahat(
     X = X,
-    beta_hat = beta_hat,
+    betahat = betahat,
     y = NULL
   )
   if (is.null(y)) {
     mse <- NA
     rmse <- NA
   } else {
-    rss <- sum((y - y_hat)^2)
-    tss <- ss_t(y = y)
+    rss <- sum((y - yhat)^2)
+    tss <- tss(y = y)
     mse <- mean(rss)
     rmse <- sqrt(mse)
     r2 <- 1 - (rss / tss)
-    rbar2_r2 <- rbar2_r2(
+    rbar2 <- .rbar2(
       r2 = r2,
       n = nrow(X),
       k = ncol(X)
     )
   }
   list(
-    y_hat = y_hat,
+    yhat = yhat,
     RSS = rss,
     MSE = mse,
     RMSE = rmse,
     R_squared = r2,
-    adjusted_R_squared = rbar2_r2
+    adjusted_R_squared = rbar2
   )
 }

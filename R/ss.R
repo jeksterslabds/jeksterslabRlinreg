@@ -60,15 +60,15 @@
 #' the `e` vector is computed
 #' using [`e()`]
 #' with `X` and `y` as required arguments
-#' and `beta_hat` as an optional argument.
+#' and `betahat` as an optional argument.
 #' If `e` is provided,
-#' `beta_hat`, `X`, and `y`
+#' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @param e Numeric vector.
 #'   Residuals.
-#' @inheritParams e_y_minus_y_hat
+#' @inheritParams y_minus_yhat
 #' @references
 #'   [Wikipedia: Residual Sum of Squares](https://en.wikipedia.org/wiki/Residual_sum_of_squares)
 #'
@@ -80,15 +80,15 @@
 #' @family sum of squares functions
 #' @return Returns residual sum of squares.
 #' @export
-ss_r_e <- function(e = NULL,
-                   beta_hat = NULL,
-                   X,
-                   y) {
+.rss <- function(e = NULL,
+                 betahat = NULL,
+                 X,
+                 y) {
   if (is.null(e)) {
     e <- e(
       X = X,
       y = y,
-      beta_hat = beta_hat
+      betahat = betahat
     )
   }
   drop(
@@ -98,20 +98,20 @@ ss_r_e <- function(e = NULL,
 
 #' Residual Sum of Square
 #'
-#' @details If `beta_hat = NULL`,
-#'   the `beta_hat` vector is computed
-#'   using [`beta_hat_inv()`].
+#' @details If `betahat = NULL`,
+#'   the `betahat` vector is computed
+#'   using [`betahat_inv()`].
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams ss_r_e
-#' @inherit ss_r_e description references return
+#' @inheritParams .rss
+#' @inherit .rss description references return
 #' @family sum of squares functions
 #' @export
-ss_r <- function(beta_hat = NULL,
-                 X,
-                 y) {
-  ss_r_e(
+rss <- function(betahat = NULL,
+                X,
+                y) {
+  .rss(
     e = NULL,
-    beta_hat = beta_hat,
+    betahat = betahat,
     X = X,
     y = y
   )
@@ -141,22 +141,22 @@ ss_r <- function(beta_hat = NULL,
 #'   }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams ss_r
+#' @inheritParams rss
 #' @return Returns the explained sum of squares.
-#' @inherit ss_r references
+#' @inherit rss references
 #' @family sum of squares functions
 #' @export
-ss_e <- function(beta_hat = NULL,
-                 X,
-                 y) {
-  if (is.null(beta_hat)) {
-    beta_hat <- beta_hat_inv(
+ess <- function(betahat = NULL,
+                X,
+                y) {
+  if (is.null(betahat)) {
+    betahat <- betahat_inv(
       X = X,
       y = y
     )
   }
   drop(
-    (t(beta_hat) %*% t(X) %*% X %*% beta_hat) - (nrow(X) * mean(y)^2)
+    (t(betahat) %*% t(X) %*% X %*% betahat) - (nrow(X) * mean(y)^2)
   )
 }
 
@@ -182,12 +182,12 @@ ss_e <- function(beta_hat = NULL,
 #'   }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams ss_r
+#' @inheritParams rss
 #' @return Returns the total sum of squares.
-#' @inherit ss_r references
+#' @inherit rss references
 #' @family sum of squares functions
 #' @export
-ss_t <- function(y) {
+tss <- function(y) {
   drop(
     crossprod(y) - length(y) * mean(y)^2
   )

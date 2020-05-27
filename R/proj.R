@@ -21,13 +21,13 @@
 #' (\eqn{\mathbf{\hat{y}} = \mathbf{Py}}).
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams beta_hat_inv
+#' @inheritParams betahat_inv
 #' @return Returns the projection matrix (\eqn{\mathbf{P}}).
 #' @references
 #'   [Wikipedia: Projection Matrix](https://en.wikipedia.org/wiki/Projection_matrix)
 #' @family projection matrix functions
 #' @export
-proj_P <- function(X) {
+P <- function(X) {
   X %*% solve(t(X) %*% X) %*% t(X)
 }
 
@@ -50,7 +50,7 @@ proj_P <- function(X) {
 #'
 #' If `P = NULL`,
 #' the `P` matrix is computed
-#' using [`proj_P()`].
+#' using [`P()`].
 #' The residual maker matrix (\eqn{\mathbf{M}})
 #' transforms the \eqn{\mathbf{y}} vector
 #' to the vector of residuals
@@ -60,15 +60,15 @@ proj_P <- function(X) {
 #' @param P Matrix.
 #'   The projection matrix
 #'   (\eqn{\mathbf{P}}).
-#' @inheritParams beta_hat_inv
+#' @inheritParams betahat_inv
 #' @return Returns the residual maker matrix (\eqn{\mathbf{M}}).
-#' @inherit proj_P references
+#' @inherit P references
 #' @family projection matrix functions
 #' @export
-proj_M <- function(X,
-                   P = NULL) {
+M <- function(X,
+              P = NULL) {
   if (is.null(P)) {
-    P <- proj_P(X)
+    P <- P(X)
   }
   diag(nrow(X)) - P
 }
