@@ -1,0 +1,25 @@
+---
+title: "Notes: Lack of perfect multicollinearity"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Notes: Lack of perfect multicollinearity}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_options, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+## References
+
+[Wikipedia: Linear Regression - Assumptions](https://en.wikipedia.org/wiki/Linear_regression#Assumptions)
+
+[Wikipedia: Ordinary Least Squares - Assumptions](https://en.wikipedia.org/wiki/Ordinary_least_squares#Assumptions)

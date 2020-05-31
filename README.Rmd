@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![codecov](https://codecov.io/github/jeksterslabds/jeksterslabRlinreg/branch/master/graphs/badge.svg)](https://codecov.io/github/jeksterslabds/jeksterslabRlinreg) 
 <!-- badges: end -->
 
-A collection of functions that I find useful in studying linear regression concepts and methods.
+`jeksterslabRlinreg` is a collection of functions that I find useful in studying linear regression concepts and methods.
 
 ## Installation
 
