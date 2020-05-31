@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Ivan Jacob Agaloos Pesigan" />
+
+<meta name="date" content="2020-05-31" />
+
+<title>Notes: Exogeniety</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Notes: Exogeniety</h1>
+<h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
+<h4 class="date">2020-05-31</h4>
+
+
+
+<div id="exogenous-variable" class="section level2">
+<h2>Exogenous variable</h2>
+<ul>
+<li>An <strong>exogenous variable</strong> is one whose value is determined outside the model and is imposed on the model.</li>
+<li>An <strong>exogenous change</strong> is a change in an exogenous variable.</li>
+</ul>
+</div>
+<div id="endogenous-variable" class="section level2">
+<h2>Endogenous variable</h2>
+<ul>
+<li>An <strong>endogenous variable</strong> is a variable whose value is determined by the model.</li>
+<li>An <strong>endogenous change</strong> is a change in an endogenous variable in response to an exogenous change that is imposed upon the model.</li>
+</ul>
+</div>
+<div id="exogeniety-assumption" class="section level2">
+<h2>Exogeniety Assumption</h2>
+<ul>
+<li>An <strong>exogenous variable</strong> is assumed to be fixed in repeated sampling, which means it is a nonstochastic variable.</li>
+<li>An implication of this assumption is that the error term in the econometric model is independent of the exogenous variable.</li>
+</ul>
+<p>Endogeneity can come from</p>
+<ul>
+<li>ommited variable</li>
+<li>measurement error</li>
+<li>simultaneity</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+  Y_i = \beta_1 + \beta_2 X_i + \varepsilon_i
+\end{equation}\]</span></p>
+<div class="figure">
+<img src="data:image/png;base64,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" alt="Exogenous and endogenous variables" width="100%" />
+<p class="caption">
+Exogenous and endogenous variables
+</p>
+</div>
+<p><span class="math display">\[\begin{equation}
+  \mathbb{E}
+  \left(
+    \varepsilon_i
+    \mid
+    \mathbf{X}
+  \right)
+    =
+    0
+\end{equation}\]</span></p>
+<p>In matrix notation,</p>
+<p><span class="math display">\[\begin{equation}
+  \mathbb{E}
+  \left(
+    \boldsymbol{\varepsilon}
+    \mid
+    \mathbf{X}
+  \right)
+    =
+    0
+\end{equation}\]</span></p>
+<div id="omitted-variable" class="section level3">
+<h3>Omitted Variable</h3>
+<p>In this case, the endogeneity comes from an uncontrolled <strong>confounding variable</strong>, a variable that is correlated with both the independent variable in the model and with the error term. Equivalently, the omitted variable affects the independent variable and separately affects the dependent variable.</p>
+</div>
+<div id="measurement-error" class="section level3">
+<h3>Measurement error</h3>
+</div>
+<div id="simultaneity" class="section level3">
+<h3>Simultaneity</h3>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p><a href="https://en.wikipedia.org/wiki/Exogenous_and_endogenous_variables">Wikipedia: Exogenous and Endogenous Variables</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Endogeneity_(econometrics)">Wikipedia: Endogeneity (Econometrics)</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Linear_regression#Assumptions">Wikipedia: Linear Regression - Assumptions</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Ordinary_least_squares#Assumptions">Wikipedia: Ordinary Least Squares - Assumptions</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Omitted-variable_bias">Wikipedia: Omitted-Variable Bias</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
