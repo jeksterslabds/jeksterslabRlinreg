@@ -1,7 +1,7 @@
 jeksterslabRlinreg
 ================
 Ivan Jacob Agaloos Pesigan
-2020-05-31
+2020-06-01
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -50,25 +50,24 @@ linreg(
   output = c("coef", "model", "anova")
 )
 #> Coefficients:
-#>   Coefficients        se        t            p
-#> 1     2.008965 0.3331220  6.03072 3.112947e-08
-#> 2     2.475046 0.1126943 21.96249 5.291468e-39
-#> 3     2.369464 0.1177129 20.12917 4.896128e-36
-#> 4     2.930873 0.1164833 25.16133 8.504350e-44
-#> 5     2.700578 0.1264947 21.34934 4.977296e-38
+#>   Coefficients        se         t            p
+#> 1     1.657591 0.3143990  5.272252 8.295795e-07
+#> 2     2.607402 0.1168548 22.313187 9.091826e-40
+#> 3     1.613772 0.1079584 14.948097 8.382428e-27
+#> 4     2.297810 0.1089696 21.086702 8.322454e-38
 #> 
 #> Model Evaluation:
-#>                                            Value
-#> Coefficient of determination           0.9579428
-#> Adjusted coefficient of determination  0.9561720
-#> Mean Squared Error                    10.1480229
-#> Root Mean Squared Error                3.1855962
+#>                                           Value
+#> Coefficient of determination          0.9347173
+#> Adjusted coefficient of determination 0.9326772
+#> Mean Squared Error                    8.9662270
+#> Root Mean Squared Error               2.9943659
 #> 
 #> ANOVA Table:
-#>  Source df        SS         MS       F            p
-#>   Model  4 23114.293 5778.57316 540.957 1.994773e-64
-#>   Error 95  1014.802   10.68213      NA           NA
-#>   Total 99 24129.095         NA      NA           NA
+#>  Source df         SS         MS        F            p
+#>   Model  3 12837.8312 4279.27706 458.1755 9.826856e-57
+#>   Error 96   896.6227    9.33982       NA           NA
+#>   Total 99 13734.4539         NA       NA           NA
 ```
 
 See [GitHub
