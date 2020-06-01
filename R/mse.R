@@ -108,7 +108,7 @@ mse <- function(betahat = NULL,
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .rmse
-#' @inherit .rmse decription details return references
+#' @inherit .rmse description details return references
 #' @family assessment of model quality functions
 #' @export
 rmse <- function(betahat = NULL,
