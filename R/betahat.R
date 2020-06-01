@@ -172,3 +172,83 @@ betahat <- function(X,
     y = y
   )
 }
+
+#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - Correlations
+#'
+#' Estimates slopes of a linear regression model
+#'   (\eqn{\boldsymbol{\hat{\beta}}} minus the intercept)
+#'   as a function of correlations
+#'   given by
+#'   \deqn{
+#'     \boldsymbol{\hat{\beta}}
+#'     =
+#'     \mathrm{R}_{\mathbf{X}}
+#'     \mathrm{r}_{\mathbf{yX}}
+#'   }
+#'   where
+#'   \eqn{\mathbf{R}_{\mathbf{X}}}
+#'   is the correlation matrix
+#'   of the regressor variables
+#'   and
+#'   \eqn{ \mathbf{r}_{\mathbf{yX}}}
+#'   is the column vector
+#'   of the correlations between
+#'   the regressand
+#'   and the regressors.
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @param R_X Matrix.
+#'   Correlations between the regressors.
+#' @param r_yX Vector
+#'   or
+#'   \eqn{k - 1 \times 1}
+#'   matrix
+#'   of correlations between the regressand
+#'   and the regressors.
+#' @return
+#'   Returns the slopes of a linear regression model
+#'   derived from correlations.
+#' @export
+betahat_cor <- function(R_X, r_yX) {
+  solve(R_X) %*% r_yX
+}
+
+#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - Covariances
+#'
+#' Estimates slopes of a linear regression model
+#'   (\eqn{\boldsymbol{\hat{\beta}}} minus the intercept)
+#'   as a function of covariances
+#'   given by
+#'   \deqn{
+#'     \boldsymbol{\hat{\beta}}
+#'     =
+#'     \mathrm{V}_{\mathbf{X}}
+#'     \mathrm{v}_{\mathbf{yX}}
+#'   }
+#'   where
+#'   \eqn{\mathbf{V}_{\mathbf{X}}}
+#'   is the covariance matrix
+#'   of the regressor variables
+#'   and
+#'   \eqn{ \mathbf{v}_{\mathbf{yX}}}
+#'   is the column vector
+#'   of the covariances between
+#'   the regressand
+#'   and the regressors.
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @param V_X Matrix.
+#'   Covariances between the regressors.
+#' @param v_yX Vector
+#'   or
+#'   \eqn{k - 1 \times 1}
+#'   matrix
+#'   of covariances between the regressand
+#'   and the regressors.
+#' @return
+#'   Returns the slopes of a linear regression model
+#'   derived from covariances.
+#' @export
+betahat_cov <- function(V_X, v_yX) {
+  solve(V_X) %*% v_yX
+}
