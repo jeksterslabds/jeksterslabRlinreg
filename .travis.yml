@@ -3,9 +3,15 @@ language: r
 r:
 - oldrel
 - release
+- devel
 os:
 - linux
 - osx
+jobs:
+  exclude:
+  # macOS binary packages not available for r-devel
+  - r: devel
+    os: osx
 addons:
   apt:
     update: true
