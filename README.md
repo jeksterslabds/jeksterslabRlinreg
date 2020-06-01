@@ -50,22 +50,25 @@ linreg(
   output = c("coef", "model", "anova")
 )
 #> Coefficients:
-#>   Coefficients        se        t            p
-#> 1     1.133331 0.3463911 3.271826 1.476032e-03
-#> 2     0.959112 0.1258016 7.624007 1.594382e-11
+#>   Coefficients        se         t            p
+#> 1    3.0175891 0.4069687  7.414794 5.044609e-11
+#> 2    0.7122662 0.1425886  4.995252 2.667779e-06
+#> 3    1.7529967 0.1334224 13.138698 4.355513e-23
+#> 4    1.3611493 0.1454428  9.358654 3.882123e-15
+#> 5    1.5915178 0.1390666 11.444287 1.417382e-19
 #> 
 #> Model Evaluation:
 #>                                            Value
-#> Coefficient of determination           0.3722998
-#> Adjusted coefficient of determination  0.3658947
-#> Mean Squared Error                    11.7511624
-#> Root Mean Squared Error                3.4279968
+#> Coefficient of determination           0.8341273
+#> Adjusted coefficient of determination  0.8271432
+#> Mean Squared Error                    13.7216083
+#> Root Mean Squared Error                3.7042689
 #> 
 #> ANOVA Table:
-#>  Source df        SS        MS        F            p
-#>   Model  1  696.9816 696.98159 58.12548 1.594382e-11
-#>   Error 98 1175.1162  11.99098       NA           NA
-#>   Total 99 1872.0978        NA       NA           NA
+#>  Source df       SS        MS        F            p
+#>   Model  4 6900.211 1725.0527 119.4321 3.532341e-36
+#>   Error 95 1372.161   14.4438       NA           NA
+#>   Total 99 8272.372        NA       NA           NA
 ```
 
 See [GitHub
