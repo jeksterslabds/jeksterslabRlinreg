@@ -1,7 +1,7 @@
 jeksterslabRlinreg
 ================
 Ivan Jacob Agaloos Pesigan
-2020-06-01
+2020-06-02
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -51,24 +51,21 @@ linreg(
 )
 #> Coefficients:
 #>   Coefficients        se         t            p
-#> 1    3.0175891 0.4069687  7.414794 5.044609e-11
-#> 2    0.7122662 0.1425886  4.995252 2.667779e-06
-#> 3    1.7529967 0.1334224 13.138698 4.355513e-23
-#> 4    1.3611493 0.1454428  9.358654 3.882123e-15
-#> 5    1.5915178 0.1390666 11.444287 1.417382e-19
+#> 1     0.713429 0.3303565  2.159573 3.324561e-02
+#> 2     1.916013 0.1174041 16.319811 1.066923e-29
 #> 
 #> Model Evaluation:
 #>                                            Value
-#> Coefficient of determination           0.8341273
-#> Adjusted coefficient of determination  0.8271432
-#> Mean Squared Error                    13.7216083
-#> Root Mean Squared Error                3.7042689
+#> Coefficient of determination           0.7310177
+#> Adjusted coefficient of determination  0.7282730
+#> Mean Squared Error                    10.6933755
+#> Root Mean Squared Error                3.2700727
 #> 
 #> ANOVA Table:
-#>  Source df       SS        MS        F            p
-#>   Model  4 6900.211 1725.0527 119.4321 3.532341e-36
-#>   Error 95 1372.161   14.4438       NA           NA
-#>   Total 99 8272.372        NA       NA           NA
+#>  Source df       SS         MS        F            p
+#>   Model  1 2906.156 2906.15648 266.3362 1.066923e-29
+#>   Error 98 1069.338   10.91161       NA           NA
+#>   Total 99 3975.494         NA       NA           NA
 ```
 
 See [GitHub
