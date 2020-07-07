@@ -13,7 +13,6 @@ jobs:
   - r: devel
     os: osx
 cache: packages
-cache: packages
 before_install:
 - Rscript -e 'if (!require("covr")) install.packages("covr")'
 after_success:
