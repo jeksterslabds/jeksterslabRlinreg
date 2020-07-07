@@ -34,7 +34,5 @@ Suggests:
 	rmarkdown,
 	testthat,
     microbenchmark,
-    MASS,
-    magick,
-    pdftools
+    MASS
 RoxygenNote: 7.1.1
