@@ -7,47 +7,47 @@
 #'     1 - \frac{\textrm{Residual sum of squares}}{\textrm{Total sum of squares}}
 #'   }
 #'
-#' If `rss = NULL`,
-#' `rss` is computed
-#' using [`rss()`]
+#' If `RSS = NULL`,
+#' `RSS` is computed
+#' using [`RSS()`]
 #' with `X` and `y` as required arguments
 #' and `betahat` as an optional argument.
-#' If `tss = NULL`,
-#' `tss` is computed
-#' using [`tss()`]
+#' If `TSS = NULL`,
+#' `TSS` is computed
+#' using [`TSS()`]
 #' with `y` as a required argument.
-#' If `rss` and `tss` are provided,
+#' If `RSS` and `TSS` are provided,
 #' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param rss Numeric.
+#' @param RSS Numeric.
 #'   Residual sum of squares.
-#' @param tss Numeric.
+#' @param TSS Numeric.
 #'   Total sum of squares.
-#' @inheritParams rss
+#' @inheritParams RSS
 #' @return Returns the coefficient of determination \eqn{R^2}.
 #' @family assessment of model quality functions
-#' @inherit rss references
+#' @inherit RSS references
 #' @export
-.r2_rss <- function(rss = NULL,
-                    tss = NULL,
-                    betahat = NULL,
+.R2_RSS <- function(RSS = NULL,
+                    TSS = NULL,
                     X = NULL,
-                    y = NULL) {
-  if (is.null(rss)) {
-    rss <- rss(
-      betahat = betahat,
+                    y = NULL,
+                    betahat = NULL) {
+  if (is.null(RSS)) {
+    RSS <- RSS(
       X = X,
+      y = y,
+      betahat = betahat
+    )
+  }
+  if (is.null(TSS)) {
+    TSS <- TSS(
       y = y
     )
   }
-  if (is.null(tss)) {
-    tss <- tss(
-      y = y
-    )
-  }
-  1 - (rss / tss)
+  1 - (RSS / TSS)
 }
 
 #' R-square (from \eqn{ESS})
@@ -59,44 +59,44 @@
 #'     \frac{\textrm{Explained sum of squares}}{\textrm{Total sum of squares}}.
 #'   }
 #'
-#' If `ess = NULL`,
-#' `ess` is computed
-#' using [`ess()`]
+#' If `ESS = NULL`,
+#' `ESS` is computed
+#' using [`ESS()`]
 #' with `X` and `y` as required arguments
 #' and `betahat` as an optional argument.
-#' If `tss = NULL`,
-#' `tss` is computed
-#' using [`tss()`]
+#' If `TSS = NULL`,
+#' `TSS` is computed
+#' using [`TSS()`]
 #' with `y` as a required argument.
-#' If `ess` and `tss` are provided,
+#' If `ESS` and `TSS` are provided,
 #' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param ess Numeric.
+#' @param ESS Numeric.
 #'   Explained sum of squares.
-#' @inheritParams .r2_rss
-#' @inherit .r2_rss return references
+#' @inheritParams .R2_RSS
+#' @inherit .R2_RSS return references
 #' @family assessment of model quality functions
 #' @export
-.r2_ess <- function(ess = NULL,
-                    tss = NULL,
-                    betahat = NULL,
+.R2_ESS <- function(ESS = NULL,
+                    TSS = NULL,
                     X = NULL,
-                    y = NULL) {
-  if (is.null(ess)) {
-    ess <- ess(
-      betahat = betahat,
+                    y = NULL,
+                    betahat = NULL) {
+  if (is.null(ESS)) {
+    ESS <- ESS(
       X = X,
+      y = y,
+      betahat = betahat
+    )
+  }
+  if (is.null(TSS)) {
+    TSS <- TSS(
       y = y
     )
   }
-  if (is.null(tss)) {
-    tss <- tss(
-      y = y
-    )
-  }
-  ess / tss
+  ESS / TSS
 }
 
 #' R-square
@@ -115,39 +115,39 @@
 #'   }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param fromrss Logical.
+#' @param fromRSS Logical.
 #'   If `TRUE`,
 #'   calculates the coefficient of determinism
 #'   from `RSS`.
 #'   If `FALSE`,
 #'   calculates the coefficient of determinism
 #'   from `ESS`.
-#' @inheritParams .r2_rss
+#' @inheritParams .R2_RSS
 #' @family assessment of model quality functions
-#' @inherit .r2_rss references
+#' @inherit .R2_RSS references
 #' @export
-r2 <- function(betahat = NULL,
-               X,
+R2 <- function(X,
                y,
-               fromrss = TRUE) {
-  if (fromrss) {
+               betahat = NULL,
+               fromRSS = TRUE) {
+  if (fromRSS) {
     return(
-      .r2_rss(
-        rss = NULL,
-        tss = NULL,
-        betahat = betahat,
+      .R2_RSS(
+        RSS = NULL,
+        TSS = NULL,
         X = X,
-        y = y
+        y = y,
+        betahat = betahat
       )
     )
   } else {
     return(
-      .r2_ess(
-        ess = NULL,
-        tss = NULL,
-        betahat = betahat,
+      .R2_ESS(
+        ESS = NULL,
+        TSS = NULL,
         X = X,
-        y = y
+        y = y,
+        betahat = betahat
       )
     )
   }
@@ -173,12 +173,12 @@ r2 <- function(betahat = NULL,
 #'     \frac{n - 1}{n - k}.
 #'   }
 #'
-#' If `r2 = NULL`,
-#' `r2` is computed
-#' using [`r2()`]
+#' If `R2 = NULL`,
+#' `R2` is computed
+#' using [`R2()`]
 #' with `X` and `y` as required arguments
 #' and `betahat` as an optional argument.
-#' If `r2` is provided,
+#' If `R2` is provided,
 #' `betahat`, `X`, and `y`
 #' are not needed.
 #'
@@ -189,48 +189,48 @@ r2 <- function(betahat = NULL,
 #'   including a regressor
 #'   whose value is 1 for each observation.
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param r2 Numeric.
+#' @param R2 Numeric.
 #'   Coefficient of determinims \eqn{R^2}.
-#' @inheritParams r2
+#' @inheritParams R2
 #' @return Returns the adjusted coefficient of determination \eqn{\bar{R}^{2}}.
 #' @family assessment of model quality functions
-#' @inherit .r2_rss references
+#' @inherit .R2_RSS references
 #' @export
-.rbar2 <- function(r2 = NULL,
+.Rbar2 <- function(R2 = NULL,
                    n,
                    k,
-                   betahat = NULL,
                    X,
                    y,
-                   fromrss = TRUE) {
-  if (is.null(r2)) {
-    r2 <- r2(
-      betahat = betahat,
+                   betahat = NULL,
+                   fromRSS = TRUE) {
+  if (is.null(R2)) {
+    R2 <- R2(
       X = X,
       y = y,
-      fromrss = fromrss
+      betahat = betahat,
+      fromRSS = fromRSS
     )
     n <- nrow(X)
     k <- ncol(X)
   }
-  1 - (1 - r2) * ((n - 1) / (n - k))
+  1 - (1 - R2) * ((n - 1) / (n - k))
 }
 
 #' Adjusted R-square
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @inheritParams .rbar2
-#' @inherit .rbar2 description return references
+#' @inheritParams .Rbar2
+#' @inherit .Rbar2 description return references
 #' @family assessment of model quality functions
 #' @export
-rbar2 <- function(betahat = NULL,
-                  X,
-                  y) {
-  .rbar2(
-    r2 = NULL,
-    betahat = betahat,
+Rbar2 <- function(X,
+                  y,
+                  betahat = NULL) {
+  .Rbar2(
+    R2 = NULL,
     X = X,
     y = y,
-    fromrss = TRUE
+    betahat = betahat,
+    fromRSS = TRUE
   )
 }

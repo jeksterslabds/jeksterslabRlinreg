@@ -12,13 +12,21 @@
 #'   \deqn{
 #'     \hat{\sigma}^2_{\textrm{unbiased}}
 #'     =
+#'     \frac{1}{n - k}
+#'     \sum_{i = 1}^{n}
+#'     \left(
+#'       \mathbf{y}
+#'       -
+#'       \mathbf{X} \boldsymbol{\hat{\beta}}
+#'     \right)^2 \\
+#'     =
 #'     \frac{
 #'     \mathbf{e}^{\prime}
 #'     \mathbf{e}
 #'     }
 #'     {
 #'       n - k
-#'     }
+#'     } \\
 #'     =
 #'     \frac{
 #'     RSS
@@ -31,13 +39,21 @@
 #'   \deqn{
 #'     \hat{\sigma}^2_{\textrm{biased}}
 #'     =
+#'     \frac{1}{n}
+#'     \sum_{i = 1}^{n}
+#'     \left(
+#'       \mathbf{y}
+#'       -
+#'       \mathbf{X} \boldsymbol{\hat{\beta}}
+#'     \right)^2 \\
+#'     =
 #'     \frac{
 #'     \mathbf{e}^{\prime}
 #'     \mathbf{e}
 #'     }
 #'     {
 #'       n
-#'     }
+#'     } \\
 #'     =
 #'     \frac{
 #'     RSS
@@ -53,19 +69,19 @@
 #' and \eqn{k} is the number of regressors
 #' including a regressor whose value is 1 for each observation.
 #'
-#' If `rss = NULL`,
-#' `rss` is computed
-#' using [`rss()`]
+#' If `RSS = NULL`,
+#' `RSS` is computed
+#' using [`RSS()`]
 #' with `X` and `y` as a required arguments
 #' and `betahat` as an optional argument.
-#' If `rss` is provided,
+#' If `RSS` is provided,
 #' `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams y_minus_yhat
-#' @inheritParams .rbar2
-#' @inheritParams .r2_rss
+#' @inheritParams .Rbar2
+#' @inheritParams .R2_RSS
 #' @param type String.
 #'   Residual variance estimator.
 #'   If `type = "unbiased"`,
@@ -75,18 +91,20 @@
 #'   If `type = "both"`,
 #'   returns a vector of
 #'   unbiased and biased estimates.
-#' @return Returns the estimated residual variance.
+#' @return Returns the estimated
+#'   residual variance (\eqn{\hat{\sigma}^2}).
 #' @inherit yhat references
+#' @family residual variance functions
 #' @export
-.sigma2hat <- function(rss = NULL,
+.sigma2hat <- function(RSS = NULL,
                        n,
                        k,
                        type = "unbiased",
-                       betahat = NULL,
                        X = NULL,
-                       y = NULL) {
-  if (is.null(rss)) {
-    rss <- rss(
+                       y = NULL,
+                       betahat = NULL) {
+  if (is.null(RSS)) {
+    RSS <- RSS(
       betahat = betahat,
       X = X,
       y = y
@@ -95,32 +113,33 @@
     k <- ncol(X)
   }
   if (type == "unbiased") {
-    return(rss / (n - k))
+    return(RSS / (n - k))
   }
   if (type == "biased") {
-    return(rss / n)
+    return(RSS / n)
   }
   if (type == "both") {
     return(
       c(
-        unbiased = rss / (n - k),
-        biased = rss / n
+        unbiased = RSS / (n - k),
+        biased = RSS / n
       )
     )
   }
 }
 
-#' Residual Variance
+#' Residual Variance (\eqn{\hat{\sigma}^2})
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .sigma2hat
 #' @inherit .sigma2hat return description references
+#' @family residual variance functions
 #' @export
 sigma2hat <- function(X,
                       y,
                       type = "unbiased") {
   .sigma2hat(
-    rss = NULL,
+    RSS = NULL,
     type = type,
     betahat = NULL,
     X = X,
@@ -154,27 +173,29 @@ sigma2hat <- function(X,
 #' `sigma2hat` is computed
 #' using [`sigma2hat()`]
 #' with `X` and `y` as a required arguments
-#' and `betahat` and `rss` as an optional argument.
+#' and `betahat` and `RSS` as an optional argument.
 #' If `sigma2hat` is provided,
-#' `rss`, `betahat`, `X`, and `y`
+#' `RSS`, `betahat`, `X`, and `y`
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @param sigma2hat Numeric.
 #'   Estimate of error variance.
 #' @inheritParams .sigma2hat
-#' @return Returns variance-covariance matrix of estimates of regression coefficients.
+#' @return Returns the variance-covariance matrix
+#'   of estimates of regression coefficients.
 #' @inherit sigma2hat references
+#' @family variance-covariance functions
 #' @export
 .vcov_betahat <- function(sigma2hat = NULL,
-                          rss = NULL,
-                          betahat = NULL,
+                          RSS = NULL,
                           X,
                           y,
+                          betahat = NULL,
                           type = "unbiased") {
   if (is.null(sigma2hat)) {
     sigma2hat <- .sigma2hat(
-      rss = rss,
+      RSS = RSS,
       type = type,
       betahat = betahat,
       X = X,
@@ -203,6 +224,7 @@ sigma2hat <- function(X,
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .vcov_betahat
 #' @inherit .vcov_betahat return description references
+#' @family variance-covariance functions
 #' @export
 vcov_betahat <- function(X,
                          y,

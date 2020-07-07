@@ -43,7 +43,7 @@ P <- function(X) {
 #'       \mathbf{X}^{\prime}
 #'       \mathbf{X}
 #'     \right)^{-1}
-#'     \mathbf{X}^{\prime}
+#'     \mathbf{X}^{\prime} \\
 #'     =
 #'     \mathbf{I} - \mathbf{P}.
 #'   }
@@ -71,4 +71,61 @@ M <- function(X,
     P <- P(X)
   }
   diag(nrow(X)) - P
+}
+
+#' Leverage
+#'
+#' Calculates leverage,
+#' that is,
+#' how far away the regressor values
+#' of an observation are
+#' from those of the other observations using
+#'   \deqn{
+#'     h_{ii}
+#'     =
+#'     x_{i}^{\prime}
+#'     \left(
+#'       \mathbf{X}^{\prime}
+#'       \mathbf{X}
+#'     \right)^{-1}
+#'     x_{i}
+#'   }
+#' where \eqn{x_{i}^{\prime}}
+#' is the \eqn{i}th row of the \eqn{\mathbf{X}} matrix.
+#' Note that
+#' \eqn{\mathbf{X} \left( \mathbf{X}^{\prime} \mathbf{X} \right)^{-1} \mathbf{X}^{\prime}}
+#' is the projection matrix (or hat matrix) \eqn{\mathbf{P}}
+#' and \eqn{h_{ii}} is the diagonal of \eqn{\mathbf{P}}.
+#'
+#' If `P = NULL`,
+#' `P` is computed with
+#' `X` as a required argument.
+#' `X` is ignored if `P` is provided.
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @param P Matrix
+#'   The projection matrix.
+#' @inheritParams P
+#' @family projection matrix functions
+#' @export
+.h <- function(P = NULL,
+               X = NULL) {
+  if (is.null(P)) {
+    P <- P(X)
+  }
+  diag(P)
+}
+
+#' Leverage
+#'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @inheritParams .h
+#' @inherit .h description
+#' @family projection matrix functions
+#' @export
+h <- function(X) {
+  .h(
+    P = NULL,
+    X = X
+  )
 }
