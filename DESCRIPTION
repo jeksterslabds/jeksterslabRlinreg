@@ -25,12 +25,16 @@ Depends:
 	R (>= 3.5.0)
 Imports:
 	utils,
-	stats
+	stats,
+    jeksterslabRdist
+Remotes:
+    jeksterslabds/jeksterslabRdist
 Suggests:
 	knitr,
 	rmarkdown,
 	testthat,
     microbenchmark,
+    MASS,
     magick,
     pdftools
 RoxygenNote: 7.1.0

@@ -100,7 +100,7 @@ linreg(
   X = X,
   y = y,
   FUN = betahat_inv,
-  output = c("coef", "model", "anova")
+  output = c("coef", "ci", "model", "anova")
 )
 ```
 

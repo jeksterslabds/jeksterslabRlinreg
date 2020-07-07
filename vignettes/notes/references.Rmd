@@ -1,0 +1,21 @@
+---
+title: "Notes: References"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Notes: References}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+- https://www.springer.com/gp/book/9781848829688
+- https://www.springer.com/gp/book/9783319552507
+- https://www.springer.com/gp/book/9783642343322

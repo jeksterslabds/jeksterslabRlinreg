@@ -1,0 +1,428 @@
+---
+title: "Notes: The Linear Regression Model - The Population Regression Model"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Notes: The Linear Regression Model - The Population Regression Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Linear Regression Equation
+
+The linear regression model is given by
+
+\begin{equation}
+  Y
+  =
+  \beta_1 X_{1}
+  +
+  \beta_2 X_{2}
+  +
+  \beta_3 X_{3}
+  +
+  \dots
+  +
+  \beta_k X_{k}
+  +
+  \varepsilon .
+\end{equation}
+
+- $Y$ is the regressand variable.
+- $X_1, X_2, X_3, \dots, X_k$ are the regressor variables.
+  The variable $X_1$ takes the value $1$ for each observation
+  as such it can be omitted from the equation.
+  - fixed design (fixed regressors) -
+    the regressors $X$
+    are treated as known constants
+    set by a design,
+    and $Y$ is sampled conditionally
+    on the values of $X$ as in an experiment
+  - random design (stochastic regressors) -
+    the regressors $X_{2i}, X_{3i}, \dots, X_{ki}$
+    are random and sampled together with the $Y_i$'s
+    from some population,
+    as in an observational study
+- The error/disturbance term $\varepsilon$ is added
+  to account for the random or stochastic component in the model.
+- The coefficients,
+  $\beta_1, \beta_2, \beta_3, \dots, \beta_k$
+  are called regression parameters or coefficients.
+  - $\beta_1$ is called the intercept
+  - coefficients $\beta_2$ to $\beta_k$
+    are called partial regression coefficients or slopes.
+- $k$ is the number of regression coefficients.
+- $p = k - 1$ is the number of partial regression coefficients or slopes.
+
+The goal of regression is to model the effect
+of a given set of regressors
+on the regressand variable.
+The relationship between the
+regressand
+and the
+regressors 
+is not deterministic.
+The error/disturbance term accounts for random errors.
+This implies that the regressand variable $Y$ is a random variable,
+whose distribution depends on the regressors.
+
+\begin{equation}
+\begin{split}
+  \mathbb{E}
+  \left(
+    Y
+    \mid
+    X_1,
+    X_2,
+    X_3,
+    \dots,
+    X_k
+  \right)
+  &=
+  f
+  \left(
+    X_1,
+    X_2,
+    X_3,
+    \dots,
+    X_k
+  \right) \\
+  &=
+  \beta_1 X_{1}
+  +
+  \beta_2 X_{2}
+  +
+  \beta_3 X_{3}
+  +
+  \dots
+  +
+  \beta_k X_{k}
+\end{split}
+\end{equation}
+
+We can decompose the regressand into
+
+\begin{equation}
+\begin{split}
+  Y
+  &=
+  \mathbb{E}
+  \left(
+    Y
+    \mid
+    X_1,
+    X_2,
+    X_3,
+    \dots,
+    X_k
+  \right)
+  +
+  \varepsilon \\
+  &=
+  f
+  \left(
+    X_1,
+    X_2,
+    X_3,
+    \dots,
+    X_k
+  \right)
+  +
+  \varepsilon \\
+  &=
+  \beta_1 X_{1}
+  +
+  \beta_2 X_{2}
+  +
+  \beta_3 X_{3}
+  +
+  \dots
+  +
+  \beta_k X_{k}
+  +
+  \varepsilon
+\end{split}
+\end{equation}
+
+## Matrix Representation
+
+When we map the random variables
+to the $n$ realizations,
+we have $n$ equations
+
+\begin{equation}
+  y_i
+  =
+  \beta_1 x_{1i}
+  +
+  \beta_2 x_{2i}
+  +
+  \beta_3 x_{3i}
+  +
+  \dots
+  +
+  \beta_k x_{ki}
+  +
+  \varepsilon_i, 
+  \quad
+  i
+  =
+  1,
+  2,
+  3,
+  \dots,
+  n .
+\end{equation}
+
+\noindent or
+
+\begin{equation}
+\label{eq:regression02}
+  y_1 = \beta_1 x_{11} + \beta_2 x_{21} + \beta_3 x_{31} + \dots + \beta_k x_{k1} + \varepsilon_1 \\
+  y_2 = \beta_1 x_{12} + \beta_2 x_{22} + \beta_3 x_{32} + \dots + \beta_k x_{k2} + \varepsilon_2 \\
+  y_3 = \beta_1 x_{13} + \beta_2 x_{23} + \beta_3 x_{33} + \dots + \beta_k x_{k3} + \varepsilon_3 \\
+  \vdots \\
+  y_n = \beta_1 x_{1n} + \beta_2 x_{2n} + \beta_3 x_{3n} + \dots + \beta_k x_{kn} + \varepsilon_n
+\end{equation}
+
+The system of equations can be expressed compactly as
+
+\begin{equation}
+\label{eq:regression03}
+  \begin{bmatrix}
+    y_1    \\
+    y_2    \\
+    y_3    \\
+    \vdots \\
+    y_n
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1      & x_{21} & x_{31} & \dots  & x_{k1} \\
+    1      & x_{22} & x_{32} & \dots  & x_{k2} \\
+    1      & x_{23} & x_{33} & \dots  & x_{k3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    1      & x_{2n} & x_{3n} & \dots  & x_{kn}
+  \end{bmatrix}
+  \begin{bmatrix}
+    \beta_1 \\
+    \beta_2 \\
+    \beta_3 \\
+    \vdots  \\
+    \beta_k
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    \varepsilon_1 \\
+    \varepsilon_2 \\
+    \varepsilon_3 \\
+    \vdots        \\
+    \varepsilon_n
+  \end{bmatrix}
+\end{equation}
+
+\noindent or
+
+\begin{equation}
+\label{eq:regression04}
+  \mathbf{y}
+  =
+  \mathbf{X}
+  \boldsymbol{\beta}
+  +
+  \boldsymbol{\varepsilon}
+\end{equation}
+
+\noindent where
+
+- $\mathbf{y}$ is an $n \times 1$ column vector of observations on the regressand variable
+- $\mathbf{X}$ is an $n \times k$ matrix of $n$ observations on $k$ regressors,
+  which includes a regressor whose value is $1$ for each observation.
+  $\mathbf{X}$ is also know as
+  the data matrix,
+  the design matrix,
+  the model matrix or
+  the regressor matrix.
+- $\boldsymbol{\beta}$ is a $k \times 1$ column vector of the $k$ regression parameters
+- $\boldsymbol{\varepsilon}$ is an $n \times 1$ column vector of $n$ errors
+  or disturbances $\varepsilon_i$.
+
+Equation \ref{eq:regression03} is called the population regression model
+as it shows the relationship between
+the regressand and the regressors in the population.
+The population regression model consists of two components:
+
+- the deterministic component $\mathbf{X}\boldsymbol{\beta}$
+- the random component $\boldsymbol{\varepsilon}$
+
+$\mathbf{X}\boldsymbol{\beta}$ can be interpreted as the
+conditional mean of $Y$,
+$\mathbb{E} \left( Y \mid \mathbf{X} \right)$,
+conditional on the given $\mathbf{X}$ values.
+The value of $Y$ is equal to the mean value of the population
+of which it is a member, plus or minus a random term.
+
+The regression coefficient
+$\beta_1$
+gives the mean or average value of the regressand when the values of the regressors
+$X_2$ through $X_k$ are all set to zero for each observation.
+The regression coefficients, $\beta_2$ through $\beta_k$,
+are the partial regression coefficients.
+Each partial regression coefficient
+gives the rate of change in the values
+of the regressor associated with it,
+holding all other regressor values constant.
+
+## Error Term
+
+\begin{equation}
+  \mathbb{E}
+  \left(
+    \varepsilon
+  \right)
+  =
+  0
+  \quad
+  \textrm{and}
+  \quad
+  \mathrm{Var}
+  \left(
+    \varepsilon
+  \right)
+  =
+  \sigma^2 \mathbf{I}
+\end{equation}
+
+- constant variance or homoscedasticity
+  - $\sigma^2 \mathbf{I}$
+    where $\sigma^2$ is the variance and
+    $\mathbf{I}$ is an identity matrix
+- errors are independent of the regressors
+- additional normaility assumption for hypothesis testing
+
+\begin{equation}
+  \boldsymbol{\varepsilon} \sim \mathcal{N} \left( \mu = 0, \sigma^2 \mathbf{I} \right)
+\end{equation}
+
+## Path Diagram
+
+```{tikz, linear_regression, echo = FALSE, fig.width = 4, fig.cap = "Linear Regression Model", fig.ext = "png", cache = TRUE}
+\usetikzlibrary{er, arrows, positioning}
+\begin{tikzpicture}[
+  auto,
+  node distance = 20mm,
+  manifest/.style = {
+    rectangle,
+    draw,
+    thick,
+    inner sep = 0pt,
+    minimum width = 15mm,
+    minimum height = 10mm
+  },
+  inv/.style = {
+    rectangle,
+    draw=none,
+    fill=none,
+    inner sep = 0pt,
+    minimum width = 15mm,
+    minimum height = 10mm
+  },
+  error/.style = {
+    ellipse,
+    draw,
+    thick,
+    inner sep = 0pt,
+    minimum size = 7mm,
+    align = center
+  },
+  mean/.style={
+    regular polygon,
+    regular polygon sides = 3,
+    draw,
+    thick,
+    inner sep = 0pt,
+    minimum width = 15mm,
+    minimum height = 10mm
+  },
+  path/.style = {
+    ->,
+    thick,
+    >=stealth'
+  },
+  cov/.style = {
+    <->,
+    thick,
+    >=stealth'
+  },
+]
+  \node[mean] (1) {$1$};
+  \node[manifest] (X2) [below = of 1] {$X_2$};
+  \node[manifest] (X3) [below = of X2] {$X_3$};
+  \node[manifest] (Xdots) [below = of X3] {$\vdots$};
+  \node[manifest] (Xk) [below = of Xdots] {$X_k$};
+  \node[manifest] (Y) [left = of X3] {$Y$};
+  \node[error] (epsilon) [below = of Y] {$\varepsilon$};
+  \draw [path] (1) to node {$\beta_1$} (Y);
+  \draw [path] (X2) to node {$\beta_2$} (Y);
+  \draw [path] (X3) to node {$\beta_3$} (Y);
+  \draw [path] (Xdots) to node {$\vdots$} (Y);
+  \draw [path] (Xk) to node {$\beta_k$} (Y);
+  \draw [path] (epsilon) to node {1} (Y);
+  \draw [cov] (epsilon) to[out=-60,in=-120,looseness=7] node[below] {$\sigma^{2}$} (epsilon);
+  \draw [cov] (1) to[out=70,in=110,looseness=5] node[above] {1} (1);
+  \draw [cov] (epsilon) to[out=-60,in=-120,looseness=7] node[below] {$\sigma^{2}$} (epsilon);
+  \draw [cov] (X2) to[out=70,in=110,looseness=5] node[above] {$\sigma^{2}_{X_{2}}$} (X2);
+  \draw [cov] (X3) to[out=70,in=110,looseness=5] node[above] {$\sigma^{2}_{X_{3}}$} (X3);
+  \draw [cov] (Xdots) to[out=70,in=110,looseness=5] node[above] {$\sigma^{2}_{X_{\dots}}$} (Xdots);
+  \draw [cov] (Xk) to[out=70,in=110,looseness=5] node[above] {$\sigma^{2}_{X_{k}}$} (Xk);
+  \draw [cov] (X2) to[out=360, in=360] node[left] {$\sigma_{X_{2}, X_{3}}$} (X3);
+  \draw [cov] (X3) to[out=360, in=360] node[left] {$\sigma_{X_{3}, X_{\dots}}$} (Xdots);
+  \draw [cov] (Xdots) to[out=360, in=360] node[left] {$\sigma_{X_{\dots}, X_{4}}$} (Xk);
+  \draw [cov] (X2) to[out=360,in=360,looseness=1.15] node[left] {$\sigma_{X_{2}, X_{\dots}}$} (Xdots);
+  \draw [cov] (X3) to[out=360,in=360,looseness=1.15] node[left] {$\sigma_{X_{3}, X_{k}}$} (Xk);
+  \draw [cov] (X2) to[out=360,in=360,looseness=1.20] node[left] {$\sigma_{X_{2}, X_{k}}$} (Xk);
+\end{tikzpicture}
+```
+
+The parameters of the linear regression model include
+the regression coefficients
+
+\begin{equation}
+  \boldsymbol{\beta}
+  =
+  \begin{bmatrix}
+    \beta_1 \\
+    \beta_2 \\
+    \beta_3 \\
+    \vdots \\
+    \beta_k \\
+  \end{bmatrix} ,
+\end{equation}
+
+\noindent the variance
+of $\boldsymbol{\varepsilon}$
+where
+$\varepsilon \sim \mathcal{N} \left( \mu = 0, \sigma^2 \mathbf{I} \right)$
+
+\noindent and
+the variance-covariance matrix of the regressors
+$X_2, X_3, \dots, X_k$
+
+\begin{equation}
+  \mathbf{\Sigma}_{\mathbf{X}}
+  =
+  \begin{bmatrix}
+    \sigma^2_{X_2}      & \sigma_{X_{2}X_{3}} & \cdots & \sigma_{X_{2}X_{k}} \\
+    \sigma_{X_{3}X_{2}} & \sigma^2_{X_3}      & \cdots & \sigma_{X_{3}X_{k}} \\
+    \vdots              & \vdots              & \ddots & \vdots              \\
+    \sigma_{X_{k}X_{2}} & \sigma_{X_{k}X_{3}} & \cdots & \sigma^2_{X_k}
+  \end{bmatrix} .
+\end{equation}

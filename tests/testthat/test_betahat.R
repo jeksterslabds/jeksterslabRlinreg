@@ -94,15 +94,14 @@ y <- X %*% beta + rnorm(
 #' ## Estimate Regression Coefficients
 #'
 #+ estimate
-lm_object <- lm(
+result_lm_object <- lm(
   y ~ X[, -1]
 )
-result_lm <- drop(
+result_lm_betahat <- drop(
   coef(
-    lm_object
+    result_lm_object
   )
 )
-lm_anova <- anova(lm_object)
 result_betahat_inv <- betahat_inv(
   X = X,
   y = y
@@ -130,15 +129,6 @@ result_betahat_betahat_svd <- betahat(
   y = y,
   FUN = betahat_svd
 )
-results_linreg <- invisible(
-  linreg(
-    X = X,
-    y = y,
-    FUN = betahat_inv,
-    output = c("coef", "model", "anova")
-  )
-)
-results_betahat_linreg <- results_linreg$betahat
 #'
 #' ## Summarize Results
 #'
@@ -151,14 +141,13 @@ knitr::kable(
       "}$"
     ),
     Parameter = beta,
-    lm = result_lm,
+    lm = result_lm_betahat,
     betahat_inv = result_betahat_inv,
     betahat_qr = result_betahat_qr,
     betahat_svd = result_betahat_svd,
     betahat_betahat_inv = result_betahat_betahat_inv,
     betahat_betahat_qr = result_betahat_betahat_qr,
-    betahat_betahat_svd = result_betahat_betahat_svd,
-    betahat_linreg = results_betahat_linreg
+    betahat_betahat_svd = result_betahat_betahat_svd
   ),
   row.names = FALSE
 )
@@ -167,14 +156,13 @@ knitr::kable(
 #'
 #+ benchmark
 microbenchmark(
-  lm = lm(y ~ X[, -1]),
+  lm = coef(lm(y ~ X[, -1])),
   betahat_inv = betahat_inv(X = X, y = y),
   betahat_qr = betahat_qr(X = X, y = y),
   betahat_svd = betahat_svd(X = X, y = y),
   betahat_betahat_inv = betahat(X = X, y = y, FUN = betahat_inv),
   betahat_betahat_qr = betahat(X = X, y = y, FUN = betahat_qr),
-  betahat_betahat_svd = betahat(X = X, y = y, FUN = betahat_svd),
-  linreg = linreg(X = X, y = y, FUN = betahat_inv, output = NULL)
+  betahat_betahat_svd = betahat(X = X, y = y, FUN = betahat_svd)
 )
 #'
 #' ## testthat
@@ -183,7 +171,7 @@ microbenchmark(
 test_that("betahat_inv, betahat_qr, betahat_svd, and betahat return the same coefficients as lm", {
   expect_equivalent(
     round(
-      x = result_lm,
+      x = result_lm_betahat,
       digits = 2
     ),
     round(
@@ -208,10 +196,6 @@ test_that("betahat_inv, betahat_qr, betahat_svd, and betahat return the same coe
     ),
     round(
       x = result_betahat_betahat_svd,
-      digits = 2
-    ),
-    round(
-      x = results_betahat_linreg,
       digits = 2
     )
   )

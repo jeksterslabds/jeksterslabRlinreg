@@ -1,0 +1,30 @@
+---
+title: "Notes: Notation"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Notes: Notation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+- Random variables
+  - Upper case letters
+  - For example, $X$, $Y$
+- Realizations of random variables
+  - Lower case letters
+  - For example, $x$, $y$
+- Matrix
+  - Bold upper case letter
+  - For example, $\mathbf{X}$
+- Vector
+  - Bold lower case letter
+  - For example, $\mathbf{y}$
