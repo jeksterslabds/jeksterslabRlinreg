@@ -129,8 +129,7 @@
 #' RSS is computed with
 #' `X` and `y`
 #' as required arguments
-#' and
-#' `betahat`
+#' and `betahat`
 #' as an optional argument.
 #'
 #' @author Ivan Jacob Agaloos Pesigan

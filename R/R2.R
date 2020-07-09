@@ -1,11 +1,27 @@
-#' R-square (from \eqn{RSS})
+#' R-square
+#' (from
+#' \eqn{
+#'   RSS
+#' }
+#' )
 #'
 #' Calculates the coefficient of determination using
-#'   \deqn{
-#'     R^2
-#'     =
-#'     1 - \frac{\textrm{Residual sum of squares}}{\textrm{Total sum of squares}}
+#' \deqn{
+#'   R^2
+#'   =
+#'   1
+#'   -
+#'   \frac{
+#'     \textrm{
+#'       Residual sum of squares
+#'     }
 #'   }
+#'   {
+#'     \textrm{
+#'       Total sum of squares
+#'     }
+#'   } .
+#' }
 #'
 #' If `RSS = NULL`,
 #' `RSS` is computed
@@ -21,14 +37,18 @@
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param RSS Numeric.
-#'   Residual sum of squares.
-#' @param TSS Numeric.
-#'   Total sum of squares.
-#' @inheritParams RSS
-#' @return Returns the coefficient of determination \eqn{R^2}.
 #' @family assessment of model quality functions
+#' @keywords coefficient of determination
+#' @inheritParams RSS
 #' @inherit RSS references
+#' @param RSS Numeric.
+#' Residual sum of squares.
+#' @param TSS Numeric.
+#' Total sum of squares.
+#' @return Returns the coefficient of determination
+#' \eqn{
+#'   R^2
+#' }.
 #' @export
 .R2_RSS <- function(RSS = NULL,
                     TSS = NULL,
@@ -50,14 +70,28 @@
   1 - (RSS / TSS)
 }
 
-#' R-square (from \eqn{ESS})
+#' R-square
+#' (from
+#' \eqn{
+#'   ESS
+#' }
+#' )
 #'
 #' Calculates the coefficient of determination using
-#'   \deqn{
-#'     R^2
-#'     =
-#'     \frac{\textrm{Explained sum of squares}}{\textrm{Total sum of squares}}.
+#' \deqn{
+#'   R^2
+#'   =
+#'   \frac{
+#'     \textrm{
+#'       Explained sum of squares
+#'     }
 #'   }
+#'   {
+#'     \textrm{
+#'       Total sum of squares
+#'     }
+#'   } .
+#' }
 #'
 #' If `ESS = NULL`,
 #' `ESS` is computed
@@ -73,11 +107,12 @@
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param ESS Numeric.
-#'   Explained sum of squares.
+#' @family assessment of model quality functions
+#' @keywords coefficient of determination
 #' @inheritParams .R2_RSS
 #' @inherit .R2_RSS return references
-#' @family assessment of model quality functions
+#' @param ESS Numeric.
+#' Explained sum of squares.
 #' @export
 .R2_ESS <- function(ESS = NULL,
                     TSS = NULL,
@@ -102,29 +137,50 @@
 #' R-square
 #'
 #' Calculates the coefficient of determination using
-#'   \deqn{
-#'     R^2
-#'     =
-#'     1 - \frac{\textrm{Residual sum of squares}}{\textrm{Total sum of squares}}
+#' \deqn{
+#'   R^2
+#'   =
+#'   1
+#'   -
+#'   \frac{
+#'     \textrm{
+#'       Residual sum of squares
+#'     }
 #'   }
+#'   {
+#'     \textrm{
+#'       Total sum of squares
+#'     }
+#'   }
+#' }
 #' or
-#'   \deqn{
-#'     R^2
-#'     =
-#'     \frac{\textrm{Explained sum of squares}}{\textrm{Total sum of squares}}.
+#' \deqn{
+#'   R^2
+#'   =
+#'   \frac{
+#'     \textrm{
+#'       Explained sum of squares
+#'     }
 #'   }
+#'   {
+#'     \textrm{
+#'       Total sum of squares
+#'     }
+#'   } .
+#' }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param fromRSS Logical.
-#'   If `TRUE`,
-#'   calculates the coefficient of determinism
-#'   from `RSS`.
-#'   If `FALSE`,
-#'   calculates the coefficient of determinism
-#'   from `ESS`.
-#' @inheritParams .R2_RSS
 #' @family assessment of model quality functions
+#' @keywords coefficient of determination
+#' @inheritParams .R2_RSS
 #' @inherit .R2_RSS references
+#' @param fromRSS Logical.
+#' If `TRUE`,
+#' calculates the coefficient of determination
+#' from `RSS`.
+#' If `FALSE`,
+#' calculates the coefficient of determination
+#' from `ESS`.
 #' @export
 R2 <- function(X,
                y,
@@ -153,25 +209,62 @@ R2 <- function(X,
   }
 }
 
-#' Adjusted R-square (from \eqn{R^2})
+#' Adjusted R-square
+#' (from
+#' \eqn{
+#'   R^2
+#' }
+#' )
 #'
 #' Calculates the adjusted coefficient of determination
-#'   \deqn{
-#'     \bar{R}^{2}
-#'     =
-#'     1
-#'     -
-#'     \left(
-#'       \frac{RSS / \left( n - k \right)}{TSS / \left(n - 1 \right)}
-#'     \right)
-#'     =
-#'     1
-#'     -
-#'     \left(
-#'       1 - R^2
-#'     \right)
-#'     \frac{n - 1}{n - k}.
+#' \deqn{
+#'   \bar{
+#'     R
+#'   }^{
+#'     2
 #'   }
+#'   =
+#'   1
+#'   -
+#'   \left(
+#'     \frac{
+#'       RSS
+#'       /
+#'       \left(
+#'         n
+#'         -
+#'         k
+#'       \right)
+#'     }
+#'     {
+#'       TSS
+#'       /
+#'       \left(
+#'         n
+#'         -
+#'         1
+#'       \right)
+#'     }
+#'   \right)
+#'   =
+#'   1
+#'   -
+#'   \left(
+#'     1
+#'     -
+#'     R^2
+#'   \right)
+#'   \frac{
+#'     n
+#'     -
+#'     1
+#'   }
+#'   {
+#'     n
+#'     -
+#'     k
+#'   } .
+#' }
 #'
 #' If `R2 = NULL`,
 #' `R2` is computed
@@ -182,19 +275,30 @@ R2 <- function(X,
 #' `betahat`, `X`, and `y`
 #' are not needed.
 #'
-#' @param n Integer.
-#'   Sample size.
-#' @param k Integer.
-#'   Number of regressors
-#'   including a regressor
-#'   whose value is 1 for each observation.
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param R2 Numeric.
-#'   Coefficient of determinims \eqn{R^2}.
-#' @inheritParams R2
-#' @return Returns the adjusted coefficient of determination \eqn{\bar{R}^{2}}.
 #' @family assessment of model quality functions
+#' @keywords coefficient of determination
+#' @inheritParams R2
 #' @inherit .R2_RSS references
+#' @param n Integer.
+#' Sample size.
+#' @param k Integer.
+#' Number of regressors
+#' including a regressor
+#' whose value is 1 for each observation.
+#' @param R2 Numeric.
+#' Coefficient of determinims
+#' \eqn{
+#'   R^2
+#' } .
+#' @return Returns the adjusted coefficient of determination
+#' \eqn{
+#'   \bar{
+#'     R
+#'   }^{
+#'     2
+#'   }
+#' } .
 #' @export
 .Rbar2 <- function(R2 = NULL,
                    n,
@@ -219,9 +323,10 @@ R2 <- function(X,
 #' Adjusted R-square
 #'
 #' @author Ivan Jacob Agaloos Pesigan
+#' @family assessment of model quality functions
+#' @keywords coefficient of determination
 #' @inheritParams .Rbar2
 #' @inherit .Rbar2 description return references
-#' @family assessment of model quality functions
 #' @export
 Rbar2 <- function(X,
                   y,

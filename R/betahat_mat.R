@@ -1,43 +1,122 @@
 # Beta-hat from Summary Matrices
 # Ivan Jacob Agaloos Pesigan
 
-#' Beta-hat Slopes (\eqn{\boldsymbol{\hat{\beta}}_{\mathrm{slopes}}}) - Covariances
+#' Beta-hat Slopes
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         slopes
+#'       }
+#'     }
+#'   \right)
+#' } - Covariances
 #'
 #' Calculates the slopes of a linear regression model
-#'   (\eqn{\boldsymbol{\hat{\beta}}} minus the intercept)
-#'   as a function of covariances
-#'   given by
-#'   \deqn{
-#'     \boldsymbol{\hat{\beta}}_{\mathrm{slopes}}
-#'     =
-#'     \mathrm{V}_{\mathbf{X}}^{\prime}
-#'     \mathrm{v}_{\mathbf{yX}}
+#' (
+#'   \eqn{
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }
 #'   }
-#'   where
-#'   \eqn{\mathbf{V}_{\mathbf{X}}}
-#'   is the covariance matrix
-#'   of the regressor variables
-#'   and
-#'   \eqn{ \mathbf{v}_{\mathbf{yX}}}
-#'   is the column vector
-#'   of the covariances between
-#'   the regressand
-#'   and the regressors.
+#'   minus the intercept
+#' )
+#' as a function of covariances
+#' given by
+#' \deqn{
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }_{
+#'     \mathrm{
+#'       slopes
+#'     }
+#'   }
+#'   =
+#'   \mathrm{
+#'     V
+#'   }_{
+#'     \mathbf{
+#'       X
+#'     }
+#'   }^{
+#'     \prime
+#'   }
+#'   \mathrm{
+#'     v
+#'   }_{
+#'     \mathbf{
+#'       yX
+#'     }
+#'   }
+#' }
+#' where
+#' \eqn{
+#'   \mathbf{
+#'     V
+#'   }_{
+#'     \mathbf{
+#'       X
+#'     }
+#'   }
+#' }
+#' is the covariance matrix
+#' of the regressor variables
+#' and
+#' \eqn{
+#'   \mathbf{
+#'     v
+#'   }_{
+#'     \mathbf{
+#'       yX
+#'     }
+#'   }
+#' }
+#' is the column vector
+#' of the covariances between
+#' the regressand
+#' and the regressors.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @param VX Matrix.
-#'   Covariances between the regressors.
+#' Covariances between the regressors.
 #' @param vyX Vector
-#'   or
-#'   \eqn{\left( k - 1 \right) \times 1}
-#'   matrix
-#'   of covariances between the regressand
-#'   and the regressors.
-#' @return
-#'   Returns the slopes
-#'   (\eqn{\boldsymbol{\hat{\beta}}_\mathrm{slopes}})
-#'   of a linear regression model
-#'   derived from the variance-covariance matrix.
+#' or
+#' \eqn{
+#'   \left(
+#'     k
+#'     -
+#'     1
+#'   \right)
+#'   \times
+#'   1
+#' }
+#' matrix
+#' of covariances between the regressand
+#' and the regressors.
+#' @return Returns the slopes
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         slopes
+#'       }
+#'     }
+#'   \right)
+#' }
+#' of a linear regression model
+#' derived from the variance-covariance matrix.
 #' @family beta-hat from summary matrices functions
 #' @export
 betahat_slopes_cov <- function(VX,
@@ -47,45 +126,129 @@ betahat_slopes_cov <- function(VX,
   )
 }
 
-#' Standardized Beta-hat Slopes (\eqn{\boldsymbol{\hat{\beta}}_{\mathrm{std}}}) - Correlations
+#' Standardized Beta-hat Slopes
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         std
+#'       }
+#'     }
+#'   \right)
+#' } - Correlations
 #'
 #' Calculates the standardized slopes of a linear regression model
-#'   (\eqn{\boldsymbol{\hat{\beta}_{\mathrn{std}}}})
-#'   as a function of correlations
-#'   given by
-#'   \deqn{
-#'     \boldsymbol{\hat{\beta}}_{\mathrm{std}}
-#'     =
-#'     \mathrm{R}_{\mathbf{X}}^{\prime}
-#'     \mathrm{r}_{\mathbf{yX}}
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }_{
+#'         \mathrn{
+#'           std
+#'         }
+#'       }
+#'     }
+#'   \right)
+#' }
+#' as a function of correlations
+#' given by
+#' \deqn{
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }_{
+#'     \mathrm{
+#'       std
+#'     }
 #'   }
+#'   =
+#'   \mathrm{
+#'     R
+#'   }_{
+#'     \mathbf{
+#'       X
+#'     }
+#'   }^{
+#'     \prime
+#'   }
+#'   \mathrm{
+#'     r
+#'   }_{
+#'     \mathbf{
+#'       yX
+#'     }
+#'   }
+#' }
 #' where
-#' \eqn{\mathbf{R}_{\mathbf{X}}}
+#' \eqn{
+#'   \mathbf{
+#'     R
+#'   }_{
+#'     \mathbf{
+#'       X
+#'     }
+#'   }
+#' }
 #' is the correlation matrix
 #' of the regressor variables
 #' and
-#' \eqn{ \mathbf{r}_{\mathbf{yX}}}
+#' \eqn{
+#'   \mathbf{
+#'     r
+#'   }_{
+#'     \mathbf{
+#'       yX
+#'     }
+#'   }
+#' }
 #' is the column vector
 #' of the correlations between
 #' the regressand
 #' and the regressors.
-#' Note that the \eqn{y}-intercept
+#' Note that the
+#' \eqn{y}-intercept
 #' is zero when the variables are scaled.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @param RX Matrix.
-#'   Correlations between the regressors.
+#' Correlations between the regressors.
 #' @param ryX Vector
-#'   or
-#'   \eqn{\left( k - 1 \right) \times 1}
-#'   matrix
-#'   of correlations between the regressand
-#'   and the regressors.
+#' or
+#' \eqn{
+#'   \left(
+#'     k
+#'     -
+#'     1
+#'   \right)
+#'   \times
+#'   1
+#' }
+#' matrix
+#' of correlations between the regressand
+#' and the regressors.
 #' @return
-#'   Returns the standardized slopes
-#'   (\eqn{\boldsymbol{\hat{\beta}}_\mathrm{std}})
-#'   of a linear regression model
-#'   derived from the correlation matrix.
+#' Returns the standardized slopes
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         std
+#'       }
+#'     }
+#'   \right)
+#' }
+#' of a linear regression model
+#' derived from the correlation matrix.
 #' @family beta-hat from summary matrices functions
 #' @export
 betahat_std_slopes_cor <- function(RX,
@@ -95,35 +258,93 @@ betahat_std_slopes_cor <- function(RX,
   )
 }
 
-#' Beta-hat Intercept (\eqn{\boldsymbol{\hat{\beta}}_{\mathrm{intercept}}})
+#' Beta-hat Intercept
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         intercept
+#'       }
+#'     }
+#'   \right)
+#' }
 #'
 #' Calculates the intercept of a linear regression model
-#'   (\eqn{\boldsymbol{\hat{\beta}}} minus the slopes)
-#'   as a function of sample means and
-#'   regression slopes
-#'   given by
-#'   \deqn{
-#'     \boldsymbol{\hat{\beta}}_{\mathrm{intercept}}
-#'     =
-#'     \boldsymbol{\hat{\beta}}_{\mathrm{slopes}}^{\prime}
-#'     \boldsymbol{\hat{\mu}}
+#' (
+#'   \eqn{
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }
 #'   }
+#'   minus the slopes
+#' )
+#' as a function of sample means and
+#' regression slopes
+#' given by
+#' \deqn{
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }_{
+#'     \mathrm{
+#'       intercept
+#'     }
+#'   }
+#'   =
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }_{
+#'     \mathrm{
+#'       slopes
+#'     }
+#'   }^{
+#'     \prime
+#'   }
+#'   \boldsymbol{
+#'     \hat{
+#'       \mu
+#'     }
+#'   }
+#' }
 #' where
-#' \eqn{\boldsymbol{\hat{\beta}}_{\mathrm{slopes}}}
+#' \eqn{
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }_{
+#'     \mathrm{
+#'       slopes
+#'     }
+#'   }
+#' }
 #' is a vector of estimated regression slopes
-#' with the last element as \eqn{0},
+#' with the last element as 0,
 #' and
-#' \eqn{\boldsymbol{\hat{\mu}}}
+#' \eqn{
+#'   \boldsymbol{
+#'     \hat{\mu}
+#'   }
+#' }
 #' is a vector of sample means
 #' of the regressor variables
 #' and the regressand variable.
 #'
-#' @param betahat_slopes Vector.
-#'   Estimates of unknown regression slopes.
-#' @param muhatX Vector.
-#'   Sample means of regressors.
+#' @param betahat_slopes Numeric vector.
+#' Estimates of unknown regression slopes.
+#' @param muhatX Numeric vector.
+#' Sample means of regressors.
 #' @param muhaty Numeric.
-#'   Sample mean of regressand.
+#' Sample mean of regressand.
 #' @family beta-hat from summary matrices functions
 #' @export
 betahat_intercept <- function(betahat_slopes,
@@ -139,44 +360,53 @@ betahat_intercept <- function(betahat_slopes,
   out[1]
 }
 
-#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - From Means and Covariance Matrix
+#' Beta-hat
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }
+#'   \right)
+#' } - From Means and Covariance Matrix
 #'
-#' Calculates \eqn{\boldsymbol{\hat{\beta}}}
+#' Calculates
+#' \eqn{
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }
+#' }
 #' from means and covariance matrix.
-#' See
-#' [`.betahat_mat()`],
-#' [`betahat_intercept()`],
-#' [`betahat_slopes_cov()`].
+#' See [`.betahat_mat()`], [`betahat_intercept()`], [`betahat_slopes_cov()`].
 #'
-#' If
-#' `VX`,
-#' `vyX`,
-#' `muhatX`,
-#' or
-#' `muhaty`
-#' is `NULL`
+#' If `VX`, `vyX`, `muhatX`, or
+#' `muhaty` is `NULL`
 #' these values are calculated
-#' from
-#' `X`
-#' and
-#' `y`.
+#' from `X` and `y`.
 #' `X` and `y` are ignored when
-#' `VX`,
-#' `vyX`,
-#' `muhatX`,
-#' and
-#' `muhaty`
+#' `VX`, `vyX`, `muhatX`, and `muhaty`
 #' are provided.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @param VX Matrix.
-#'   Covariances between the regressors.
+#' Covariances between the regressors.
 #' @param vyX Vector
-#'   or
-#'   \eqn{\left( k - 1 \right) \times 1}
-#'   matrix
-#'   of covariances between the regressand
-#'   and the regressors.
+#' or
+#' \eqn{
+#'   \left(
+#'     k
+#'     -
+#'     1
+#'   \right)
+#'   \times
+#'   1
+#' }
+#' matrix
+#' of covariances between the regressand
+#' and the regressors.
 #' @inheritParams betahat_intercept
 #' @inheritParams betahat_inv
 #' @importFrom stats cov
@@ -220,7 +450,16 @@ betahat_intercept <- function(betahat_slopes,
   )
 }
 
-#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - From Means and Covariance Matrix
+#' Beta-hat
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }
+#'   \right)
+#' } - From Means and Covariance Matrix
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .betahat_mat
@@ -239,27 +478,42 @@ betahat_mat <- function(X,
   )
 }
 
-#' Standardized Beta-hat Slopes (\eqn{\boldsymbol{\hat{\beta}}_{\mathrm{std}}}) - Correlations
+#' Standardized Beta-hat Slopes
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         std
+#'       }
+#'     }
+#'   \right)
+#' } - Correlations
 #'
-#' Calculates \eqn{\boldsymbol{\hat{\beta}}_{\mathrm{std}}}
+#' Calculates
+#' \eqn{
+#'   \boldsymbol{
+#'     \hat{
+#'       \beta
+#'     }
+#'   }_{
+#'     \mathrm{
+#'       std
+#'     }
+#'   }
+#' }
 #' from the correlation matrix.
-#' See
-#' [`betahat_std_slopes_cor()`].
+#' See [`betahat_std_slopes_cor()`].
 #'
-#' If
-#' `RX`,
-#' or
-#' `ryX`,
+#' If `RX`, or `ryX`,
 #' is `NULL`
 #' these values are calculated
-#' from
-#' `X`
-#' and
-#' `y`.
+#' from `X` and `y`.
 #' `X` and `y` are ignored when
-#' `RX`,
-#' and
-#' `ryX`,
+#' `RX`, and `ryX`,
 #' are provided.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
@@ -294,7 +548,20 @@ betahat_mat <- function(X,
   )
 }
 
-#' Standardized Beta-hat Slopes (\eqn{\boldsymbol{\hat{\beta}}_{\mathrm{std}}}) - Correlations
+#' Standardized Beta-hat Slopes
+#' \eqn{
+#'   \left(
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }_{
+#'       \mathrm{
+#'         std
+#'       }
+#'     }
+#'   \right)
+#' } - Correlations
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .betahat_std_mat

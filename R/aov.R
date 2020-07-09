@@ -1,41 +1,98 @@
-#' F-Test (From \eqn{R^2})
+#' F-Test
+#' (From
+#' \eqn{
+#'   R^2
+#' }
+#' )
 #'
-#' Calculates the \eqn{F} statistic from \eqn{R^2}
+#' Calculates the
+#' \eqn{
+#'   F
+#' }
+#' statistic from
+#' \eqn{
+#'   R^2
+#' }
 #' using
-#'   \deqn{
-#'     F
-#'     =
+#' \deqn{
+#'   F
+#'   =
+#'   \frac{
 #'     \frac{
-#'       \frac{
-#'         R^2
-#'       }
-#'       {
-#'         k - 1
-#'       }
+#'       R^2
 #'     }
 #'     {
-#'       \frac{
-#'         1
-#'         -
-#'         R^2
-#'       }
-#'       {
-#'         n - k
-#'       }
+#'       k
+#'       -
+#'       1
+#'     }
+#'     }
+#'     {
+#'     \frac{
+#'       1
+#'       -
+#'       R^2
+#'     }
+#'     {
+#'       n
+#'       -
+#'       k
 #'     }
 #'   }
+#' } .
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .Rbar2
-#' @return
-#'   Returns a vector with the following elements
-#'   \describe{
-#'     \item{R2}{Coefficient of determination (\eqn{R^2}).}
-#'     \item{F}{F Statistic (\eqn{F}).}
-#'     \item{p}{p value (\eqn{p}).}
-#'     \item{df1}{Degrees of Freedom - Model (\eqn{df_1 = k - 1}).}
-#'     \item{df2}{Degrees of Freedom - Error (\eqn{df_2 = n - k}).}
+#' @return Returns a vector with the following elements
+#' \describe{
+#'   \item{R2}{
+#'     Coefficient of determination
+#'     \eqn{
+#'       \left(
+#'         R^2
+#'       \right)
+#'     } .
 #'   }
+#'   \item{F}{
+#'     F Statistic
+#'     \eqn{
+#'       \left(
+#'         F
+#'       \right)
+#'     } .
+#'   }
+#'   \item{p}{p value
+#'     \eqn{
+#'       \left(
+#'         p
+#'       \right)
+#'     } .
+#'   }
+#'   \item{df1}{
+#'     Degrees of Freedom - Model
+#'     \eqn{
+#'       \left(
+#'         df_1
+#'         =
+#'         k
+#'         -
+#'         1
+#'       \right)
+#'     } .
+#'   }
+#'   \item{df2}{
+#'     Degrees of Freedom - Error
+#'     \eqn{
+#'       \left(
+#'         df_2
+#'         =
+#'         n
+#'         -
+#'         k
+#'       \right)
+#'     } .
+#'   }
+#' }
 #' @importFrom stats pf
 #' @export
 .F_R2 <- function(R2 = NULL,
@@ -72,10 +129,14 @@
   )
 }
 
-#' F-Test (From \eqn{R^2})
+#' F-Test
+#' (From
+#' \eqn{
+#'   R^2
+#' }
+#' )
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#'
 #' @inheritParams .F_R2
 F_R2 <- function(X,
                  y,
@@ -88,17 +149,29 @@ F_R2 <- function(X,
   )
 }
 
-#' F-Test \eqn{F_{m, \left( n - k \right)}}
+#' F-Test
+#' \eqn{
+#'   F_{
+#'     m,
+#'     \left(
+#'       n
+#'       -
+#'       k
+#'     \right)
+#'   }
+#' }
 #'
 #' Tests the incremental contribution of regressors
 #' using
-#'   \deqn{
+#' \deqn{
 #'   F
 #'   =
 #'   \frac{
 #'     \frac{
 #'       RSS_R
-#'       RSS_{UR}
+#'       RSS_{
+#'         UR
+#'       }
 #'     }
 #'     {
 #'       m
@@ -106,27 +179,38 @@ F_R2 <- function(X,
 #'   }
 #'   {
 #'     \frac{
-#'       RSS_{UR}
+#'       RSS_{
+#'         UR
+#'       }
 #'     }
 #'     {
-#'       n - k
+#'       n
+#'       -
+#'       k
 #'     }
 #'   }
 #'   \sim
-#'   F_{m, \left( n - k \right) }
-#'   }
+#'   F_{
+#'     m,
+#'     \left(
+#'       n
+#'       -
+#'       k
+#'     \right)
+#'   } .
+#' }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param RSS_R Numeric.
-#'   Residual sum of squares from the restricted regression.
-#' @param RSS_UR Numeric.
-#'   Residual sum of squares from the unrestricted regression.
-#' @param m Integer.
-#'   Number of linear restrictions.
-#' @param X_r Vector.
-#'   Vector of column indices used to subset X
-#'   for the restricted regression.
 #' @inheritParams .F_R2
+#' @param RSS_R Numeric.
+#' Residual sum of squares from the restricted regression.
+#' @param RSS_UR Numeric.
+#' Residual sum of squares from the unrestricted regression.
+#' @param m Integer.
+#' Number of linear restrictions.
+#' @param X_r Vector.
+#' Vector of column indices used to subset X
+#' for the restricted regression.
 #' @export
 .F_inc <- function(RSS_R = NULL,
                    RSS_UR = NULL,
@@ -162,7 +246,17 @@ F_R2 <- function(X,
   ((RSS_R - RSS_UR) / m) / (RSS_UR / (n - k))
 }
 
-#' F-Test \eqn{F_{m, \left( n - k \right)}}
+#' F-Test
+#' \eqn{
+#'   F_{
+#'     m,
+#'     \left(
+#'       n
+#'       -
+#'       k
+#'     \right)
+#'   }
+#' }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams .F_inc

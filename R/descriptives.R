@@ -4,20 +4,131 @@
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @param muhat Logical.
-#'   If `TRUE`, compute means.
+#' If `TRUE`, compute means.
 #' @inheritParams betahat_inv
-#' @return
-#' Returns a list with the following items
-#'   \describe{
-#'     \item{Sigmahat}{Variance-covariance matrix (\eqn{\boldsymbol{\hat{\Sigma}}}).}
-#'     \item{R}{Correlation matrix (\eqn{\mathrm{R}}).}
-#'     \item{VX}{Variance-covariance matrix (\eqn{\mathbf{V}_{\mathbf{X}}}).}
-#'     \item{vyX}{Vector of covariances between \eqn{\mathbf{y}} and \eqn{\mathbf{X}} (\eqn{\mathbf{v}_{\mathbf{yX}}}).}
-#'     \item{RX}{Correlation matrix (\eqn{\mathbf{R}_{\mathbf{X}}}).}
-#'     \item{ryX}{Vector of correlations between \eqn{\mathbf{y}} and \eqn{\mathbf{X}} (\eqn{\mathbf{r}_{\mathbf{yX}}}).}
-#'     \item{muhatX}{Means of regressor variables \eqn{\boldsymbol{\hat{\mu}}_\mathbf{X}}.}
-#'     \item{muhaty}{Mean of regressand variable \eqn{\hat{\mu}_\mathbf{y}}.}
+#' @return Returns a list with the following items
+#' \describe{
+#'   \item{Sigmahat}{
+#'     Variance-covariance matrix
+#'     \eqn{
+#'       \left(
+#'         \boldsymbol{
+#'           \hat{
+#'             \Sigma
+#'           }
+#'         }
+#'       \right)
+#'     } .
 #'   }
+#'   \item{R}{
+#'     Correlation matrix
+#'     \eqn{
+#'       \left(
+#'         \mathrm{
+#'           R
+#'         }
+#'       \right)
+#'     } .
+#'   }
+#'   \item{VX}{Variance-covariance matrix
+#'     \eqn{
+#'       \left(
+#'         \mathbf{
+#'           V
+#'         }_{
+#'           \mathbf{
+#'             X
+#'           }
+#'         }
+#'       \right)
+#'     } .
+#'   }
+#'   \item{vyX}{Vector of covariances between
+#'     \eqn{
+#'       \mathbf{
+#'         y
+#'       }
+#'     }
+#'     and
+#'     \eqn{
+#'       \mathbf{
+#'         X
+#'       }
+#'     }
+#'     \eqn{
+#'       \left(
+#'         \mathbf{
+#'           v
+#'         }_{
+#'           \mathbf{
+#'             yX
+#'           }
+#'         }
+#'       \right)
+#'     } .
+#'   }
+#'   \item{RX}{Correlation matrix
+#'     \eqn{
+#'       \left(
+#'         \mathbf{
+#'           R
+#'         }_{
+#'           \mathbf{
+#'             X
+#'           }
+#'         }
+#'       \right)
+#'     } .
+#'   }
+#'   \item{ryX}{Vector of correlations between
+#'     \eqn{
+#'       \mathbf{
+#'         y
+#'       }
+#'     }
+#'     and
+#'     \eqn{
+#'       \mathbf{
+#'         X
+#'       }
+#'     }
+#'     \eqn{
+#'       \left(
+#'         \mathbf{
+#'           r
+#'         }_{
+#'           \mathbf{
+#'             yX
+#'           }
+#'         }
+#'       \right)
+#'     } .
+#'   }
+#'   \item{muhatX}{Means of regressor variables
+#'     \eqn{
+#'       \boldsymbol{
+#'         \hat{
+#'           \mu
+#'         }
+#'       }_{
+#'         \mathbf{
+#'           X
+#'         }
+#'       }
+#'     } .
+#'   }
+#'   \item{muhaty}{Mean of regressand variable
+#'     \eqn{
+#'       \hat{
+#'         \mu
+#'       }_{
+#'         \mathbf{
+#'           y
+#'         }
+#'       }
+#'     } .
+#'   }
+#' }
 #' Note that `muhatX` and `muhaty` are `NA`
 #' when `muhat = FALSE`.
 #' @importFrom stats cor

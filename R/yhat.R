@@ -1,14 +1,35 @@
-#' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{P} \mathbf{y}})
-#'
-#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
-#' the predicted value of \eqn{\mathbf{y}}
-#' given \eqn{\mathbf{X}} using
-#'   \deqn{
+#' y-hat
+#' \eqn{
+#'   \left(
 #'     \mathbf{\hat{y}}
 #'     =
 #'     \mathbf{P}
-#'     \mathbf{y}.
-#'   }
+#'     \mathbf{y}
+#'   \right)
+#' }
+#'
+#' Calculates y-hat
+#' \eqn{
+#'   \left(
+#'     \mathbf{\hat{y}}
+#'   \right)
+#' },
+#' that is,
+#' the predicted value of
+#' \eqn{
+#'   \mathbf{y}
+#' }
+#' given
+#' \eqn{
+#'   \mathbf{X}
+#' }
+#' using
+#' \deqn{
+#'   \mathbf{\hat{y}}
+#'   =
+#'   \mathbf{P}
+#'   \mathbf{y}.
+#' }
 #'
 #' If `P = NULL`,
 #' the `P` matrix is computed
@@ -21,12 +42,13 @@
 #' @inheritParams betahat_inv
 #' @inheritParams M
 #' @return
-#'   Returns y-hat (\eqn{\mathbf{\hat{y}}}).
+#' Returns y-hat
+#' \eqn{\left( \mathbf{\hat{y}} \right)}.
 #' @family y-hat functions
 #' @references
-#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#' [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
-#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+#' [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #' @export
 Py <- function(y,
                P = NULL,
@@ -42,17 +64,22 @@ Py <- function(y,
   P %*% y
 }
 
-#' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}})
+#' y-hat
+#' \eqn{\left( \mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}} \right)}
 #'
-#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
-#' the predicted value of \eqn{\mathbf{y}}
-#' given \eqn{\mathbf{X}} using
-#'   \deqn{
-#'     \mathbf{\hat{y}}
-#'     =
-#'     \mathbf{X}
-#'     \boldsymbol{\hat{\beta}}.
-#'   }
+#' Calculates y-hat
+#' \eqn{\left( \mathbf{\hat{y}} \right)},
+#' that is,
+#' the predicted value of
+#' \eqn{\mathbf{y}}
+#' given
+#' \eqn{\mathbf{X}} using
+#' \deqn{
+#'   \mathbf{\hat{y}}
+#'   =
+#'   \mathbf{X}
+#'   \boldsymbol{\hat{\beta}}.
+#' }
 #'
 #' If `betahat = NULL`,
 #' the `betahat` vector is computed
@@ -80,17 +107,22 @@ Xbetahat <- function(X,
   X %*% betahat
 }
 
-#' y-hat (\eqn{\mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}})
+#' y-hat
+#' \eqn{\left( \mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}} \right)}
 #'
-#' Calculates y-hat (\eqn{\mathbf{\hat{y}}}), that is,
-#' the predicted value of \eqn{\mathbf{y}}
-#' given \eqn{\mathbf{X}} using
-#'   \deqn{
-#'     \mathbf{\hat{y}}
-#'     =
-#'     \mathbf{X}
-#'     \boldsymbol{\hat{\beta}}.
-#'   }
+#' Calculates y-hat
+#' \eqn{\left( \mathbf{\hat{y}} \right)},
+#' that is,
+#' the predicted value of
+#' \eqn{\mathbf{y}}
+#' given
+#' \eqn{\mathbf{X}} using
+#' \deqn{
+#'   \mathbf{\hat{y}}
+#'   =
+#'   \mathbf{X}
+#'   \boldsymbol{\hat{\beta}}.
+#' }
 #'
 #' If `betahat = NULL`,
 #' the `betahat` vector is computed

@@ -2,6 +2,7 @@
 #'
 #' Calculated statistics for each row in the data set.
 #'
+#' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams betahat
 #' @inheritParams RSS
 #' @export

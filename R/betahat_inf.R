@@ -1,13 +1,13 @@
 #' Beta-hat Inference
 #'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param vcov Matrix.
-#'   Variance-covariance matrix
-#'   of estimates
-#'   of regression coefficients.
 #' @inheritParams .vcov_betahat
 #' @inheritParams betahat
 #' @inheritParams .Rbar2
+#' @param vcov Matrix.
+#' Variance-covariance matrix
+#' of estimates
+#' of regression coefficients.
 #' @importFrom stats pt
 #' @importFrom stats qt
 #' @export

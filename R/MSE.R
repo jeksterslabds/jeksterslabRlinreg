@@ -1,22 +1,83 @@
-#' Mean Squared Error (from \eqn{RSS})
+#' Mean Squared Error
+#' (from
+#' \eqn{
+#'   RSS
+#' }
+#' )
 #'
-#' Calculates the mean squared error (\eqn{MSE}) using
-#'   \deqn{
+#' Calculates the mean squared error
+#' \eqn{
+#'   \left(
 #'     MSE
+#'   \right)
+#' }
+#' using
+#' \deqn{
+#'   MSE
+#'   =
+#'   \frac{
+#'     1
+#'   }
+#'   {
+#'     n
+#'   }
+#'   \sum_{
+#'     i
 #'     =
-#'     \frac{1}{n}
-#'     \sum_{i = 1}^{n}
+#'     1
+#'   }^{
+#'     n
+#'   }
+#'   \left(
+#'     \mathbf{
+#'       y
+#'     }
+#'     -
+#'     \mathbf{
+#'       X
+#'     }
+#'     \boldsymbol{
+#'       \hat{
+#'         \beta
+#'       }
+#'     }
+#'     \right)^{
+#'       2
+#'     } \\
+#'     =
+#'     \frac{
+#'       1
+#'     }
+#'     {
+#'       n
+#'     }
+#'     \sum_{
+#'       i
+#'       =
+#'       1
+#'     }^{
+#'       n
+#'     }
 #'     \left(
-#'       \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}}
-#'     \right)^{2} \\
+#'       \mathbf{
+#'         y
+#'       }
+#'       -
+#'       \mathbf{
+#'         \hat{
+#'           y
+#'         }
+#'       }
+#'     \right)^{
+#'       2
+#'     } \\
 #'     =
-#'     \frac{1}{n}
-#'     \sum_{i = 1}^{n}
-#'     \left(
-#'       \mathbf{y} - \mathbf{\hat{y}}
-#'     \right)^{2} \\
-#'     =
-#'     \frac{RSS}{n}.
+#'     \frac{
+#'       RSS
+#'     }
+#'     {
+#'       n
+#'     } .
 #'   }
 #'
 #' If `RSS = NULL`,
@@ -29,12 +90,13 @@
 #' are not needed.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
+#' @family assessment of model quality functions
+#' @keywords mean square error
 #' @inheritParams .Rbar2
 #' @inheritParams .R2_RSS
-#' @references
-#'   [Wikipedia: Mean Squared Error](https://en.wikipedia.org/wiki/Mean_squared_error)
-#' @family assessment of model quality functions
 #' @return Returns the mean squared error.
+#' @references
+#' [Wikipedia: Mean Squared Error](https://en.wikipedia.org/wiki/Mean_squared_error)
 #' @export
 .MSE <- function(RSS = NULL,
                  n,
@@ -54,9 +116,11 @@
 
 #' Mean Squared Error
 #'
+#' @author Ivan Jacob Agaloos Pesigan
+#' @family assessment of model quality functions
+#' @keywords mean square error
 #' @inheritParams .MSE
 #' @inherit .MSE description references return
-#' @family assessment of model quality functions
 #' @export
 MSE <- function(X,
                 y,
@@ -69,38 +133,102 @@ MSE <- function(X,
   )
 }
 
-#' Root Mean Squared Error (from \eqn{RSS})
+#' Root Mean Squared Error
+#' (from
+#' \eqn{
+#'   RSS
+#' }
+#' )
 #'
-#' Calculates the root mean squared error (RMSE) using
-#'   \deqn{
+#' Calculates the root mean squared error
+#' \eqn{
+#'   \left(
 #'     RMSE
-#'     =
-#'     \sqrt{
-#'       \frac{1}{n}
-#'       \sum_{i = 1}^{n}
-#'       \left(
-#'         \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}}
-#'       \right)^{2}
-#'     } \\
-#'     =
-#'     \sqrt{
-#'       \frac{1}{n}
-#'       \sum_{i = 1}^{n}
-#'       \left(
-#'         \mathbf{y} - \mathbf{\hat{y}}
-#'       \right)^{2}
-#'     } \\
-#'     =
-#'     \sqrt{\frac{RSS}{n}}.
-#'   }
+#'   \right)
+#' }
+#' using
+#' \deqn{
+#'   RMSE
+#'   =
+#'   \sqrt{
+#'     \frac{
+#'       1
+#'     }
+#'     {
+#'       n
+#'     }
+#'     \sum_{
+#'       i
+#'       =
+#'       1
+#'     }^{
+#'       n
+#'     }
+#'     \left(
+#'       \mathbf{
+#'         y
+#'       }
+#'       -
+#'       \mathbf{
+#'         X
+#'       }
+#'       \boldsymbol{
+#'         \hat{
+#'           \beta
+#'         }
+#'       }
+#'     \right)^{
+#'       2
+#'     }
+#'   } \\
+#'   =
+#'   \sqrt{
+#'     \frac{
+#'       1
+#'     }
+#'     {
+#'       n
+#'     }
+#'     \sum_{
+#'       i
+#'       =
+#'       1
+#'     }^{
+#'       n
+#'     }
+#'     \left(
+#'       \mathbf{
+#'         y
+#'       }
+#'       -
+#'       \mathbf{
+#'         \hat{
+#'           y
+#'         }
+#'       }
+#'     \right)^{
+#'       2
+#'     }
+#'   } \\
+#'   =
+#'   \sqrt{
+#'     \frac{
+#'       RSS
+#'     }
+#'     {
+#'       n
+#'     }
+#'   } .
+#' }
 #'
 #' @author Ivan Jacob Agaloos Pesigan
+#' @family assessment of model quality functions
+#' @keywords mean square error
 #' @inheritParams .MSE
 #' @inherit .MSE details
-#' @references
-#'   [Wikipedia: Root Mean Square Deviation](https://en.wikipedia.org/wiki/Root-mean-square_deviation)
 #' @return Returns the root mean squared error.
-#' @family assessment of model quality functions
+#' @references
+#' [Wikipedia: Root Mean Square Deviation](https://en.wikipedia.org/wiki/Root-mean-square_deviation)
 #' @export
 .RMSE <- function(RSS = NULL,
                   n,
@@ -121,9 +249,10 @@ MSE <- function(X,
 #' Root Mean Squared Error
 #'
 #' @author Ivan Jacob Agaloos Pesigan
+#' @family assessment of model quality functions
+#' @keywords mean square error
 #' @inheritParams .RMSE
 #' @inherit .RMSE description details return references
-#' @family assessment of model quality functions
 #' @export
 RMSE <- function(X,
                  y,

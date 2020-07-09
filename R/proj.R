@@ -1,24 +1,25 @@
 #' P Matrix
 #'
-#' Calculates the projection matrix (\eqn{\mathbf{P}})
-#'   using
-#'   \deqn{
-#'     \mathbf{P}
-#'     =
+#' Calculates the projection matrix
+#' \eqn{\left( \mathbf{P} \right)}
+#' using
+#' \deqn{
+#'   \mathbf{P}
+#'   =
+#'   \mathbf{X}
+#'   \left(
+#'     \mathbf{X}^{\prime}
 #'     \mathbf{X}
-#'     \left(
-#'       \mathbf{X}^{\prime}
-#'       \mathbf{X}
-#'     \right)^{-1}
-#'     \mathbf{X}^{\prime}.
-#'   }
+#'   \right)^{-1}
+#'   \mathbf{X}^{\prime}.
+#' }
 #'
 #' The projection matrix
-#' (\eqn{\mathbf{P}}),
+#' \eqn{\left( \mathbf{P} \right)},
 #' also known as the hat matrix,
 #' transforms the \eqn{\mathbf{y}} vector
 #' to the vector of predicted values
-#' (\eqn{\mathbf{\hat{y}} = \mathbf{Py}}).
+#' \eqn{\left( \mathbf{\hat{y}} = \mathbf{Py} \right)}.
 #'
 #' @author Ivan Jacob Agaloos Pesigan
 #' @inheritParams betahat_inv
