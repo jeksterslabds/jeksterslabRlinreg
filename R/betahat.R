@@ -1,47 +1,20 @@
-# Beta-hat
-# Ivan Jacob Agaloos Pesigan
-
-#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}} = \left( \mathbf{X}^{\prime} \mathbf{X} \right)^{-1} \left( \mathbf{X}^{\prime} \mathbf{y} \right)})
+#' @author Ivan Jacob Agaloos Pesigan
 #'
-#' Estimates coefficients of a linear regression model
-#'   using
-#'   \deqn{
+#' @title Regression Coefficients
+#'   \eqn{
 #'     \boldsymbol{\hat{\beta}}
 #'     =
-#'     \left(
-#'       \mathbf{X}^{\prime}
-#'       \mathbf{X}
-#'     \right)^{-1}
-#'     \left(
-#'       \mathbf{X}^{\prime}
-#'       \mathbf{y}
-#'     \right).
+#'     \left( \mathbf{X}^{\prime} \mathbf{X} \right)^{-1}
+#'     \left( \mathbf{X}^{\prime} \mathbf{y} \right)
 #'   }
 #'
-#' @author Ivan Jacob Agaloos Pesigan
-#' @param X Matrix.
-#'   The data matrix
-#'   \eqn{\mathbf{X}}
-#'   (also known as
-#'   design matrix,
-#'   model matrix or
-#'   regressor matrix)
-#'   is an \eqn{n \times k} matrix
-#'   of \eqn{n} observations
-#'   of \eqn{k} regressors,
-#'   which includes a regressor
-#'   whose value is 1 for each observation.
-#' @param y Vector or `n` by `1` matrix.
-#'   The vector
-#'   \eqn{\mathbf{y}}
-#'   is an \eqn{n \times 1} vector
-#'   of observations on the regressand variable.
-#' @return
-#'   Returns \eqn{\boldsymbol{\hat{\beta}}}
-#'   that is,
-#'   a \eqn{k \times 1} vector of estimates
-#'   of \eqn{k} unknown regression coefficients
-#'   estimated using ordinary least squares.
+#' @description Estimates coefficients of a linear regression model using
+#'   \deqn{\boldsymbol{\hat{\beta}}
+#'     =
+#'     \left( \mathbf{X}^{\prime} \mathbf{X} \right)^{-1}
+#'     \left( \mathbf{X}^{\prime} \mathbf{y} \right) .
+#'   }
+#'
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
@@ -50,10 +23,25 @@
 #'   [Wikipedia: Inverting the matrix of the normal equations](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations)
 #'
 #'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'
 #' @family beta-hat functions
+#' @keywords beta-hat-ols
+#' @param X Matrix.
+#'   The data matrix \eqn{\mathbf{X}}
+#'   (also known as design matrix, model matrix or regressor matrix)
+#'   is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
+#'   which includes a regressor whose value is 1 for each observation.
+#' @param y Vector or `n` by `1` matrix.
+#'   The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
+#'   on the regressand variable.
+#' @return
+#'   Returns \eqn{\boldsymbol{\hat{\beta}}}, that is,
+#'   a \eqn{k \times 1} vector of estimates
+#'   of \eqn{k} unknown regression coefficients
+#'   estimated using ordinary least squares.
 #' @export
-betahat_inv <- function(X,
-                        y) {
+betahatinv <- function(X,
+                       y) {
   drop(
     solve(
       crossprod(X),
@@ -62,9 +50,12 @@ betahat_inv <- function(X,
   )
 }
 
-#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - QR Decomposition
+#' @author Ivan Jacob Agaloos Pesigan
 #'
-#' Estimates coefficients of a linear regression model
+#' @title Regression Coefficients
+#'   \eqn{\boldsymbol{\hat{\beta}}} - QR Decomposition
+#'
+#' @description Estimates coefficients of a linear regression model
 #'   using QR Decomposition.
 #'   The data matrix \eqn{\mathbf{X}} is decomposed into
 #'   \deqn{
@@ -82,8 +73,6 @@ betahat_inv <- function(X,
 #'     \mathbf{y}.
 #'   }
 #'
-#' @inheritParams betahat_inv
-#' @inherit betahat_inv return
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
@@ -94,10 +83,14 @@ betahat_inv <- function(X,
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #'
 #'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'
 #' @family beta-hat functions
+#' @keywords beta-hat-ols
+#' @inheritParams betahatinv
+#' @inherit betahatinv return
 #' @export
-betahat_qr <- function(X,
-                       y) {
+betahatqr <- function(X,
+                      y) {
   Xqr <- qr(X)
   drop(
     backsolve(
@@ -110,9 +103,12 @@ betahat_qr <- function(X,
   )
 }
 
-#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}}) - Singular Value Decomposition
+#' @author Ivan Jacob Agaloos Pesigan
 #'
-#' Estimates coefficients of a linear regression model
+#' @title Regression Coefficients
+#'   \eqn{\boldsymbol{\hat{\beta}}} - Singular Value Decomposition
+#'
+#' @description Estimates coefficients of a linear regression model
 #'   using Singular Value Decomposition.
 #'   The data matrix \eqn{\mathbf{X}} is decomposed into
 #'   \deqn{
@@ -133,8 +129,6 @@ betahat_qr <- function(X,
 #'   }
 #'   where the superscript \eqn{+} indicates the pseudoinverse.
 #'
-#' @inheritParams betahat_inv
-#' @inherit betahat_inv return
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
@@ -145,27 +139,26 @@ betahat_qr <- function(X,
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #'
 #'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'
 #' @family beta-hat functions
+#' @keywords beta-hat-ols
+#' @inheritParams betahatinv
+#' @inherit betahatinv return
 #' @export
-betahat_svd <- function(X,
-                        y) {
+betahatsvd <- function(X,
+                       y) {
   Xsvd <- svd(X)
   drop(
     (Xsvd$v %*% (1 / Xsvd$d * t(Xsvd$u))) %*% y
   )
 }
 
-#' Beta-hat (\eqn{\boldsymbol{\hat{\beta}}})
-#'
-#' See [`betahat_inv()`] for inverse of X,
-#' [`betahat_qr()`] for QR decomposition, and
-#' [`betahat_svd()`] for singular value decomposition.
-#'
 #' @author Ivan Jacob Agaloos Pesigan
-#' @param FUN Function.
-#'   Beta-hat function to use.
-#'   [`betahat_inv()`] is used by default.
-#' @inheritParams betahat_inv
+#'
+#' @title Regression Coefficients \eqn{\boldsymbol{\hat{\beta}}}
+#'
+#' @description Estimates coefficients of a linear regression model.
+#'
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
@@ -180,11 +173,17 @@ betahat_svd <- function(X,
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #'
 #'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'
 #' @family beta-hat functions
+#' @keywords beta-hat-ols
+#' @inheritParams betahatinv
+#' @param FUN Function.
+#'   Beta-hat function to use.
+#'   [`betahatinv()`] is used by default.
 #' @export
 betahat <- function(X,
                     y,
-                    FUN = betahat_inv) {
+                    FUN = betahatinv) {
   FUN(
     X = X,
     y = y

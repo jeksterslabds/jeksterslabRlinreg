@@ -2,38 +2,27 @@
 % Please edit documentation in R/betahat.R
 \name{betahat}
 \alias{betahat}
-\title{Beta-hat (\eqn{\boldsymbol{\hat{\beta}}})}
+\title{Regression Coefficients \eqn{\boldsymbol{\hat{\beta}}}}
 \usage{
-betahat(X, y, FUN = betahat_inv)
+betahat(X, y, FUN = betahatinv)
 }
 \arguments{
 \item{X}{Matrix.
-The data matrix
-\eqn{\mathbf{X}}
-(also known as
-design matrix,
-model matrix or
-regressor matrix)
-is an \eqn{n \times k} matrix
-of \eqn{n} observations
-of \eqn{k} regressors,
-which includes a regressor
-whose value is 1 for each observation.}
+The data matrix \eqn{\mathbf{X}}
+(also known as design matrix, model matrix or regressor matrix)
+is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
+which includes a regressor whose value is 1 for each observation.}
 
 \item{y}{Vector or \code{n} by \code{1} matrix.
-The vector
-\eqn{\mathbf{y}}
-is an \eqn{n \times 1} vector
-of observations on the regressand variable.}
+The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
+on the regressand variable.}
 
 \item{FUN}{Function.
 Beta-hat function to use.
-\code{\link[=betahat_inv]{betahat_inv()}} is used by default.}
+\code{\link[=betahatinv]{betahatinv()}} is used by default.}
 }
 \description{
-See \code{\link[=betahat_inv]{betahat_inv()}} for inverse of X,
-\code{\link[=betahat_qr]{betahat_qr()}} for QR decomposition, and
-\code{\link[=betahat_svd]{betahat_svd()}} for singular value decomposition.
+Estimates coefficients of a linear regression model.
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear Regression}
@@ -52,11 +41,12 @@ See \code{\link[=betahat_inv]{betahat_inv()}} for inverse of X,
 }
 \seealso{
 Other beta-hat functions: 
-\code{\link{betahat_inv}()},
-\code{\link{betahat_qr}()},
-\code{\link{betahat_svd}()}
+\code{\link{betahatinv}()},
+\code{\link{betahatqr}()},
+\code{\link{betahatsvd}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan
 }
 \concept{beta-hat functions}
+\keyword{beta-hat-ols}

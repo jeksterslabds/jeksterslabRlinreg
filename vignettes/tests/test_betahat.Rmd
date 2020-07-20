@@ -115,32 +115,32 @@ result_lm_betahat <- drop(
     result_lm_object
   )
 )
-result_betahat_inv <- betahat_inv(
+result_betahatinv <- betahatinv(
   X = X,
   y = y
 )
-result_betahat_qr <- betahat_qr(
+result_betahatqr <- betahatqr(
   X = X,
   y = y
 )
-result_betahat_svd <- betahat_svd(
+result_betahatsvd <- betahatsvd(
   X = X,
   y = y
 )
-result_betahat_betahat_inv <- betahat(
+result_betahat_betahatinv <- betahat(
   X = X,
   y = y,
-  FUN = betahat_inv
+  FUN = betahatinv
 )
-result_betahat_betahat_qr <- betahat(
+result_betahat_betahatqr <- betahat(
   X = X,
   y = y,
-  FUN = betahat_qr
+  FUN = betahatqr
 )
-result_betahat_betahat_svd <- betahat(
+result_betahat_betahatsvd <- betahat(
   X = X,
   y = y,
-  FUN = betahat_svd
+  FUN = betahatsvd
 )
 ```
 
@@ -158,12 +158,12 @@ knitr::kable(
     ),
     Parameter = beta,
     lm = result_lm_betahat,
-    betahat_inv = result_betahat_inv,
-    betahat_qr = result_betahat_qr,
-    betahat_svd = result_betahat_svd,
-    betahat_betahat_inv = result_betahat_betahat_inv,
-    betahat_betahat_qr = result_betahat_betahat_qr,
-    betahat_betahat_svd = result_betahat_betahat_svd
+    betahatinv = result_betahatinv,
+    betahatqr = result_betahatqr,
+    betahatsvd = result_betahatsvd,
+    betahat_betahatinv = result_betahat_betahatinv,
+    betahat_betahatqr = result_betahat_betahatqr,
+    betahat_betahatsvd = result_betahat_betahatsvd
   ),
   row.names = FALSE
 )
@@ -176,12 +176,12 @@ knitr::kable(
 ```{r benchmark}
 microbenchmark(
   lm = coef(lm(y ~ X[, -1])),
-  betahat_inv = betahat_inv(X = X, y = y),
-  betahat_qr = betahat_qr(X = X, y = y),
-  betahat_svd = betahat_svd(X = X, y = y),
-  betahat_betahat_inv = betahat(X = X, y = y, FUN = betahat_inv),
-  betahat_betahat_qr = betahat(X = X, y = y, FUN = betahat_qr),
-  betahat_betahat_svd = betahat(X = X, y = y, FUN = betahat_svd)
+  betahatinv = betahatinv(X = X, y = y),
+  betahatqr = betahatqr(X = X, y = y),
+  betahatsvd = betahatsvd(X = X, y = y),
+  betahat_betahatinv = betahat(X = X, y = y, FUN = betahatinv),
+  betahat_betahatqr = betahat(X = X, y = y, FUN = betahatqr),
+  betahat_betahatsvd = betahat(X = X, y = y, FUN = betahatsvd)
 )
 ```
 
@@ -190,34 +190,34 @@ microbenchmark(
 
 
 ```{r testthat, echo=TRUE}
-test_that("betahat_inv, betahat_qr, betahat_svd, and betahat return the same coefficients as lm", {
+test_that("betahatinv, betahatqr, betahatsvd, and betahat return the same coefficients as lm", {
   expect_equivalent(
     round(
       x = result_lm_betahat,
       digits = 2
     ),
     round(
-      x = result_betahat_inv,
+      x = result_betahatinv,
       digits = 2
     ),
     round(
-      x = result_betahat_qr,
+      x = result_betahatqr,
       digits = 2
     ),
     round(
-      x = result_betahat_svd,
+      x = result_betahatsvd,
       digits = 2
     ),
     round(
-      x = result_betahat_betahat_inv,
+      x = result_betahat_betahatinv,
       digits = 2
     ),
     round(
-      x = result_betahat_betahat_qr,
+      x = result_betahat_betahatqr,
       digits = 2
     ),
     round(
-      x = result_betahat_betahat_svd,
+      x = result_betahat_betahatsvd,
       digits = 2
     )
   )

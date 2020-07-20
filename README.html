@@ -601,7 +601,7 @@ body {
 <body>
 
 <h1 id="jeksterslabrlinreg">jeksterslabRlinreg</h1>
-<p>Ivan Jacob Agaloos Pesigan 2020-07-10</p>
+<p>Ivan Jacob Agaloos Pesigan 2020-07-20</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- badges: start -->
@@ -615,28 +615,6 @@ body {
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(devtools)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">install_github</span>(<span class="st">&quot;jeksterslabds/jeksterslabRlinreg&quot;</span>)</span></code></pre></div>
 <h2 id="example">Example</h2>
-<p>The main function in this package is <code>linreg()</code>. It fits a linear regression model using ordinary least squares. The required arguments include:</p>
-<ul>
-<li><strong>X</strong>: The data matrix is an matrix of observations of regressors, which includes a regressor whose value is 1 for each observation.</li>
-<li><strong>y</strong>: The vector is an vector of observations on the regressand variable.</li>
-</ul>
-<!-- end list -->
-
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">library</span>(jeksterslabRlinreg)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">linreg</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="dt">X =</span> X,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="dt">y =</span> y,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  <span class="dt">FUN =</span> betahat_inv,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  <span class="dt">output =</span> <span class="kw">c</span>(<span class="st">&quot;coef&quot;</span>, <span class="st">&quot;ci&quot;</span>, <span class="st">&quot;model&quot;</span>, <span class="st">&quot;anova&quot;</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt; </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; Model Evaluation:</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt;                                           Value</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; Coefficient of determination             0.9443</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; Adjusted Coefficient of determination    0.9426</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; Residual Sum of Squares               1216.0282</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; Mean Square Error                       12.1603</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a><span class="co">#&gt; Root Mean Square Error                   3.4872</span></span></code></pre></div>
 <p>See <a href="https://jeksterslabds.github.io/jeksterslabRlinreg/index.html">GitHub Pages</a> for package documentation.</p>
 
 </body>
