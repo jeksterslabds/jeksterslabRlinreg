@@ -9,56 +9,11 @@
 #'
 #' @details The following are the parameters of a linear regression model
 #'   for the covariance structure
-#'   - \eqn{\boldsymbol{\beta}_{\mathrm{slopes}}} - \eqn{p \times 1} regression slopes,
+#'   - \eqn{\boldsymbol{\beta}_{2 \cdots k}} - \eqn{p \times 1} regression slopes,
 #'   - \eqn{\sigma^2} - variance of the error term
 #'     \eqn{\varepsilon}, and
 #'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}} - \eqn{p \times p}
-#'     variances and covariances of \eqn{{X}_{2}, {X}_{3}, \dots, {X}_{k}}.
-#'
-#'   The model-implied variance-covariance matrix is given by
-#'   \deqn{
-#'     \boldsymbol{\Sigma} \left( \boldsymbol{\theta} \right)
-#'     =
-#'     \left( \mathrm{I} - \mathrm{A} \right)^{-1}
-#'     \mathrm{S}
-#'     \left[ \left( \mathrm{I} - \mathrm{A} \right)^{-1} \right]^{\prime}
-#'   }
-#'   where
-#'   \deqn{
-#'     \mathbf{A}
-#'     =
-#'     \begin{bmatrix}
-#'       0 & \beta_2 & \beta_3 & \cdots & \beta_k \\
-#'       0 & 0       & 0       & \cdots & 0       \\
-#'       0 & 0       & 0       & \cdots & 0       \\
-#'       0 & 0       & 0       & \cdots & 0       \\
-#'       0 & 0       & 0       & \cdots & 0
-#'     \end{bmatrix}
-#'   }
-#'
-#'   \deqn{
-#'     \mathbf{S}
-#'     =
-#'     \begin{bmatrix}
-#'       \sigma^2 & 0                         & 0                         & \cdots & 0                         \\
-#'       0        & \mathrm{Var}_{X_2}        & \mathrm{Cov}_{X_{2}X_{3}} & \cdots & \mathrm{Cov}_{X_{2}X_{k}} \\
-#'       0        & \mathrm{Cov}_{X_{3}X_{2}} & \mathrm{Var}_{X_3}        & \cdots & \mathrm{Cov}_{X_{3}X_{k}} \\
-#'       0        & \vdots                    & \vdots                    & \ddots & \vdots                    \\
-#'       0        & \mathrm{Cov}_{X_{k}X_{2}} & \mathrm{Cov}_{X_{k}X_{3}} & \cdots & \mathrm{Var}_{X_k}
-#'     \end{bmatrix}
-#'   }
-#'
-#'   \deqn{
-#'     \mathbf{I}
-#'     =
-#'     \begin{bmatrix}
-#'       1 & 0   & 0   & \cdots & 0   \\
-#'       0 & 1   & 0   & \cdots & 0   \\
-#'       0 & 0   & 1   & \cdots & 0   \\
-#'       0 & 0   & 0   & 1      & 0   \\
-#'       0 & 0   & 0   & \cdots & 1
-#'     \end{bmatrix}
-#'   }
+#'     variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}.
 #'
 #' @family model-implied functions
 #' @keywords model-implied
@@ -67,7 +22,7 @@
 #' @param sigma2 Numeric.
 #'   Variance of the error term \eqn{\varepsilon} \eqn{\left( \sigma^2 \right)}.
 #' @param SigmaX `p` by `p` numeric matrix.
-#'   Variances and covariances of \eqn{{X}_{2}, {X}_{3}, \dots, {X}_{k}}
+#'   Variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\Sigma}_{\mathbf{X}} \right)}.
 #' @return Returns the model-implied variance-covariance matrix
 #'   \eqn{\boldsymbol{\Sigma} \left( \boldsymbol{\theta} \right)}.
@@ -123,46 +78,14 @@ Sigmatheta <- function(slopes,
 #'   for the mean structure
 #'   - \eqn{\boldsymbol{\beta}} - \eqn{k \times k} regression coefficients and
 #'   - \eqn{\boldsymbol{\mu}_{\mathbf{X}}} - \eqn{p \times 1} vector of means of the regressors
-#'     \eqn{ {X}_{2}, {X}_{3}, \dots, {X}_{k}} .
-#'
-#'   The model-implied mean vector is given by
-#'   \deqn{
-#'     \boldsymbol{\mu} \left( \boldsymbol{\theta} \right)
-#'     =
-#'     \left( \mathrm{I} - \mathrm{A} \right)^{-1}
-#'     \mathrm{M}
-#'   }
-#'   where
-#'   \deqn{
-#'     \mathbf{A}
-#'     =
-#'     \begin{bmatrix}
-#'       0 & \beta_2 & \beta_3 & \cdots & \beta_k \\
-#'       0 & 0       & 0       & \cdots & 0       \\
-#'       0 & 0       & 0       & \cdots & 0       \\
-#'       0 & 0       & 0       & \cdots & 0       \\
-#'       0 & 0       & 0       & \cdots & 0
-#'     \end{bmatrix}
-#'   }
-#'
-#'   \deqn{
-#'     \mathbf{M}
-#'     =
-#'     \begin{bmatrix}
-#'       \beta_1     \\
-#'       \mu_{X_{2}} \\
-#'       \mu_{X_{3}} \\
-#'       \vdots      \\
-#'       \mu_{X_{k}}
-#'     \end{bmatrix}
-#'   }
+#'     \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}} .
 #'
 #' @family model-implied functions
 #' @keywords model-implied
 #' @param beta Vector or `k` by `1` matrix.
 #'   \eqn{k \times 1} regression coefficients \eqn{\left( \boldsymbol{\beta} \right)}.
 #' @param muX Vector or `p` by `1` matrix. \eqn{p \times 1} vector
-#'   of means of the regressors \eqn{ {X}_{2}, {X}_{3}, \dots, {X}_{k}}
+#'   of means of the regressors \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\mu}_{\mathbf{X}} \right)} .
 #' @export
 mutheta <- function(beta,

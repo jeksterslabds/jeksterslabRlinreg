@@ -14,17 +14,19 @@
 #'     \mathrm{V}_{\mathbf{X}}^{\prime}
 #'     \mathrm{v}_{\mathbf{yX}}
 #'   }
-#'   where \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}}
-#'   is the \eqn{p \times p} covariance matrix of the regressor variables and
-#'   \eqn{\boldsymbol{\sigma}_{\mathbf{yX}}}
-#'   is the \eqn{p \times 1} column vector of the covariances between the regressand and the regressors.
+#'
+#'   where
+#'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}}
+#'     is the \eqn{p \times p} covariance matrix of the regressor variables and
+#'   - \eqn{\boldsymbol{\sigma}_{\mathbf{yX}}}
+#'     is the \eqn{p \times 1} column vector of the covariances between the regressand and the regressors.
 #'
 #' @family model-implied functions
-#' @keywords model-implied, beta
+#' @keywords model-implied, parameters
 #' @inheritParams Sigmatheta
 #' @param sigmayX Vector or `p` by `1` matrix of covariances between the regressand and the regressors.
 #'   \eqn{\left( \boldsymbol{\sigma}_{\mathbf{yX}} \right)}.
-#' @return Returns the slopes \eqn{\left( \boldsymbol{\beta}_{2 \cdots k} \right)}
+#' @return Returns the slopes \eqn{\boldsymbol{\beta}_{2 \cdots k}}
 #'   of a linear regression model derived from the variance-covariance matrix.
 #' @export
 slopes <- function(SigmaX,
@@ -48,17 +50,19 @@ slopes <- function(SigmaX,
 #'     \mathrm{R}_{\mathbf{X}}^{\prime}
 #'     \mathrm{r}_{\mathbf{yX}}
 #'   }
-#'   where \eqn{\mathbf{R}_{\mathbf{X}}}
-#'   is the \eqn{p \times p} correlation matrix of the regressor variables and
-#'   \eqn{\mathbf{r}_{\mathbf{yX}}}
-#'   is the \eqn{p \times 1} column vector of the correlations between the regressand and the regressors.
+#'
+#'   where
+#'   - \eqn{\mathbf{R}_{\mathbf{X}}}
+#'     is the \eqn{p \times p} correlation matrix of the regressor variables and
+#'   - \eqn{\mathbf{r}_{\mathbf{yX}}}
+#'     is the \eqn{p \times 1} column vector of the correlations between the regressand and the regressors.
 #'
 #' @family model-implied functions
-#' @keywords model-implied, beta
+#' @keywords model-implied, parameters
 #' @param RX `p` by `p` numeric matrix.
 #'   Correlations between the regressors.
 #' @param ryX Vector or `p` by `1` matrix of correlations between the regressand and the regressors.
-#' @return Returns the standardized slopes \eqn{\left( \boldsymbol{\beta}_{2 \cdots k}^{*} \right)}
+#' @return Returns the standardized slopes \eqn{\boldsymbol{\beta}_{2 \cdots k}^{*}}
 #'   of a linear regression model derived from the correlation matrix.
 #' @export
 stdslopes <- function(RX,
@@ -75,18 +79,28 @@ stdslopes <- function(RX,
 #' @description Derives the intercept \eqn{\beta_1} of a linear regression model
 #'   from the \eqn{p \times 1} regression slopes \eqn{\left( \boldsymbol{\beta}_{2 \cdots k} \right)},
 #'   the mean of the regressand \eqn{\left( \mu_y \right)},
-#'   and the \eqn{p \times 1} means of regressors \eqn{ {X}_{2}, {X}_{3}, \dots, {X}_{k}}
+#'   and the \eqn{p \times 1} means of regressors \eqn{{X}_{2}, {X}_{3}, \dots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\mu}_{\mathbf{X}} \right)} .
 #'
 #' @details The intercept is given by
-#'   \deqn{\beta_1 = \mu_y - \boldsymbol{\mu}_{\mathbf{X}} \boldsymbol{\beta}_{2 \cdots k}^{\prime}}
+#'   \deqn{
+#'     \beta_1
+#'     =
+#'     \mu_y
+#'     -
+#'     \boldsymbol{\mu}_{\mathbf{X}}
+#'     \boldsymbol{\beta}_{2 \cdots k}^{\prime}
+#'   }
 #'
 #' @family model-implied functions
-#' @keywords model-implied, beta
+#' @keywords model-implied, parameters
 #' @inheritParams Sigmatheta
 #' @inheritParams mutheta
 #' @param muy Numeric.
 #'   Mean of the regressand variable \eqn{\left( \mu_{\mathbf{y}} \right)} .
+#' @return Returns the intercept \eqn{\beta_1}
+#'   of a linear regression model derived from the means
+#'   and the slopes \eqn{\left( \boldsymbol{\beta}_{2 \cdots k} \right)} .
 #' @export
 intercept <- function(slopes,
                       muy,

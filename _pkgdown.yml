@@ -6,10 +6,10 @@ reference:
   desc:  Model-implied matrices for the $k$-variable linear regression model.
 - contents:
   - has_keyword("model-implied")
-- title: Regression Coefficients
-  desc:  Regression coefficients from model-implied matrices.
+- title: Regression Coefficients and Error Variance
+  desc:  Regression coefficients and error variance from model-implied matrices.
 - contents:
-  - has_keyword("beta")
+  - has_keyword("parameters")
 - title: Regression Coefficients OLS.
   desc:  Regression coefficients ordinary least squares estimator.
 - contents:
