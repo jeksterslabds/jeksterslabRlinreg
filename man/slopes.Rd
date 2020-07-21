@@ -28,7 +28,7 @@ The linear regression slopes is given by
 \deqn{
     \boldsymbol{\beta}_{2 \cdots k}
     =
-    \mathrm{V}_{\mathbf{X}}^{\prime}
+    \mathrm{V}_{\mathbf{X}}^{T}
     \mathrm{v}_{\mathbf{yX}}
   }
 
@@ -46,7 +46,7 @@ Other model-implied functions:
 \code{\link{intercept}()},
 \code{\link{mutheta}()},
 \code{\link{sigma2}()},
-\code{\link{stdslopes}()}
+\code{\link{slopesprime}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

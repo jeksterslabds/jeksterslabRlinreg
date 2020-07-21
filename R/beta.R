@@ -11,7 +11,7 @@
 #'   \deqn{
 #'     \boldsymbol{\beta}_{2 \cdots k}
 #'     =
-#'     \mathrm{V}_{\mathbf{X}}^{\prime}
+#'     \mathrm{V}_{\mathbf{X}}^{T}
 #'     \mathrm{v}_{\mathbf{yX}}
 #'   }
 #'
@@ -45,9 +45,9 @@ slopes <- function(SigmaX,
 #'
 #' @details The linear regression standardized slopes is given by
 #'   \deqn{
-#'     \boldsymbol{\beta}_{2 \cdots k}^{*}
+#'     \boldsymbol{\beta}_{2 \cdots k}^{\prime}
 #'     =
-#'     \mathrm{R}_{\mathbf{X}}^{\prime}
+#'     \mathrm{R}_{\mathbf{X}}^{T}
 #'     \mathrm{r}_{\mathbf{yX}}
 #'   }
 #'
@@ -65,8 +65,8 @@ slopes <- function(SigmaX,
 #' @return Returns the standardized slopes \eqn{\boldsymbol{\beta}_{2 \cdots k}^{*}}
 #'   of a linear regression model derived from the correlation matrix.
 #' @export
-stdslopes <- function(RX,
-                      ryX) {
+slopesprime <- function(RX,
+                        ryX) {
   drop(
     solve(RX) %*% ryX
   )
@@ -89,7 +89,7 @@ stdslopes <- function(RX,
 #'     \mu_y
 #'     -
 #'     \boldsymbol{\mu}_{\mathbf{X}}
-#'     \boldsymbol{\beta}_{2 \cdots k}^{\prime}
+#'     \boldsymbol{\beta}_{2 \cdots k}^{T}
 #'   }
 #'
 #' @family model-implied functions

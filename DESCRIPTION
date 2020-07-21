@@ -28,11 +28,13 @@ Imports:
 	stats,
     jeksterslabRdist
 Remotes:
-    jeksterslabds/jeksterslabRdist
+    jeksterslabds/jeksterslabRdist,
+    jeksterslabds/jeksterslabRdatarepo
 Suggests:
 	knitr,
 	rmarkdown,
 	testthat,
     microbenchmark,
-    MASS
+    MASS,
+    jeksterslabRdatarepo
 RoxygenNote: 7.1.1

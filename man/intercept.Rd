@@ -37,7 +37,7 @@ The intercept is given by
     \mu_y
     -
     \boldsymbol{\mu}_{\mathbf{X}}
-    \boldsymbol{\beta}_{2 \cdots k}^{\prime}
+    \boldsymbol{\beta}_{2 \cdots k}^{T}
   }
 }
 \seealso{
@@ -45,8 +45,8 @@ Other model-implied functions:
 \code{\link{Sigmatheta}()},
 \code{\link{mutheta}()},
 \code{\link{sigma2}()},
-\code{\link{slopes}()},
-\code{\link{stdslopes}()}
+\code{\link{slopesprime}()},
+\code{\link{slopes}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

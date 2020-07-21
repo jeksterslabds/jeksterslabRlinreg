@@ -34,8 +34,8 @@ Other model-implied functions:
 \code{\link{Sigmatheta}()},
 \code{\link{intercept}()},
 \code{\link{sigma2}()},
-\code{\link{slopes}()},
-\code{\link{stdslopes}()}
+\code{\link{slopesprime}()},
+\code{\link{slopes}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

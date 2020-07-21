@@ -43,8 +43,8 @@ Other model-implied functions:
 \code{\link{intercept}()},
 \code{\link{mutheta}()},
 \code{\link{sigma2}()},
-\code{\link{slopes}()},
-\code{\link{stdslopes}()}
+\code{\link{slopesprime}()},
+\code{\link{slopes}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan
