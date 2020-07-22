@@ -14,7 +14,7 @@
 #'     \eqn{\varepsilon}, and
 #'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}} - \eqn{p \times p}
 #'     variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}.
-#' 
+#'
 #' @return Returns the model-implied variance-covariance matrix.
 #'   Note that the first item corresponds to `y`.
 #'   The rest of the items correspond to how `SigmaX` is arranged.
@@ -83,7 +83,7 @@ Sigmatheta <- function(slopes,
 #'   - \eqn{\boldsymbol{\beta}} - \eqn{k \times k} regression coefficients and
 #'   - \eqn{\boldsymbol{\mu}_{\mathbf{X}}} - \eqn{p \times 1} vector of means of the regressors
 #'     \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}} .
-#' 
+#'
 #' @return Returns the model-implied Mean vector.
 #'   Note that the first item corresponds to the expected value of `y`.
 #'   The rest of the items correspond to `muX`.
