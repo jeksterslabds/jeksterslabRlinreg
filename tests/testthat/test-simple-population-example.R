@@ -11,8 +11,10 @@
 #'
 #+ include = FALSE
 knitr::opts_chunk$set(
+  error = TRUE,
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
 #'
 #'
@@ -79,6 +81,13 @@ mutheta <- matrix(
   ncol = 1
 )
 #'
+#'
+#' The `jeksterslabRlinreg` package has functions to derive expectations for regression models.
+#'
+#' - `jeksterslabRlinreg::mutheta()` returns the expected values,
+#'   that is, the model-implied mean vector.
+#' - `jeksterslabRlinreg::Sigmatheta()` returns the covariance expectations,
+#'   that is, the model-implied variance-covariance matrix.
 #'
 #' In this hypothetical example,
 #' we assume that we have population data
@@ -185,13 +194,6 @@ knitr::kable(
 #' The slope represents `r beta2` US dollar increase in hourly wages
 #' given 1 additional year of education.
 #'
-#' The `jeksterslabRlinreg` package has functions to derive expectations for regression models.
-#'
-#' - `jeksterslabRlinreg::mutheta()` returns the expected values,
-#'   that is, the model-implied mean vector.
-#' - `jeksterslabRlinreg::Sigmatheta()` returns the covariance expectations,
-#'   that is, the model-implied variance-covariance matrix.
-#'
 #' The expected values are derived using `jeksterslabRlinreg::mutheta()`.
 #'
 #+
@@ -274,7 +276,7 @@ result_sigma2epsilon
 #'
 #'
 #+
-context("Test model-implied")
+context("Test simple-regression-ram")
 test_that("result_mutheta", {
   for (i in 1:nrow(result_mutheta)) {
     expect_equivalent(
