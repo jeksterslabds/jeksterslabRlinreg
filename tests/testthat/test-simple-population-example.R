@@ -215,7 +215,7 @@ knitr::kable(
 #+
 result_Sigmatheta <- jeksterslabRlinreg::Sigmatheta(
   slopes = beta2,
-  sigma2 = sigma2epsilon,
+  sigma2epsilon = sigma2epsilon,
   SigmaX = sigma2x
 )
 #'

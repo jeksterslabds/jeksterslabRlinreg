@@ -14,12 +14,16 @@
 #'     \eqn{\varepsilon}, and
 #'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}} - \eqn{p \times p}
 #'     variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}.
+#' 
+#' @return Returns the model-implied variance-covariance matrix.
+#'   Note that the first item corresponds to `y`.
+#'   The rest of the items correspond to how `SigmaX` is arranged.
 #'
 #' @family model-implied functions
 #' @keywords model-implied
 #' @param slopes Vector or `p` by `1` matrix.
 #'   Regression slopes \eqn{\left( \boldsymbol{\beta}_{2 \cdots k} \right)} .
-#' @param sigma2 Numeric.
+#' @param sigma2epsilon Numeric.
 #'   Variance of the error term \eqn{\varepsilon} \eqn{\left( \sigma^2 \right)}.
 #' @param SigmaX `p` by `p` numeric matrix.
 #'   Variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
@@ -28,7 +32,7 @@
 #'   \eqn{\boldsymbol{\Sigma} \left( \boldsymbol{\theta} \right)}.
 #' @export
 Sigmatheta <- function(slopes,
-                       sigma2,
+                       sigma2epsilon,
                        SigmaX) {
   foo <- function(A,
                   S) {
@@ -58,7 +62,7 @@ Sigmatheta <- function(slopes,
     0,
     S
   )
-  S[1, 1] <- sigma2
+  S[1, 1] <- sigma2epsilon
   foo(
     A = A,
     S = S
@@ -79,6 +83,10 @@ Sigmatheta <- function(slopes,
 #'   - \eqn{\boldsymbol{\beta}} - \eqn{k \times k} regression coefficients and
 #'   - \eqn{\boldsymbol{\mu}_{\mathbf{X}}} - \eqn{p \times 1} vector of means of the regressors
 #'     \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}} .
+#' 
+#' @return Returns the model-implied Mean vector.
+#'   Note that the first item corresponds to the expected value of `y`.
+#'   The rest of the items correspond to `muX`.
 #'
 #' @family model-implied functions
 #' @keywords model-implied
