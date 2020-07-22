@@ -13,10 +13,10 @@
 #' @param sigma2y Numeric.
 #'   Variance of the regressand variable \eqn{\left( \sigma_{y}^{2} \right)}.
 #' @export
-sigma2 <- function(slopes,
-                   sigma2y,
-                   sigmayX,
-                   SigmaX) {
+sigma2epsilon <- function(slopes,
+                          sigma2y,
+                          sigmayX,
+                          SigmaX) {
   foo <- function(A,
                   S) {
     invIminusA <- solve(diag(nrow(A)) - A)
