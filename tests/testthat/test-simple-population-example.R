@@ -14,16 +14,16 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-
+#'
+#'
 # The Simple Linear Regression Model: The Population Regression Model Example {#simple-population-example}
-
-
+#'
+#+ echo = FALSE
 library(testthat)
 library(jeksterslabRlinreg)
-
-
-
+#'
+#'
+#+ echo = FALSE
 varnames <- c("y", "x")
 wages <- jeksterslabRdatarepo::wages
 x <- wages$education
@@ -42,9 +42,9 @@ sigma2y <- var(y)
 sigma2epsilon <- sigma2y - (beta2^2 * sigma2x)
 # mean structure
 mux <- mean(x)
-
-
-
+#'
+#'
+#+ echo = FALSE
 x <- rnorm(n = n, mean = mux, sd = sqrt(sigma2x))
 epsilon <- rnorm(n = n, mean = 0, sd = sqrt(sigma2epsilon))
 y <- beta1 + beta2 * x + epsilon
@@ -78,7 +78,7 @@ mutheta <- matrix(
   data = c(muy, mux),
   ncol = 1
 )
-
+#'
 #'
 #' In this hypothetical example,
 #' we assume that we have population data
@@ -89,10 +89,10 @@ mutheta <- matrix(
 #' The slope is the increase in hourly wage in US dollars
 #' for one year increase in education.
 #'
-
+#+ echo = FALSE
 plot(x = x, y = y)
 abline(obj, col = "red")
-
+#'
 #'
 #' The the following vectors represent the parameters of the simple linear regression model.
 #'
@@ -115,8 +115,8 @@ abline(obj, col = "red")
 #'   \end{bmatrix}
 #' \end{equation}
 #'
-
-
+#'
+#+ echo = FALSE
 Variable <- c(
   "`beta1`",
   "`mux`"
@@ -143,9 +143,9 @@ knitr::kable(
   caption = "$\\boldsymbol{\\theta}_{\\text{mean structure}}$",
   row.names = FALSE
 )
-
-
-
+#'
+#'
+#+ echo = FALSE
 Variable <- c(
   "`beta2`",
   "`sigma2epsilon`",
@@ -176,7 +176,7 @@ knitr::kable(
   caption = "$\\boldsymbol{\\theta}_{\\text{covariance structure}}$",
   row.names = FALSE
 )
-
+#'
 #'
 #' There are times when the intercept does not lend to a meaningful interpretation.
 #' A negative wage corresponding to zero years of education
@@ -194,40 +194,40 @@ knitr::kable(
 #'
 #' The expected values are derived using `jeksterslabRlinreg::mutheta()`.
 #'
-
+#+
 result_mutheta <- jeksterslabRlinreg::mutheta(
   beta = beta,
   muX = mux
 )
-
-
-
+#'
+#'
+#+ echo = FALSE
 colnames(result_mutheta) <- "$\\mu$"
 rownames(result_mutheta) <- varnames
 knitr::kable(
   x = result_mutheta,
   caption = "Expected Values"
 )
-
+#'
 #'
 #' The covariance expectations are derive using `jeksterslabRlinreg::Sigmatheta()`.
 #'
-
+#+
 result_Sigmatheta <- jeksterslabRlinreg::Sigmatheta(
   slopes = beta2,
   sigma2 = sigma2epsilon,
   SigmaX = sigma2x
 )
-
-
-
+#'
+#'
+#+ echo = FALSE
 colnames(result_Sigmatheta) <- varnames
 rownames(result_Sigmatheta) <- varnames
 knitr::kable(
   x = result_Sigmatheta,
   caption = "Covariance Expectations"
 )
-
+#'
 #'
 #' The inverse, that is, deriving the parameters from the expectations
 #' can also be done using functions from the `jeksterslabRlinreg` package.
@@ -236,7 +236,7 @@ knitr::kable(
 #' `jeksterslabRlinreg::intercept()`, and `jeksterslabRlinreg::slopes()`
 #' from the means and the covariances.
 #'
-
+#+
 result_slopes <- jeksterslabRlinreg::slopes(
   SigmaX = sigma2x,
   sigmayX = sigmayx
@@ -248,32 +248,32 @@ result_intercept <- jeksterslabRlinreg::intercept(
   muX = mux
 )
 result_intercept
-
+#'
 #'
 #' Standardized slopes can also be obtained using `jeksterslabRlinreg::slopesprime()`
 #'
-
+#+
 result_slopesprime <- jeksterslabRlinreg::slopesprime(
   RX = sqrt(sigma2x),
   ryX = ryx
 )
 result_slopesprime
-
+#'
 #'
 #' The error variance can also be derived with the available information using
 #' `jeksterslabRlinreg::sigma2()` .
 #'
-
-result_sigma2epsilon <- sigma2(
+#+
+result_sigma2epsilon <- sigma2epsilon(
   slopes = beta2,
   sigma2y = sigma2y,
   sigmayX = sigmayx,
   SigmaX = sigma2x
 )
 result_sigma2epsilon
-
-
-
+#'
+#'
+#+
 context("Test model-implied")
 test_that("result_mutheta", {
   for (i in 1:nrow(result_mutheta)) {
