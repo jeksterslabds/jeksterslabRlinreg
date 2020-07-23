@@ -270,7 +270,7 @@ microbenchmark::microbenchmark(
 )
 #'
 #'
-#+ echo = FALSE
+#+
 context("Test linreg-estimation-ols")
 test_that("results_betahat", {
   result_lm <- as.vector(unname(result_lm))
@@ -297,20 +297,19 @@ test_that("results_betahat", {
     )
   }
 })
-test_that("X transpose X is singular.", {
+test_that("X is singular.", {
   expect_error(
     jeksterslabRlinreg::betahatnorm(
-      X = jeksterslabRdatarepo::svd$X,
-      y = jeksterslabRdatarepo::svd$y
-    ),
-    "X transpose X is singular."
+      X = jeksterslabRdatarepo::svd.linreg$Xb,
+      y = jeksterslabRdatarepo::svd.linreg$yb,
+    )
   )
 })
 test_that("Using QR decomposition.", {
   expect_message(
     jeksterslabRlinreg::betahat(
-      X = jeksterslabRdatarepo::svd$X,
-      y = jeksterslabRdatarepo::svd$y
+      X = jeksterslabRdatarepo::svd.linreg$Xb,
+      y = jeksterslabRdatarepo::svd.linreg$yb,
     ),
     "Using QR decomposition."
   )
@@ -318,8 +317,8 @@ test_that("Using QR decomposition.", {
 test_that("Using singular value decomposition.", {
   expect_message(
     jeksterslabRlinreg::betahat(
-      X = jeksterslabRdatarepo::svd$X,
-      y = jeksterslabRdatarepo::svd$y,
+      X = jeksterslabRdatarepo::svd.linreg$Xb,
+      y = jeksterslabRdatarepo::svd.linreg$yb,
       qr = FALSE
     ),
     "Using singular value decomposition."

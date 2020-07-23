@@ -1,7 +1,7 @@
 jeksterslabRlinreg
 ================
 Ivan Jacob Agaloos Pesigan
-2020-07-23
+2020-07-24
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

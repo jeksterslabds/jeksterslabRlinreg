@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (OLS)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-23</h4>
+            <h4 class="date">2020-07-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-ols-example.Rmd"><code>vignettes/tests/test-linreg-estimation-ols-example.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-ols-example.Rmd</code></div>
@@ -356,11 +356,64 @@
   <span class="kw">betahatsvd</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahatsvd.html">betahatsvd</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;         expr     min       lq       mean   median        uq      max neval</span>
-<span class="co">#&gt;           lm 882.284 936.4380 1221.07477 1047.105 1286.9900 5492.834   100</span>
-<span class="co">#&gt;  betahatnorm  58.750  71.3055   89.43204   80.910  102.1435  201.737   100</span>
-<span class="co">#&gt;    betahatqr 155.253 174.4745  299.15341  284.454  352.5700 2477.136   100</span>
-<span class="co">#&gt;   betahatsvd 160.864 175.0365  232.05347  234.658  266.3710  427.698   100</span></pre></body></html></div>
+<span class="co">#&gt;         expr     min       lq       mean    median       uq       max neval</span>
+<span class="co">#&gt;           lm 890.688 951.0190 1080.32644 1067.5730 1180.344  1678.261   100</span>
+<span class="co">#&gt;  betahatnorm  43.589  50.4975   61.03272   59.7160   68.206   109.236   100</span>
+<span class="co">#&gt;    betahatqr 152.175 179.0330  669.28561  275.8230  356.907 37356.051   100</span>
+<span class="co">#&gt;   betahatsvd 159.652 177.7115  214.52774  207.1205  247.836   313.994   100</span></pre></body></html></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test linreg-estimation-ols"</span>)
+<span class="fu">test_that</span>(<span class="st">"results_betahat"</span>, {
+  <span class="no">result_lm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_lm</span>))
+  <span class="no">result_inv</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_inv</span>))
+  <span class="no">result_qr</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_qr</span>))
+  <span class="no">result_svd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_svd</span>))
+  <span class="no">result_betahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_betahat</span>))
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result_lm</span>)) {
+    <span class="fu">expect_equivalent</span>(
+      <span class="no">result_lm</span>[<span class="no">i</span>],
+      <span class="no">result_inv</span>[<span class="no">i</span>]
+    )
+    <span class="fu">expect_equivalent</span>(
+      <span class="no">result_lm</span>[<span class="no">i</span>],
+      <span class="no">result_qr</span>[<span class="no">i</span>]
+    )
+    <span class="fu">expect_equivalent</span>(
+      <span class="no">result_lm</span>[<span class="no">i</span>],
+      <span class="no">result_svd</span>[<span class="no">i</span>]
+    )
+    <span class="fu">expect_equivalent</span>(
+      <span class="no">result_lm</span>[<span class="no">i</span>],
+      <span class="no">result_betahat</span>[<span class="no">i</span>]
+    )
+  }
+})
+<span class="fu">test_that</span>(<span class="st">"X is singular."</span>, {
+  <span class="fu">expect_error</span>(
+    <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahatnorm.html">betahatnorm</a></span>(
+      <span class="kw">X</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/svd.linreg.html">svd.linreg</a></span>$<span class="no">Xb</span>,
+      <span class="kw">y</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/svd.linreg.html">svd.linreg</a></span>$<span class="no">yb</span>,
+    )
+  )
+})
+<span class="fu">test_that</span>(<span class="st">"Using QR decomposition."</span>, {
+  <span class="fu">expect_message</span>(
+    <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahat.html">betahat</a></span>(
+      <span class="kw">X</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/svd.linreg.html">svd.linreg</a></span>$<span class="no">Xb</span>,
+      <span class="kw">y</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/svd.linreg.html">svd.linreg</a></span>$<span class="no">yb</span>,
+    ),
+    <span class="st">"Using QR decomposition."</span>
+  )
+})
+<span class="fu">test_that</span>(<span class="st">"Using singular value decomposition."</span>, {
+  <span class="fu">expect_message</span>(
+    <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahat.html">betahat</a></span>(
+      <span class="kw">X</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/svd.linreg.html">svd.linreg</a></span>$<span class="no">Xb</span>,
+      <span class="kw">y</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/svd.linreg.html">svd.linreg</a></span>$<span class="no">yb</span>,
+      <span class="kw">qr</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+    ),
+    <span class="st">"Using singular value decomposition."</span>
+  )
+})</pre></body></html></div>
 </div>
   </div>
 

@@ -27,7 +27,6 @@
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @importFrom jeksterslabRmatrix is.singular
 #' @param X Matrix.
 #'   The data matrix \eqn{\mathbf{X}}
 #'   (also known as design matrix, model matrix or regressor matrix)
@@ -43,15 +42,15 @@
 #' @export
 betahatnorm <- function(X,
                         y) {
-  XTX <- crossprod(X)
-  if (is.singular(XTX)) {
-    stop(
-      "X transpose X is singular."
-    )
-  }
+  # @importFrom jeksterslabRmatrix is.singular
+  # if (is.singular(X)) {
+  #  stop(
+  #    "X is singular."
+  #  )
+  # }
   drop(
     solve(
-      XTX,
+      crossprod(X),
       crossprod(X, y)
     )
   )
