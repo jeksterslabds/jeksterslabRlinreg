@@ -14,6 +14,7 @@
 #'     \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
 #'     \left( \mathbf{X}^{T} \mathbf{y} \right) .
 #'   }
+#'   Also know as the normal equation.
 #'
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
@@ -164,6 +165,10 @@ betahatsvd <- function(X,
 #' @title Regression Coefficients \eqn{\boldsymbol{\hat{\beta}}}
 #'
 #' @description Estimates coefficients of a linear regression model.
+#'
+#' @details Calculates coefficients using the normal equation.
+#'   When that fails, QR decomposition is used when `qr = TRUE`
+#'   or singular value decomposition when `qr = FALSE`.
 #'
 #' @references
 #'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
