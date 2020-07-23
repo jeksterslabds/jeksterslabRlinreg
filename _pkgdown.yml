@@ -9,7 +9,7 @@ reference:
 - title: Regression Coefficients and Error Variance
   desc:  Regression coefficients and error variance from model-implied matrices.
 - contents:
-  - has_keyword("parameters")
+  - has_keyword("parameter")
 - title: Regression Coefficients OLS.
   desc:  Regression coefficients ordinary least squares estimator.
 - contents:

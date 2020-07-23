@@ -21,8 +21,8 @@
 #'   - \eqn{\boldsymbol{\sigma}_{\mathbf{yX}}}
 #'     is the \eqn{p \times 1} column vector of the covariances between the regressand and the regressors.
 #'
-#' @family model-implied functions
-#' @keywords model-implied, parameters
+#' @family parameter functions
+#' @keywords parameter
 #' @inheritParams Sigmatheta
 #' @param sigmayX Vector or `p` by `1` matrix of covariances between the regressand and the regressors.
 #'   \eqn{\left( \boldsymbol{\sigma}_{\mathbf{yX}} \right)}.
@@ -57,8 +57,8 @@ slopes <- function(SigmaX,
 #'   - \eqn{\mathbf{r}_{\mathbf{yX}}}
 #'     is the \eqn{p \times 1} column vector of the correlations between the regressand and the regressors.
 #'
-#' @family model-implied functions
-#' @keywords model-implied, parameters
+#' @family parameter functions
+#' @keywords parameter
 #' @param RX `p` by `p` numeric matrix.
 #'   Correlations between the regressors.
 #' @param ryX Vector or `p` by `1` matrix of correlations between the regressand and the regressors.
@@ -74,7 +74,7 @@ slopesprime <- function(RX,
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Regression Intercept \eqn{\beta_1}
+#' @title Regression Intercept \eqn{\beta_{1}}
 #'
 #' @description Derives the intercept \eqn{\beta_1} of a linear regression model
 #'   from the \eqn{p \times 1} regression slopes \eqn{\left( \boldsymbol{\beta}_{2 \cdots k} \right)},
@@ -92,8 +92,8 @@ slopesprime <- function(RX,
 #'     \boldsymbol{\beta}_{2 \cdots k}^{T}
 #'   }
 #'
-#' @family model-implied functions
-#' @keywords model-implied, parameters
+#' @family parameter functions
+#' @keywords parameter
 #' @inheritParams Sigmatheta
 #' @inheritParams mutheta
 #' @param muy Numeric.

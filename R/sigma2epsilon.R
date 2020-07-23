@@ -6,8 +6,8 @@
 #'   \eqn{\boldsymbol{\beta}_{2 \cdots k}}
 #'   and variance-covariance matrix \eqn{\boldsymbol{\Sigma}}.
 #'
-#' @family model-implied functions
-#' @keywords model-implied, parameters
+#' @family parameter functions
+#' @keywords parameter
 #' @inheritParams slopes
 #' @inheritParams Sigmatheta
 #' @param sigma2y Numeric.
