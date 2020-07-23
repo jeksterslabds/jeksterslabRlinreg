@@ -41,8 +41,8 @@
 #'   of \eqn{k} unknown regression coefficients
 #'   estimated using ordinary least squares.
 #' @export
-betahatinv <- function(X,
-                       y) {
+betahatnorm <- function(X,
+                        y) {
   XTX <- crossprod(X)
   if (is.singular(XTX)) {
     stop(
@@ -93,8 +93,8 @@ betahatinv <- function(X,
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @inheritParams betahatinv
-#' @inherit betahatinv return
+#' @inheritParams betahatnorm
+#' @inherit betahatnorm return
 #' @export
 betahatqr <- function(X,
                       y) {
@@ -149,8 +149,8 @@ betahatqr <- function(X,
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @inheritParams betahatinv
-#' @inherit betahatinv return
+#' @inheritParams betahatnorm
+#' @inherit betahatnorm return
 #' @export
 betahatsvd <- function(X,
                        y) {
@@ -187,8 +187,8 @@ betahatsvd <- function(X,
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @inheritParams betahatinv
-#' @inherit betahatinv return
+#' @inheritParams betahatnorm
+#' @inherit betahatnorm return
 #' @param qr Logical.
 #'   If `TRUE`, use QR decomposition when normal equations fail.
 #'   If `FALSE`, use singular value decompositon when normal equations fail.
@@ -198,7 +198,7 @@ betahat <- function(X,
                     qr = TRUE) {
   tryCatch(
     {
-      out <- betahatinv(
+      out <- betahatnorm(
         X = X,
         y = y
       )
