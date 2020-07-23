@@ -99,7 +99,7 @@ mutheta <- matrix(
 #' for one year increase in education.
 #'
 #+ echo = FALSE
-plot(x = x, y = y)
+plot(x = x, y = y, xlab = "Years of Education", ylab = "Hourly Wages in US Dollars")
 abline(obj, col = "red")
 #'
 #'

@@ -4,15 +4,15 @@
 #'   \eqn{
 #'     \boldsymbol{\hat{\beta}}
 #'     =
-#'     \left( \mathbf{X}^{\prime} \mathbf{X} \right)^{-1}
-#'     \left( \mathbf{X}^{\prime} \mathbf{y} \right)
+#'     \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
+#'     \left( \mathbf{X}^{T} \mathbf{y} \right)
 #'   }
 #'
 #' @description Estimates coefficients of a linear regression model using
 #'   \deqn{\boldsymbol{\hat{\beta}}
 #'     =
-#'     \left( \mathbf{X}^{\prime} \mathbf{X} \right)^{-1}
-#'     \left( \mathbf{X}^{\prime} \mathbf{y} \right) .
+#'     \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
+#'     \left( \mathbf{X}^{T} \mathbf{y} \right) .
 #'   }
 #'
 #' @references
@@ -26,6 +26,7 @@
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
+#' @importFrom jeksterslabRmatrix is.singular
 #' @param X Matrix.
 #'   The data matrix \eqn{\mathbf{X}}
 #'   (also known as design matrix, model matrix or regressor matrix)
@@ -34,17 +35,22 @@
 #' @param y Vector or `n` by `1` matrix.
 #'   The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 #'   on the regressand variable.
-#' @return
-#'   Returns \eqn{\boldsymbol{\hat{\beta}}}, that is,
+#' @return Returns \eqn{\boldsymbol{\hat{\beta}}}, that is,
 #'   a \eqn{k \times 1} vector of estimates
 #'   of \eqn{k} unknown regression coefficients
 #'   estimated using ordinary least squares.
 #' @export
 betahatinv <- function(X,
                        y) {
+  XTX <- crossprod(X)
+  if (is.singular(XTX)) {
+    stop(
+      "X transpose X is singular."
+    )
+  }
   drop(
     solve(
-      crossprod(X),
+      XTX,
       crossprod(X, y)
     )
   )
@@ -69,7 +75,7 @@ betahatinv <- function(X,
 #'     \mathbf{R}
 #'     \boldsymbol{\hat{\beta}}
 #'     =
-#'     \mathbf{Q}^{\prime}
+#'     \mathbf{Q}^{T}
 #'     \mathbf{y}.
 #'   }
 #'
@@ -116,7 +122,7 @@ betahatqr <- function(X,
 #'     =
 #'     \mathbf{U}
 #'     \mathbf{\Sigma}
-#'     \mathbf{V}^{\prime}.
+#'     \mathbf{V}^{T}.
 #'   }
 #'   Estimates are found by solving
 #'   \deqn{
@@ -124,7 +130,7 @@ betahatqr <- function(X,
 #'     =
 #'     \mathbf{V}
 #'     \mathbf{\Sigma}^{+}
-#'     \mathbf{U}^{\prime}
+#'     \mathbf{U}^{T}
 #'     \mathbf{y}
 #'   }
 #'   where the superscript \eqn{+} indicates the pseudoinverse.
@@ -177,15 +183,27 @@ betahatsvd <- function(X,
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
 #' @inheritParams betahatinv
-#' @param FUN Function.
-#'   Beta-hat function to use.
-#'   [`betahatinv()`] is used by default.
+#' @inherit betahatinv return
 #' @export
 betahat <- function(X,
-                    y,
-                    FUN = betahatinv) {
-  FUN(
-    X = X,
-    y = y
+                    y) {
+  tryCatch(
+    {
+      out <- betahatinv(
+        X = X,
+        y = y
+      )
+      return(out)
+    },
+    error = function(e) {
+      message(
+        "Using singular value decomposition."
+      )
+      out <- betahatsvd(
+        X = X,
+        y = y
+      )
+      return(out)
+    }
   )
 }

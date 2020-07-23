@@ -26,10 +26,12 @@ Depends:
 Imports:
 	utils,
 	stats,
-    jeksterslabRdist
+    jeksterslabRdist,
+    jeksterslabRmatrix
 Remotes:
     jeksterslabds/jeksterslabRdist,
-    jeksterslabds/jeksterslabRdatarepo
+    jeksterslabds/jeksterslabRdatarepo,
+    jeksterslabds/jeksterslabRmatrix
 Suggests:
 	knitr,
 	rmarkdown,
