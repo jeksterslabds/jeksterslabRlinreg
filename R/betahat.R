@@ -155,7 +155,7 @@ betahatsvd <- function(X,
                        y) {
   Xsvd <- svd(X)
   drop(
-    (Xsvd$v %*% (1 / Xsvd$d * t(Xsvd$u))) %*% y
+    Xsvd$v %*% ((1 / Xsvd$d) * crossprod(Xsvd$u, y))
   )
 }
 
@@ -184,9 +184,13 @@ betahatsvd <- function(X,
 #' @keywords beta-hat-ols
 #' @inheritParams betahatinv
 #' @inherit betahatinv return
+#' @param qr Logical.
+#'   If `TRUE`, use QR decomposition when normal equations fail.
+#'   If `FALSE`, use singular value decompositon when normal equations fail.
 #' @export
 betahat <- function(X,
-                    y) {
+                    y,
+                    qr = TRUE) {
   tryCatch(
     {
       out <- betahatinv(
@@ -196,14 +200,25 @@ betahat <- function(X,
       return(out)
     },
     error = function(e) {
-      message(
-        "Using singular value decomposition."
-      )
-      out <- betahatsvd(
-        X = X,
-        y = y
-      )
-      return(out)
+      if (qr) {
+        message(
+          "Using QR decomposition."
+        )
+        out <- betahatqr(
+          X = X,
+          y = y
+        )
+        return(out)
+      } else {
+        message(
+          "Using singular value decomposition."
+        )
+        out <- betahatqr(
+          X = X,
+          y = y
+        )
+        return(out)
+      }
     }
   )
 }
