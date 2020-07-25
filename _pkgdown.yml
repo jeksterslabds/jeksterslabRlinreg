@@ -2,6 +2,10 @@ destination: docs
 url: https://github.com/jeksterslabds/jeksterslabRlinreg/
 
 reference:
+- title: Linear Regression
+  desc:  Linear regression model function.
+- contents:
+  - has_keyword("linreg")
 - title: Model-Implied Matrices
   desc:  Model-implied matrices for the $k$-variable linear regression model.
 - contents:
