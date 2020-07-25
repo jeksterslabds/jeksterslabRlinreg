@@ -2,16 +2,13 @@
 #'
 #' @title Regression Coefficients
 #'   \eqn{
-#'     \boldsymbol{\hat{\beta}}
-#'     =
-#'     \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
+#'     \boldsymbol{\hat{\beta}} = \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
 #'     \left( \mathbf{X}^{T} \mathbf{y} \right)
 #'   }
 #'
 #' @description Estimates coefficients of a linear regression model using
-#'   \deqn{\boldsymbol{\hat{\beta}}
-#'     =
-#'     \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
+#'   \deqn{
+#'     \boldsymbol{\hat{\beta}} = \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
 #'     \left( \mathbf{X}^{T} \mathbf{y} \right) .
 #'   }
 #'   Also know as the normal equation.
@@ -27,12 +24,12 @@
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @param X Matrix.
+#' @param X `n` by `k` numeric matrix.
 #'   The data matrix \eqn{\mathbf{X}}
 #'   (also known as design matrix, model matrix or regressor matrix)
 #'   is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
-#'   which includes a regressor whose value is 1 for each observation.
-#' @param y Vector or `n` by `1` matrix.
+#'   which includes a regressor whose value is 1 for each observation on the first column.
+#' @param y Numeric vector of length `n` or `n` by `1` matrix.
 #'   The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 #'   on the regressand variable.
 #' @return Returns \eqn{\boldsymbol{\hat{\beta}}}, that is,
@@ -65,18 +62,11 @@ betahatnorm <- function(X,
 #'   using QR Decomposition.
 #'   The data matrix \eqn{\mathbf{X}} is decomposed into
 #'   \deqn{
-#'     \mathbf{X}
-#'     =
-#'     \mathbf{Q}
-#'     \mathbf{R}.
+#'     \mathbf{X} = \mathbf{Q} \mathbf{R} .
 #'   }
 #'   Estimates are found by solving \eqn{\boldsymbol{\hat{\beta}}} in
 #'   \deqn{
-#'     \mathbf{R}
-#'     \boldsymbol{\hat{\beta}}
-#'     =
-#'     \mathbf{Q}^{T}
-#'     \mathbf{y}.
+#'     \mathbf{R} \boldsymbol{\hat{\beta}} = \mathbf{Q}^{T} \mathbf{y}.
 #'   }
 #'
 #' @references
@@ -118,20 +108,12 @@ betahatqr <- function(X,
 #'   using Singular Value Decomposition.
 #'   The data matrix \eqn{\mathbf{X}} is decomposed into
 #'   \deqn{
-#'     \mathbf{X}
-#'     =
-#'     \mathbf{U}
-#'     \mathbf{\Sigma}
-#'     \mathbf{V}^{T}.
+#'     \mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^{T} .
 #'   }
 #'   Estimates are found by solving
 #'   \deqn{
-#'     \boldsymbol{\hat{\beta}}
-#'     =
-#'     \mathbf{V}
-#'     \mathbf{\Sigma}^{+}
-#'     \mathbf{U}^{T}
-#'     \mathbf{y}
+#'     \boldsymbol{\hat{\beta}} =
+#'     \mathbf{V} \mathbf{\Sigma}^{+} \mathbf{U}^{T} \mathbf{y}
 #'   }
 #'   where the superscript \eqn{+} indicates the pseudoinverse.
 #'

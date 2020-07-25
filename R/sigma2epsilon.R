@@ -1,9 +1,9 @@
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Error Variance \eqn{\sigma^2}
+#' @title Error Variance \eqn{\sigma_{\varepsilon}^{2}}
 #'
-#' @description Error variance \eqn{\sigma^2} from the slopes
-#'   \eqn{\boldsymbol{\beta}_{2 \cdots k}}
+#' @description Error variance \eqn{\sigma_{\varepsilon}^{2}} from the slopes
+#'   \eqn{\boldsymbol{\beta}_{2, \cdots, k}}
 #'   and variance-covariance matrix \eqn{\boldsymbol{\Sigma}}.
 #'
 #' @family parameter functions
