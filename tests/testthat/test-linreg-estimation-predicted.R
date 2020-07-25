@@ -158,3 +158,19 @@ test_that("Py = yhat.", {
     )
   }
 })
+test_that("error.", {
+  expect_error(
+    .Py(
+      y = y,
+      P = NULL,
+      X = NULL
+    )
+  )
+  expect_error(
+    .Xbetahat(
+      X = X,
+      betahat = NULL,
+      y = NULL
+    )
+  )
+})

@@ -22,3 +22,7 @@ reference:
   desc:  Predicted values.
 - contents:
   - has_keyword("predicted")
+- title: Residuals
+  desc:  Residuals.
+- contents:
+  - has_keyword("residuals")
