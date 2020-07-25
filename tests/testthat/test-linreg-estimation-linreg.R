@@ -64,6 +64,10 @@ lmobj <- lm(
 lm_betahat <- as.vector(coef(lmobj))
 lm_yhat <- as.vector(predict(lmobj))
 lm_epsilonhat <- as.vector(residuals(lmobj))
+lm_anova <- anova(lmobj)
+lm_RSS <- lm_anova["Residuals", "Sum Sq"]
+lm_TSS <- sum(lm_anova[["Sum Sq"]])
+lm_ESS <- lm_TSS - lm_RSS
 summary(lmobj)
 #'
 #'
@@ -72,6 +76,9 @@ context("Test linreg-estimation-linreg")
 result_betahat <- as.vector(result_linreg[["betahat"]])
 result_yhat <- as.vector(result_linreg[["yhat"]])
 result_epsilonhat <- as.vector(result_linreg[["epsilonhat"]])
+result_RSS <- as.vector(result_linreg[["RSS"]])
+result_ESS <- as.vector(result_linreg[["ESS"]])
+result_TSS <- as.vector(result_linreg[["TSS"]])
 test_that("betahat.", {
   expect_equivalent(
     length(result_betahat),
@@ -107,5 +114,23 @@ test_that("epsilonhat.", {
       lm_epsilonhat[i]
     )
   }
+})
+test_that("RSS", {
+  expect_equivalent(
+    lm_RSS,
+    result_RSS
+  )
+})
+test_that("ESS", {
+  expect_equivalent(
+    lm_ESS,
+    result_ESS
+  )
+})
+test_that("TSS", {
+  expect_equivalent(
+    lm_TSS,
+    result_TSS
+  )
 })
 #'

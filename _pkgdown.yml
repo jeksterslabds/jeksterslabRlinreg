@@ -30,3 +30,8 @@ reference:
   desc:  Residuals.
 - contents:
   - has_keyword("residuals")
+- title: Sum of Squares
+  desc:  Sum of squares.
+- contents:
+  - has_keyword("SS")
+  

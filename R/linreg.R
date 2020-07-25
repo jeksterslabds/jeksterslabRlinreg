@@ -14,18 +14,26 @@ linreg <- function(X,
   )
   yhat <- .Xbetahat(
     X = X,
-    betahat = betahat,
-    y = NULL
+    betahat = betahat
   )
   epsilonhat <- .yminusyhat(
     y = y,
-    yhat = yhat,
-    X = NULL,
-    betahat = NULL
+    yhat = yhat
   )
+  RSS <- .RSS(
+    epsilonhat = epsilonhat
+  )
+  ESS <- .ESS(
+    yhat = yhat,
+    ybar = mean(y)
+  )
+  TSS <- RSS + ESS
   list(
     betahat = betahat,
     yhat = yhat,
-    epsilonhat = epsilonhat
+    epsilonhat = epsilonhat,
+    RSS = RSS,
+    ESS = ESS,
+    TSS = TSS
   )
 }
