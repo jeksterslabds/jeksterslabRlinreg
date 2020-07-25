@@ -1,0 +1,182 @@
+#' ---
+#' title: "Tests: The Linear Regression Model (Residuals)"
+#' author: "Ivan Jacob Agaloos Pesigan"
+#' date: "`r Sys.Date()`"
+#' output: rmarkdown::html_vignette
+#' vignette: >
+#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (Residuals)}
+#'   %\VignetteEngine{knitr::rmarkdown}
+#'   %\VignetteEncoding{UTF-8}
+#' ---
+#'
+#+ include = FALSE
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+#'
+#'
+# The Linear Regression Model: Residuals {#linreg-estimation-residuals-example}
+#'
+#+ echo = FALSE
+library(microbenchmark)
+library(testthat)
+library(jeksterslabRlinreg)
+#'
+#' ## Data
+#'
+#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#'
+#+
+varnames <- c(
+  "wages", "gender", "race", "union", "education", "experience"
+)
+Xvars <- c(
+  "gender", "race", "union", "education", "experience"
+)
+wages <- jeksterslabRdatarepo::wages
+wages <- wages[, varnames]
+X <- wages[, Xvars]
+X <- cbind(Intercept = 1, X)
+X <- as.matrix(X)
+y <- wages[, "wages"]
+head(X)
+head(y)
+#'
+#' ## $\mathrm{My}$
+#'
+#+
+Pmatrix <- P(X = X)
+Mmatrix <- M(X = X)
+betahat <- betahat(
+  X = X,
+  y = y
+)
+yhat <- yhat(
+  X = X,
+  y = y
+)
+result_My1 <- .My(
+  y = y,
+  M = Mmatrix
+)
+result_My2 <- .My(
+  y = y,
+  X = X,
+  P = Pmatrix
+)
+result_My3 <- My(
+  X = X,
+  y = y
+)
+#'
+#' ## $\mathrm{y} - \mathrm{\hat{y}}$
+#'
+#+
+result_yminusyhat1 <- .yminusyhat(
+  y = y,
+  yhat = yhat
+)
+result_yminusyhat2 <- .yminusyhat(
+  y = y,
+  yhat = NULL,
+  X = X
+)
+
+result_yminusyhat3 <- yminusyhat(
+  X = X,
+  y = y
+)
+#'
+#' ## $\boldsymbol{\hat{\varepsilon}}$
+#'
+#+
+result_epsilonhat <- epsilonhat(
+  X = X,
+  y = y
+)
+#'
+#' ## `lm()` function
+#'
+#+
+lmobj <- lm(
+  wages ~ gender + race + union + education + experience,
+  data = jeksterslabRdatarepo::wages
+)
+lm_epsilonhat <- as.vector(residuals(lmobj))
+#'
+#'
+#+
+context("Test linreg-estimation-projection")
+test_that("Py = yhat.", {
+  expect_equivalent(
+    length(result_My1),
+    length(result_My2),
+    length(result_My3),
+    length(result_yminusyhat1),
+    length(result_yminusyhat2),
+    length(result_yminusyhat3),
+    length(result_epsilonhat)
+  )
+  for (i in seq_along(result_My1)) {
+    expect_equivalent(
+      result_My1[i],
+      lm_epsilonhat[i]
+    )
+  }
+  for (i in seq_along(result_My2)) {
+    expect_equivalent(
+      result_My2[i],
+      lm_epsilonhat[i]
+    )
+  }
+  for (i in seq_along(result_My3)) {
+    expect_equivalent(
+      result_My3[i],
+      lm_epsilonhat[i]
+    )
+  }
+  for (i in seq_along(result_yminusyhat1)) {
+    expect_equivalent(
+      result_yminusyhat1[i],
+      lm_epsilonhat[i]
+    )
+  }
+  for (i in seq_along(result_yminusyhat2)) {
+    expect_equivalent(
+      result_yminusyhat2[i],
+      lm_epsilonhat[i]
+    )
+  }
+  for (i in seq_along(result_yminusyhat3)) {
+    expect_equivalent(
+      result_yminusyhat3[i],
+      lm_epsilonhat[i]
+    )
+  }
+  for (i in seq_along(result_epsilonhat)) {
+    expect_equivalent(
+      result_epsilonhat[i],
+      lm_epsilonhat[i]
+    )
+  }
+})
+test_that("error.", {
+  expect_error(
+    .My(
+      y = y,
+      M = NULL,
+      X = NULL,
+      P = NULL
+    )
+  )
+  expect_error(
+    .yminusyhat(
+      y = y,
+      yhat = NULL,
+      X = NULL
+    )
+  )
+})
