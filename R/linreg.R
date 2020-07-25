@@ -7,6 +7,8 @@
 linreg <- function(X,
                    y,
                    qr = TRUE) {
+  n <- nrow(X)
+  k <- ncol(X)
   betahat <- betahat(
     X = X,
     y = y,
@@ -28,12 +30,19 @@ linreg <- function(X,
     ybar = mean(y)
   )
   TSS <- RSS + ESS
+  sigma2epsilonhat <- .sigma2epsilonhat(
+    RSS = RSS,
+    n = n,
+    k = k,
+    type = "both"
+  )
   list(
     betahat = betahat,
     yhat = yhat,
     epsilonhat = epsilonhat,
     RSS = RSS,
     ESS = ESS,
-    TSS = TSS
+    TSS = TSS,
+    sigma2epsilonhat = sigma2epsilonhat
   )
 }

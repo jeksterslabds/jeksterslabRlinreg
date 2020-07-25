@@ -34,4 +34,7 @@ reference:
   desc:  Sum of squares.
 - contents:
   - has_keyword("SS")
-  
+- title: Residual Variance
+  desc:  Residual variance.
+- contents:
+  - has_keyword("sigma2epsilonhat")
