@@ -69,6 +69,7 @@ lmobj <- lm(
 lm_yhat <- as.vector(predict(lmobj))
 lm_epsilonhat <- as.vector(residuals(lmobj))
 #'
+#'
 #+
 context("Test linreg-estimation-projection")
 test_that("Py = yhat.", {

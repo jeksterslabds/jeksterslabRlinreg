@@ -18,3 +18,7 @@ reference:
   desc:  Projection matrix functions.
 - contents:
   - has_keyword("projection")
+- title: Predicted
+  desc:  Predicted values.
+- contents:
+  - has_keyword("predicted")
