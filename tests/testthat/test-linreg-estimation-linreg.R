@@ -47,16 +47,6 @@ result_linreg <- linreg(
   y = y
 )
 #'
-#+ echo = FALSE
-# coverage
-out <- linreg(
-  X = X,
-  y = y,
-  unbiased = FALSE,
-  plot = FALSE,
-  print = FALSE
-)
-#'
 #' ## `lm()` function
 #'
 #+
@@ -220,3 +210,15 @@ test_that("p.", {
   }
 })
 #'
+#'
+#+ echo = FALSE
+# coverage
+invisible(
+  out <- linreg(
+    X = X,
+    y = y,
+    unbiased = FALSE,
+    plot = FALSE,
+    print = TRUE
+  )
+)
