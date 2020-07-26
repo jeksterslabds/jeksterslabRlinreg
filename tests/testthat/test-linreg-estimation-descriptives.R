@@ -261,7 +261,6 @@ test_that("meanandsd", {
 #'
 X <- cbind(
   1,
-  rnorm(n = 100),
   rnorm(n = 100)
 )
 y <- rnorm(n = 100)
