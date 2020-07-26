@@ -1,0 +1,38 @@
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Confidence Intervals of Estimates of Regression Coefficients
+#'
+#' @family hypothesis testing functions
+#' @keywords inference
+#' @inheritParams .RSS
+#' @inheritParams .sigma2epsilonhat
+#' @param se Numeric vector.
+#'   Standard errors of regression coefficients.
+#' @export
+ci <- function(betahat,
+               se,
+               n,
+               k) {
+  alpha <- c(0.001, 0.01, 0.05)
+  df <- n - k
+  prob_ll <- alpha / 2
+  prob_ul <- rev(1 - prob_ll)
+  prob <- c(prob_ll, prob_ul)
+  tcritical <- qt(
+    p = prob,
+    df = df
+  )
+  ci <- matrix(
+    data = NA,
+    nrow = k,
+    ncol = length(tcritical)
+  )
+  for (i in seq_along(tcritical)) {
+    ci[, i] <- betahat + (tcritical[i] * se)
+  }
+  colnames(ci) <- paste0(
+    "ci_",
+    prob * 100
+  )
+  ci
+}
