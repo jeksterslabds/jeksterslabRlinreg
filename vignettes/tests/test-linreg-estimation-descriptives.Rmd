@@ -1,0 +1,295 @@
+---
+title: "Tests: The Linear Regression Model (Descriptives)"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tests: The Linear Regression Model (Descriptives)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+
+
+
+```{r }
+# The Linear Regression Model: Descriptives {#linreg-estimation-descriptives-example}
+```
+
+
+
+```{r echo = FALSE}
+library(testthat)
+library(jeksterslabRlinreg)
+```
+
+
+## Data
+
+See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+
+
+```{r }
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+X <- cbind(
+  Intercept = 1,
+  X
+)
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+head(X)
+head(y)
+data <- X[, -1]
+data <- cbind(
+  y,
+  data
+)
+n <- nrow(X)
+k <- ncol(X)
+df1 <- k - 1
+df2 <- n - k
+muhatX <- as.vector(colMeans(X))
+muhatX <- muhatX[-1]
+muhaty <- mean(y)
+mu <- c(muhaty, muhatX)
+R <- as.vector(cor(data))
+RX <- as.vector(cor(X[, -1]))
+ryX <- cor(data)
+ryX <- as.vector(ryX[, 1])
+ryX <- ryX[-1]
+Sigma <- as.vector(cov(data))
+SigmaX <- as.vector(cov(X[, -1]))
+sigmayX <- cov(data)
+sigmayX <- as.vector(sigmayX[, 1])
+sigmayX <- sigmayX[-1]
+sigma2X <- as.vector(diag(cov(X[, -1])))
+sigma2y <- as.vector(var(y))
+sigma2 <- c(sigma2y, sigma2X)
+sigma <- sqrt(sigma2)
+meanandsd <- c(mu, sigma)
+```
+
+
+## Descriptive Statistics
+
+
+```{r }
+output <- descriptives(
+  X = X,
+  y = y,
+)
+result_X <- as.vector(output[["X"]])
+result_y <- as.vector(output[["y"]])
+result_data <- as.vector(output[["data"]])
+result_n <- as.vector(output[["n"]])
+result_k <- as.vector(output[["k"]])
+result_df1 <- as.vector(output[["df1"]])
+result_df2 <- as.vector(output[["df2"]])
+result_muhatX <- as.vector(output[["muhatX"]])
+result_muhaty <- as.vector(output[["muhaty"]])
+result_mu <- as.vector(output[["mu"]])
+result_R <- as.vector(output[["R"]])
+result_RX <- as.vector(output[["RX"]])
+result_ryX <- as.vector(output[["ryX"]])
+result_Sigma <- as.vector(output[["Sigma"]])
+result_SigmaX <- as.vector(output[["SigmaX"]])
+result_sigmayX <- as.vector(output[["sigmayX"]])
+result_sigma2X <- as.vector(output[["sigma2X"]])
+result_sigma2y <- as.vector(output[["sigma2y"]])
+result_sigma2 <- as.vector(output[["sigma2"]])
+result_sigma <- as.vector(output[["sigma"]])
+result_meanandsd <- as.vector(output[["meanandsd"]])
+```
+
+
+
+
+```{r }
+context("Test linreg-estimation-descriptives")
+test_that("X", {
+  X_vector <- as.vector(X)
+  for (i in 1:length(result_X)) {
+    expect_equivalent(
+      result_X[i],
+      X_vector[i]
+    )
+  }
+})
+test_that("y", {
+  y_vector <- as.vector(y)
+  for (i in 1:length(result_y)) {
+    expect_equivalent(
+      result_y[i],
+      y_vector[i]
+    )
+  }
+})
+test_that("data", {
+  data_vector <- as.vector(data)
+  for (i in 1:length(result_data)) {
+    expect_equivalent(
+      result_data[i],
+      data_vector[i]
+    )
+  }
+})
+test_that("n", {
+  expect_equivalent(
+    n,
+    result_n
+  )
+})
+test_that("k", {
+  expect_equivalent(
+    k,
+    result_k
+  )
+})
+test_that("df1", {
+  expect_equivalent(
+    df1,
+    result_df1
+  )
+})
+test_that("df2", {
+  expect_equivalent(
+    df2,
+    result_df2
+  )
+})
+test_that("muhatX", {
+  for (i in 1:length(result_muhatX)) {
+    expect_equivalent(
+      muhatX[i],
+      result_muhatX[i]
+    )
+  }
+})
+test_that("muhaty", {
+  expect_equivalent(
+    muhaty,
+    result_muhaty
+  )
+})
+test_that("mu", {
+  for (i in 1:length(result_mu)) {
+    expect_equivalent(
+      mu[i],
+      result_mu[i]
+    )
+  }
+})
+test_that("R", {
+  for (i in 1:length(result_R)) {
+    expect_equivalent(
+      R[i],
+      result_R[i]
+    )
+  }
+})
+test_that("RX", {
+  for (i in 1:length(result_RX)) {
+    expect_equivalent(
+      RX[i],
+      result_RX[i]
+    )
+  }
+})
+test_that("ryX", {
+  for (i in 1:length(result_ryX)) {
+    expect_equivalent(
+      ryX[i],
+      result_ryX[i]
+    )
+  }
+})
+test_that("Sigma", {
+  for (i in 1:length(result_Sigma)) {
+    expect_equivalent(
+      Sigma[i],
+      result_Sigma[i]
+    )
+  }
+})
+test_that("SigmaX", {
+  for (i in 1:length(result_SigmaX)) {
+    expect_equivalent(
+      SigmaX[i],
+      result_SigmaX[i]
+    )
+  }
+})
+test_that("sigmayX", {
+  for (i in 1:length(result_sigmayX)) {
+    expect_equivalent(
+      sigmayX[i],
+      result_sigmayX[i]
+    )
+  }
+})
+test_that("sigma2X", {
+  for (i in 1:length(result_sigma2X)) {
+    expect_equivalent(
+      sigma2X[i],
+      result_sigma2X[i]
+    )
+  }
+})
+test_that("sigma2y", {
+  expect_equivalent(
+    sigma2y,
+    result_sigma2y
+  )
+})
+test_that("sigma2", {
+  for (i in 1:length(result_sigma2)) {
+    expect_equivalent(
+      sigma2[i],
+      result_sigma2[i]
+    )
+  }
+})
+test_that("sigma", {
+  for (i in 1:length(result_sigma)) {
+    expect_equivalent(
+      sigma[i],
+      result_sigma[i]
+    )
+  }
+})
+test_that("meanandsd", {
+  for (i in 1:length(result_meanandsd)) {
+    expect_equivalent(
+      meanandsd[i],
+      result_meanandsd[i]
+    )
+  }
+})
+```
+
+
+
+```{r }
+X <- cbind(
+  1,
+  rnorm(n = 100)
+)
+y <- rnorm(n = 100)
+invisible(
+  output <- descriptives(
+    X = X,
+    y = y,
+  )
+)
+```
+
