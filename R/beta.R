@@ -103,6 +103,5 @@ slopesprime <- function(RX,
 intercept <- function(slopes,
                       muy,
                       muX) {
-  # muy - sum(as.vector(muX) * t(as.vector(slopes)))
   muy - sum(crossprod(as.vector(muX), as.vector(slopes)))
 }

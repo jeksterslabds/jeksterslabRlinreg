@@ -114,8 +114,13 @@ Py <- function(X,
 #' @inheritParams .Xbetahat
 #' @inherit .Xbetahat description return references
 #' @export
-Xbetahat <- function(X, y) {
-  .Xbetahat(X = X, betahat = NULL, y = y)
+Xbetahat <- function(X,
+                     y) {
+  .Xbetahat(
+    X = X,
+    betahat = NULL,
+    y = y
+  )
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
