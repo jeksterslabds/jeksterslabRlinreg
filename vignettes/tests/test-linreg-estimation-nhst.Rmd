@@ -1,0 +1,152 @@
+---
+title: "Tests: The Linear Regression Model (nhst)"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tests: The Linear Regression Model (nhst)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+
+
+
+```{r }
+# The Linear Regression Model {#linreg-estimation-nhst-example}
+```
+
+
+
+```{r echo = FALSE}
+library(testthat)
+library(jeksterslabRlinreg)
+```
+
+
+## Data
+
+See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+
+
+```{r }
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+X <- cbind(
+  Intercept = 1,
+  X
+)
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+head(X)
+head(y)
+```
+
+
+## `jeksterslabRlinreg::linreg()`
+
+
+```{r }
+n <- nrow(X)
+k <- ncol(X)
+betahat <- betahat(
+  X = X,
+  y = y
+)
+vcovbetahat <- vcovbetahat(
+  X = X,
+  y = y
+)
+se <- sqrt(diag(vcovbetahat))
+result <- nhst(
+  betahat = betahat,
+  se = se,
+  n = n,
+  k = k
+)
+result_coef <- as.vector(result[, "coef"])
+result_se <- as.vector(result[, "se"])
+result_t <- as.vector(result[, "t"])
+result_p <- as.vector(result[, "p"])
+```
+
+
+## `lm()` function
+
+
+```{r }
+lmobj <- lm(
+  wages ~ gender + race + union + education + experience,
+  data = jeksterslabRdatarepo::wages
+)
+lm_coef <- summary(lmobj)[["coefficients"]][, "Estimate"]
+lm_se <- summary(lmobj)[["coefficients"]][, "Std. Error"]
+lm_t <- summary(lmobj)[["coefficients"]][, "t value"]
+lm_p <- summary(lmobj)[["coefficients"]][, "Pr(>|t|)"]
+```
+
+
+
+
+```{r }
+context("Test linreg-estimation-linreg")
+test_that("coef.", {
+  expect_equivalent(
+    length(lm_coef),
+    length(result_coef)
+  )
+  for (i in seq_along(result_coef)) {
+    expect_equivalent(
+      result_coef[i],
+      lm_coef[i]
+    )
+  }
+})
+test_that("se.", {
+  expect_equivalent(
+    length(lm_se),
+    length(result_se)
+  )
+  for (i in seq_along(result_se)) {
+    expect_equivalent(
+      result_se[i],
+      lm_se[i]
+    )
+  }
+})
+test_that("t.", {
+  expect_equivalent(
+    length(lm_t),
+    length(result_t)
+  )
+  for (i in seq_along(result_t)) {
+    expect_equivalent(
+      result_t[i],
+      lm_t[i]
+    )
+  }
+})
+test_that("p.", {
+  expect_equivalent(
+    length(lm_p),
+    length(result_p)
+  )
+  for (i in seq_along(result_p)) {
+    expect_equivalent(
+      result_p[i],
+      lm_p[i]
+    )
+  }
+})
+```
+
+
