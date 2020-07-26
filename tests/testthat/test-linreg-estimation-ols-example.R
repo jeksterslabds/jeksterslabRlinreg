@@ -52,18 +52,13 @@ library(jeksterslabRlinreg)
 #' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
 #'
 #+
-varnames <- c(
-  "wages", "gender", "race", "union", "education", "experience"
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+X <- cbind(
+  Intercept = 1,
+  X
 )
-Xvars <- c(
-  "gender", "race", "union", "education", "experience"
-)
-wages <- jeksterslabRdatarepo::wages
-wages <- wages[, varnames]
-X <- wages[, Xvars]
-X <- cbind(Intercept = 1, X)
-X <- as.matrix(X)
-y <- wages[, "wages"]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
 head(y)
 #'

@@ -35,5 +35,55 @@ install_github("jeksterslabds/jeksterslabRlinreg")
 
 ## Example
 
+### Data
+
+In this example, we examine the association between `GPA` and `LSAT` scores.
+
+See `jeksterslabRdatarepo::law()` for more information about the data set used.
+
+```{r, echo = FALSE}
+LSAT <- jeksterslabRdatarepo::law$LSAT
+GPA <- jeksterslabRdatarepo::law$GPA
+X <- cbind(
+  Intercept = 1,
+  GPA = GPA
+)
+y <- matrix(
+  data = LSAT,
+  ncol = 1
+)
+colnames(y) <- "LSAT"
+head(X)
+head(y)
+```
+
+### `jeksterslabRlinreg::linreg()`
+
+The `jeksterslabRlinreg::linreg()` function
+fits a linear regression model using `X` and `y`.
+In this example, `X` consists of a column of constants and `GPA`
+and `y` consists of `LSAT` scores.
+
+The output includes the following:
+
+- ANOVA table
+- Table of regression coefficients with the following columns
+  - Regression coefficients
+  - Standard errors
+  - $t$ statistic
+  - $p$ value
+  - Standardized coefficients
+- Confidence intervals (0.05, 0.5, 2.5, 97.5, 99.5, 99.95)
+- Means and standard deviations
+- Scatterplot matrix
+- Residual plots
+
+```{r}
+jeksterslabRlinreg::linreg(
+  X = X,
+  y = y
+)
+```
+
 See [GitHub Pages](https://jeksterslabds.github.io/jeksterslabRlinreg/index.html)
 for package documentation.

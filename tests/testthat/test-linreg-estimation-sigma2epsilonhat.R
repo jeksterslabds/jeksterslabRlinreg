@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 # The Linear Regression Model: Residual Variance {#linreg-estimation-sigma2epsilonhat-example}
 #'
 #+ echo = FALSE
-library(microbenchmark)
 library(testthat)
 library(jeksterslabRlinreg)
 #'
@@ -30,18 +29,13 @@ library(jeksterslabRlinreg)
 #' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
 #'
 #+
-varnames <- c(
-  "wages", "gender", "race", "union", "education", "experience"
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+X <- cbind(
+  Intercept = 1,
+  X
 )
-Xvars <- c(
-  "gender", "race", "union", "education", "experience"
-)
-wages <- jeksterslabRdatarepo::wages
-wages <- wages[, varnames]
-X <- wages[, Xvars]
-X <- cbind(Intercept = 1, X)
-X <- as.matrix(X)
-y <- wages[, "wages"]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
 head(y)
 #'
@@ -54,10 +48,6 @@ betahat <- betahat(
   X = X,
   y = y
 )
-epsilonhat <- epsilonhat(
-  X = X,
-  y = y
-)
 RSS <- RSS(
   X = X,
   y = y
@@ -65,51 +55,36 @@ RSS <- RSS(
 result_sigma2epsilonhat1 <- .sigma2epsilonhat(
   RSS = RSS,
   n = n,
-  k = k,
-  type = "unbiased"
+  k = k
 )
 result_sigma2epsilonhat2 <- .sigma2epsilonhat(
   RSS = NULL,
   n = n,
   k = k,
-  type = "unbiased",
-  epsilonhat = epsilonhat
+  X = X,
+  y = y
 )
-result_sigma2epsilonhat3 <- .sigma2epsilonhat(
+result_sigma2epsilonhat3 <- sigma2epsilonhat(
+  X = X,
+  y = y
+)
+#'
+#' ## Residual Variance (Biased)
+#'
+#+
+result_sigma2epsilonhatbiased1 <- .sigma2epsilonhatbiased(
+  RSS = RSS,
+  n = n
+)
+result_sigma2epsilonhatbiased2 <- .sigma2epsilonhatbiased(
   RSS = NULL,
   n = n,
-  k = k,
-  type = "unbiased",
-  epsilonhat = NULL,
   X = X,
-  y = y,
-  betahat = betahat
+  y = y
 )
-result_sigma2epsilonhat4 <- .sigma2epsilonhat(
-  RSS = NULL,
-  n = n,
-  k = k,
-  type = "unbiased",
-  epsilonhat = NULL,
+result_sigma2epsilonhatbiased3 <- sigma2epsilonhatbiased(
   X = X,
-  y = y,
-  betahat = NULL
-)
-result_sigma2epsilonhat5 <- sigma2epsilonhat(
-  X = X,
-  y = y,
-  type = "unbiased"
-)
-result_sigma2epsilonhat6 <- sigma2epsilonhat(
-  X = X,
-  y = y,
-  type = "both"
-)
-result_sigma2epsilonhat6 <- result_sigma2epsilonhat6[[1]]
-biased <- sigma2epsilonhat(
-  X = X,
-  y = y,
-  type = "biased"
+  y = y
 )
 #'
 #' ## `lm()` function
@@ -120,12 +95,17 @@ lmobj <- lm(
   data = jeksterslabRdatarepo::wages
 )
 lm_sigma2epsilonhat <- summary(lmobj)$sigma^2
+lm_anova <- anova(lmobj)
+lm_RSS <- lm_anova["Residuals", "Sum Sq"]
+lm_sigma2epsilonhatbiased <- lm_RSS / n
 #'
 #'
 #+
 sigma2epsilonhat <- c(
-  result_sigma2epsilonhat1, result_sigma2epsilonhat2, result_sigma2epsilonhat3,
-  result_sigma2epsilonhat4, result_sigma2epsilonhat5, result_sigma2epsilonhat6
+  result_sigma2epsilonhat1, result_sigma2epsilonhat2, result_sigma2epsilonhat3
+)
+sigma2epsilonhatbiased <- c(
+  result_sigma2epsilonhatbiased1, result_sigma2epsilonhatbiased2, result_sigma2epsilonhatbiased3
 )
 context("Test linreg-estimation-sigma2epsilonhat.")
 test_that("sigma2epsilonhat", {
@@ -133,6 +113,14 @@ test_that("sigma2epsilonhat", {
     expect_equivalent(
       lm_sigma2epsilonhat,
       sigma2epsilonhat[i]
+    )
+  }
+})
+test_that("sigma2epsilonhatbiased", {
+  for (i in seq_along(sigma2epsilonhatbiased)) {
+    expect_equivalent(
+      lm_sigma2epsilonhatbiased,
+      sigma2epsilonhatbiased[i]
     )
   }
 })

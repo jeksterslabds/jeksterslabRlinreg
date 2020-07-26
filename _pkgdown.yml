@@ -6,6 +6,10 @@ reference:
   desc:  Linear regression model function.
 - contents:
   - has_keyword("linreg")
+- title: Descriptive Statistics
+  desc:  Descriptive statistics.
+- contents:
+  - has_keyword("descriptives")
 - title: Model-Implied Matrices
   desc:  Model-implied matrices for the $k$-variable linear regression model.
 - contents:
@@ -38,3 +42,15 @@ reference:
   desc:  Residual variance.
 - contents:
   - has_keyword("sigma2epsilonhat")
+- title: Coefficient of Determination
+  desc:  Coefficient of determination.
+- contents:
+  - has_keyword("R-squared")
+- title: Hypothesis Testing
+  desc:  Hypothesis testing.
+- contents:
+  - has_keyword("inference")
+- title: Plotting Functions
+  desc:  Plotting functions.
+- contents:
+  - has_keyword("plot")

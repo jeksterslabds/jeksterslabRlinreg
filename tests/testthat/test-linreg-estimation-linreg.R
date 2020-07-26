@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 # The Linear Regression Model {#linreg-estimation-linreg-example}
 #'
 #+ echo = FALSE
-library(microbenchmark)
 library(testthat)
 library(jeksterslabRlinreg)
 #'
@@ -30,18 +29,13 @@ library(jeksterslabRlinreg)
 #' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
 #'
 #+
-varnames <- c(
-  "wages", "gender", "race", "union", "education", "experience"
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+X <- cbind(
+  Intercept = 1,
+  X
 )
-Xvars <- c(
-  "gender", "race", "union", "education", "experience"
-)
-wages <- jeksterslabRdatarepo::wages
-wages <- wages[, varnames]
-X <- wages[, Xvars]
-X <- cbind(Intercept = 1, X)
-X <- as.matrix(X)
-y <- wages[, "wages"]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
 head(y)
 #'
@@ -52,7 +46,16 @@ result_linreg <- linreg(
   X = X,
   y = y
 )
-str(result_linreg)
+#'
+#+ echo = FALSE
+# coverage
+out <- linreg(
+  X = X,
+  y = y,
+  unbiased = FALSE,
+  plot = FALSE,
+  print = FALSE
+)
 #'
 #' ## `lm()` function
 #'
@@ -68,17 +71,32 @@ lm_anova <- anova(lmobj)
 lm_RSS <- lm_anova["Residuals", "Sum Sq"]
 lm_TSS <- sum(lm_anova[["Sum Sq"]])
 lm_ESS <- lm_TSS - lm_RSS
+lm_R2 <- summary(lmobj)$r.squared
+lm_Rbar2 <- summary(lmobj)$adj.r.squared
+lm_vcov <- as.vector(vcov(lmobj))
+lm_se <- as.vector(sqrt(diag(vcov(lmobj))))
+lm_coef <- summary(lmobj)[["coefficients"]][, "Estimate"]
+lm_se <- summary(lmobj)[["coefficients"]][, "Std. Error"]
+lm_t <- summary(lmobj)[["coefficients"]][, "t value"]
+lm_p <- summary(lmobj)[["coefficients"]][, "Pr(>|t|)"]
 summary(lmobj)
-#'
 #'
 #+
 context("Test linreg-estimation-linreg")
 result_betahat <- as.vector(result_linreg[["betahat"]])
 result_yhat <- as.vector(result_linreg[["yhat"]])
 result_epsilonhat <- as.vector(result_linreg[["epsilonhat"]])
-result_RSS <- as.vector(result_linreg[["RSS"]])
-result_ESS <- as.vector(result_linreg[["ESS"]])
-result_TSS <- as.vector(result_linreg[["TSS"]])
+result_RSS <- result_linreg[["RSS"]]
+result_ESS <- result_linreg[["ESS"]]
+result_TSS <- result_linreg[["TSS"]]
+result_R2 <- result_linreg[["R2"]]
+result_Rbar2 <- result_linreg[["Rbar2"]]
+result_vcov <- as.vector(result_linreg[["vcov"]])
+result_vcovbiased <- as.vector(result_linreg[["vcovbiased"]])
+result_se <- as.vector(result_linreg[["se"]])
+result_sebiased <- as.vector(result_linreg[["sebiased"]])
+result_t <- as.vector(result_linreg[["t"]])
+result_p <- as.vector(result_linreg[["pt"]])
 test_that("betahat.", {
   expect_equivalent(
     length(result_betahat),
@@ -132,5 +150,73 @@ test_that("TSS", {
     lm_TSS,
     result_TSS
   )
+})
+test_that("R2", {
+  expect_equivalent(
+    lm_R2,
+    result_R2
+  )
+})
+test_that("Rbar2", {
+  expect_equivalent(
+    lm_Rbar2,
+    result_Rbar2
+  )
+})
+test_that("vcov", {
+  for (i in 1:length(lm_vcov)) {
+    expect_equivalent(
+      result_vcov[i],
+      lm_vcov[i]
+    )
+  }
+})
+test_that("vcovbiased", {
+  for (i in 1:length(lm_vcov)) {
+    expect_equivalent(
+      round(result_vcovbiased[i], digits = 1),
+      round(lm_vcov[i], digits = 1)
+    )
+  }
+})
+test_that("se", {
+  for (i in 1:length(lm_se)) {
+    expect_equivalent(
+      result_se[i],
+      lm_se[i]
+    )
+  }
+})
+test_that("sebiased", {
+  for (i in 1:length(lm_se)) {
+    expect_equivalent(
+      round(result_sebiased[i], digits = 1),
+      round(lm_se[i], digits = 1)
+    )
+  }
+})
+test_that("t.", {
+  expect_equivalent(
+    length(lm_t),
+    length(result_t)
+  )
+  for (i in seq_along(result_t)) {
+    expect_equivalent(
+      result_t[i],
+      lm_t[i]
+    )
+  }
+})
+test_that("p.", {
+  expect_equivalent(
+    length(lm_p),
+    length(result_p)
+  )
+  for (i in seq_along(result_p)) {
+    expect_equivalent(
+      result_p[i],
+      lm_p[i]
+    )
+  }
 })
 #'
