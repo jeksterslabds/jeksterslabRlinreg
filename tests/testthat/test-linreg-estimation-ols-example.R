@@ -40,9 +40,9 @@ library(jeksterslabRlinreg)
 #' The `jeksterslabRlinreg` package has several functions that can be used
 #' in solving for $\boldsymbol{\hat{\beta}}$ namely
 #'
-#' - `jeksterslabRlinreg::betahatnorm()` - normal equation
-#' - `jeksterslabRlinreg::betahatqr()` - using QR decomposition
-#' - `jeksterslabRlinreg::betahatsvd()` - using singular value decomposition and
+#' - `jeksterslabRlinreg::.betahatnorm()` - normal equation
+#' - `jeksterslabRlinreg::.betahatqr()` - using QR decomposition
+#' - `jeksterslabRlinreg::.betahatsvd()` - using singular value decomposition and
 #' - `jeksterslabRlinreg::betahat` - calculates coefficients using the normal equation.
 #'   When that fails, QR decomposition is used when `qr = TRUE`
 #'   or singular value decomposition when `qr = FALSE`.
@@ -81,13 +81,13 @@ solve(t(X) %*% X) %*% t(X) %*% y
 solve(crossprod(X), crossprod(X, y))
 #'
 #'
-#' ### `jeksterslabRlinreg::betahatnorm()`
+#' ### `jeksterslabRlinreg::.betahatnorm()`
 #'
 #' The `jeksterslabRlinreg` package has a function
 #' that solves for $\boldsymbol{\hat{\beta}}$ using the normal equation.
 #'
 #+
-result_inv <- jeksterslabRlinreg::betahatnorm(
+result_inv <- jeksterslabRlinreg::.betahatnorm(
   X = X,
   y = y
 )
@@ -146,13 +146,13 @@ solve(R) %*% crossprod(Q, y)
 #'
 #' The first solution is more efficient.
 #'
-#' ### `jeksterslabRlinreg::betahatqr()`
+#' ### `jeksterslabRlinreg::.betahatqr()`
 #'
 #' The `jeksterslabRlinreg` package has a function
 #' that solves for $\boldsymbol{\hat{\beta}}$ using QR decomposition.
 #'
 #+
-result_qr <- jeksterslabRlinreg::betahatqr(
+result_qr <- jeksterslabRlinreg::.betahatqr(
   X = X,
   y = y
 )
@@ -201,13 +201,13 @@ Sigma <- Xsvd$d
 V %*% ((1 / Sigma) * crossprod(U, y))
 #'
 #'
-#' ### `jeksterslabRlinreg::betahatsvd()`
+#' ### `jeksterslabRlinreg::.betahatsvd()`
 #'
 #' The `jeksterslabRlinreg` package has a function
 #' that solves for $\boldsymbol{\hat{\beta}}$ using singular decomposition.
 #'
 #+
-result_svd <- jeksterslabRlinreg::betahatsvd(
+result_svd <- jeksterslabRlinreg::.betahatsvd(
   X = X,
   y = y
 )
@@ -255,9 +255,10 @@ summary(lmobj)
 #+
 microbenchmark::microbenchmark(
   lm = lm(y ~ gender + race + union + education + experience, data = jeksterslabRdatarepo::wages),
-  betahatnorm = jeksterslabRlinreg::betahatnorm(X = X, y = y),
-  betahatqr = jeksterslabRlinreg::betahatqr(X = X, y = y),
-  betahatsvd = jeksterslabRlinreg::betahatsvd(X = X, y = y)
+  betahatnorm = jeksterslabRlinreg::.betahatnorm(X = X, y = y),
+  betahatqr = jeksterslabRlinreg::.betahatqr(X = X, y = y),
+  betahatsvd = jeksterslabRlinreg::.betahatsvd(X = X, y = y),
+  betahat = jeksterslabRlinreg::betahat(X = X, y = y)
 )
 #'
 #'
@@ -290,7 +291,7 @@ test_that("results_betahat", {
 })
 test_that("X is singular.", {
   expect_error(
-    jeksterslabRlinreg::betahatnorm(
+    jeksterslabRlinreg::.betahatnorm(
       X = jeksterslabRdatarepo::svd.linreg$Xb,
       y = jeksterslabRdatarepo::svd.linreg$yb,
     )
