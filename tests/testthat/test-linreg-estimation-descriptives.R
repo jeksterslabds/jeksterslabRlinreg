@@ -31,13 +31,11 @@ library(jeksterslabRlinreg)
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 X <- X[, -ncol(X)]
-X <- cbind(
-  Intercept = 1,
-  X
-)
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
 head(y)
+#'
+#+
 data <- X[, -1]
 data <- cbind(
   y,

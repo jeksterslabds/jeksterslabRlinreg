@@ -54,3 +54,33 @@ reference:
   desc:  Plotting functions.
 - contents:
   - has_keyword("plot")
+
+articles:
+- title: jeksterslabRlinreg Package
+  desc: Installation and the basics.
+  contents:
+  - jeksterslabRlinreg
+- title: The linreg() Function
+  desc: The main function.
+  contents:
+  - tests/test-linreg-estimation-linreg
+- title: Population Regression Model
+  desc: The population regression model.
+  contents:
+  - tests/test-simple-population-example
+- title: Other Tests
+  desc: Other tests.
+  contents:
+  - tests/test-linreg-estimation-descriptives
+  - tests/test-linreg-estimation-ols-example
+  - tests/test-linreg-estimation-projection
+  - tests/test-linreg-estimation-predicted
+  - tests/test-linreg-estimation-residuals
+  - tests/test-linreg-estimation-SS
+  - tests/test-linreg-estimation-R2
+  - tests/test-linreg-estimation-sigma2epsilonhat
+  - tests/test-linreg-estimation-vcov
+  - tests/test-linreg-estimation-anovatable
+  - tests/test-linreg-estimation-nhst
+  - tests/test-linreg-estimation-leverage
+  - tests/test-linreg-estimation-tepsilonhat
