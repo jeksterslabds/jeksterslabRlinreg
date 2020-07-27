@@ -37,8 +37,8 @@
 #'   of \eqn{k} unknown regression coefficients
 #'   estimated using ordinary least squares.
 #' @export
-betahatnorm <- function(X,
-                        y) {
+.betahatnorm <- function(X,
+                         y) {
   # @importFrom jeksterslabRmatrix is.singular
   # if (is.singular(X)) {
   #  stop(
@@ -82,11 +82,11 @@ betahatnorm <- function(X,
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @inheritParams betahatnorm
-#' @inherit betahatnorm return
+#' @inheritParams .betahatnorm
+#' @inherit .betahatnorm return
 #' @export
-betahatqr <- function(X,
-                      y) {
+.betahatqr <- function(X,
+                       y) {
   Xqr <- qr(X)
   drop(
     backsolve(
@@ -130,11 +130,11 @@ betahatqr <- function(X,
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @inheritParams betahatnorm
-#' @inherit betahatnorm return
+#' @inheritParams .betahatnorm
+#' @inherit .betahatnorm return
 #' @export
-betahatsvd <- function(X,
-                       y) {
+.betahatsvd <- function(X,
+                        y) {
   Xsvd <- svd(X)
   drop(
     Xsvd$v %*% ((1 / Xsvd$d) * crossprod(Xsvd$u, y))
@@ -168,8 +168,8 @@ betahatsvd <- function(X,
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
-#' @inheritParams betahatnorm
-#' @inherit betahatnorm return
+#' @inheritParams .betahatnorm
+#' @inherit .betahatnorm return
 #' @param qr Logical.
 #'   If `TRUE`, use QR decomposition when normal equations fail.
 #'   If `FALSE`, use singular value decompositon when normal equations fail.
@@ -179,7 +179,7 @@ betahat <- function(X,
                     qr = TRUE) {
   tryCatch(
     {
-      out <- betahatnorm(
+      out <- .betahatnorm(
         X = X,
         y = y
       )
@@ -190,7 +190,7 @@ betahat <- function(X,
         message(
           "Using QR decomposition."
         )
-        out <- betahatqr(
+        out <- .betahatqr(
           X = X,
           y = y
         )
@@ -199,7 +199,7 @@ betahat <- function(X,
         message(
           "Using singular value decomposition."
         )
-        out <- betahatqr(
+        out <- .betahatsvd(
           X = X,
           y = y
         )
