@@ -46,7 +46,7 @@ residual.plot <- function(yhat,
     x = yhat,
     y = sqrtabsstd,
     xlab = "Fitted",
-    ylab = "sqrt(abs(Std. Residuals))",
+    ylab = expression(sqrt(abs(Std. ~ Residuals))),
     main = "Scale-Location"
   )
   lines(yhat[j], lw2$fitted[j], col = "red")
