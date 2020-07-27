@@ -32,8 +32,8 @@ scatter.plot <- function(data) {
   # Customize upper panel
   upper.panel <- function(x, y) {
     lw1 <- suppressWarnings(loess(y ~ x))
-    points(x, y)
     j <- order(x)
+    points(x, y)
     lines(x[j], lw1$fitted[j], col = "red")
   }
   # Create the plots

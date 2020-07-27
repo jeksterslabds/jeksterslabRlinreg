@@ -184,7 +184,8 @@ linreg <- function(X,
     residual.plot(
       yhat = yhat,
       tepsilonhat = tepsilonhat,
-      epsilonhat = epsilonhat
+      epsilonhat = epsilonhat,
+      h = h
     )
   }
   out <- list(
