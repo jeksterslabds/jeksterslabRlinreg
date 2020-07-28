@@ -1,10 +1,10 @@
 #' ---
-#' title: "Tests: The Linear Regression Model (nhst)"
+#' title: "Tests: The Linear Regression Model (Null Hypothesis Significance Testing)"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (nhst)}
+#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (Null Hypothesis Significance Testing)}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 #'
 #'
-# The Linear Regression Model {#linreg-estimation-nhst-example}
+# The Linear Regression Model: Null Hypothesis Significance Testing {#linreg-estimation-nhst-example}
 #'
 #+ echo = FALSE
 library(testthat)
@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)

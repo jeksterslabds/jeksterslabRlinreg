@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Leverage)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-27</h4>
+            <h4 class="date">2020-07-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-leverage.Rmd"><code>vignettes/tests/test-linreg-estimation-leverage.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-leverage.Rmd</code></div>
@@ -92,8 +92,9 @@
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">jeksterslabRdatarepo::wages()</a></code> for the data set used in this example.</p>
+<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<span class="co"># age is removed</span>
 <span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)

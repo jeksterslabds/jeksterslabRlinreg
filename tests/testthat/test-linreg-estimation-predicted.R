@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -61,13 +62,11 @@ result_Py3 <- Py(
 #+
 result_Xbetahat1 <- .Xbetahat(
   X = X,
-  betahat = NULL,
   y = y
 )
 result_Xbetahat2 <- .Xbetahat(
   X = X,
-  betahat = betahat,
-  y = NULL
+  betahat = betahat
 )
 result_Xbetahat3 <- Xbetahat(
   X = X,
@@ -151,16 +150,12 @@ test_that("Py = yhat.", {
 test_that("error.", {
   expect_error(
     .Py(
-      y = y,
-      P = NULL,
-      X = NULL
+      y = y
     )
   )
   expect_error(
     .Xbetahat(
-      X = X,
-      betahat = NULL,
-      y = NULL
+      X = X
     )
   )
 })

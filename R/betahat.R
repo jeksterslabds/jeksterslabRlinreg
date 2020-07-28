@@ -39,12 +39,6 @@
 #' @export
 .betahatnorm <- function(X,
                          y) {
-  # @importFrom jeksterslabRmatrix is.singular
-  # if (is.singular(X)) {
-  #  stop(
-  #    "X is singular."
-  #  )
-  # }
   drop(
     solve(
       crossprod(X),

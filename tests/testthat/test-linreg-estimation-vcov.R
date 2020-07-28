@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)

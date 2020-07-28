@@ -1,7 +1,7 @@
 jeksterslabRlinreg
 ================
 Ivan Jacob Agaloos Pesigan
-2020-07-27
+2020-07-28
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -31,35 +31,35 @@ install_github("jeksterslabds/jeksterslabRlinreg")
 
 ### Data
 
-In this example, we examine the association between `GPA` and `LSAT`
-scores.
+In this hypothetical example, we are interested in the association
+between wages and education. The regressor variable is years of
+education. The regressand variable is hourly wage in US dollars.
 
-See `jeksterslabRdatarepo::law()` for more information about the data
-set used.
-
-    #>      Intercept  GPA
-    #> [1,]         1 3.23
-    #> [2,]         1 2.83
-    #> [3,]         1 3.24
-    #> [4,]         1 3.12
-    #> [5,]         1 3.09
-    #> [6,]         1 3.39
-    #>      LSAT
-    #> [1,]  622
-    #> [2,]  542
-    #> [3,]  579
-    #> [4,]  653
-    #> [5,]  606
-    #> [6,]  576
+    #>      constant education
+    #> [1,]        1        11
+    #> [2,]        1         8
+    #> [3,]        1         9
+    #> [4,]        1        10
+    #> [5,]        1        15
+    #> [6,]        1        12
+    #>          wages
+    #> [1,]  6.045637
+    #> [2,]  7.337631
+    #> [3,]  4.353645
+    #> [4,] -3.449000
+    #> [5,] 15.772231
+    #> [6,] 10.267500
 
 ### `jeksterslabRlinreg::linreg()`
 
 The `jeksterslabRlinreg::linreg()` function fits a linear regression
 model using `X` and `y`. In this example, `X` consists of a column of
-constants and `GPA` and `y` consists of `LSAT` scores.
+constants and years of `education` and `y` consists of hourly `wages` in
+US dollars.
 
 The output includes the following:
 
+  - Model assessment
   - ANOVA table
   - Table of regression coefficients with the following columns
       - Regression coefficients
@@ -80,29 +80,37 @@ jeksterslabRlinreg::linreg(
   y = y
 )
 #> 
+#> Model Assessment:
+#>                   Value
+#> RSS            62426.92
+#> MSE               48.43
+#> RMSE               6.96
+#> R-squared          0.23
+#> Adj. R-squared     0.23
+#> 
 #> ANOVA Table:
-#>       df        SS         MS        F           p
-#> Model  1  69304.85 69304.8538 109.3925 1.24029e-16
-#> Error 80  50683.45   633.5431       NA          NA
-#> Total 81 119988.30         NA       NA          NA
+#>         df       SS          MS       F            p
+#> Model    1 18778.38 18778.37701 387.137 1.473016e-75
+#> Error 1287 62426.92    48.50577      NA           NA
+#> Total 1288 81205.30          NA      NA           NA
 #> 
 #> Coefficients:
-#>               coef       se         t           p std. coef
-#> Intercept 113.6474 46.34954  2.451964 1.63854e-02 0.0000000
-#> GPA       154.3605 14.75851 10.459086 1.24029e-16 0.7599979
+#>                coef        se         t            p std. coef
+#> Intercept -5.532713 0.8823929 -6.270124 4.914487e-10 0.0000000
+#> education  1.326519 0.0674188 19.675797 1.473016e-75 0.4808801
 #> 
 #> Confidence Intervals:
-#>             ci_0.05     ci_0.5   ci_2.5  ci_97.5  ci_99.5 ci_99.95
-#> Intercept -44.69825  -8.654677  21.4089 205.8860 235.9495 271.9931
-#> GPA       103.94046 115.417366 124.9901 183.7309 193.3036 204.7805
+#>             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95
+#> Intercept -8.442935 -7.808982 -7.263799 -3.801627 -3.256444 -2.622491
+#> education  1.104165  1.152601  1.194256  1.458782  1.500436  1.548873
 #> 
 #> Means and Standard Deviations:
-#>            Mean         SD
-#> LSAT 597.548780 38.4881423
-#> GPA    3.134878  0.1894973
+#>               Mean       SD
+#> wages     11.40433 7.940251
+#> education 12.76804 2.878444
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" /><img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" /><img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
 
 See [GitHub
 Pages](https://jeksterslabds.github.io/jeksterslabRlinreg/index.html)

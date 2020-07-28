@@ -79,7 +79,7 @@
 <div id="jeksterslabrlinreg" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#jeksterslabrlinreg" class="anchor"></a>jeksterslabRlinreg</h1></div>
-<p>Ivan Jacob Agaloos Pesigan 2020-07-27</p>
+<p>Ivan Jacob Agaloos Pesigan 2020-07-28</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 <p><a href="https://travis-ci.com/jeksterslabds/jeksterslabRlinreg"><img src="https://travis-ci.com/jeksterslabds/jeksterslabRlinreg.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/jeksterslabds/jeksterslabRlinreg"><img src="https://ci.appveyor.com/api/projects/status/github/jeksterslabds/jeksterslabRlinreg?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/github/jeksterslabds/jeksterslabRlinreg"><img src="https://codecov.io/github/jeksterslabds/jeksterslabRlinreg/branch/master/graphs/badge.svg" alt="codecov"></a> <!-- badges: end --></p>
@@ -97,30 +97,30 @@
 <div id="data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h3>
-<p>In this example, we examine the association between <code>GPA</code> and <code>LSAT</code> scores.</p>
-<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/law.html">jeksterslabRdatarepo::law()</a></code> for more information about the data set used.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">#&gt;      Intercept  GPA</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">#&gt; [1,]         1 3.23</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">#&gt; [2,]         1 2.83</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt; [3,]         1 3.24</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; [4,]         1 3.12</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; [5,]         1 3.09</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; [6,]         1 3.39</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt;      LSAT</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; [1,]  622</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; [2,]  542</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; [3,]  579</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; [4,]  653</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; [5,]  606</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; [6,]  576</span></span></code></pre></div>
+<p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">#&gt;      constant education</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">#&gt; [1,]        1        11</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">#&gt; [2,]        1         8</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt; [3,]        1         9</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; [4,]        1        10</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; [5,]        1        15</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; [6,]        1        12</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt;          wages</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; [1,]  6.045637</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; [2,]  7.337631</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; [3,]  4.353645</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; [4,] -3.449000</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; [5,] 15.772231</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; [6,] 10.267500</span></span></code></pre></div>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#jeksterslabrlinreglinreg" class="anchor"></a><code>jeksterslabRlinreg::linreg()</code>
 </h3>
-<p>The <code><a href="reference/linreg.html">jeksterslabRlinreg::linreg()</a></code> function fits a linear regression model using <code>X</code> and <code>y</code>. In this example, <code>X</code> consists of a column of constants and <code>GPA</code> and <code>y</code> consists of <code>LSAT</code> scores.</p>
+<p>The <code><a href="reference/linreg.html">jeksterslabRlinreg::linreg()</a></code> function fits a linear regression model using <code>X</code> and <code>y</code>. In this example, <code>X</code> consists of a column of constants and years of <code>education</code> and <code>y</code> consists of hourly <code>wages</code> in US dollars.</p>
 <p>The output includes the following:</p>
 <ul>
+<li>Model assessment</li>
 <li>ANOVA table</li>
 <li>Table of regression coefficients with the following columns
 <ul>
@@ -143,27 +143,35 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="co">#&gt; </span>
+<span class="co">#&gt; Model Assessment:</span>
+<span class="co">#&gt;                   Value</span>
+<span class="co">#&gt; RSS            62426.92</span>
+<span class="co">#&gt; MSE               48.43</span>
+<span class="co">#&gt; RMSE               6.96</span>
+<span class="co">#&gt; R-squared          0.23</span>
+<span class="co">#&gt; Adj. R-squared     0.23</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; ANOVA Table:</span>
-<span class="co">#&gt;       df        SS         MS        F           p</span>
-<span class="co">#&gt; Model  1  69304.85 69304.8538 109.3925 1.24029e-16</span>
-<span class="co">#&gt; Error 80  50683.45   633.5431       NA          NA</span>
-<span class="co">#&gt; Total 81 119988.30         NA       NA          NA</span>
+<span class="co">#&gt;         df       SS          MS       F            p</span>
+<span class="co">#&gt; Model    1 18778.38 18778.37701 387.137 1.473016e-75</span>
+<span class="co">#&gt; Error 1287 62426.92    48.50577      NA           NA</span>
+<span class="co">#&gt; Total 1288 81205.30          NA      NA           NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               coef       se         t           p std. coef</span>
-<span class="co">#&gt; Intercept 113.6474 46.34954  2.451964 1.63854e-02 0.0000000</span>
-<span class="co">#&gt; GPA       154.3605 14.75851 10.459086 1.24029e-16 0.7599979</span>
+<span class="co">#&gt;                coef        se         t            p std. coef</span>
+<span class="co">#&gt; Intercept -5.532713 0.8823929 -6.270124 4.914487e-10 0.0000000</span>
+<span class="co">#&gt; education  1.326519 0.0674188 19.675797 1.473016e-75 0.4808801</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
-<span class="co">#&gt;             ci_0.05     ci_0.5   ci_2.5  ci_97.5  ci_99.5 ci_99.95</span>
-<span class="co">#&gt; Intercept -44.69825  -8.654677  21.4089 205.8860 235.9495 271.9931</span>
-<span class="co">#&gt; GPA       103.94046 115.417366 124.9901 183.7309 193.3036 204.7805</span>
+<span class="co">#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95</span>
+<span class="co">#&gt; Intercept -8.442935 -7.808982 -7.263799 -3.801627 -3.256444 -2.622491</span>
+<span class="co">#&gt; education  1.104165  1.152601  1.194256  1.458782  1.500436  1.548873</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
-<span class="co">#&gt;            Mean         SD</span>
-<span class="co">#&gt; LSAT 597.548780 38.4881423</span>
-<span class="co">#&gt; GPA    3.134878  0.1894973</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"><img src="reference/figures/README-unnamed-chunk-3-2.png" width="100%"></p>
+<span class="co">#&gt;               Mean       SD</span>
+<span class="co">#&gt; wages     11.40433 7.940251</span>
+<span class="co">#&gt; education 12.76804 2.878444</span></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"><img src="reference/figures/README-unnamed-chunk-4-2.png" width="100%"></p>
 <p>See <a href="https://jeksterslabds.github.io/jeksterslabRlinreg/index.html">GitHub Pages</a> for package documentation.</p>
 </div>
 </div>

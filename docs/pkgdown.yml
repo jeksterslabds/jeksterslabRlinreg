@@ -3,12 +3,15 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   jeksterslabRlinreg: jeksterslabRlinreg.html
+  notes-linreg: notes/notes-linreg.html
+  test-linreg-estimation-MSE: tests/test-linreg-estimation-MSE.html
   test-linreg-estimation-R2: tests/test-linreg-estimation-R2.html
   test-linreg-estimation-SS: tests/test-linreg-estimation-SS.html
   test-linreg-estimation-anovatable: tests/test-linreg-estimation-anovatable.html
+  test-linreg-estimation-descriptives-simple: tests/test-linreg-estimation-descriptives-simple.html
   test-linreg-estimation-descriptives: tests/test-linreg-estimation-descriptives.html
   test-linreg-estimation-leverage: tests/test-linreg-estimation-leverage.html
-  test-linreg-estimation-linreg: tests/test-linreg-estimation-linreg.html
+  test-linreg-estimation-model: tests/test-linreg-estimation-model.html
   test-linreg-estimation-nhst: tests/test-linreg-estimation-nhst.html
   test-linreg-estimation-ols-example: tests/test-linreg-estimation-ols-example.html
   test-linreg-estimation-predicted: tests/test-linreg-estimation-predicted.html
@@ -18,7 +21,7 @@ articles:
   test-linreg-estimation-tepsilonhat: tests/test-linreg-estimation-tepsilonhat.html
   test-linreg-estimation-vcov: tests/test-linreg-estimation-vcov.html
   test-simple-population-example: tests/test-simple-population-example.html
-last_built: 2020-07-27T05:29Z
+last_built: 2020-07-28T08:27Z
 urls:
   reference: https://github.com/jeksterslabds/jeksterslabRlinreg//reference
   article: https://github.com/jeksterslabds/jeksterslabRlinreg//articles

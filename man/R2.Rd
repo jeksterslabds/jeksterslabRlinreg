@@ -43,14 +43,20 @@ or
 \href{https://en.wikipedia.org/wiki/Coefficient_of_determination}{Wikipedia: Coefficient of Determination}
 }
 \seealso{
-Other coefficient of determination functions: 
+Other assessment of model quality functions: 
+\code{\link{.MSE}()},
 \code{\link{.R2fromESS}()},
 \code{\link{.R2fromRSS}()},
+\code{\link{.RMSE}()},
 \code{\link{.Rbar2}()},
-\code{\link{Rbar2}()}
+\code{\link{.model}()},
+\code{\link{MSE}()},
+\code{\link{RMSE}()},
+\code{\link{Rbar2}()},
+\code{\link{model}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan
 }
-\concept{coefficient of determination functions}
-\keyword{R-squared}
+\concept{assessment of model quality functions}
+\keyword{model-assessment}

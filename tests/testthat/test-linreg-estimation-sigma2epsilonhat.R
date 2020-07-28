@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -54,7 +55,6 @@ result_sigma2epsilonhat1 <- .sigma2epsilonhat(
   k = k
 )
 result_sigma2epsilonhat2 <- .sigma2epsilonhat(
-  RSS = NULL,
   n = n,
   k = k,
   X = X,
@@ -73,7 +73,6 @@ result_sigma2epsilonhatbiased1 <- .sigma2epsilonhatbiased(
   n = n
 )
 result_sigma2epsilonhatbiased2 <- .sigma2epsilonhatbiased(
-  RSS = NULL,
   n = n,
   X = X,
   y = y

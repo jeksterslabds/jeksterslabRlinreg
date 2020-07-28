@@ -1,10 +1,10 @@
 #' ---
-#' title: "Tests: The Linear Regression Model (OLS)"
+#' title: "Tests: The Linear Regression Model (Ordinary Least Squares)"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (OLS)}
+#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (Ordinary Least Squares)}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -49,10 +49,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)

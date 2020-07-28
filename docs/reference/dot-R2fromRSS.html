@@ -134,7 +134,7 @@ $$
   $$</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.R2fromRSS</span>(<span class='kw'>RSS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>TSS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epsilonhat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>betahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>.R2fromRSS</span>(<span class='kw'>RSS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>TSS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>X</span>, <span class='no'>y</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,11 +150,6 @@ Residual sum of squares.</p></td>
 Total sum of squares.</p></td>
     </tr>
     <tr>
-      <th>epsilonhat</th>
-      <td><p>Numeric vector of length <code>n</code> or <code>n</code> by 1 matrix.
-\(n \time 1\) vector of residuals.</p></td>
-    </tr>
-    <tr>
       <th>X</th>
       <td><p><code>n</code> by <code>k</code> numeric matrix.
 The data matrix \(\mathbf{X}\)
@@ -168,12 +163,6 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \(\mathbf{y}\) is an \(n \times 1\) vector of observations
 on the regressand variable.</p></td>
     </tr>
-    <tr>
-      <th>betahat</th>
-      <td><p>Vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
-The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
-of \(k\) unknown regression coefficients.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -181,9 +170,9 @@ of \(k\) unknown regression coefficients.</p></td>
     <p>Returns the coefficient of determination \(R^2\) .</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>RSS = NULL</code>, <code>RSS</code> is computed using <code><a href='dot-RSS.html'>.RSS()</a></code>.
+    <p>If <code>RSS = NULL</code>, <code>RSS</code> is computed using <code><a href='RSS.html'>RSS()</a></code> with <code>X</code> and <code>y</code> as required arguments.
 If <code>TSS = NULL</code>, <code>TSS</code> is computed using <code><a href='TSS.html'>TSS()</a></code> with <code>y</code> as a required argument.
-If <code>RSS</code> and <code>TSS</code> are provided, <code>epsilonhat</code>, <code>betahat</code>, <code>X</code>, and <code>y</code> are not needed.</p>
+If <code>RSS</code> and <code>TSS</code> are provided, <code>X</code>, and <code>y</code> are not needed.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://en.wikipedia.org/wiki/Residual_sum_of_squares'>Wikipedia: Residual Sum of Squares</a></p>
@@ -192,11 +181,17 @@ If <code>RSS</code> and <code>TSS</code> are provided, <code>epsilonhat</code>, 
 <p><a href='https://en.wikipedia.org/wiki/Coefficient_of_determination'>Wikipedia: Coefficient of Determination</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other coefficient of determination functions: 
+    <div class='dont-index'><p>Other assessment of model quality functions: 
+<code><a href='dot-MSE.html'>.MSE</a>()</code>,
 <code><a href='dot-R2fromESS.html'>.R2fromESS</a>()</code>,
+<code><a href='dot-RMSE.html'>.RMSE</a>()</code>,
 <code><a href='dot-Rbar2.html'>.Rbar2</a>()</code>,
+<code><a href='dot-model.html'>.model</a>()</code>,
+<code><a href='MSE.html'>MSE</a>()</code>,
 <code><a href='R2.html'>R2</a>()</code>,
-<code><a href='Rbar2.html'>Rbar2</a>()</code></p></div>
+<code><a href='RMSE.html'>RMSE</a>()</code>,
+<code><a href='Rbar2.html'>Rbar2</a>()</code>,
+<code><a href='model.html'>model</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

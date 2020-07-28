@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -63,7 +64,6 @@ sigma2X <- as.vector(diag(cov(X[, -1])))
 sigma2y <- as.vector(var(y))
 sigma2 <- c(sigma2y, sigma2X)
 sigma <- sqrt(sigma2)
-meanandsd <- c(mu, sigma)
 #'
 #' ## Descriptive Statistics
 #'
@@ -92,7 +92,6 @@ result_sigma2X <- as.vector(output[["sigma2X"]])
 result_sigma2y <- as.vector(output[["sigma2y"]])
 result_sigma2 <- as.vector(output[["sigma2"]])
 result_sigma <- as.vector(output[["sigma"]])
-result_meanandsd <- as.vector(output[["meanandsd"]])
 #'
 #'
 #+
@@ -248,23 +247,3 @@ test_that("sigma", {
     )
   }
 })
-test_that("meanandsd", {
-  for (i in 1:length(result_meanandsd)) {
-    expect_equivalent(
-      meanandsd[i],
-      result_meanandsd[i]
-    )
-  }
-})
-#'
-X <- cbind(
-  1,
-  rnorm(n = 100)
-)
-y <- rnorm(n = 100)
-invisible(
-  output <- descriptives(
-    X = X,
-    y = y,
-  )
-)

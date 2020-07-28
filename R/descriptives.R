@@ -88,15 +88,15 @@ descriptives <- function(X,
   names(sigma2) <- c(varnamey, varnamesX[-1])
   sigma <- sqrt(sigma2)
   names(sigma) <- c(varnamey, varnamesX[-1])
-  meanandsd <- cbind(
-    mu,
-    sigma
-  )
-  colnames(meanandsd) <- c(
-    "Mean",
-    "SD"
-  )
   if (msd) {
+    meanandsd <- cbind(
+      mu,
+      sigma
+    )
+    colnames(meanandsd) <- c(
+      "Mean",
+      "SD"
+    )
     print(
       meanandsd
     )
@@ -109,8 +109,6 @@ descriptives <- function(X,
   }
   invisible(
     list(
-      varnamesX = varnamesX,
-      varnamey = varnamey,
       X = X,
       y = y,
       data = data,
@@ -130,8 +128,7 @@ descriptives <- function(X,
       sigma2X = sigma2X,
       sigma2y = sigma2y,
       sigma2 = sigma2,
-      sigma = sigma,
-      meanandsd = meanandsd
+      sigma = sigma
     )
   )
 }

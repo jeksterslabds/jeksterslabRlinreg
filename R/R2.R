@@ -8,13 +8,14 @@
 #'     {\textrm{Total sum of squares}} .
 #'   }
 #'
-#' @details If `RSS = NULL`, `RSS` is computed using [`.RSS()`].
+#' @details If `RSS = NULL`, `RSS` is computed using [`RSS()`] with `X` and `y` as required arguments.
 #'   If `TSS = NULL`, `TSS` is computed using [`TSS()`] with `y` as a required argument.
-#'   If `RSS` and `TSS` are provided, `epsilonhat`, `betahat`, `X`, and `y` are not needed.
-#' @family coefficient of determination functions
-#' @keywords R-squared
-#' @inheritParams .RSS
-#' @inherit .RSS references
+#'   If `RSS` and `TSS` are provided, `X`, and `y` are not needed.
+#'
+#' @family assessment of model quality functions
+#' @keywords model-assessment
+#' @inheritParams RSS
+#' @inherit RSS references
 #' @param RSS Numeric.
 #'   Residual sum of squares.
 #' @param TSS Numeric.
@@ -23,16 +24,12 @@
 #' @export
 .R2fromRSS <- function(RSS = NULL,
                        TSS = NULL,
-                       epsilonhat = NULL,
                        X,
-                       y,
-                       betahat = NULL) {
+                       y) {
   if (is.null(RSS)) {
-    RSS <- .RSS(
-      epsilonhat = epsilonhat,
+    RSS <- RSS(
       X = X,
-      y = y,
-      betahat = betahat
+      y = y
     )
   }
   if (is.null(TSS)) {
@@ -53,15 +50,14 @@
 #'     {\textrm{Total sum of squares}} .
 #'   }
 #'
-#' @details If `ESS = NULL`, `ESS` is computed using [`.ESS()`].
+#' @details If `ESS = NULL`, `ESS` is computed using [`ESS()`] with `X` and `y` as required arguments.
 #'   If `TSS = NULL`, `TSS` is computed using [`TSS()`] with `y` as a required argument.
 #'   If `ESS` and `TSS` are provided, `yhat`, `ybar`, `betahat`, `X`, and `y` are not needed.
 #'
-#' @author Ivan Jacob Agaloos Pesigan
-#' @family coefficient of determination functions
-#' @keywords R-squared
+#' @family assessment of model quality functions
+#' @keywords model-assessment
 #' @inheritParams .R2fromRSS
-#' @inheritParams .ESS
+#' @inheritParams ESS
 #' @inherit .R2fromRSS return references
 #' @param ESS Numeric.
 #'   Explained sum of squares.
@@ -69,17 +65,11 @@
 .R2fromESS <- function(ESS = NULL,
                        TSS = NULL,
                        X,
-                       y,
-                       yhat = NULL,
-                       ybar = NULL,
-                       betahat = NULL) {
+                       y) {
   if (is.null(ESS)) {
-    ESS <- .ESS(
-      yhat = yhat,
-      ybar = ybar,
+    ESS <- ESS(
       X = X,
-      y = y,
-      betahat = betahat
+      y = y
     )
   }
   if (is.null(TSS)) {
@@ -105,8 +95,8 @@
 #'     {\textrm{Total sum of squares}} .
 #' }
 #'
-#' @family coefficient of determination functions
-#' @keywords R-squared
+#' @family assessment of model quality functions
+#' @keywords model-assessment
 #' @inheritParams .R2fromRSS
 #' @inherit .R2fromRSS references
 #' @param fromRSS Logical.
@@ -121,10 +111,8 @@ R2 <- function(X,
       .R2fromRSS(
         RSS = NULL,
         TSS = NULL,
-        epsilonhat = NULL,
         X = X,
-        y = y,
-        betahat = NULL
+        y = y
       )
     )
   } else {
@@ -133,10 +121,7 @@ R2 <- function(X,
         ESS = NULL,
         TSS = NULL,
         X = X,
-        y = y,
-        yhat = NULL,
-        ybar = NULL,
-        betahat = NULL
+        y = y
       )
     )
   }
@@ -157,8 +142,8 @@ R2 <- function(X,
 #'   with `X` and `y` as required arguments.
 #'   If `R2` is provided, `X`, and `y` are not needed.
 #'
-#' @family coefficient of determination functions
-#' @keywords R-squared
+#' @family assessment of model quality functions
+#' @keywords model-assessment
 #' @inheritParams R2
 #' @inherit R2 references
 #' @param n Integer.
@@ -191,8 +176,8 @@ R2 <- function(X,
 #'
 #' @title Adjusted R-square \eqn{\bar{R}^{2}}
 #'
-#' @family coefficient of determination functions
-#' @keywords R-squared
+#' @family assessment of model quality functions
+#' @keywords model-assessment
 #' @inheritParams .Rbar2
 #' @inherit .Rbar2 description return references
 #' @export

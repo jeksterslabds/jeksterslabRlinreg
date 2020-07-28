@@ -80,7 +80,7 @@
       <h1 data-toc-skip>Introduction to jeksterslabRlinreg</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-27</h4>
+            <h4 class="date">2020-07-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/jeksterslabRlinreg.Rmd"><code>vignettes/jeksterslabRlinreg.Rmd</code></a></small>
       <div class="hidden name"><code>jeksterslabRlinreg.Rmd</code></div>
@@ -103,30 +103,30 @@
 <div id="data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h3>
-<p>In this example, we examine the association between <code>GPA</code> and <code>LSAT</code> scores.</p>
-<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/law.html">jeksterslabRdatarepo::law()</a></code> for more information about the data set used.</p>
-<pre><code>#&gt;      Intercept  GPA
-#&gt; [1,]         1 3.23
-#&gt; [2,]         1 2.83
-#&gt; [3,]         1 3.24
-#&gt; [4,]         1 3.12
-#&gt; [5,]         1 3.09
-#&gt; [6,]         1 3.39
-#&gt;      LSAT
-#&gt; [1,]  622
-#&gt; [2,]  542
-#&gt; [3,]  579
-#&gt; [4,]  653
-#&gt; [5,]  606
-#&gt; [6,]  576</code></pre>
+<p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
+<pre><code>#&gt;      constant education
+#&gt; [1,]        1        16
+#&gt; [2,]        1        14
+#&gt; [3,]        1        13
+#&gt; [4,]        1        12
+#&gt; [5,]        1        14
+#&gt; [6,]        1        13
+#&gt;          wages
+#&gt; [1,] 18.539478
+#&gt; [2,]  7.342017
+#&gt; [3,] 16.010738
+#&gt; [4,]  7.552257
+#&gt; [5,] 19.119486
+#&gt; [6,]  5.469569</code></pre>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#jeksterslabrlinreglinreg" class="anchor"></a><code>jeksterslabRlinreg::linreg()</code>
 </h3>
-<p>The <code><a href="../reference/linreg.html">jeksterslabRlinreg::linreg()</a></code> function fits a linear regression model using <code>X</code> and <code>y</code>. In this example, <code>X</code> consists of a column of constants and <code>GPA</code> and <code>y</code> consists of <code>LSAT</code> scores.</p>
+<p>The <code><a href="../reference/linreg.html">jeksterslabRlinreg::linreg()</a></code> function fits a linear regression model using <code>X</code> and <code>y</code>. In this example, <code>X</code> consists of a column of constants and years of <code>education</code> and <code>y</code> consists of hourly <code>wages</code> in US dollars.</p>
 <p>The output includes the following:</p>
 <ul>
+<li>Model assessment</li>
 <li>ANOVA table</li>
 <li>Table of regression coefficients with the following columns
 <ul>
@@ -149,27 +149,35 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="co">#&gt; </span>
+<span class="co">#&gt; Model Assessment:</span>
+<span class="co">#&gt;                   Value</span>
+<span class="co">#&gt; RSS            59099.69</span>
+<span class="co">#&gt; MSE               45.85</span>
+<span class="co">#&gt; RMSE               6.77</span>
+<span class="co">#&gt; R-squared          0.22</span>
+<span class="co">#&gt; Adj. R-squared     0.22</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; ANOVA Table:</span>
-<span class="co">#&gt;       df        SS         MS        F           p</span>
-<span class="co">#&gt; Model  1  69304.85 69304.8538 109.3925 1.24029e-16</span>
-<span class="co">#&gt; Error 80  50683.45   633.5431       NA          NA</span>
-<span class="co">#&gt; Total 81 119988.30         NA       NA          NA</span>
+<span class="co">#&gt;         df       SS          MS        F            p</span>
+<span class="co">#&gt; Model    1 16312.41 16312.40903 355.2315 3.631579e-70</span>
+<span class="co">#&gt; Error 1287 59099.69    45.92051       NA           NA</span>
+<span class="co">#&gt; Total 1288 75412.10          NA       NA           NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               coef       se         t           p std. coef</span>
-<span class="co">#&gt; Intercept 113.6474 46.34954  2.451964 1.63854e-02 0.0000000</span>
-<span class="co">#&gt; GPA       154.3605 14.75851 10.459086 1.24029e-16 0.7599979</span>
+<span class="co">#&gt;                coef         se         t            p std. coef</span>
+<span class="co">#&gt; Intercept -3.863147 0.86412259 -4.470601 8.486642e-06 0.0000000</span>
+<span class="co">#&gt; education  1.237858 0.06567726 18.847585 3.631579e-70 0.4650916</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
-<span class="co">#&gt;             ci_0.05     ci_0.5   ci_2.5  ci_97.5  ci_99.5 ci_99.95</span>
-<span class="co">#&gt; Intercept -44.69825  -8.654677  21.4089 205.8860 235.9495 271.9931</span>
-<span class="co">#&gt; GPA       103.94046 115.417366 124.9901 183.7309 193.3036 204.7805</span>
+<span class="co">#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95</span>
+<span class="co">#&gt; Intercept -6.713112 -6.092285 -5.558390 -2.167904 -1.634009 -1.013182</span>
+<span class="co">#&gt; education  1.021247  1.068433  1.109012  1.366704  1.407282  1.454468</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
-<span class="co">#&gt;            Mean         SD</span>
-<span class="co">#&gt; LSAT 597.548780 38.4881423</span>
-<span class="co">#&gt; GPA    3.134878  0.1894973</span></pre></body></html></div>
-<p><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-3-1.png" width="100%"><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-3-2.png" width="100%"></p>
+<span class="co">#&gt;               Mean       SD</span>
+<span class="co">#&gt; wages     12.03022 7.651782</span>
+<span class="co">#&gt; education 12.83941 2.874950</span></pre></body></html></div>
+<p><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-1.png" width="100%"><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-2.png" width="100%"></p>
 </div>
 </div>
   </div>

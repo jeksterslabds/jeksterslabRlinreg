@@ -27,10 +27,6 @@ residual.plot <- function(yhat,
     main = "Residuals vs. Fitted Values"
   )
   lines(yhat[j], lw1$fitted[j], col = "red")
-  # abline(
-  #  h = 0,
-  #  col = "red"
-  # )
   qqnorm(
     epsilonhat,
     main = "Normal Q-Q Plot of Residuals"

@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Descriptives)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-27</h4>
+            <h4 class="date">2020-07-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-descriptives.Rmd"><code>vignettes/tests/test-linreg-estimation-descriptives.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-descriptives.Rmd</code></div>
@@ -92,8 +92,9 @@
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">jeksterslabRdatarepo::wages()</a></code> for the data set used in this example.</p>
+<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<span class="co"># age is removed</span>
 <span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)
@@ -138,8 +139,7 @@
 <span class="no">sigma2X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span>(<span class="no">X</span>[, -<span class="fl">1</span>])))
 <span class="no">sigma2y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="no">y</span>))
 <span class="no">sigma2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">sigma2y</span>, <span class="no">sigma2X</span>)
-<span class="no">sigma</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">sigma2</span>)
-<span class="no">meanandsd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">mu</span>, <span class="no">sigma</span>)</pre></body></html></div>
+<span class="no">sigma</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">sigma2</span>)</pre></body></html></div>
 </div>
 <div id="descriptive-statistics" class="section level2">
 <h2 class="hasAnchor">
@@ -189,8 +189,7 @@
 <span class="no">result_sigma2X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"sigma2X"</span>]])
 <span class="no">result_sigma2y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"sigma2y"</span>]])
 <span class="no">result_sigma2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"sigma2"</span>]])
-<span class="no">result_sigma</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"sigma"</span>]])
-<span class="no">result_meanandsd</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"meanandsd"</span>]])</pre></body></html></div>
+<span class="no">result_sigma</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"sigma"</span>]])</pre></body></html></div>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test linreg-estimation-descriptives"</span>)
 <span class="fu">test_that</span>(<span class="st">"X"</span>, {
   <span class="no">X_vector</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">X</span>)
@@ -342,32 +341,26 @@
       <span class="no">result_sigma</span>[<span class="no">i</span>]
     )
   }
-})
-<span class="fu">test_that</span>(<span class="st">"meanandsd"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result_meanandsd</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">meanandsd</span>[<span class="no">i</span>],
-      <span class="no">result_meanandsd</span>[<span class="no">i</span>]
-    )
-  }
 })</pre></body></html></div>
+</div>
+<div id="single-regressor-for-code-coverage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#single-regressor-for-code-coverage" class="anchor"></a>Single Regressor for Code Coverage</h2>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(
   <span class="fl">1</span>,
   <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
 )
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>(
-  <span class="no">output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/descriptives.html">descriptives</a></span>(
+<span class="fu"><a href="../../reference/descriptives.html">descriptives</a></span>(
     <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
     <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-  )
 )
 <span class="co">#&gt;           Mean        SD</span>
-<span class="co">#&gt; y  -0.06698468 1.0429877</span>
-<span class="co">#&gt; X2 -0.05592833 0.9475289</span>
-<span class="co">#&gt;              y          X2</span>
-<span class="co">#&gt; y   1.00000000 -0.09394631</span>
-<span class="co">#&gt; X2 -0.09394631  1.00000000</span></pre></body></html></div>
+<span class="co">#&gt; y   0.10871584 0.8828526</span>
+<span class="co">#&gt; X2 -0.05158991 1.0454891</span>
+<span class="co">#&gt;               y           X2</span>
+<span class="co">#&gt; y   1.000000000 -0.001951479</span>
+<span class="co">#&gt; X2 -0.001951479  1.000000000</span></pre></body></html></div>
 <p><img src="test-linreg-estimation-descriptives_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 </div>
   </div>

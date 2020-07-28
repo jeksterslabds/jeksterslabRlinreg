@@ -134,15 +134,7 @@ $$
   $$</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.R2fromESS</span>(
-  <span class='kw'>ESS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>TSS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>X</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>yhat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ybar</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>betahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>.R2fromESS</span>(<span class='kw'>ESS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>TSS</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>X</span>, <span class='no'>y</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,23 +163,6 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \(\mathbf{y}\) is an \(n \times 1\) vector of observations
 on the regressand variable.</p></td>
     </tr>
-    <tr>
-      <th>yhat</th>
-      <td><p>Vector of length <code>n</code> or <code>n</code> by <code>1</code> matrix.
-\(n \times 1\) vector of predicted values of \(\mathbf{y}\)
-\(\left( \mathbf{\hat{y}} \right)\).</p></td>
-    </tr>
-    <tr>
-      <th>ybar</th>
-      <td><p>Numeric.
-Mean of <code>y</code>.</p></td>
-    </tr>
-    <tr>
-      <th>betahat</th>
-      <td><p>Vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
-The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
-of \(k\) unknown regression coefficients.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -195,7 +170,7 @@ of \(k\) unknown regression coefficients.</p></td>
     <p>Returns the coefficient of determination \(R^2\) .</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>ESS = NULL</code>, <code>ESS</code> is computed using <code><a href='dot-ESS.html'>.ESS()</a></code>.
+    <p>If <code>ESS = NULL</code>, <code>ESS</code> is computed using <code><a href='ESS.html'>ESS()</a></code> with <code>X</code> and <code>y</code> as required arguments.
 If <code>TSS = NULL</code>, <code>TSS</code> is computed using <code><a href='TSS.html'>TSS()</a></code> with <code>y</code> as a required argument.
 If <code>ESS</code> and <code>TSS</code> are provided, <code>yhat</code>, <code>ybar</code>, <code>betahat</code>, <code>X</code>, and <code>y</code> are not needed.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -206,11 +181,17 @@ If <code>ESS</code> and <code>TSS</code> are provided, <code>yhat</code>, <code>
 <p><a href='https://en.wikipedia.org/wiki/Coefficient_of_determination'>Wikipedia: Coefficient of Determination</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other coefficient of determination functions: 
+    <div class='dont-index'><p>Other assessment of model quality functions: 
+<code><a href='dot-MSE.html'>.MSE</a>()</code>,
 <code><a href='dot-R2fromRSS.html'>.R2fromRSS</a>()</code>,
+<code><a href='dot-RMSE.html'>.RMSE</a>()</code>,
 <code><a href='dot-Rbar2.html'>.Rbar2</a>()</code>,
+<code><a href='dot-model.html'>.model</a>()</code>,
+<code><a href='MSE.html'>MSE</a>()</code>,
 <code><a href='R2.html'>R2</a>()</code>,
-<code><a href='Rbar2.html'>Rbar2</a>()</code></p></div>
+<code><a href='RMSE.html'>RMSE</a>()</code>,
+<code><a href='Rbar2.html'>Rbar2</a>()</code>,
+<code><a href='model.html'>model</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

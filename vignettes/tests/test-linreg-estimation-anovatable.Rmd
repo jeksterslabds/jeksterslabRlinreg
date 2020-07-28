@@ -36,11 +36,12 @@ library(jeksterslabRlinreg)
 
 ## Data
 
-See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 
 
 ```{r }
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -66,12 +67,9 @@ result1 <- .anovatable(
   RSS = RSS,
   ESS = ESS,
   n = n,
-  k = k,
-  X = NULL,
-  y = NULL
+  k = k
 )
 result2 <- .anovatable(
-  RSS = NULL,
   ESS = ESS,
   n = n,
   k = k,
@@ -80,15 +78,12 @@ result2 <- .anovatable(
 )
 result3 <- .anovatable(
   RSS = RSS,
-  ESS = NULL,
   n = n,
   k = k,
   X = X,
   y = y
 )
 result4 <- .anovatable(
-  RSS = NULL,
-  ESS = NULL,
   n = n,
   k = k,
   X = X,
@@ -148,42 +143,42 @@ result_df3 <- c(
   result4["Total", "df"],
   result5["Total", "df"]
 )
-result_ss1 <- c(
+result_SS1 <- c(
   result1["Model", "SS"],
   result2["Model", "SS"],
   result3["Model", "SS"],
   result4["Model", "SS"],
   result5["Model", "SS"]
 )
-result_ss2 <- c(
+result_SS2 <- c(
   result1["Error", "SS"],
   result2["Error", "SS"],
   result3["Error", "SS"],
   result4["Error", "SS"],
   result5["Error", "SS"]
 )
-result_ss3 <- c(
+result_SS3 <- c(
   result1["Total", "SS"],
   result2["Total", "SS"],
   result3["Total", "SS"],
   result4["Total", "SS"],
   result5["Total", "SS"]
 )
-result_ms1 <- c(
+result_MS1 <- c(
   result1["Model", "MS"],
   result2["Model", "MS"],
   result3["Model", "MS"],
   result4["Model", "MS"],
   result5["Model", "MS"]
 )
-result_ms2 <- c(
+result_MS2 <- c(
   result1["Error", "MS"],
   result2["Error", "MS"],
   result3["Error", "MS"],
   result4["Error", "MS"],
   result5["Error", "MS"]
 )
-result_f <- c(
+result_F <- c(
   result1["Model", "F"],
   result2["Model", "F"],
   result3["Model", "F"],
@@ -223,50 +218,50 @@ test_that("df3", {
   }
 })
 test_that("ss1", {
-  for (i in seq_along(result_ss1)) {
+  for (i in seq_along(result_SS1)) {
     expect_equivalent(
       lm_ESS,
-      result_ss1[i]
+      result_SS1[i]
     )
   }
 })
 test_that("ss2", {
-  for (i in seq_along(result_ss2)) {
+  for (i in seq_along(result_SS2)) {
     expect_equivalent(
       lm_RSS,
-      result_ss2[i]
+      result_SS2[i]
     )
   }
 })
 test_that("ss3", {
-  for (i in seq_along(result_ss3)) {
+  for (i in seq_along(result_SS3)) {
     expect_equivalent(
       lm_TSS,
-      result_ss3[i]
+      result_SS3[i]
     )
   }
 })
 test_that("ms1", {
-  for (i in seq_along(result_ms1)) {
+  for (i in seq_along(result_MS1)) {
     expect_equivalent(
       lm_MS_model,
-      result_ms1[i]
+      result_MS1[i]
     )
   }
 })
 test_that("ms2", {
-  for (i in seq_along(result_ms2)) {
+  for (i in seq_along(result_MS2)) {
     expect_equivalent(
       lm_MS_error,
-      result_ms2[i]
+      result_MS2[i]
     )
   }
 })
 test_that("f", {
-  for (i in seq_along(result_f)) {
+  for (i in seq_along(result_F)) {
     expect_equivalent(
       lm_F,
-      result_f[i]
+      result_F[i]
     )
   }
 })

@@ -38,22 +38,43 @@ install_github("jeksterslabds/jeksterslabRlinreg")
 
 ### Data
 
-In this example, we examine the association between `GPA` and `LSAT` scores.
-
-See `jeksterslabRdatarepo::law()` for more information about the data set used.
+In this hypothetical example,
+we are interested in the association between wages and education.
+The regressor variable is years of education.
+The regressand variable is hourly wage in US dollars.
 
 ```{r, echo = FALSE}
-LSAT <- jeksterslabRdatarepo::law$LSAT
-GPA <- jeksterslabRdatarepo::law$GPA
+wages <- jeksterslabRdatarepo::wages
+x <- wages$education
+y <- wages$wages
+n <- length(x)
+obj <- lm(y ~ x)
+beta <- unname(coef(obj))
+# covariance structure
+beta1 <- beta[1]
+beta2 <- beta[2]
+sigma2x <- var(x)
+sigma2y <- var(y)
+# sigma^2 has some discrepancy
+# sigma2epsilon <- summary(obj)$sigma^2
+sigma2epsilon <- sigma2y - (beta2^2 * sigma2x)
+# mean structure
+mux <- mean(x)
+```
+
+```{r, echo = FALSE}
+x <- as.integer(rnorm(n = n, mean = mux, sd = sqrt(sigma2x)))
+epsilon <- rnorm(n = n, mean = 0, sd = sqrt(sigma2epsilon))
+y <- beta1 + beta2 * x + epsilon
 X <- cbind(
-  Intercept = 1,
-  GPA = GPA
+  constant = 1,
+  education = x
 )
 y <- matrix(
-  data = LSAT,
+  data = y,
   ncol = 1
 )
-colnames(y) <- "LSAT"
+colnames(y) <- "wages"
 head(X)
 head(y)
 ```
@@ -62,11 +83,12 @@ head(y)
 
 The `jeksterslabRlinreg::linreg()` function
 fits a linear regression model using `X` and `y`.
-In this example, `X` consists of a column of constants and `GPA`
-and `y` consists of `LSAT` scores.
+In this example, `X` consists of a column of constants and years of `education`
+and `y` consists of hourly `wages` in US dollars.
 
 The output includes the following:
 
+- Model assessment
 - ANOVA table
 - Table of regression coefficients with the following columns
   - Regression coefficients

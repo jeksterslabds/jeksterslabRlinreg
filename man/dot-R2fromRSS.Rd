@@ -4,7 +4,7 @@
 \alias{.R2fromRSS}
 \title{Coefficient of Determination \eqn{R^2} (from \eqn{RSS})}
 \usage{
-.R2fromRSS(RSS = NULL, TSS = NULL, epsilonhat = NULL, X, y, betahat = NULL)
+.R2fromRSS(RSS = NULL, TSS = NULL, X, y)
 }
 \arguments{
 \item{RSS}{Numeric.
@@ -12,9 +12,6 @@ Residual sum of squares.}
 
 \item{TSS}{Numeric.
 Total sum of squares.}
-
-\item{epsilonhat}{Numeric vector of length \code{n} or \code{n} by 1 matrix.
-\eqn{n \time 1} vector of residuals.}
 
 \item{X}{\code{n} by \code{k} numeric matrix.
 The data matrix \eqn{\mathbf{X}}
@@ -25,10 +22,6 @@ which includes a regressor whose value is 1 for each observation on the first co
 \item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
-
-\item{betahat}{Vector of length \code{k} or \code{k} by \code{1} matrix.
-The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
-of \eqn{k} unknown regression coefficients.}
 }
 \value{
 Returns the coefficient of determination \eqn{R^2} .
@@ -41,9 +34,9 @@ Calculates the coefficient of determination using
   }
 }
 \details{
-If \code{RSS = NULL}, \code{RSS} is computed using \code{\link[=.RSS]{.RSS()}}.
+If \code{RSS = NULL}, \code{RSS} is computed using \code{\link[=RSS]{RSS()}} with \code{X} and \code{y} as required arguments.
 If \code{TSS = NULL}, \code{TSS} is computed using \code{\link[=TSS]{TSS()}} with \code{y} as a required argument.
-If \code{RSS} and \code{TSS} are provided, \code{epsilonhat}, \code{betahat}, \code{X}, and \code{y} are not needed.
+If \code{RSS} and \code{TSS} are provided, \code{X}, and \code{y} are not needed.
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}
@@ -55,14 +48,20 @@ If \code{RSS} and \code{TSS} are provided, \code{epsilonhat}, \code{betahat}, \c
 \href{https://en.wikipedia.org/wiki/Coefficient_of_determination}{Wikipedia: Coefficient of Determination}
 }
 \seealso{
-Other coefficient of determination functions: 
+Other assessment of model quality functions: 
+\code{\link{.MSE}()},
 \code{\link{.R2fromESS}()},
+\code{\link{.RMSE}()},
 \code{\link{.Rbar2}()},
+\code{\link{.model}()},
+\code{\link{MSE}()},
 \code{\link{R2}()},
-\code{\link{Rbar2}()}
+\code{\link{RMSE}()},
+\code{\link{Rbar2}()},
+\code{\link{model}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan
 }
-\concept{coefficient of determination functions}
-\keyword{R-squared}
+\concept{assessment of model quality functions}
+\keyword{model-assessment}

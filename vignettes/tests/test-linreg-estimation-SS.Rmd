@@ -1,10 +1,10 @@
 ---
-title: "Tests: The Linear Regression Model (SS)"
+title: "Tests: The Linear Regression Model (Sum of Squares)"
 author: "Ivan Jacob Agaloos Pesigan"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tests: The Linear Regression Model (SS)}
+  %\VignetteIndexEntry{Tests: The Linear Regression Model (Sum of Squares)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -36,11 +36,12 @@ library(jeksterslabRlinreg)
 
 ## Data
 
-See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 
 
 ```{r }
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -60,20 +61,19 @@ betahat <- betahat(
   X = X,
   y = y
 )
-result_rss1 <- .RSS(
+result_RSS1 <- .RSS(
   epsilonhat = epsilonhat
 )
-result_rss2 <- .RSS(
+result_RSS2 <- .RSS(
   X = X,
-  y = y,
-  betahat = NULL
+  y = y
 )
-result_rss3 <- .RSS(
+result_RSS3 <- .RSS(
   X = X,
   y = y,
   betahat = betahat
 )
-result_rss4 <- RSS(
+result_RSS4 <- RSS(
   X = X,
   y = y
 )
@@ -89,45 +89,36 @@ yhat <- yhat(
   y = y
 )
 ybar <- mean(y)
-result_ess1 <- .ESS(
+result_ESS1 <- .ESS(
   yhat = yhat,
-  ybar = ybar,
-  betahat = NULL
+  ybar = ybar
 )
-result_ess2 <- .ESS(
+result_ESS2 <- .ESS(
   yhat = yhat,
-  ybar = NULL,
   y = y
 )
-result_ess3 <- .ESS(
-  yhat = NULL,
+result_ESS3 <- .ESS(
   ybar = ybar,
   X = X,
   y = y,
   betahat = NULL
 )
-result_ess4 <- .ESS(
-  yhat = NULL,
+result_ESS4 <- .ESS(
   ybar = ybar,
   X = X,
   y = y,
   betahat = betahat
 )
-result_ess5 <- .ESS(
-  yhat = NULL,
-  ybar = NULL,
+result_ESS5 <- .ESS(
   X = X,
   y = y,
   betahat = betahat
 )
-result_ess6 <- .ESS(
-  yhat = NULL,
-  ybar = NULL,
+result_ESS6 <- .ESS(
   X = X,
-  y = y,
-  betahat = NULL
+  y = y
 )
-result_ess7 <- ESS(
+result_ESS7 <- ESS(
   X = X,
   y = y
 )
@@ -138,7 +129,7 @@ result_ess7 <- ESS(
 
 
 ```{r }
-result_tss <- TSS(
+result_TSS <- TSS(
   y = y
 )
 ```
@@ -162,33 +153,33 @@ lm_ESS <- lm_TSS - lm_RSS
 
 
 ```{r }
-result_rss <- c(
-  result_rss1, result_rss2, result_rss3, result_rss4
+result_RSS <- c(
+  result_RSS1, result_RSS2, result_RSS3, result_RSS4
 )
-result_ess <- c(
-  result_ess1, result_ess2, result_ess3, result_ess4, result_ess5, result_ess6, result_ess7
+result_ESS <- c(
+  result_ESS1, result_ESS2, result_ESS3, result_ESS4, result_ESS5, result_ESS6, result_ESS7
 )
 context("Test linreg-estimation-SS.")
 test_that("RSS", {
-  for (i in seq_along(result_rss)) {
+  for (i in seq_along(result_RSS)) {
     expect_equivalent(
       lm_RSS,
-      result_rss[i]
+      result_RSS[i]
     )
   }
 })
 test_that("ESS", {
-  for (i in seq_along(result_rss)) {
+  for (i in seq_along(result_RSS)) {
     expect_equivalent(
       lm_ESS,
-      result_ess[i]
+      result_ESS[i]
     )
   }
 })
 test_that("TSS", {
   expect_equivalent(
     lm_TSS,
-    result_tss
+    result_TSS
   )
 })
 ```

@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -68,88 +69,52 @@ R2 <- R2(
 )
 n <- nrow(X)
 k <- ncol(X)
-result_r21 <- .R2fromRSS(
+result_R21 <- .R2fromRSS(
   RSS = RSS,
-  TSS = NULL,
-  epsilonhat = NULL,
-  X = NULL,
-  y = y,
-  betahat = NULL
+  y = y
 )
-result_r22 <- .R2fromRSS(
-  RSS = NULL,
+result_R22 <- .R2fromRSS(
   TSS = TSS,
-  epsilonhat = epsilonhat,
-  X = NULL,
-  y = NULL,
-  betahat = NULL
-)
-result_r23 <- .R2fromRSS(
-  RSS = NULL,
-  TSS = TSS,
-  epsilonhat = epsilonhat,
-  X = NULL,
-  y = NULL,
-  betahat = betahat
-)
-result_r24 <- .R2fromRSS(
-  RSS = RSS,
-  TSS = TSS,
-  epsilonhat = NULL,
-  X = NULL,
-  y = NULL,
-  betahat = NULL
-)
-result_r25 <- .R2fromRSS(
-  RSS = NULL,
-  TSS = NULL,
-  epsilonhat = NULL,
   X = X,
-  y = y,
-  betahat = NULL
+  y = y
 )
-result_r26 <- .R2fromESS(
+result_R23 <- .R2fromRSS(
+  RSS = RSS,
+  TSS = TSS
+)
+result_R24 <- .R2fromRSS(
+  RSS = NULL,
+  TSS = NULL,
+  X = X,
+  y = y
+)
+
+
+
+
+result_R25 <- .R2fromESS(
   ESS = ESS,
-  TSS = NULL,
-  X = NULL,
-  y = y,
-  yhat = NULL,
-  ybar = NULL,
-  betahat = NULL
+  y = y
 )
-result_r27 <- .R2fromESS(
-  ESS = NULL,
-  TSS = NULL,
-  X = NULL,
-  y = y,
-  yhat = yhat,
-  ybar = NULL,
-  betahat = NULL
-)
-result_r28 <- .R2fromESS(
-  ESS = NULL,
-  TSS = NULL,
+result_R26 <- .R2fromESS(
+  TSS = TSS,
   X = X,
-  y = y,
-  yhat = NULL,
-  ybar = ybar,
-  betahat = NULL
+  y = y
 )
-result_r29 <- .R2fromESS(
-  ESS = NULL,
-  TSS = NULL,
+result_R27 <- .R2fromESS(
+  ESS = ESS,
+  TSS = TSS
+)
+result_R28 <- .R2fromESS(
   X = X,
-  y = y,
-  yhat = NULL,
-  ybar = ybar,
-  betahat = betahat
+  y = y
 )
-result_r210 <- R2(
+result_R29 <- R2(
   X = X,
   y = y,
   fromRSS = TRUE
 )
-result_r211 <- R2(
+result_R210 <- R2(
   X = X,
   y = y,
   fromRSS = FALSE
@@ -158,47 +123,27 @@ result_r211 <- R2(
 #' ## $\bar{R}^{2}$
 #'
 #+
-result_rbar21 <- .Rbar2(
-  R2 = NULL,
-  n,
-  k,
-  X,
-  y,
-  fromRSS = TRUE
+result_Rbar21 <- .Rbar2(
+  R2 = R2,
+  n = n,
+  k = k
 )
-result_rbar21 <- .Rbar2(
+result_Rbar22 <- .Rbar2(
   R2 = R2,
   n = n,
   k = k,
-  X = NULL,
-  y = NULL,
-  fromRSS = TRUE
-)
-result_rbar22 <- .Rbar2(
-  R2 = R2,
-  n = n,
-  k = k,
-  X = NULL,
-  y = NULL,
   fromRSS = FALSE
 )
-result_rbar23 <- .Rbar2(
-  R2 = NULL,
-  n = NULL,
-  k = NULL,
+result_Rbar23 <- .Rbar2(
   X = X,
-  y = y,
-  fromRSS = TRUE
+  y = y
 )
-result_rbar24 <- .Rbar2(
-  R2 = NULL,
-  n = NULL,
-  k = NULL,
+result_Rbar24 <- .Rbar2(
   X = X,
   y = y,
   fromRSS = FALSE
 )
-result_rbar25 <- Rbar2(
+result_Rbar25 <- Rbar2(
   X = X,
   y = y
 )
@@ -210,33 +155,33 @@ lmobj <- lm(
   wages ~ gender + race + union + education + experience,
   data = jeksterslabRdatarepo::wages
 )
-lm_r2 <- summary(lmobj)$r.squared
-lm_rbar2 <- summary(lmobj)$adj.r.squared
+lm_R2 <- summary(lmobj)$r.squared
+lm_Rbar2 <- summary(lmobj)$adj.r.squared
 #'
 #'
 #+
-result_r2 <- c(
-  result_r21, result_r22, result_r23, result_r24, result_r25,
-  result_r26, result_r27, result_r28, result_r29, result_r210, result_r211
+result_R2 <- c(
+  result_R21, result_R22, result_R23, result_R24, result_R25,
+  result_R26, result_R27, result_R28, result_R29, result_R210
 )
-result_rbar2 <- c(
-  result_rbar21, result_rbar22, result_rbar23,
-  result_rbar24, result_rbar25
+result_Rbar2 <- c(
+  result_Rbar21, result_Rbar22, result_Rbar23,
+  result_Rbar24, result_Rbar25
 )
 context("Test linreg-estimation-R2.")
 test_that("R2", {
-  for (i in seq_along(result_r2)) {
+  for (i in seq_along(result_R2)) {
     expect_equivalent(
-      lm_r2,
-      result_r2[i]
+      lm_R2,
+      result_R2[i]
     )
   }
 })
 test_that("Rbar2", {
-  for (i in seq_along(result_rbar2)) {
+  for (i in seq_along(result_Rbar2)) {
     expect_equivalent(
-      lm_rbar2,
-      result_rbar2[i]
+      lm_Rbar2,
+      result_Rbar2[i]
     )
   }
 })

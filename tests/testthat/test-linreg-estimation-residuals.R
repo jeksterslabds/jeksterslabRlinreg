@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -71,7 +72,6 @@ result_yminusyhat1 <- .yminusyhat(
 )
 result_yminusyhat2 <- .yminusyhat(
   y = y,
-  yhat = NULL,
   X = X
 )
 
@@ -156,17 +156,12 @@ test_that("Py = yhat.", {
 test_that("error.", {
   expect_error(
     .My(
-      y = y,
-      M = NULL,
-      X = NULL,
-      P = NULL
+      y = y
     )
   )
   expect_error(
     .yminusyhat(
-      y = y,
-      yhat = NULL,
-      X = NULL
+      y = y
     )
   )
 })

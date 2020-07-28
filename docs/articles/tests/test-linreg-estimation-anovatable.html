@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (ANOVA Table)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-27</h4>
+            <h4 class="date">2020-07-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-anovatable.Rmd"><code>vignettes/tests/test-linreg-estimation-anovatable.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-anovatable.Rmd</code></div>
@@ -92,8 +92,9 @@
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">jeksterslabRdatarepo::wages()</a></code> for the data set used in this example.</p>
+<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<span class="co"># age is removed</span>
 <span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)
@@ -130,12 +131,9 @@
   <span class="kw">RSS</span> <span class="kw">=</span> <span class="no">RSS</span>,
   <span class="kw">ESS</span> <span class="kw">=</span> <span class="no">ESS</span>,
   <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
-  <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="kw">NULL</span>
+  <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>
 )
 <span class="no">result2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-anovatable.html">.anovatable</a></span>(
-  <span class="kw">RSS</span> <span class="kw">=</span> <span class="kw">NULL</span>,
   <span class="kw">ESS</span> <span class="kw">=</span> <span class="no">ESS</span>,
   <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
   <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>,
@@ -144,15 +142,12 @@
 )
 <span class="no">result3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-anovatable.html">.anovatable</a></span>(
   <span class="kw">RSS</span> <span class="kw">=</span> <span class="no">RSS</span>,
-  <span class="kw">ESS</span> <span class="kw">=</span> <span class="kw">NULL</span>,
   <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
   <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>,
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="no">result4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-anovatable.html">.anovatable</a></span>(
-  <span class="kw">RSS</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-  <span class="kw">ESS</span> <span class="kw">=</span> <span class="kw">NULL</span>,
   <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
   <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>,
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
@@ -203,42 +198,42 @@
   <span class="no">result4</span>[<span class="st">"Total"</span>, <span class="st">"df"</span>],
   <span class="no">result5</span>[<span class="st">"Total"</span>, <span class="st">"df"</span>]
 )
-<span class="no">result_ss1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="no">result_SS1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="no">result1</span>[<span class="st">"Model"</span>, <span class="st">"SS"</span>],
   <span class="no">result2</span>[<span class="st">"Model"</span>, <span class="st">"SS"</span>],
   <span class="no">result3</span>[<span class="st">"Model"</span>, <span class="st">"SS"</span>],
   <span class="no">result4</span>[<span class="st">"Model"</span>, <span class="st">"SS"</span>],
   <span class="no">result5</span>[<span class="st">"Model"</span>, <span class="st">"SS"</span>]
 )
-<span class="no">result_ss2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="no">result_SS2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="no">result1</span>[<span class="st">"Error"</span>, <span class="st">"SS"</span>],
   <span class="no">result2</span>[<span class="st">"Error"</span>, <span class="st">"SS"</span>],
   <span class="no">result3</span>[<span class="st">"Error"</span>, <span class="st">"SS"</span>],
   <span class="no">result4</span>[<span class="st">"Error"</span>, <span class="st">"SS"</span>],
   <span class="no">result5</span>[<span class="st">"Error"</span>, <span class="st">"SS"</span>]
 )
-<span class="no">result_ss3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="no">result_SS3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="no">result1</span>[<span class="st">"Total"</span>, <span class="st">"SS"</span>],
   <span class="no">result2</span>[<span class="st">"Total"</span>, <span class="st">"SS"</span>],
   <span class="no">result3</span>[<span class="st">"Total"</span>, <span class="st">"SS"</span>],
   <span class="no">result4</span>[<span class="st">"Total"</span>, <span class="st">"SS"</span>],
   <span class="no">result5</span>[<span class="st">"Total"</span>, <span class="st">"SS"</span>]
 )
-<span class="no">result_ms1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="no">result_MS1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="no">result1</span>[<span class="st">"Model"</span>, <span class="st">"MS"</span>],
   <span class="no">result2</span>[<span class="st">"Model"</span>, <span class="st">"MS"</span>],
   <span class="no">result3</span>[<span class="st">"Model"</span>, <span class="st">"MS"</span>],
   <span class="no">result4</span>[<span class="st">"Model"</span>, <span class="st">"MS"</span>],
   <span class="no">result5</span>[<span class="st">"Model"</span>, <span class="st">"MS"</span>]
 )
-<span class="no">result_ms2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="no">result_MS2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="no">result1</span>[<span class="st">"Error"</span>, <span class="st">"MS"</span>],
   <span class="no">result2</span>[<span class="st">"Error"</span>, <span class="st">"MS"</span>],
   <span class="no">result3</span>[<span class="st">"Error"</span>, <span class="st">"MS"</span>],
   <span class="no">result4</span>[<span class="st">"Error"</span>, <span class="st">"MS"</span>],
   <span class="no">result5</span>[<span class="st">"Error"</span>, <span class="st">"MS"</span>]
 )
-<span class="no">result_f</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="no">result_F</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
   <span class="no">result1</span>[<span class="st">"Model"</span>, <span class="st">"F"</span>],
   <span class="no">result2</span>[<span class="st">"Model"</span>, <span class="st">"F"</span>],
   <span class="no">result3</span>[<span class="st">"Model"</span>, <span class="st">"F"</span>],
@@ -278,50 +273,50 @@
   }
 })
 <span class="fu">test_that</span>(<span class="st">"ss1"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_ss1</span>)) {
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_SS1</span>)) {
     <span class="fu">expect_equivalent</span>(
       <span class="no">lm_ESS</span>,
-      <span class="no">result_ss1</span>[<span class="no">i</span>]
+      <span class="no">result_SS1</span>[<span class="no">i</span>]
     )
   }
 })
 <span class="fu">test_that</span>(<span class="st">"ss2"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_ss2</span>)) {
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_SS2</span>)) {
     <span class="fu">expect_equivalent</span>(
       <span class="no">lm_RSS</span>,
-      <span class="no">result_ss2</span>[<span class="no">i</span>]
+      <span class="no">result_SS2</span>[<span class="no">i</span>]
     )
   }
 })
 <span class="fu">test_that</span>(<span class="st">"ss3"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_ss3</span>)) {
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_SS3</span>)) {
     <span class="fu">expect_equivalent</span>(
       <span class="no">lm_TSS</span>,
-      <span class="no">result_ss3</span>[<span class="no">i</span>]
+      <span class="no">result_SS3</span>[<span class="no">i</span>]
     )
   }
 })
 <span class="fu">test_that</span>(<span class="st">"ms1"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_ms1</span>)) {
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_MS1</span>)) {
     <span class="fu">expect_equivalent</span>(
       <span class="no">lm_MS_model</span>,
-      <span class="no">result_ms1</span>[<span class="no">i</span>]
+      <span class="no">result_MS1</span>[<span class="no">i</span>]
     )
   }
 })
 <span class="fu">test_that</span>(<span class="st">"ms2"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_ms2</span>)) {
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_MS2</span>)) {
     <span class="fu">expect_equivalent</span>(
       <span class="no">lm_MS_error</span>,
-      <span class="no">result_ms2</span>[<span class="no">i</span>]
+      <span class="no">result_MS2</span>[<span class="no">i</span>]
     )
   }
 })
 <span class="fu">test_that</span>(<span class="st">"f"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_f</span>)) {
+  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_F</span>)) {
     <span class="fu">expect_equivalent</span>(
       <span class="no">lm_F</span>,
-      <span class="no">result_f</span>[<span class="no">i</span>]
+      <span class="no">result_F</span>[<span class="no">i</span>]
     )
   }
 })

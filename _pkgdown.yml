@@ -42,10 +42,10 @@ reference:
   desc:  Residual variance.
 - contents:
   - has_keyword("sigma2epsilonhat")
-- title: Coefficient of Determination
-  desc:  Coefficient of determination.
+- title: Model Assessment
+  desc:  Assessment of model quality.
 - contents:
-  - has_keyword("R-squared")
+  - has_keyword("model-assessment")
 - title: Hypothesis Testing
   desc:  Hypothesis testing.
 - contents:
@@ -63,7 +63,7 @@ articles:
 - title: The linreg() Function
   desc: The main function.
   contents:
-  - tests/test-linreg-estimation-linreg
+  - notes/notes-linreg
 - title: Population Regression Model
   desc: The population regression model.
   contents:
@@ -71,6 +71,7 @@ articles:
 - title: Other Tests
   desc: Other tests.
   contents:
+  - tests/test-linreg-estimation-descriptives-simple
   - tests/test-linreg-estimation-descriptives
   - tests/test-linreg-estimation-ols-example
   - tests/test-linreg-estimation-projection
@@ -78,6 +79,8 @@ articles:
   - tests/test-linreg-estimation-residuals
   - tests/test-linreg-estimation-SS
   - tests/test-linreg-estimation-R2
+  - tests/test-linreg-estimation-MSE
+  - tests/test-linreg-estimation-model
   - tests/test-linreg-estimation-sigma2epsilonhat
   - tests/test-linreg-estimation-vcov
   - tests/test-linreg-estimation-anovatable

@@ -57,7 +57,8 @@
 #' @inheritParams .My
 #' @inherit .My description return references
 #' @export
-My <- function(X, y) {
+My <- function(X,
+               y) {
   .My(
     y = y,
     M = NULL,

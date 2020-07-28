@@ -32,9 +32,19 @@ linreg <- function(X,
     msd = FALSE,
     cor = FALSE
   )
-  varnamesX <- descriptives[["varnamesX"]]
-  varnamesy <- descriptives[["varnamesy"]]
+  X <- descriptives[["X"]]
+  y <- descriptives[["y"]]
+  varnamesX <- colnames(X)
+  varnamey <- colnames(y)
   betahatnames <- c("Intercept", varnamesX[-1])
+  RX <- descriptives[["RX"]]
+  ryX <- descriptives[["ryX"]]
+  ybar <- descriptives[["muhaty"]]
+  n <- descriptives[["n"]]
+  k <- descriptives[["k"]]
+  mu <- descriptives[["mu"]]
+  sigma <- descriptives[["sigma"]]
+  data <- descriptives[["data"]]
   # proj--------------------------------------------------------------------------
   P <- P(X)
   M <- .M(
@@ -52,8 +62,8 @@ linreg <- function(X,
   names(betahat) <- betahatnames
   # betahat prime-----------------------------------------------------------------------------
   betahatprime <- slopesprime(
-    RX = descriptives[["RX"]],
-    ryX = descriptives[["ryX"]]
+    RX = RX,
+    ryX = ryX
   )
   betahatprime <- as.vector(
     c(
@@ -80,18 +90,18 @@ linreg <- function(X,
   )
   ESS <- .ESS(
     yhat = yhat,
-    ybar = descriptives[["muhaty"]]
+    ybar = ybar
   )
   TSS <- RSS + ESS
   # sigma2epsilonhat -----------------------------------------------------------------------------
   sigma2epsilonhat <- .sigma2epsilonhat(
     RSS = RSS,
-    n = descriptives[["n"]],
-    k = descriptives[["k"]]
+    n = n,
+    k = k
   )
   sigma2epsilonhatbiased <- .sigma2epsilonhatbiased(
     RSS = RSS,
-    n = descriptives[["n"]]
+    n = n
   )
   # studentized residuals ---------------------------------------------------------------------------------------
   tepsilonhat <- .tepsilonhat(
@@ -106,15 +116,24 @@ linreg <- function(X,
   )
   Rbar2 <- .Rbar2(
     R2 = R2,
-    n = descriptives[["n"]],
-    k = descriptives[["k"]],
+    n = n,
+    k = k,
+  )
+  # mse ----------------------------------------------------------------------------------------
+  MSE <- .MSE(
+    RSS = RSS,
+    n = n
+  )
+  # rmse ----------------------------------------------------------------------------------
+  RMSE <- .RMSE(
+    MSE = MSE
   )
   # inference -----------------------------------------------------------------------------
   aov <- .anovatable(
     RSS = RSS,
     ESS = ESS,
-    n = descriptives[["n"]],
-    k = descriptives[["k"]]
+    n = n,
+    k = k
   )
   vcov <- .vcovbetahat(
     sigma2epsilonhat = sigma2epsilonhat,
@@ -140,7 +159,7 @@ linreg <- function(X,
   betahatinference <- .betahatinference(
     betahat = betahat,
     se = setouse,
-    n = descriptives[["n"]]
+    n = n
   )
   betahatinference <- cbind(
     betahatinference,
@@ -152,6 +171,32 @@ linreg <- function(X,
   coefficients <- betahatinference[, c(1, 2, 3, 4, ncol(betahatinference))]
   if (print) {
     # display -------------------------------------------------------------------------------------------
+    ## model assessment --------------------------------------------------------------------------------
+    model <- matrix(
+      data = round(
+        c(
+          RSS,
+          MSE,
+          RMSE,
+          R2,
+          Rbar2
+        ),
+        digits = 2
+      ),
+      ncol = 1
+    )
+    rownames(model) <- c(
+      "RSS",
+      "MSE",
+      "RMSE",
+      "R-squared",
+      "Adj. R-squared"
+    )
+    colnames(model) <- "Value"
+    cat("\nModel Assessment:\n")
+    print(
+      model
+    )
     ## anova table--------------------------------------------------------------------------------------
     cat("\nANOVA Table:\n")
     print(
@@ -171,15 +216,23 @@ linreg <- function(X,
       ci
     )
     ## descriptive statistics--------------------------------------------------------------------------------------
+    meanandsd <- cbind(
+      mu,
+      sigma
+    )
+    colnames(meanandsd) <- c(
+      "Mean",
+      "SD"
+    )
     cat("\nMeans and Standard Deviations:\n")
     print(
-      descriptives[["meanandsd"]]
+      meanandsd
     )
   }
   ## plots--------------------------------------------------------------------------------------
   if (plot) {
     scatter.plot(
-      data = descriptives[["data"]]
+      data = data
     )
     residual.plot(
       yhat = yhat,
@@ -208,6 +261,8 @@ linreg <- function(X,
     MSerror = aov["Error", "MS"],
     F = aov["Model", "F"],
     pf = aov["Model", "p"],
+    MSE = MSE,
+    RMSE = RMSE,
     vcov = vcov,
     vcovbiased = vcovbiased,
     se = se,
@@ -215,8 +270,7 @@ linreg <- function(X,
     t = betahatinference[, "t"],
     pt = betahatinference[, "p"],
     coefficients = coefficients,
-    ci = ci,
-    betahatinference = betahatinference
+    ci = ci
   )
   invisible(
     c(

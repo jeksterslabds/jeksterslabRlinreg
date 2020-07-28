@@ -4,15 +4,7 @@
 \alias{.R2fromESS}
 \title{Coefficient of Determination \eqn{R^2} (from \eqn{ESS})}
 \usage{
-.R2fromESS(
-  ESS = NULL,
-  TSS = NULL,
-  X,
-  y,
-  yhat = NULL,
-  ybar = NULL,
-  betahat = NULL
-)
+.R2fromESS(ESS = NULL, TSS = NULL, X, y)
 }
 \arguments{
 \item{ESS}{Numeric.
@@ -30,17 +22,6 @@ which includes a regressor whose value is 1 for each observation on the first co
 \item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
-
-\item{yhat}{Vector of length \code{n} or \code{n} by \code{1} matrix.
-\eqn{n \times 1} vector of predicted values of \eqn{\mathbf{y}}
-\eqn{\left( \mathbf{\hat{y}} \right)}.}
-
-\item{ybar}{Numeric.
-Mean of \code{y}.}
-
-\item{betahat}{Vector of length \code{k} or \code{k} by \code{1} matrix.
-The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
-of \eqn{k} unknown regression coefficients.}
 }
 \value{
 Returns the coefficient of determination \eqn{R^2} .
@@ -53,7 +34,7 @@ Calculates the coefficient of determination using
   }
 }
 \details{
-If \code{ESS = NULL}, \code{ESS} is computed using \code{\link[=.ESS]{.ESS()}}.
+If \code{ESS = NULL}, \code{ESS} is computed using \code{\link[=ESS]{ESS()}} with \code{X} and \code{y} as required arguments.
 If \code{TSS = NULL}, \code{TSS} is computed using \code{\link[=TSS]{TSS()}} with \code{y} as a required argument.
 If \code{ESS} and \code{TSS} are provided, \code{yhat}, \code{ybar}, \code{betahat}, \code{X}, and \code{y} are not needed.
 }
@@ -67,16 +48,20 @@ If \code{ESS} and \code{TSS} are provided, \code{yhat}, \code{ybar}, \code{betah
 \href{https://en.wikipedia.org/wiki/Coefficient_of_determination}{Wikipedia: Coefficient of Determination}
 }
 \seealso{
-Other coefficient of determination functions: 
+Other assessment of model quality functions: 
+\code{\link{.MSE}()},
 \code{\link{.R2fromRSS}()},
+\code{\link{.RMSE}()},
 \code{\link{.Rbar2}()},
+\code{\link{.model}()},
+\code{\link{MSE}()},
 \code{\link{R2}()},
-\code{\link{Rbar2}()}
+\code{\link{RMSE}()},
+\code{\link{Rbar2}()},
+\code{\link{model}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan
-
-Ivan Jacob Agaloos Pesigan
 }
-\concept{coefficient of determination functions}
-\keyword{R-squared}
+\concept{assessment of model quality functions}
+\keyword{model-assessment}

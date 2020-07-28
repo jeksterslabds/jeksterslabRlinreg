@@ -26,10 +26,11 @@ library(jeksterslabRlinreg)
 #'
 #' ## Data
 #'
-#' See `jeksterslabRdatarepo::wages()` for the data set used in this example.
+#' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
 #'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
@@ -45,7 +46,10 @@ result_yhat <- as.vector(Pmatrix %*% y)
 #'
 #+
 Mmatrix1 <- M(X = X)
-Mmatrix2 <- .M(X = X, P = Pmatrix)
+Mmatrix2 <- .M(
+  X = X,
+  P = Pmatrix
+)
 result_epsilonhat1 <- as.vector(Mmatrix1 %*% y)
 result_epsilonhat2 <- as.vector(Mmatrix2 %*% y)
 #'

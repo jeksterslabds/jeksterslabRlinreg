@@ -10,6 +10,9 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/M.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/MSE.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/My.html</loc>
   </url>
   <url>
@@ -20,6 +23,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/R2.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/RMSE.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/RSS.html</loc>
@@ -58,6 +64,9 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-M.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-MSE.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-My.html</loc>
   </url>
   <url>
@@ -68,6 +77,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-R2fromRSS.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-RMSE.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-RSS.html</loc>
@@ -95,6 +107,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-h.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-model.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sigma2epsilonhat.html</loc>
@@ -125,6 +140,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/linreg.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/model.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/mutheta.html</loc>
@@ -172,6 +190,12 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/jeksterslabRlinreg.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/notes/notes-linreg.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-MSE.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-R2.html</loc>
   </url>
   <url>
@@ -181,13 +205,16 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-anovatable.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-descriptives-simple.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-descriptives.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-leverage.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-linreg.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-model.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-nhst.html</loc>

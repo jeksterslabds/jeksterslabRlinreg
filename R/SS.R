@@ -69,13 +69,17 @@
     }
     return(
       drop(
-        unname(crossprod(y) - (2 * (betahat %*% crossprod(X, y))) + (t(betahat) %*% t(X) %*% X %*% betahat))
+        unname(
+          crossprod(y) - (2 * (betahat %*% crossprod(X, y))) + (t(betahat) %*% t(X) %*% X %*% betahat)
+        )
       )
     )
   } else {
     return(
       drop(
-        unname(crossprod(epsilonhat))
+        unname(
+          crossprod(epsilonhat)
+        )
       )
     )
   }
@@ -159,7 +163,9 @@ RSS <- function(X,
     )
   }
   drop(
-    unname(sum(yhat^2) - (2 * ybar * sum(yhat)) + (length(as.vector(yhat)) * ybar^2))
+    unname(
+      sum(yhat^2) - (2 * ybar * sum(yhat)) + (length(as.vector(yhat)) * ybar^2)
+    )
   )
 }
 
@@ -213,6 +219,8 @@ ESS <- function(X,
 #' @export
 TSS <- function(y) {
   drop(
-    unname(crossprod(y) - length(y) * mean(y)^2)
+    unname(
+      crossprod(y) - length(y) * mean(y)^2
+    )
   )
 }
