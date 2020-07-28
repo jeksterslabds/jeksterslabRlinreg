@@ -38,6 +38,5 @@ Suggests:
 	testthat,
     microbenchmark,
     MASS,
-    jeksterslabRdatarepo,
-    lavaan
+    jeksterslabRdatarepo
 RoxygenNote: 7.1.1

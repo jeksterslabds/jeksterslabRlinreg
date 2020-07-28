@@ -106,32 +106,34 @@ lmobj <- lm(
   data = jeksterslabRdatarepo::wages
 )
 summary(lmobj)
-#'
-#' ## `lavaan::sem()` function
-#' 
-#' Linear regression in SEM
-#' 
-#+
-model <- c(
-  wages ~ gender + race + union + education + experience
-)
-#' 
-#' ### Wishart Likelihood (Unbiased)
-#' 
-#+
-lavobj <- lavaan::sem(
-  model = model,
-  data = jeksterslabRdatarepo::wages,
-  likelihood = "wishart"
-)
-summary(lavobj)
-#' 
-#' ### Normal Likelihood (Biased)
-#' 
-#+
-lavobj <- lavaan::sem(
-  model = model,
-  data = jeksterslabRdatarepo::wages,
-  likelihood = "normal"
-)
-summary(lavobj)
+#
+## `lavaan::sem()` function
+# 
+# Linear regression in SEM
+# 
+#
+#model <- c(
+#  wages ~ gender + race + union + education + experience
+#)
+#
+# Build errors with lavaan dependency
+#
+### Wishart Likelihood (Unbiased)
+# 
+#
+#lavobj <- lavaan::sem(
+#  model = model,
+#  data = jeksterslabRdatarepo::wages,
+#  likelihood = "wishart"
+#)
+#summary(lavobj)
+# 
+### Normal Likelihood (Biased)
+# 
+#
+#lavobj <- lavaan::sem(
+#  model = model,
+#  data = jeksterslabRdatarepo::wages,
+#  likelihood = "normal"
+#)
+#summary(lavobj)

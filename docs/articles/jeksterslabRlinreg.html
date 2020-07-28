@@ -105,19 +105,19 @@
 <a href="#data" class="anchor"></a>Data</h3>
 <p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
 <pre><code>#&gt;      constant education
-#&gt; [1,]        1        11
-#&gt; [2,]        1        15
+#&gt; [1,]        1         9
+#&gt; [2,]        1        14
 #&gt; [3,]        1        15
-#&gt; [4,]        1        11
-#&gt; [5,]        1         8
-#&gt; [6,]        1        15
+#&gt; [4,]        1        13
+#&gt; [5,]        1        14
+#&gt; [6,]        1        12
 #&gt;          wages
-#&gt; [1,]  9.790432
-#&gt; [2,] 18.140379
-#&gt; [3,] 14.086514
-#&gt; [4,] -2.414173
-#&gt; [5,]  4.046642
-#&gt; [6,] 18.965834</code></pre>
+#&gt; [1,]  9.180623
+#&gt; [2,] 13.418780
+#&gt; [3,]  5.727348
+#&gt; [4,]  4.594453
+#&gt; [5,] 16.251503
+#&gt; [6,] 11.447440</code></pre>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
@@ -151,32 +151,32 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model Assessment:</span>
 <span class="co">#&gt;                   Value</span>
-<span class="co">#&gt; RSS            65210.85</span>
-<span class="co">#&gt; MSE               50.59</span>
-<span class="co">#&gt; RMSE               7.11</span>
-<span class="co">#&gt; R-squared          0.16</span>
-<span class="co">#&gt; Adj. R-squared     0.16</span>
+<span class="co">#&gt; RSS            64136.17</span>
+<span class="co">#&gt; MSE               49.76</span>
+<span class="co">#&gt; RMSE               7.05</span>
+<span class="co">#&gt; R-squared          0.23</span>
+<span class="co">#&gt; Adj. R-squared     0.23</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ANOVA Table:</span>
 <span class="co">#&gt;         df       SS          MS        F            p</span>
-<span class="co">#&gt; Model    1 12456.08 12456.07947 245.8329 7.773636e-51</span>
-<span class="co">#&gt; Error 1287 65210.85    50.66888       NA           NA</span>
-<span class="co">#&gt; Total 1288 77666.93          NA       NA           NA</span>
+<span class="co">#&gt; Model    1 18919.45 18919.45465 379.6507 2.654434e-74</span>
+<span class="co">#&gt; Error 1287 64136.17    49.83385       NA           NA</span>
+<span class="co">#&gt; Total 1288 83055.62          NA       NA           NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;                coef         se         t            p std. coef</span>
-<span class="co">#&gt; Intercept -2.401586 0.92469602 -2.597163 9.506932e-03 0.0000000</span>
-<span class="co">#&gt; education  1.126289 0.07183398 15.679060 7.773636e-51 0.4004724</span>
+<span class="co">#&gt; Intercept -5.514197 0.92029577 -5.991766 2.690500e-09 0.0000000</span>
+<span class="co">#&gt; education  1.369988 0.07031125 19.484626 2.654434e-74 0.4772762</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
-<span class="co">#&gt;              ci_0.05     ci_0.5     ci_2.5    ci_97.5     ci_99.5  ci_99.95</span>
-<span class="co">#&gt; Intercept -5.4513281 -4.7869824 -4.2156628 -0.5875089 -0.01618932 0.6481564</span>
-<span class="co">#&gt; education  0.8893734  0.9409824  0.9853647  1.2672138  1.31159610 1.3632051</span>
+<span class="co">#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95</span>
+<span class="co">#&gt; Intercept -8.549427 -7.888242 -7.319641 -3.708752 -3.140151 -2.478967</span>
+<span class="co">#&gt; education  1.138095  1.188610  1.232051  1.507926  1.551367  1.601882</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
 <span class="co">#&gt;               Mean       SD</span>
-<span class="co">#&gt; wages     11.75960 7.765334</span>
-<span class="co">#&gt; education 12.57331 2.761104</span></pre></body></html></div>
+<span class="co">#&gt; wages     12.00338 8.030204</span>
+<span class="co">#&gt; education 12.78666 2.797560</span></pre></body></html></div>
 <p><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-1.png" width="100%"><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-2.png" width="100%"></p>
 </div>
 </div>
