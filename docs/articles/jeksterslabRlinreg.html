@@ -105,19 +105,19 @@
 <a href="#data" class="anchor"></a>Data</h3>
 <p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
 <pre><code>#&gt;      constant education
-#&gt; [1,]        1         9
-#&gt; [2,]        1        14
-#&gt; [3,]        1        15
-#&gt; [4,]        1        13
-#&gt; [5,]        1        14
-#&gt; [6,]        1        12
+#&gt; [1,]        1        11
+#&gt; [2,]        1        11
+#&gt; [3,]        1        12
+#&gt; [4,]        1        14
+#&gt; [5,]        1        15
+#&gt; [6,]        1         8
 #&gt;          wages
-#&gt; [1,]  9.180623
-#&gt; [2,] 13.418780
-#&gt; [3,]  5.727348
-#&gt; [4,]  4.594453
-#&gt; [5,] 16.251503
-#&gt; [6,] 11.447440</code></pre>
+#&gt; [1,]  3.287767
+#&gt; [2,] 21.739647
+#&gt; [3,] 24.105535
+#&gt; [4,]  1.292768
+#&gt; [5,] 21.075396
+#&gt; [6,] 10.789691</code></pre>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
@@ -151,32 +151,32 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model Assessment:</span>
 <span class="co">#&gt;                   Value</span>
-<span class="co">#&gt; RSS            64136.17</span>
-<span class="co">#&gt; MSE               49.76</span>
-<span class="co">#&gt; RMSE               7.05</span>
+<span class="co">#&gt; RSS            61628.87</span>
+<span class="co">#&gt; MSE               47.81</span>
+<span class="co">#&gt; RMSE               6.91</span>
 <span class="co">#&gt; R-squared          0.23</span>
 <span class="co">#&gt; Adj. R-squared     0.23</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ANOVA Table:</span>
 <span class="co">#&gt;         df       SS          MS        F            p</span>
-<span class="co">#&gt; Model    1 18919.45 18919.45465 379.6507 2.654434e-74</span>
-<span class="co">#&gt; Error 1287 64136.17    49.83385       NA           NA</span>
-<span class="co">#&gt; Total 1288 83055.62          NA       NA           NA</span>
+<span class="co">#&gt; Model    1 17987.28 17987.27675 375.6295 1.261344e-73</span>
+<span class="co">#&gt; Error 1287 61628.87    47.88568       NA           NA</span>
+<span class="co">#&gt; Total 1288 79616.15          NA       NA           NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                coef         se         t            p std. coef</span>
-<span class="co">#&gt; Intercept -5.514197 0.92029577 -5.991766 2.690500e-09 0.0000000</span>
-<span class="co">#&gt; education  1.369988 0.07031125 19.484626 2.654434e-74 0.4772762</span>
+<span class="co">#&gt;                coef        se         t            p std. coef</span>
+<span class="co">#&gt; Intercept -4.725501 0.8750584 -5.400212 7.919638e-08 0.0000000</span>
+<span class="co">#&gt; education  1.304226 0.0672935 19.381164 1.261344e-73 0.4753157</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
 <span class="co">#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95</span>
-<span class="co">#&gt; Intercept -8.549427 -7.888242 -7.319641 -3.708752 -3.140151 -2.478967</span>
-<span class="co">#&gt; education  1.138095  1.188610  1.232051  1.507926  1.551367  1.601882</span>
+<span class="co">#&gt; Intercept -7.611534 -6.982850 -6.442199 -3.008804 -2.468153 -1.839469</span>
+<span class="co">#&gt; education  1.082286  1.130632  1.172209  1.436243  1.477820  1.526167</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
 <span class="co">#&gt;               Mean       SD</span>
-<span class="co">#&gt; wages     12.00338 8.030204</span>
-<span class="co">#&gt; education 12.78666 2.797560</span></pre></body></html></div>
+<span class="co">#&gt; wages     11.81763 7.862174</span>
+<span class="co">#&gt; education 12.68425 2.865311</span></pre></body></html></div>
 <p><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-1.png" width="100%"><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-2.png" width="100%"></p>
 </div>
 </div>

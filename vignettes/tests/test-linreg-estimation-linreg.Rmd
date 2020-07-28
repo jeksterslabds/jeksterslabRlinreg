@@ -31,7 +31,6 @@ knitr::opts_chunk$set(
 ```{r echo = FALSE}
 library(testthat)
 library(jeksterslabRlinreg)
-library(lavaan)
 ```
 
 
@@ -113,7 +112,7 @@ linreg(
 linreg(
   X = X,
   y = y,
-  ubiased = FALSE
+  unbiased = FALSE
 )
 ```
 
@@ -131,34 +130,34 @@ lmobj <- lm(
 summary(lmobj)
 #
 ## `lavaan::sem()` function
-# 
-# Linear regression in SEM
-# 
 #
-#model <- c(
+# Linear regression in SEM
+#
+#
+# model <- c(
 #  wages ~ gender + race + union + education + experience
-#)
+# )
 #
 # Build errors with lavaan dependency
 #
 ### Wishart Likelihood (Unbiased)
-# 
 #
-#lavobj <- lavaan::sem(
+#
+# lavobj <- lavaan::sem(
 #  model = model,
 #  data = jeksterslabRdatarepo::wages,
 #  likelihood = "wishart"
-#)
-#summary(lavobj)
-# 
-### Normal Likelihood (Biased)
-# 
+# )
+# summary(lavobj)
 #
-#lavobj <- lavaan::sem(
+### Normal Likelihood (Biased)
+#
+#
+# lavobj <- lavaan::sem(
 #  model = model,
 #  data = jeksterslabRdatarepo::wages,
 #  likelihood = "normal"
-#)
-#summary(lavobj)
+# )
+# summary(lavobj)
 ```
 

@@ -89,13 +89,11 @@
     
     
 <div class="sourceCode" id="cb1"><html><body><pre class="r"># The Linear Regression Model {#linreg-estimation-linreg-example}</pre></body></html></div>
-<pre><code>#&gt; This is lavaan 0.6-6
-#&gt; lavaan is BETA software! Please report any bugs.</code></pre>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
 <p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
 <span class="co"># age is removed</span>
 <span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
@@ -121,7 +119,7 @@
 <a href="#data-1" class="anchor"></a>Data</h2>
 <p>In this example, we are interested in predictors of wages. The regressor variables are gender, race, union membership, education, and work experience. The regressand variable is hourly wage in US dollars.</p>
 <p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
 <span class="co"># age is removed</span>
 <span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
@@ -171,7 +169,7 @@
 <div id="using-unbiased-standard-errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-unbiased-standard-errors" class="anchor"></a>Using Unbiased Standard Errors</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
@@ -221,18 +219,60 @@
 <div id="using-biased-standard-errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-biased-standard-errors" class="anchor"></a>Using Biased Standard Errors</h2>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-  <span class="kw">ubiased</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+  <span class="kw">unbiased</span> <span class="kw">=</span> <span class="fl">FALSE</span>
 )
-<span class="co">#&gt; Error in linreg(X = X, y = y, ubiased = FALSE): unused argument (ubiased = FALSE)</span></pre></body></html></div>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model Assessment:</span>
+<span class="co">#&gt;                   Value</span>
+<span class="co">#&gt; RSS            54342.54</span>
+<span class="co">#&gt; MSE               42.16</span>
+<span class="co">#&gt; RMSE               6.49</span>
+<span class="co">#&gt; R-squared          0.32</span>
+<span class="co">#&gt; Adj. R-squared     0.32</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ANOVA Table:</span>
+<span class="co">#&gt;         df       SS         MS        F             p</span>
+<span class="co">#&gt; Model    5 25967.28 5193.45611 122.6149 3.453144e-106</span>
+<span class="co">#&gt; Error 1283 54342.54   42.35584       NA            NA</span>
+<span class="co">#&gt; Total 1288 80309.82         NA       NA            NA</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt; Biased standard errors are used.</span>
+<span class="co">#&gt;                  coef         se         t            p   std. coef</span>
+<span class="co">#&gt; Intercept  -7.1833382 1.01342097 -7.088208 2.236468e-12  0.00000000</span>
+<span class="co">#&gt; gender     -3.0748755 0.36376661 -8.452880 7.620029e-17 -0.19477502</span>
+<span class="co">#&gt; race       -1.5653133 0.50800108 -3.081319 2.104728e-03 -0.07135673</span>
+<span class="co">#&gt; union       1.0959758 0.50489888  2.170684 3.013798e-02  0.05077872</span>
+<span class="co">#&gt; education   1.3703010 0.06575065 20.840873 2.582448e-83  0.48829962</span>
+<span class="co">#&gt; experience  0.1666065 0.01601016 10.406297 2.103790e-24  0.24607631</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence Intervals:</span>
+<span class="co">#&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95</span>
+<span class="co">#&gt; Intercept  -10.5257285 -9.7976266 -9.1714824 -5.1951941 -4.5690499 -3.8409480</span>
+<span class="co">#&gt; gender      -4.2746237 -4.0132721 -3.7885182 -2.3612328 -2.1364788 -1.8751273</span>
+<span class="co">#&gt; race        -3.2407650 -2.8757868 -2.5619173 -0.5687093 -0.2548398  0.1101384</span>
+<span class="co">#&gt; union       -0.5692445 -0.2064951  0.1054577  2.0864938  2.3984466  2.7611960</span>
+<span class="co">#&gt; education    1.1534470  1.2006862  1.2413104  1.4992916  1.5399157  1.5871549</span>
+<span class="co">#&gt; experience   0.1138030  0.1253056  0.1351976  0.1980155  0.2079074  0.2194101</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Means and Standard Deviations:</span>
+<span class="co">#&gt;                  Mean         SD</span>
+<span class="co">#&gt; wages      12.3658495  7.8963503</span>
+<span class="co">#&gt; gender      0.4972847  0.5001867</span>
+<span class="co">#&gt; race        0.1528317  0.3599648</span>
+<span class="co">#&gt; union       0.1590380  0.3658535</span>
+<span class="co">#&gt; education  13.1450737  2.8138234</span>
+<span class="co">#&gt; experience 18.7897595 11.6628366</span></pre></body></html></div>
+<p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-7-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-7-2.png" width="100%"></p>
 </div>
 <div id="lm-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lm-function" class="anchor"></a><code>lm()</code> function</h2>
 <p>The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function is the default option for fitting a linear model in <code>R</code>.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
   <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
   <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
 )
@@ -262,35 +302,35 @@
 <span class="co">#&gt; F-statistic: 122.6 on 5 and 1283 DF,  p-value: &lt; 2.2e-16</span>
 <span class="co">#</span>
 <span class="co">## `lavaan::sem()` function</span>
-<span class="co"># </span>
-<span class="co"># Linear regression in SEM</span>
-<span class="co"># </span>
 <span class="co">#</span>
-<span class="co">#model &lt;- c(</span>
+<span class="co"># Linear regression in SEM</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># model &lt;- c(</span>
 <span class="co">#  wages ~ gender + race + union + education + experience</span>
-<span class="co">#)</span>
+<span class="co"># )</span>
 <span class="co">#</span>
 <span class="co"># Build errors with lavaan dependency</span>
 <span class="co">#</span>
 <span class="co">### Wishart Likelihood (Unbiased)</span>
-<span class="co"># </span>
 <span class="co">#</span>
-<span class="co">#lavobj &lt;- lavaan::sem(</span>
+<span class="co">#</span>
+<span class="co"># lavobj &lt;- lavaan::sem(</span>
 <span class="co">#  model = model,</span>
 <span class="co">#  data = jeksterslabRdatarepo::wages,</span>
 <span class="co">#  likelihood = "wishart"</span>
-<span class="co">#)</span>
-<span class="co">#summary(lavobj)</span>
-<span class="co"># </span>
-<span class="co">### Normal Likelihood (Biased)</span>
-<span class="co"># </span>
+<span class="co"># )</span>
+<span class="co"># summary(lavobj)</span>
 <span class="co">#</span>
-<span class="co">#lavobj &lt;- lavaan::sem(</span>
+<span class="co">### Normal Likelihood (Biased)</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># lavobj &lt;- lavaan::sem(</span>
 <span class="co">#  model = model,</span>
 <span class="co">#  data = jeksterslabRdatarepo::wages,</span>
 <span class="co">#  likelihood = "normal"</span>
-<span class="co">#)</span>
-<span class="co">#summary(lavobj)</span></pre></body></html></div>
+<span class="co"># )</span>
+<span class="co"># summary(lavobj)</span></pre></body></html></div>
 </div>
   </div>
 
