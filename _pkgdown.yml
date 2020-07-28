@@ -63,7 +63,7 @@ articles:
 - title: The linreg() Function
   desc: The main function.
   contents:
-  - notes/notes-linreg
+  - test/test-linreg-estimation-linreg
 - title: Population Regression Model
   desc: The population regression model.
   contents:
