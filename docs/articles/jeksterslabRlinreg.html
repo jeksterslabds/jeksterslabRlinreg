@@ -105,19 +105,19 @@
 <a href="#data" class="anchor"></a>Data</h3>
 <p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
 <pre><code>#&gt;      constant education
-#&gt; [1,]        1        12
-#&gt; [2,]        1        16
-#&gt; [3,]        1         7
-#&gt; [4,]        1        10
-#&gt; [5,]        1        13
-#&gt; [6,]        1        10
+#&gt; [1,]        1        16
+#&gt; [2,]        1        11
+#&gt; [3,]        1        18
+#&gt; [4,]        1        13
+#&gt; [5,]        1        15
+#&gt; [6,]        1        13
 #&gt;          wages
-#&gt; [1,] -1.082669
-#&gt; [2,] 10.530657
-#&gt; [3,]  7.921912
-#&gt; [4,]  3.610982
-#&gt; [5,] 20.280703
-#&gt; [6,] 24.400330</code></pre>
+#&gt; [1,] 22.845034
+#&gt; [2,]  5.342228
+#&gt; [3,] 20.984341
+#&gt; [4,]  1.307842
+#&gt; [5,]  2.254395
+#&gt; [6,] 12.982306</code></pre>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
@@ -151,32 +151,32 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model Assessment:</span>
 <span class="co">#&gt;                   Value</span>
-<span class="co">#&gt; RSS            67854.14</span>
-<span class="co">#&gt; MSE               52.64</span>
-<span class="co">#&gt; RMSE               7.26</span>
-<span class="co">#&gt; R-squared          0.23</span>
-<span class="co">#&gt; Adj. R-squared     0.23</span>
+<span class="co">#&gt; RSS            63178.40</span>
+<span class="co">#&gt; MSE               49.01</span>
+<span class="co">#&gt; RMSE               7.00</span>
+<span class="co">#&gt; R-squared          0.22</span>
+<span class="co">#&gt; Adj. R-squared     0.22</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ANOVA Table:</span>
-<span class="co">#&gt;         df       SS          MS       F            p</span>
-<span class="co">#&gt; Model    1 19966.94 19966.93677 378.716 3.812001e-74</span>
-<span class="co">#&gt; Error 1287 67854.14    52.72272      NA           NA</span>
-<span class="co">#&gt; Total 1288 87821.08          NA      NA           NA</span>
+<span class="co">#&gt;         df       SS          MS        F           p</span>
+<span class="co">#&gt; Model    1 17607.91 17607.91308 358.6888 9.34817e-71</span>
+<span class="co">#&gt; Error 1287 63178.40    49.08967       NA          NA</span>
+<span class="co">#&gt; Total 1288 80786.32          NA       NA          NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                coef         se         t            p std. coef</span>
-<span class="co">#&gt; Intercept -5.706036 0.91624461 -6.227633 6.399233e-10 0.0000000</span>
-<span class="co">#&gt; education  1.360330 0.06990163 19.460627 3.812001e-74 0.4768221</span>
+<span class="co">#&gt;               coef        se         t            p std. coef</span>
+<span class="co">#&gt; Intercept -4.34751 0.8614507 -5.046731 5.138912e-07 0.0000000</span>
+<span class="co">#&gt; education  1.26903 0.0670059 18.939081 9.348170e-71 0.4668583</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
 <span class="co">#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95</span>
-<span class="co">#&gt; Intercept -8.727904 -8.069630 -7.503532 -3.908539 -3.342441 -2.684167</span>
-<span class="co">#&gt; education  1.129787  1.180007  1.223196  1.497463  1.540652  1.590872</span>
+<span class="co">#&gt; Intercept -7.188662 -6.569755 -6.037511 -2.657508 -2.125264 -1.506357</span>
+<span class="co">#&gt; education  1.048038  1.096178  1.137577  1.400483  1.441882  1.490023</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
 <span class="co">#&gt;               Mean       SD</span>
-<span class="co">#&gt; wages     11.68486 8.257364</span>
-<span class="co">#&gt; education 12.78433 2.894367</span></pre></body></html></div>
+<span class="co">#&gt; wages     11.54343 7.919741</span>
+<span class="co">#&gt; education 12.52211 2.913561</span></pre></body></html></div>
 <p><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-1.png" width="100%"><img src="jeksterslabRlinreg_files/figure-html/unnamed-chunk-4-2.png" width="100%"></p>
 </div>
 </div>

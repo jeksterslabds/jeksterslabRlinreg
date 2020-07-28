@@ -32,11 +32,15 @@ library(jeksterslabRlinreg)
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, "education"]
-X <- cbind(
-  constant = 1,
-  education = X
+X <- unname(
+  cbind(
+    1,
+    X
+  )
 )
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+y <- unname(
+  jeksterslabRdatarepo::wages.matrix[["y"]]
+)
 head(X)
 head(y)
 #'
@@ -180,10 +184,10 @@ test_that("R", {
   }
 })
 test_that("RX", {
-    expect_equivalent(
-      RX,
-      result_RX
-    )
+  expect_equivalent(
+    RX,
+    result_RX
+  )
 })
 test_that("ryX", {
   for (i in 1:length(result_ryX)) {

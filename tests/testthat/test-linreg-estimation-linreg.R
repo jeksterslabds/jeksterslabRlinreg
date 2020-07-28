@@ -43,9 +43,9 @@ head(y)
 #' we are interested in predictors of wages.
 #' The regressor variables are gender, race, union membership, education, and work experience.
 #' The regressand variable is hourly wage in US dollars.
-#' 
+#'
 #' See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
-#' 
+#'
 #+
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
@@ -54,17 +54,17 @@ y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
 head(y)
 #'
-#' 
+#'
 #' ## `jeksterslabRlinreg::linreg()`
-#' 
+#'
 #' The `jeksterslabRlinreg::linreg()` function
 #' fits a linear regression model using `X` and `y`.
 #' In this example, `X` consists of a column of constants,
 #' `gender`, `race`, `union` membership, `education`, and work `experience`.
 #' and `y` consists of hourly `wages` in US dollars.
-#' 
+#'
 #' The output includes the following:
-#' 
+#'
 #' - Model assessment
 #' - ANOVA table
 #' - Table of regression coefficients with the following columns
@@ -77,18 +77,18 @@ head(y)
 #' - Means and standard deviations
 #' - Scatterplot matrix
 #' - Residual plots
-#' 
+#'
 #+
 result_linreg <- linreg(
   X = X,
   y = y
 )
 #'
-#' 
+#'
 #' ## `lm()` function
-#' 
+#'
 #' The `lm()` function is the default option for fitting a linear model in `R`.
-#' 
+#'
 #+
 lmobj <- lm(
   wages ~ gender + race + union + education + experience,
