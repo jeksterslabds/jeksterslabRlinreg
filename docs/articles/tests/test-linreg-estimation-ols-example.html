@@ -343,12 +343,12 @@
   <span class="kw">betahat</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahat.html">betahat</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;         expr     min       lq       mean   median        uq      max neval</span>
-<span class="co">#&gt;           lm 890.923 946.1055 1061.65190 979.5220 1182.6370 3129.135   100</span>
-<span class="co">#&gt;  betahatnorm  43.866  49.6580   54.96841  54.2415   59.1730  121.908   100</span>
-<span class="co">#&gt;    betahatqr 152.278 165.8705  251.93915 176.2405  327.2215 2510.711   100</span>
-<span class="co">#&gt;   betahatsvd 162.524 174.9685  206.09267 187.9580  240.9580  258.990   100</span>
-<span class="co">#&gt;      betahat  52.407  59.3605   65.13310  64.1195   69.8260   85.383   100</span></pre></body></html></div>
+<span class="co">#&gt;         expr     min       lq       mean    median        uq      max neval</span>
+<span class="co">#&gt;           lm 892.236 948.1725 1061.32933 1027.1050 1132.3165 3245.742   100</span>
+<span class="co">#&gt;  betahatnorm  42.728  47.8425   53.59340   52.2845   58.6385   88.500   100</span>
+<span class="co">#&gt;    betahatqr 154.207 167.3695  263.38443  179.7440  330.5310 2653.347   100</span>
+<span class="co">#&gt;   betahatsvd 161.041 172.9965  205.92653  187.7150  244.3285  265.647   100</span>
+<span class="co">#&gt;      betahat  50.990  59.3825   66.15764   67.6565   71.7860   89.473   100</span></pre></body></html></div>
 <div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test linreg-estimation-ols"</span>)
 <span class="fu">test_that</span>(<span class="st">"results_betahat"</span>, {
   <span class="no">result_lm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_lm</span>))

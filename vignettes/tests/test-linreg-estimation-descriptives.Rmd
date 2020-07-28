@@ -269,19 +269,3 @@ test_that("sigma", {
 })
 ```
 
-
-## Single Regressor for Code Coverage
-
-
-```{r }
-X <- cbind(
-  1,
-  rnorm(n = 100)
-)
-y <- rnorm(n = 100)
-descriptives(
-    X = X,
-    y = y,
-)
-```
-

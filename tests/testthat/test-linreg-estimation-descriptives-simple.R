@@ -2,9 +2,9 @@
 #' title: "Tests: The Linear Regression Model (Descriptives - Simple Regression)"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
-#' output: rmarkdown::html_vignette- 
+#' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (Descriptives - Simple Regressio)}
+#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (Descriptives - Simple Regression)}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---

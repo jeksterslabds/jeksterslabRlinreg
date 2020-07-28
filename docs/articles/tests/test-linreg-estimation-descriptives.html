@@ -343,26 +343,6 @@
   }
 })</pre></body></html></div>
 </div>
-<div id="single-regressor-for-code-coverage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#single-regressor-for-code-coverage" class="anchor"></a>Single Regressor for Code Coverage</h2>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(
-  <span class="fl">1</span>,
-  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
-)
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
-<span class="fu"><a href="../../reference/descriptives.html">descriptives</a></span>(
-    <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-    <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-)
-<span class="co">#&gt;           Mean        SD</span>
-<span class="co">#&gt; y   0.10871584 0.8828526</span>
-<span class="co">#&gt; X2 -0.05158991 1.0454891</span>
-<span class="co">#&gt;               y           X2</span>
-<span class="co">#&gt; y   1.000000000 -0.001951479</span>
-<span class="co">#&gt; X2 -0.001951479  1.000000000</span></pre></body></html></div>
-<p><img src="test-linreg-estimation-descriptives_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

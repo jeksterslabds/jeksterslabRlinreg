@@ -190,9 +190,6 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/jeksterslabRlinreg.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/notes/notes-linreg.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-MSE.html</loc>
   </url>
   <url>
@@ -212,6 +209,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-leverage.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-linreg.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-model.html</loc>
