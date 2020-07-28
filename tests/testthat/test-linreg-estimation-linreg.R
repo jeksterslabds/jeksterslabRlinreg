@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 #+ echo = FALSE
 library(testthat)
 library(jeksterslabRlinreg)
+library(lavaan)
 #'
 #' ## Data
 #'
@@ -78,12 +79,22 @@ head(y)
 #' - Scatterplot matrix
 #' - Residual plots
 #'
+#' ## Using Unbiased Standard Errors
+#' 
 #+
-result_linreg <- linreg(
+linreg(
   X = X,
   y = y
 )
 #'
+#' ## Using Biased Standard Errors
+#' 
+#+
+linreg(
+  X = X,
+  y = y,
+  ubiased = FALSE
+)
 #'
 #' ## `lm()` function
 #'
@@ -96,3 +107,31 @@ lmobj <- lm(
 )
 summary(lmobj)
 #'
+#' ## `lavaan::sem()` function
+#' 
+#' Linear regression in SEM
+#' 
+#+
+model <- c(
+  wages ~ gender + race + union + education + experience
+)
+#' 
+#' ### Wishart Likelihood (Unbiased)
+#' 
+#+
+lavobj <- lavaan::sem(
+  model = model,
+  data = jeksterslabRdatarepo::wages,
+  likelihood = "wishart"
+)
+summary(lavobj)
+#' 
+#' ### Normal Likelihood (Biased)
+#' 
+#+
+lavobj <- lavaan::sem(
+  model = model,
+  data = jeksterslabRdatarepo::wages,
+  likelihood = "normal"
+)
+summary(lavobj)

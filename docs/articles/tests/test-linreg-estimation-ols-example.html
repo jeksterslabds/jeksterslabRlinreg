@@ -344,11 +344,11 @@
 )
 <span class="co">#&gt; Unit: microseconds</span>
 <span class="co">#&gt;         expr     min       lq       mean   median        uq      max neval</span>
-<span class="co">#&gt;           lm 894.952 952.8035 1055.46521 972.2330 1166.0700 3260.815   100</span>
-<span class="co">#&gt;  betahatnorm  42.773  49.2340   53.68291  53.0430   58.4025   74.067   100</span>
-<span class="co">#&gt;    betahatqr 151.800 162.9720  254.00215 185.2335  323.2365 2425.709   100</span>
-<span class="co">#&gt;   betahatsvd 159.284 173.1830  203.44550 182.5905  239.4315  277.178   100</span>
-<span class="co">#&gt;      betahat  52.811  61.1700   66.66799  66.8705   70.7080   90.769   100</span></pre></body></html></div>
+<span class="co">#&gt;           lm 888.899 950.0585 1059.64054 982.7680 1166.6965 3478.233   100</span>
+<span class="co">#&gt;  betahatnorm  43.506  49.2240   54.20965  53.1305   58.9150   80.451   100</span>
+<span class="co">#&gt;    betahatqr 156.381 167.6630  231.32532 181.3570  324.2975  362.001   100</span>
+<span class="co">#&gt;   betahatsvd 161.088 172.5715  226.14841 183.6445  241.2540 2358.745   100</span>
+<span class="co">#&gt;      betahat  51.943  60.9635   66.74856  65.8105   71.8275  114.355   100</span></pre></body></html></div>
 <div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test linreg-estimation-ols"</span>)
 <span class="fu">test_that</span>(<span class="st">"results_betahat"</span>, {
   <span class="no">result_lm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_lm</span>))
