@@ -41,7 +41,7 @@ reference:
 - title: Residual Variance
   desc:  Residual variance.
 - contents:
-  - has_keyword("sigma2epsilonhat")
+  - has_keyword("sigma2hatepsilonhat")
 - title: Model Assessment
   desc:  Assessment of model quality.
 - contents:
@@ -81,7 +81,7 @@ articles:
   - tests/test-linreg-estimation-R2
   - tests/test-linreg-estimation-MSE
   - tests/test-linreg-estimation-model
-  - tests/test-linreg-estimation-sigma2epsilonhat
+  - tests/test-linreg-estimation-sigma2hatepsilonhat
   - tests/test-linreg-estimation-vcov
   - tests/test-linreg-estimation-anovatable
   - tests/test-linreg-estimation-nhst

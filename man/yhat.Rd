@@ -28,6 +28,17 @@ that is, the predicted value of \eqn{\mathbf{y}} given \eqn{\mathbf{X}} using
     \mathbf{\hat{y}} = \mathbf{X} \boldsymbol{\hat{\beta}}.
   }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+yhat <- yhat(
+  X = X,
+  y = y
+)
+hist(yhat)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear Regression}
 

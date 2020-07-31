@@ -5,13 +5,20 @@
 #' @family hypothesis testing functions
 #' @keywords inference
 #' @inheritParams ci
+#' @return Returns a matrix with the following columns
+#' \describe{
+#'   \item{coef}{Coefficients.}
+#'   \item{se}{Standard error.}
+#'   \item{t}{t-statistic.}
+#'   \item{p}{p-value.}
+#' }
 #' @export
 nhst <- function(betahat,
-                 se,
+                 sehatbetahat,
                  n,
                  k) {
   df <- n - k
-  tstatistic <- betahat / se
+  tstatistic <- betahat / sehatbetahat
   p <- 2 * pt(
     q = -abs(tstatistic),
     df = df,
@@ -19,7 +26,7 @@ nhst <- function(betahat,
   )
   cbind(
     coef = betahat,
-    se = se,
+    se = sehatbetahat,
     t = tstatistic,
     p = p
   )

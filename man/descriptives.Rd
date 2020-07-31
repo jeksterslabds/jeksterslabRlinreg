@@ -40,8 +40,19 @@ Print means and standard deviations.}
 \item{cor}{Logical.
 Print correlations.}
 }
+\value{
+Returns descriptive statistics useful in k-variable linear regression model.
+}
 \description{
 Descriptive Statistics
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+descriptives(
+  X = X,
+  y = y
+)
 }
 \author{
 Ivan Jacob Agaloos Pesigan

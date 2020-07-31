@@ -21,7 +21,7 @@ The data matrix \eqn{\mathbf{X}}
 is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
 which includes a regressor whose value is 1 for each observation on the first column.}
 
-\item{betahat}{Vector of length \code{k} or \code{k} by \code{1} matrix.
+\item{betahat}{Numeric vector of length \code{k} or \code{k} by \code{1} matrix.
 The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
 of \eqn{k} unknown regression coefficients.}
 }

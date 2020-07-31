@@ -31,6 +31,15 @@ Note that
 is the projection matrix (or hat matrix) \eqn{\mathbf{P}}
 and \eqn{h_{ii}} is the diagonal of \eqn{\mathbf{P}}.
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+h <- h(
+  X = X
+)
+hist(h)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Leverage_(statistics)}{Wikipedia: Leverage}
 }

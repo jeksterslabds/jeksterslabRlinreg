@@ -40,16 +40,16 @@
 
 
 <meta property="og:title" content="Explained Sum of Squares — ESS" />
-<meta property="og:description" content="Calculates the explained sum of squares \(\left( ESS \right)\)
+<meta property="og:description" content="Calculates the explained sum of squares \(\left( \mathrm{ESS} \right)\)
 using
 $$
-    ESS = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
     \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} - \bar{Y} \right)^2
   $$
 In matrix form
 $$
-    ESS = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \mathbf{X} \boldsymbol{\hat{\beta}} - \mathbf{\bar{Y}} \right)^2
   $$
 where
@@ -58,12 +58,12 @@ is an \(n \times 1\) matrix of predicted values of \(\mathbf{y}\),
 and \(\mathbf{\bar{Y}}\) is the mean of \(\mathbf{y}\).
 Equivalent computational matrix formula
 $$
-    ESS = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
+    \mathrm{ESS} = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}} - n \mathbf{\bar{Y}}^{2}.
   $$
 Note that
 $$
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   $$" />
 
 
@@ -147,16 +147,16 @@ $$
     </div>
 
     <div class="ref-description">
-    <p>Calculates the explained sum of squares \(\left( ESS \right)\)
+    <p>Calculates the explained sum of squares \(\left( \mathrm{ESS} \right)\)
 using
 $$
-    ESS = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
     \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} - \bar{Y} \right)^2
   $$
 In matrix form
 $$
-    ESS = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \mathbf{X} \boldsymbol{\hat{\beta}} - \mathbf{\bar{Y}} \right)^2
   $$
 where
@@ -165,12 +165,12 @@ is an \(n \times 1\) matrix of predicted values of \(\mathbf{y}\),
 and \(\mathbf{\bar{Y}}\) is the mean of \(\mathbf{y}\).
 Equivalent computational matrix formula
 $$
-    ESS = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
+    \mathrm{ESS} = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}} - n \mathbf{\bar{Y}}^{2}.
   $$
 Note that
 $$
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   $$</p>
     </div>
 
@@ -197,7 +197,7 @@ on the regressand variable.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the explained sum of squares \(\left( ESS \right)\).</p>
+    <p>Returns the explained sum of squares \(\left( \mathrm{ESS} \right)\).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://en.wikipedia.org/wiki/Residual_sum_of_squares'>Wikipedia: Residual Sum of Squares</a></p>
@@ -212,6 +212,15 @@ on the regressand variable.</p></td>
 <code><a href='RSS.html'>RSS</a>()</code>,
 <code><a href='TSS.html'>TSS</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>ESS</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt; [1] 25967.28</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

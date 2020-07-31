@@ -12,26 +12,32 @@ The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 }
 \value{
-Returns the total sum of squares \eqn{\left( TSS \right)}.
+Returns the total sum of squares \eqn{\left( \mathrm{TSS} \right)}.
 }
 \description{
-Calculates the total sum of squares \eqn{\left( TSS \right)} using
+Calculates the total sum of squares \eqn{\left( \mathrm{TSS} \right)} using
 \deqn{
-    TSS = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
+    \mathrm{TSS} = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} Y_{i}^{2} - n \bar{Y}^2
   }
 In matrix form
 \deqn{
-    TSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
+    \mathrm{TSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
   }
 Equivalent computational matrix formula
 \deqn{
-    TSS = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
+    \mathrm{TSS} = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
   }
 Note that
 \deqn{
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   }
+}
+\examples{
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+TSS(
+  y = y
+)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}

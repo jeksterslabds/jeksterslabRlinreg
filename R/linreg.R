@@ -14,6 +14,15 @@
 #'   Display plots.
 #' @param print Logical.
 #'   Display summary output.
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' linreg(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 linreg <- function(X,
                    y,
@@ -61,7 +70,7 @@ linreg <- function(X,
   betahat <- as.vector(betahat)
   names(betahat) <- betahatnames
   # betahat prime-----------------------------------------------------------------------------
-  betahatprime <- slopesprime(
+  betahatprime <- .slopesprime(
     RX = RX,
     ryX = ryX
   )
@@ -93,13 +102,13 @@ linreg <- function(X,
     ybar = ybar
   )
   TSS <- RSS + ESS
-  # sigma2epsilonhat -----------------------------------------------------------------------------
-  sigma2epsilonhat <- .sigma2epsilonhat(
+  # sigma2hatepsilonhat -----------------------------------------------------------------------------
+  sigma2hatepsilonhat <- .sigma2hatepsilonhat(
     RSS = RSS,
     n = n,
     k = k
   )
-  sigma2epsilonhatbiased <- .sigma2epsilonhatbiased(
+  sigma2hatepsilonhatbiased <- .sigma2hatepsilonhatbiased(
     RSS = RSS,
     n = n
   )
@@ -107,7 +116,7 @@ linreg <- function(X,
   tepsilonhat <- .tepsilonhat(
     epsilonhat = epsilonhat,
     h = h,
-    sigma2epsilonhat = sigma2epsilonhat
+    sigma2hatepsilonhat = sigma2hatepsilonhat
   )
   # R2 -----------------------------------------------------------------------------
   R2 <- .R2fromRSS(
@@ -117,7 +126,7 @@ linreg <- function(X,
   Rbar2 <- .Rbar2(
     R2 = R2,
     n = n,
-    k = k,
+    k = k
   )
   # mse ----------------------------------------------------------------------------------------
   MSE <- .MSE(
@@ -129,46 +138,59 @@ linreg <- function(X,
     MSE = MSE
   )
   # inference -----------------------------------------------------------------------------
-  aov <- .anovatable(
+  anovatable <- .anovatable(
     RSS = RSS,
     ESS = ESS,
     n = n,
     k = k
   )
-  vcov <- .vcovbetahat(
-    sigma2epsilonhat = sigma2epsilonhat,
+  vcovhatbetahat <- .vcovhatbetahat(
+    sigma2hatepsilonhat = sigma2hatepsilonhat,
     X = X
   )
-  colnames(vcov) <- betahatnames
-  rownames(vcov) <- betahatnames
-  vcovbiased <- .vcovbetahatbiased(
-    sigma2epsilonhatbiased = sigma2epsilonhatbiased,
+  colnames(vcovhatbetahat) <- betahatnames
+  rownames(vcovhatbetahat) <- betahatnames
+  vcovhatbetahatbiased <- .vcovhatbetahatbiased(
+    sigma2hatepsilonhatbiased = sigma2hatepsilonhatbiased,
     X = X
   )
-  colnames(vcovbiased) <- betahatnames
-  rownames(vcovbiased) <- betahatnames
-  se <- sqrt(diag(vcov))
-  names(se) <- betahatnames
-  sebiased <- sqrt(diag(vcovbiased))
-  names(sebiased) <- betahatnames
+  colnames(vcovhatbetahatbiased) <- betahatnames
+  rownames(vcovhatbetahatbiased) <- betahatnames
+  sehatbetahat <- .sehatbetahat(vcovhatbetahat = vcovhatbetahat)
+  names(sehatbetahat) <- betahatnames
+  sehatbetahatbiased <- .sehatbetahatbiased(vcovhatbetahatbiased = vcovhatbetahatbiased)
+  names(sehatbetahatbiased) <- betahatnames
+  sehatbetahatprimebiased <- .sehatbetahatprimebiased(
+    betahat = betahat,
+    sehatbetahat = sehatbetahat,
+    betahatprime = betahatprime
+  )
+  names(sehatbetahatprimebiased) <- betahatnames
   if (unbiased) {
-    setouse <- se
+    sehatbetahattouse <- sehatbetahat
   } else {
-    setouse <- sebiased
+    sehatbetahattouse <- sehatbetahatbiased
   }
   betahatinference <- .betahatinference(
     betahat = betahat,
-    se = setouse,
+    sehatbetahat = sehatbetahattouse,
     n = n
-  )
-  betahatinference <- cbind(
-    betahatinference,
-    "std. coef" = betahatprime
   )
   rownames(betahatinference) <- betahatnames
   ci <- betahatinference
-  ci <- ci[, -c(1, 2, 3, 4, ncol(betahatinference))]
-  coefficients <- betahatinference[, c(1, 2, 3, 4, ncol(betahatinference))]
+  ci <- ci[, -c(1, 2, 3, 4)]
+  coefficients <- betahatinference[, c(1, 2, 3, 4)]
+  betahatprimeinference <- .betahatinference(
+    betahat = betahatprime,
+    sehatbetahat = sehatbetahatprimebiased,
+    n = n
+  )
+  rownames(betahatprimeinference) <- betahatnames
+  stdci <- betahatprimeinference
+  stdci <- stdci[, -c(1, 2, 3, 4)]
+  stdci <- stdci[2:length(betahatnames), ]
+  stdcoefficients <- betahatprimeinference[, c(1, 2, 3, 4)]
+  stdcoefficients <- stdcoefficients[2:length(betahatnames), ]
   if (print) {
     # display -------------------------------------------------------------------------------------------
     ## model assessment --------------------------------------------------------------------------------
@@ -200,7 +222,7 @@ linreg <- function(X,
     ## anova table--------------------------------------------------------------------------------------
     cat("\nANOVA Table:\n")
     print(
-      aov
+      anovatable
     )
     ## coefficients--------------------------------------------------------------------------------------
     cat("\nCoefficients:\n")
@@ -210,10 +232,18 @@ linreg <- function(X,
     print(
       coefficients
     )
+    cat("\nStandardized Coefficients:\n")
+    print(
+      stdcoefficients
+    )
     ## confidence intervals --------------------------------------------------------------------------------------
     cat("\nConfidence Intervals:\n")
     print(
       ci
+    )
+    cat("\nConfidence Intervals - Standardized Coefficients:\n")
+    print(
+      stdci
     )
     ## descriptive statistics--------------------------------------------------------------------------------------
     meanandsd <- cbind(
@@ -253,23 +283,25 @@ linreg <- function(X,
     RSS = RSS,
     ESS = ESS,
     TSS = TSS,
-    sigma2epsilonhat = sigma2epsilonhat,
-    sigma2epsilonhatbiased = sigma2epsilonhatbiased,
+    sigma2hatepsilonhat = sigma2hatepsilonhat,
+    sigma2hatepsilonhatbiased = sigma2hatepsilonhatbiased,
     R2 = R2,
     Rbar2 = Rbar2,
-    MSmodel = aov["Model", "MS"],
-    MSerror = aov["Error", "MS"],
-    F = aov["Model", "F"],
-    pf = aov["Model", "p"],
+    MSmodel = anovatable["Model", "MS"],
+    MSerror = anovatable["Error", "MS"],
+    F = anovatable["Model", "F"],
+    pf = anovatable["Model", "p"],
     MSE = MSE,
     RMSE = RMSE,
-    vcov = vcov,
-    vcovbiased = vcovbiased,
-    se = se,
-    sebiased = sebiased,
+    vcovhatbetahat = vcovhatbetahat,
+    vcovhatbetahatbiased = vcovhatbetahatbiased,
+    sehatbetahat = sehatbetahat,
+    sehatbetahatbiased = sehatbetahatbiased,
+    sehatbetahatprimebiased = sehatbetahatprimebiased,
     t = betahatinference[, "t"],
     pt = betahatinference[, "p"],
     coefficients = coefficients,
+    stdcoefficients = stdcoefficients,
     ci = ci
   )
   invisible(

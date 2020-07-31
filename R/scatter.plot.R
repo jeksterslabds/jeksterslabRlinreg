@@ -6,7 +6,7 @@
 #' @family plotting functions
 #' @keywords plot
 #' @import graphics
-#' @importFrom stats loess
+#' @importFrom stats loess cor.test
 #' @param data Matrix or data frame.
 #' @export
 scatter.plot <- function(data) {
@@ -26,7 +26,9 @@ scatter.plot <- function(data) {
     on.exit(par(usr))
     par(usr = c(0, 1, 0, 1))
     r <- round(cor(x, y), digits = 2)
-    txt <- paste0("r = ", r)
+    p <- cor.test(x, y)
+    r.p <- round(p$p.value, digits = 3)
+    txt <- paste0("r = ", r, "\np = ", r.p)
     text(0.5, 0.5, txt)
   }
   # Customize upper panel

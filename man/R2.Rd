@@ -33,6 +33,16 @@ or
     {\textrm{Total sum of squares}} .
 }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+R2(
+  X = X,
+  y = y
+)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}
 

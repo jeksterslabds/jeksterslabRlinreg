@@ -29,6 +29,9 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 }
+\value{
+Returns the ANOVA table.
+}
 \description{
 Analysis of Variance (from \eqn{RSS} and \eqn{ESS})
 }

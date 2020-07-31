@@ -27,6 +27,14 @@ where
     \mathbf{P} = \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
   }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+M <- M(
+  X = X
+)
+str(M, list.len = 6)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Projection_matrix}{Wikipedia: Projection Matrix}
 }

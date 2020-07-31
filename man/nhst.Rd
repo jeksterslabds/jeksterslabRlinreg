@@ -4,14 +4,14 @@
 \alias{nhst}
 \title{Hypothesis Test for Estimates of Regression Coefficients}
 \usage{
-nhst(betahat, se, n, k)
+nhst(betahat, sehatbetahat, n, k)
 }
 \arguments{
-\item{betahat}{Vector of length \code{k} or \code{k} by \code{1} matrix.
+\item{betahat}{Numeric vector of length \code{k} or \code{k} by \code{1} matrix.
 The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
 of \eqn{k} unknown regression coefficients.}
 
-\item{se}{Numeric vector.
+\item{sehatbetahat}{Numeric vector.
 Standard errors of regression coefficients.}
 
 \item{n}{Integer.
@@ -20,6 +20,15 @@ Sample size.}
 \item{k}{Integer.
 Number of regressors including a regressor
 whose value is 1 for each observation on the first column.}
+}
+\value{
+Returns a matrix with the following columns
+\describe{
+\item{coef}{Coefficients.}
+\item{se}{Standard error.}
+\item{t}{t-statistic.}
+\item{p}{p-value.}
+}
 }
 \description{
 Hypothesis Test for Estimates of Regression Coefficients

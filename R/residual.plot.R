@@ -4,6 +4,7 @@
 #'
 #' @family plotting functions
 #' @keywords plot
+#' @importFrom stats qqline qqnorm
 #' @inheritParams .yminusyhat
 #' @inheritParams .RSS
 #' @inheritParams .tepsilonhat

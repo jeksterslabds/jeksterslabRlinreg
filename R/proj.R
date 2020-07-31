@@ -20,6 +20,13 @@
 #' @return Returns the projection matrix \eqn{\left( \mathbf{P} \right)}.
 #' @references
 #'   [Wikipedia: Projection Matrix](https://en.wikipedia.org/wiki/Projection_matrix)
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, -ncol(X)]
+#' P <- P(
+#'   X = X
+#' )
+#' str(P, list.len = 6)
 #' @export
 P <- function(X) {
   X %*% solve(t(X) %*% X) %*% t(X)
@@ -69,6 +76,13 @@ P <- function(X) {
 #' @keywords projection
 #' @inheritParams .M
 #' @inherit .M description return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, -ncol(X)]
+#' M <- M(
+#'   X = X
+#' )
+#' str(M, list.len = 6)
 #' @export
 M <- function(X) {
   .M(

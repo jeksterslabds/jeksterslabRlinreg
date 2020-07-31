@@ -3,6 +3,7 @@
 #' @title Descriptive Statistics
 #'
 #' @keywords descriptives
+#' @importFrom stats cov cor
 #' @inheritParams betahat
 #' @param plot Logical.
 #'   Display scatter plot matrix.
@@ -14,6 +15,14 @@
 #'   Print means and standard deviations.
 #' @param cor Logical.
 #'   Print correlations.
+#' @return Returns descriptive statistics useful in k-variable linear regression model.
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' descriptives(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 descriptives <- function(X,
                          y,
@@ -41,6 +50,7 @@ descriptives <- function(X,
       varnamey <- colnames(y)
     }
   }
+  X <- as.matrix(X)
   y <- matrix(
     data = y,
     ncol = 1
@@ -58,6 +68,23 @@ descriptives <- function(X,
   )
   colnames(data) <- c(varnamey, varnamesX[-1])
   R <- cor(data)
+  R.p <- matrix(
+    data = NA,
+    ncol = ncol(data),
+    nrow = ncol(data)
+  )
+  for (j in 1:ncol(data)) {
+    for (i in 1:ncol(data)) {
+      out <- cor.test(
+        data[, i],
+        data[, j]
+      )
+      R.p[i, j] <- out$p.value
+    }
+  }
+  colnames(R.p) <- c(varnamey, varnamesX[-1])
+  rownames(R.p) <- c(varnamey, varnamesX[-1])
+  diag(R.p) <- rep(x = NA, length = nrow(R.p))
   if (nrow(R) > 2) {
     RX <- R[2:k, 2:k]
   } else {
@@ -65,6 +92,7 @@ descriptives <- function(X,
   }
   ryX <- as.vector(R[, 1])
   ryX <- ryX[-1]
+  names(ryX) <- varnamesX[-1]
   Sigma <- cov(data)
   if (nrow(Sigma) > 2) {
     SigmaX <- Sigma[2:k, 2:k]
@@ -75,7 +103,9 @@ descriptives <- function(X,
   }
   sigmayX <- as.vector(Sigma[, 1])
   sigma2y <- sigmayX[1]
+  names(sigma2y) <- varnamey
   sigmayX <- sigmayX[-1]
+  names(sigmayX) <- varnamesX[-1]
   mu <- c(
     muhaty,
     muhatX
@@ -88,6 +118,8 @@ descriptives <- function(X,
   names(sigma2) <- c(varnamey, varnamesX[-1])
   sigma <- sqrt(sigma2)
   names(sigma) <- c(varnamey, varnamesX[-1])
+  sigmay <- sigma[1]
+  sigmaX <- sigma[-1]
   if (msd) {
     meanandsd <- cbind(
       mu,
@@ -97,11 +129,13 @@ descriptives <- function(X,
       "Mean",
       "SD"
     )
+    cat("\nMeans and Standard Deviations:\n")
     print(
       meanandsd
     )
   }
   if (cor) {
+    cat("\nCorrelations:\n")
     print(R)
   }
   if (plot) {
@@ -120,6 +154,7 @@ descriptives <- function(X,
       muhaty = muhaty,
       mu = mu,
       R = R,
+      R.p = R.p,
       RX = RX,
       ryX = ryX,
       Sigma = Sigma,
@@ -127,6 +162,8 @@ descriptives <- function(X,
       sigmayX = sigmayX,
       sigma2X = sigma2X,
       sigma2y = sigma2y,
+      sigmaX = sigmaX,
+      sigmay = sigmay,
       sigma2 = sigma2,
       sigma = sigma
     )

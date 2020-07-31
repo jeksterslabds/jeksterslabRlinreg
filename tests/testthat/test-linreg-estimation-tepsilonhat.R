@@ -40,7 +40,7 @@ head(y)
 #'
 #+
 h <- h(X = X)
-sigma2epsilonhat <- sigma2epsilonhat(
+sigma2hatepsilonhat <- sigma2hatepsilonhat(
   X = X,
   y = y
 )
@@ -50,7 +50,7 @@ epsilonhat <- epsilonhat(
 )
 result_tepsilonhat1 <- as.vector(
   .tepsilonhat(
-    sigma2epsilonhat = sigma2epsilonhat,
+    sigma2hatepsilonhat = sigma2hatepsilonhat,
     h = h,
     epsilonhat = epsilonhat
   )

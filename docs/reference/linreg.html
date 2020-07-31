@@ -189,6 +189,77 @@ Display summary output.</p></td>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>linreg</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt; 
+#&gt; Model Assessment:
+#&gt;                   Value
+#&gt; RSS            54342.54
+#&gt; MSE               42.16
+#&gt; RMSE               6.49
+#&gt; R-squared          0.32
+#&gt; Adj. R-squared     0.32
+#&gt; 
+#&gt; ANOVA Table:
+#&gt;         df       SS         MS        F             p
+#&gt; Model    5 25967.28 5193.45611 122.6149 3.453144e-106
+#&gt; Error 1283 54342.54   42.35584       NA            NA
+#&gt; Total 1288 80309.82         NA       NA            NA
+#&gt; 
+#&gt; Coefficients:
+#&gt;                  coef         se         t            p
+#&gt; Intercept  -7.1833382 1.01578786 -7.071691 2.508276e-12
+#&gt; gender     -3.0748755 0.36461621 -8.433184 8.939416e-17
+#&gt; race       -1.5653133 0.50918754 -3.074139 2.155664e-03
+#&gt; union       1.0959758 0.50607809  2.165626 3.052356e-02
+#&gt; education   1.3703010 0.06590421 20.792312 5.507605e-83
+#&gt; experience  0.1666065 0.01604756 10.382050 2.659960e-24
+#&gt; 
+#&gt; Standardized Coefficients:
+#&gt;                   coef         se         t            p
+#&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17
+#&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03
+#&gt; union       0.05077872 0.02344760  2.165626 3.052356e-02
+#&gt; education   0.48829962 0.02348462 20.792312 5.507605e-83
+#&gt; experience  0.24607631 0.02370209 10.382050 2.659960e-24
+#&gt; 
+#&gt; Confidence Intervals:
+#&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95
+#&gt; Intercept  -10.5335348 -9.8037324 -9.1761258 -5.1905507 -4.5629441 -3.8331417
+#&gt; gender      -4.2774257 -4.0154638 -3.7901849 -2.3595660 -2.1342872 -1.8723252
+#&gt; race        -3.2446781 -2.8788475 -2.5642449 -0.5663817 -0.2517792  0.1140514
+#&gt; union       -0.5731336 -0.2095371  0.1031443  2.0888072  2.4014886  2.7650852
+#&gt; education    1.1529406  1.2002901  1.2410091  1.4995928  1.5403119  1.5876614
+#&gt; experience   0.1136797  0.1252092  0.1351242  0.1980889  0.2080039  0.2195334
+#&gt; 
+#&gt; Confidence Intervals - Standardized Coefficients:
+#&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5
+#&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436
+#&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766
+#&gt; union      -0.02655441 -0.009708265  0.00477888  0.09677855  0.11126570
+#&gt; education   0.41084437  0.427717121  0.44222714  0.53437211  0.54888213
+#&gt; experience  0.16790381  0.184932806  0.19957719  0.29257542  0.30721981
+#&gt;                ci_99.95
+#&gt; gender     -0.118600632
+#&gt; race        0.005199175
+#&gt; union       0.128111846
+#&gt; education   0.565754879
+#&gt; experience  0.324248802
+#&gt; 
+#&gt; Means and Standard Deviations:
+#&gt;                  Mean         SD
+#&gt; wages      12.3658495  7.8963503
+#&gt; gender      0.4972847  0.5001867
+#&gt; race        0.1528317  0.3599648
+#&gt; union       0.1590380  0.3658535
+#&gt; education  13.1450737  2.8138234
+#&gt; experience 18.7897595 11.6628366</div><div class='img'><img src='linreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='linreg-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -147,6 +147,17 @@ on the regressand variable.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a vector with the following elements</p><dl'>
+<dt>RSS</dt><dd><p>Residual sum of squares.</p></dd>
+<dt>MSE</dt><dd><p>Mean square error.</p></dd>
+<dt>RMSE</dt><dd><p>Root mean square error.</p></dd>
+<dt>R2</dt><dd><p>R-squared \(\left( R^2 \right)\).</p></dd>
+<dt>Rbar2</dt><dd><p>Adjusted R-squared \(\left( \bar{R}^2 \right)\) .</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other assessment of model quality functions: 
@@ -161,6 +172,16 @@ on the regressand variable.</p></td>
 <code><a href='RMSE.html'>RMSE</a>()</code>,
 <code><a href='Rbar2.html'>Rbar2</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>model</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt;          RSS          MSE         RMSE           R2        Rbar2 
+#&gt; 5.434254e+04 4.215868e+01 6.492972e+00 3.233388e-01 3.207018e-01 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

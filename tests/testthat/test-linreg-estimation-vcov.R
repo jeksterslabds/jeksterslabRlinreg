@@ -41,48 +41,48 @@ head(y)
 #+
 n <- nrow(X)
 k <- ncol(X)
-sigma2epsilonhat <- sigma2epsilonhat(
+sigma2hatepsilonhat <- sigma2hatepsilonhat(
   X = X,
   y = y
 )
-result_vcovbetahat1 <- .vcovbetahat(
-  sigma2epsilonhat = sigma2epsilonhat,
+result_vcovhatbetahat1 <- .vcovhatbetahat(
+  sigma2hatepsilonhat = sigma2hatepsilonhat,
   X = X
 )
-result_vcovbetahat1 <- as.vector(result_vcovbetahat1)
-result_vcovbetahat2 <- .vcovbetahat(
+result_vcovhatbetahat1 <- as.vector(result_vcovhatbetahat1)
+result_vcovhatbetahat2 <- .vcovhatbetahat(
   X = X,
   y = y
 )
-result_vcovbetahat2 <- as.vector(result_vcovbetahat2)
-result_vcovbetahat3 <- vcovbetahat(
+result_vcovhatbetahat2 <- as.vector(result_vcovhatbetahat2)
+result_vcovhatbetahat3 <- vcovhatbetahat(
   X = X,
   y = y
 )
-result_vcovbetahat3 <- as.vector(result_vcovbetahat3)
+result_vcovhatbetahat3 <- as.vector(result_vcovhatbetahat3)
 #'
 #' ## Variance-Covariance Matrix of Estimates of Regression Coefficients (biased)
 #'
 #+
-sigma2epsilonhatbiased <- sigma2epsilonhatbiased(
+sigma2hatepsilonhatbiased <- sigma2hatepsilonhatbiased(
   X = X,
   y = y
 )
-result_vcovbetahatbiased1 <- .vcovbetahatbiased(
-  sigma2epsilonhatbiased = sigma2epsilonhatbiased,
+result_vcovhatbetahatbiased1 <- .vcovhatbetahatbiased(
+  sigma2hatepsilonhatbiased = sigma2hatepsilonhatbiased,
   X = X
 )
-result_vcovbetahatbiased1 <- as.vector(result_vcovbetahatbiased1)
-result_vcovbetahatbiased2 <- .vcovbetahatbiased(
+result_vcovhatbetahatbiased1 <- as.vector(result_vcovhatbetahatbiased1)
+result_vcovhatbetahatbiased2 <- .vcovhatbetahatbiased(
   X = X,
   y = y
 )
-result_vcovbetahatbiased2 <- as.vector(result_vcovbetahatbiased2)
-result_vcovbetahatbiased3 <- vcovbetahatbiased(
+result_vcovhatbetahatbiased2 <- as.vector(result_vcovhatbetahatbiased2)
+result_vcovhatbetahatbiased3 <- vcovhatbetahatbiased(
   X = X,
   y = y
 )
-result_vcovbetahatbiased3 <- as.vector(result_vcovbetahatbiased3)
+result_vcovhatbetahatbiased3 <- as.vector(result_vcovhatbetahatbiased3)
 #'
 #' ## `lm()` function
 #'
@@ -99,15 +99,15 @@ context("Test linreg-estimation-vcov")
 test_that("unbiased", {
   for (i in 1:length(lm_vcov)) {
     expect_equivalent(
-      result_vcovbetahat1[i],
+      result_vcovhatbetahat1[i],
       lm_vcov[i]
     )
     expect_equivalent(
-      result_vcovbetahat1[i],
+      result_vcovhatbetahat1[i],
       lm_vcov[i]
     )
     expect_equivalent(
-      result_vcovbetahat1[i],
+      result_vcovhatbetahat1[i],
       lm_vcov[i]
     )
   }
@@ -115,15 +115,15 @@ test_that("unbiased", {
 test_that("biased", {
   for (i in 1:length(lm_vcov)) {
     expect_equivalent(
-      round(result_vcovbetahatbiased1[i], digits = 1),
+      round(result_vcovhatbetahatbiased1[i], digits = 1),
       round(lm_vcov[i], digits = 1)
     )
     expect_equivalent(
-      round(result_vcovbetahatbiased1[i], digits = 1),
+      round(result_vcovhatbetahatbiased1[i], digits = 1),
       round(lm_vcov[i], digits = 1)
     )
     expect_equivalent(
-      round(result_vcovbetahatbiased1[i], digits = 1),
+      round(result_vcovhatbetahatbiased1[i], digits = 1),
       round(lm_vcov[i], digits = 1)
     )
   }

@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Studentized Residuals)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-28</h4>
+            <h4 class="date">2020-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-tepsilonhat.Rmd"><code>vignettes/tests/test-linreg-estimation-tepsilonhat.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-tepsilonhat.Rmd</code></div>
@@ -118,7 +118,7 @@
 <h2 class="hasAnchor">
 <a href="#studentized-residuals" class="anchor"></a>Studentized Residuals</h2>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">h</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/h.html">h</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>)
-<span class="no">sigma2epsilonhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sigma2epsilonhat.html">sigma2epsilonhat</a></span>(
+<span class="no">sigma2hatepsilonhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sigma2hatepsilonhat.html">sigma2hatepsilonhat</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
@@ -128,7 +128,7 @@
 )
 <span class="no">result_tepsilonhat1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(
   <span class="fu"><a href="../../reference/dot-tepsilonhat.html">.tepsilonhat</a></span>(
-    <span class="kw">sigma2epsilonhat</span> <span class="kw">=</span> <span class="no">sigma2epsilonhat</span>,
+    <span class="kw">sigma2hatepsilonhat</span> <span class="kw">=</span> <span class="no">sigma2hatepsilonhat</span>,
     <span class="kw">h</span> <span class="kw">=</span> <span class="no">h</span>,
     <span class="kw">epsilonhat</span> <span class="kw">=</span> <span class="no">epsilonhat</span>
   )

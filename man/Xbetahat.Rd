@@ -33,6 +33,17 @@ where
     \left( \mathbf{X}^{T} \mathbf{y} \right) .
   }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+Xbetahat <- Xbetahat(
+  X = X,
+  y = y
+)
+hist(Xbetahat)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear Regression}
 

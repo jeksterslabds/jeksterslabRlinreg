@@ -17,8 +17,33 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 }
+\value{
+Returns a matrix with the following columns
+\describe{
+\item{coef}{Coefficients.}
+\item{se}{Standard error.}
+\item{t}{t-statistic.}
+\item{p}{p-value.}
+\item{ci_0.05}{Lower limit 99.99\% confidence interval.}
+\item{ci_0.5}{Lower limit 99\% confidence interval.}
+\item{ci_2.5}{Lower limit 95\% confidence interval.}
+\item{ci_97.5}{Upper limit 95\% confidence interval.}
+\item{ci_99.5}{Upper limit 99\% confidence interval.}
+\item{ci_99.95}{Upper limit 99.99\% confidence interval.}
+}
+}
 \description{
 Regression Coefficients Hypothesis Test and Confidence Intervals
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+betahatinference(
+  X = X,
+  y = y
+)
 }
 \seealso{
 Other inference functions: 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/R2.R
 \name{.Rbar2}
 \alias{.Rbar2}
-\title{Adjusted R-square \eqn{\bar{R}^{2}} (from \eqn{R^2})}
+\title{Adjusted R-squared \eqn{\bar{R}^{2}} (from \eqn{R^2})}
 \usage{
 .Rbar2(R2 = NULL, n, k, X, y, fromRSS = TRUE)
 }

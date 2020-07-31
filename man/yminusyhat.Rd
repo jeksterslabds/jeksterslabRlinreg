@@ -37,6 +37,17 @@ In matrix form
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+epsilonhat <- yminusyhat(
+  X = X,
+  y = y
+)
+hist(epsilonhat)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Errors_and_residuals}{Wikipedia: Errors and Residuals}
 }

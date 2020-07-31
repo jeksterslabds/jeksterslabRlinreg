@@ -5,12 +5,21 @@
 #' @family hypothesis testing functions
 #' @keywords inference
 #' @inheritParams .RSS
-#' @inheritParams .sigma2epsilonhat
-#' @param se Numeric vector.
+#' @inheritParams .sigma2hatepsilonhat
+#' @param sehatbetahat Numeric vector.
 #'   Standard errors of regression coefficients.
+#' @return Returns a matrix with the following columns
+#' \describe{
+#'   \item{ci_0.05}{Lower limit 99.99% confidence interval.}
+#'   \item{ci_0.5}{Lower limit 99% confidence interval.}
+#'   \item{ci_2.5}{Lower limit 95% confidence interval.}
+#'   \item{ci_97.5}{Upper limit 95% confidence interval.}
+#'   \item{ci_99.5}{Upper limit 99% confidence interval.}
+#'   \item{ci_99.95}{Upper limit 99.99% confidence interval.}
+#' }
 #' @export
 ci <- function(betahat,
-               se,
+               sehatbetahat,
                n,
                k) {
   alpha <- c(0.001, 0.01, 0.05)
@@ -28,7 +37,7 @@ ci <- function(betahat,
     ncol = length(tcritical)
   )
   for (i in seq_along(tcritical)) {
-    ci[, i] <- betahat + (tcritical[i] * se)
+    ci[, i] <- betahat + (tcritical[i] * sehatbetahat)
   }
   colnames(ci) <- paste0(
     "ci_",

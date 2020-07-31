@@ -180,6 +180,16 @@ or singular value decomposition when <code>qr = FALSE</code>.</p>
 <code><a href='dot-betahatqr.html'>.betahatqr</a>()</code>,
 <code><a href='dot-betahatsvd.html'>.betahatsvd</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>betahat</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt;   constant     gender       race      union  education experience 
+#&gt; -7.1833382 -3.0748755 -1.5653133  1.0959758  1.3703010  0.1666065 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

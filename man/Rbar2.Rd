@@ -2,7 +2,7 @@
 % Please edit documentation in R/R2.R
 \name{Rbar2}
 \alias{Rbar2}
-\title{Adjusted R-square \eqn{\bar{R}^{2}}}
+\title{Adjusted R-squared \eqn{\bar{R}^{2}}}
 \usage{
 Rbar2(X, y)
 }
@@ -27,6 +27,16 @@ Calculates the adjusted coefficient of determination
     {TSS / \left( n - 1 \right)} \right)
     = 1 - \left( 1 - R^2 \right) \frac{n - 1}{n - k} .
   }
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+Rbar2(
+  X = X,
+  y = y
+)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}

@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-28</h4>
+            <h4 class="date">2020-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-linreg.Rmd"><code>vignettes/tests/test-linreg-estimation-linreg.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-linreg.Rmd</code></div>
@@ -92,34 +92,9 @@
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
-<p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
-<span class="co"># age is removed</span>
-<span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)
-<span class="co">#&gt;      constant gender race union education experience</span>
-<span class="co">#&gt; [1,]        1      1    0     0        12         20</span>
-<span class="co">#&gt; [2,]        1      0    0     0         9          9</span>
-<span class="co">#&gt; [3,]        1      0    0     0        16         15</span>
-<span class="co">#&gt; [4,]        1      0    1     1        14         38</span>
-<span class="co">#&gt; [5,]        1      1    1     0        16         19</span>
-<span class="co">#&gt; [6,]        1      1    0     0        12          4</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">y</span>)
-<span class="co">#&gt;      wages</span>
-<span class="co">#&gt; [1,] 11.55</span>
-<span class="co">#&gt; [2,]  5.00</span>
-<span class="co">#&gt; [3,] 12.00</span>
-<span class="co">#&gt; [4,]  7.00</span>
-<span class="co">#&gt; [5,] 21.15</span>
-<span class="co">#&gt; [6,]  6.92</span></pre></body></html></div>
-</div>
-<div id="data-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-1" class="anchor"></a>Data</h2>
 <p>In this example, we are interested in predictors of wages. The regressor variables are gender, race, union membership, education, and work experience. The regressand variable is hourly wage in US dollars.</p>
 <p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
 <span class="co"># age is removed</span>
 <span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
@@ -169,7 +144,7 @@
 <div id="using-unbiased-standard-errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-unbiased-standard-errors" class="anchor"></a>Using Unbiased Standard Errors</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
@@ -189,13 +164,21 @@
 <span class="co">#&gt; Total 1288 80309.82         NA       NA            NA</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                  coef         se         t            p   std. coef</span>
-<span class="co">#&gt; Intercept  -7.1833382 1.01578786 -7.071691 2.508276e-12  0.00000000</span>
-<span class="co">#&gt; gender     -3.0748755 0.36461621 -8.433184 8.939416e-17 -0.19477502</span>
-<span class="co">#&gt; race       -1.5653133 0.50918754 -3.074139 2.155664e-03 -0.07135673</span>
-<span class="co">#&gt; union       1.0959758 0.50607809  2.165626 3.052356e-02  0.05077872</span>
-<span class="co">#&gt; education   1.3703010 0.06590421 20.792312 5.507605e-83  0.48829962</span>
-<span class="co">#&gt; experience  0.1666065 0.01604756 10.382050 2.659960e-24  0.24607631</span>
+<span class="co">#&gt;                  coef         se         t            p</span>
+<span class="co">#&gt; Intercept  -7.1833382 1.01578786 -7.071691 2.508276e-12</span>
+<span class="co">#&gt; gender     -3.0748755 0.36461621 -8.433184 8.939416e-17</span>
+<span class="co">#&gt; race       -1.5653133 0.50918754 -3.074139 2.155664e-03</span>
+<span class="co">#&gt; union       1.0959758 0.50607809  2.165626 3.052356e-02</span>
+<span class="co">#&gt; education   1.3703010 0.06590421 20.792312 5.507605e-83</span>
+<span class="co">#&gt; experience  0.1666065 0.01604756 10.382050 2.659960e-24</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Standardized Coefficients:</span>
+<span class="co">#&gt;                   coef         se         t            p</span>
+<span class="co">#&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17</span>
+<span class="co">#&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03</span>
+<span class="co">#&gt; union       0.05077872 0.02344760  2.165626 3.052356e-02</span>
+<span class="co">#&gt; education   0.48829962 0.02348462 20.792312 5.507605e-83</span>
+<span class="co">#&gt; experience  0.24607631 0.02370209 10.382050 2.659960e-24</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
 <span class="co">#&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95</span>
@@ -206,6 +189,20 @@
 <span class="co">#&gt; education    1.1529406  1.2002901  1.2410091  1.4995928  1.5403119  1.5876614</span>
 <span class="co">#&gt; experience   0.1136797  0.1252092  0.1351242  0.1980889  0.2080039  0.2195334</span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence Intervals - Standardized Coefficients:</span>
+<span class="co">#&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5</span>
+<span class="co">#&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436</span>
+<span class="co">#&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766</span>
+<span class="co">#&gt; union      -0.02655441 -0.009708265  0.00477888  0.09677855  0.11126570</span>
+<span class="co">#&gt; education   0.41084437  0.427717121  0.44222714  0.53437211  0.54888213</span>
+<span class="co">#&gt; experience  0.16790381  0.184932806  0.19957719  0.29257542  0.30721981</span>
+<span class="co">#&gt;                ci_99.95</span>
+<span class="co">#&gt; gender     -0.118600632</span>
+<span class="co">#&gt; race        0.005199175</span>
+<span class="co">#&gt; union       0.128111846</span>
+<span class="co">#&gt; education   0.565754879</span>
+<span class="co">#&gt; experience  0.324248802</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
 <span class="co">#&gt;                  Mean         SD</span>
 <span class="co">#&gt; wages      12.3658495  7.8963503</span>
@@ -214,12 +211,12 @@
 <span class="co">#&gt; union       0.1590380  0.3658535</span>
 <span class="co">#&gt; education  13.1450737  2.8138234</span>
 <span class="co">#&gt; experience 18.7897595 11.6628366</span></pre></body></html></div>
-<p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-6-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-6-2.png" width="100%"></p>
+<p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-5-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-5-2.png" width="100%"></p>
 </div>
 <div id="using-biased-standard-errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-biased-standard-errors" class="anchor"></a>Using Biased Standard Errors</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
   <span class="kw">unbiased</span> <span class="kw">=</span> <span class="fl">FALSE</span>
@@ -241,13 +238,21 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt; Biased standard errors are used.</span>
-<span class="co">#&gt;                  coef         se         t            p   std. coef</span>
-<span class="co">#&gt; Intercept  -7.1833382 1.01342097 -7.088208 2.236468e-12  0.00000000</span>
-<span class="co">#&gt; gender     -3.0748755 0.36376661 -8.452880 7.620029e-17 -0.19477502</span>
-<span class="co">#&gt; race       -1.5653133 0.50800108 -3.081319 2.104728e-03 -0.07135673</span>
-<span class="co">#&gt; union       1.0959758 0.50489888  2.170684 3.013798e-02  0.05077872</span>
-<span class="co">#&gt; education   1.3703010 0.06575065 20.840873 2.582448e-83  0.48829962</span>
-<span class="co">#&gt; experience  0.1666065 0.01601016 10.406297 2.103790e-24  0.24607631</span>
+<span class="co">#&gt;                  coef         se         t            p</span>
+<span class="co">#&gt; Intercept  -7.1833382 1.01342097 -7.088208 2.236468e-12</span>
+<span class="co">#&gt; gender     -3.0748755 0.36376661 -8.452880 7.620029e-17</span>
+<span class="co">#&gt; race       -1.5653133 0.50800108 -3.081319 2.104728e-03</span>
+<span class="co">#&gt; union       1.0959758 0.50489888  2.170684 3.013798e-02</span>
+<span class="co">#&gt; education   1.3703010 0.06575065 20.840873 2.582448e-83</span>
+<span class="co">#&gt; experience  0.1666065 0.01601016 10.406297 2.103790e-24</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Standardized Coefficients:</span>
+<span class="co">#&gt;                   coef         se         t            p</span>
+<span class="co">#&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17</span>
+<span class="co">#&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03</span>
+<span class="co">#&gt; union       0.05077872 0.02344760  2.165626 3.052356e-02</span>
+<span class="co">#&gt; education   0.48829962 0.02348462 20.792312 5.507605e-83</span>
+<span class="co">#&gt; experience  0.24607631 0.02370209 10.382050 2.659960e-24</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Intervals:</span>
 <span class="co">#&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95</span>
@@ -258,6 +263,20 @@
 <span class="co">#&gt; education    1.1534470  1.2006862  1.2413104  1.4992916  1.5399157  1.5871549</span>
 <span class="co">#&gt; experience   0.1138030  0.1253056  0.1351976  0.1980155  0.2079074  0.2194101</span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence Intervals - Standardized Coefficients:</span>
+<span class="co">#&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5</span>
+<span class="co">#&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436</span>
+<span class="co">#&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766</span>
+<span class="co">#&gt; union      -0.02655441 -0.009708265  0.00477888  0.09677855  0.11126570</span>
+<span class="co">#&gt; education   0.41084437  0.427717121  0.44222714  0.53437211  0.54888213</span>
+<span class="co">#&gt; experience  0.16790381  0.184932806  0.19957719  0.29257542  0.30721981</span>
+<span class="co">#&gt;                ci_99.95</span>
+<span class="co">#&gt; gender     -0.118600632</span>
+<span class="co">#&gt; race        0.005199175</span>
+<span class="co">#&gt; union       0.128111846</span>
+<span class="co">#&gt; education   0.565754879</span>
+<span class="co">#&gt; experience  0.324248802</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; Means and Standard Deviations:</span>
 <span class="co">#&gt;                  Mean         SD</span>
 <span class="co">#&gt; wages      12.3658495  7.8963503</span>
@@ -266,13 +285,13 @@
 <span class="co">#&gt; union       0.1590380  0.3658535</span>
 <span class="co">#&gt; education  13.1450737  2.8138234</span>
 <span class="co">#&gt; experience 18.7897595 11.6628366</span></pre></body></html></div>
-<p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-7-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-7-2.png" width="100%"></p>
+<p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-6-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-6-2.png" width="100%"></p>
 </div>
 <div id="lm-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lm-function" class="anchor"></a><code>lm()</code> function</h2>
 <p>The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function is the default option for fitting a linear model in <code>R</code>.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
   <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
   <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
 )

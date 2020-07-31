@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Null Hypothesis Significance Testing)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-28</h4>
+            <h4 class="date">2020-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-nhst.Rmd"><code>vignettes/tests/test-linreg-estimation-nhst.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-nhst.Rmd</code></div>
@@ -124,14 +124,14 @@
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
-<span class="no">vcovbetahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/vcovbetahat.html">vcovbetahat</a></span>(
+<span class="no">vcovhatbetahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/vcovhatbetahat.html">vcovhatbetahat</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
-<span class="no">se</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="no">vcovbetahat</span>))
+<span class="no">sehatbetahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="no">vcovhatbetahat</span>))
 <span class="no">result1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/nhst.html">nhst</a></span>(
   <span class="kw">betahat</span> <span class="kw">=</span> <span class="no">betahat</span>,
-  <span class="kw">se</span> <span class="kw">=</span> <span class="no">se</span>,
+  <span class="kw">sehatbetahat</span> <span class="kw">=</span> <span class="no">sehatbetahat</span>,
   <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
   <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>
 )

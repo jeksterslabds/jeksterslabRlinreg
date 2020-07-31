@@ -29,6 +29,7 @@
 #' @param SigmaX `p` by `p` numeric matrix.
 #'   \eqn{p \times p} variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\Sigma}_{\mathbf{X}} \right)}.
+#' @examples
 #' @export
 Sigmatheta <- function(slopes,
                        sigma2epsilon,

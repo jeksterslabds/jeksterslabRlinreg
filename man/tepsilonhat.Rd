@@ -26,6 +26,17 @@ Calculates studentized residuals using
     t_i = \frac{\hat{\varepsilon}_{i}}{\hat{\sigma}_{\varepsilon}^{2} \sqrt{1 - h_{ii}}}
   }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+tepsilonhat <- tepsilonhat(
+  X = X,
+  y = y
+)
+hist(tepsilonhat)
+}
 \seealso{
 Other residuals functions: 
 \code{\link{.My}()},

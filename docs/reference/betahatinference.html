@@ -147,11 +147,49 @@ on the regressand variable.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a matrix with the following columns</p><dl'>
+<dt>coef</dt><dd><p>Coefficients.</p></dd>
+<dt>se</dt><dd><p>Standard error.</p></dd>
+<dt>t</dt><dd><p>t-statistic.</p></dd>
+<dt>p</dt><dd><p>p-value.</p></dd>
+<dt>ci_0.05</dt><dd><p>Lower limit 99.99% confidence interval.</p></dd>
+<dt>ci_0.5</dt><dd><p>Lower limit 99% confidence interval.</p></dd>
+<dt>ci_2.5</dt><dd><p>Lower limit 95% confidence interval.</p></dd>
+<dt>ci_97.5</dt><dd><p>Upper limit 95% confidence interval.</p></dd>
+<dt>ci_99.5</dt><dd><p>Upper limit 99% confidence interval.</p></dd>
+<dt>ci_99.95</dt><dd><p>Upper limit 99.99% confidence interval.</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other inference functions: 
 <code><a href='dot-betahatinference.html'>.betahatinference</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>betahatinference</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt;                  coef         se         t            p     ci_0.05     ci_0.5
+#&gt; constant   -7.1833382 1.01578786 -7.071691 2.508276e-12 -10.5335348 -9.8037324
+#&gt; gender     -3.0748755 0.36461621 -8.433184 8.939416e-17  -4.2774257 -4.0154638
+#&gt; race       -1.5653133 0.50918754 -3.074139 2.155664e-03  -3.2446781 -2.8788475
+#&gt; union       1.0959758 0.50607809  2.165626 3.052356e-02  -0.5731336 -0.2095371
+#&gt; education   1.3703010 0.06590421 20.792312 5.507605e-83   1.1529406  1.2002901
+#&gt; experience  0.1666065 0.01604756 10.382050 2.659960e-24   0.1136797  0.1252092
+#&gt;                ci_2.5    ci_97.5    ci_99.5   ci_99.95
+#&gt; constant   -9.1761258 -5.1905507 -4.5629441 -3.8331417
+#&gt; gender     -3.7901849 -2.3595660 -2.1342872 -1.8723252
+#&gt; race       -2.5642449 -0.5663817 -0.2517792  0.1140514
+#&gt; union       0.1031443  2.0888072  2.4014886  2.7650852
+#&gt; education   1.2410091  1.4995928  1.5403119  1.5876614
+#&gt; experience  0.1351242  0.1980889  0.2080039  0.2195334</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

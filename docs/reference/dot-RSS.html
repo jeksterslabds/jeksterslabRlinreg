@@ -40,9 +40,9 @@
 
 
 <meta property="og:title" content="Residual Sum of Square (from \(\boldsymbol{\hat{\varepsilon}}\)) — .RSS" />
-<meta property="og:description" content="Calculates the residual sum of squares \(\left( RSS \right)\) using
+<meta property="og:description" content="Calculates the residual sum of squares \(\left( \mathrm{RSS} \right)\) using
 $$
-    RSS = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
+    \mathrm{RSS} = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
     = \sum_{i = 1}^{n} \left( Y_i -
     \left[ \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} +
     \dots + \hat{\beta}_{k} X_{ki} \right] \right)^2 \\
@@ -51,14 +51,14 @@ $$
   $$
 In matrix form
 $$
-    RSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+    \mathrm{RSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
     = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
     = \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{\prime}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right) .
   $$
 Or simply
 $$
-    RSS = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
+    \mathrm{RSS} = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
     = \boldsymbol{\hat{\varepsilon}}^{\prime} \boldsymbol{\hat{\varepsilon}}
   $$
 where
@@ -67,13 +67,13 @@ that is, the difference between the observed and predicted value of \(\mathbf{y}
 \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\).
 Equivalent computational matrix formula
 $$
-    RSS = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
+    \mathrm{RSS} = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
     \mathbf{y} + \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}}.
   $$
 Note that
 $$
-    TSS = ESS + RSS.
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS}.
   $$" />
 
 
@@ -157,9 +157,9 @@ $$
     </div>
 
     <div class="ref-description">
-    <p>Calculates the residual sum of squares \(\left( RSS \right)\) using
+    <p>Calculates the residual sum of squares \(\left( \mathrm{RSS} \right)\) using
 $$
-    RSS = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
+    \mathrm{RSS} = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
     = \sum_{i = 1}^{n} \left( Y_i -
     \left[ \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} +
     \dots + \hat{\beta}_{k} X_{ki} \right] \right)^2 \\
@@ -168,14 +168,14 @@ $$
   $$
 In matrix form
 $$
-    RSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+    \mathrm{RSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
     = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
     = \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{\prime}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right) .
   $$
 Or simply
 $$
-    RSS = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
+    \mathrm{RSS} = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
     = \boldsymbol{\hat{\varepsilon}}^{\prime} \boldsymbol{\hat{\varepsilon}}
   $$
 where
@@ -184,13 +184,13 @@ that is, the difference between the observed and predicted value of \(\mathbf{y}
 \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\).
 Equivalent computational matrix formula
 $$
-    RSS = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
+    \mathrm{RSS} = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
     \mathbf{y} + \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}}.
   $$
 Note that
 $$
-    TSS = ESS + RSS.
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS}.
   $$</p>
     </div>
 
@@ -220,7 +220,7 @@ on the regressand variable.</p></td>
     </tr>
     <tr>
       <th>betahat</th>
-      <td><p>Vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
+      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
 The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
 of \(k\) unknown regression coefficients.</p></td>
     </tr>
@@ -228,10 +228,10 @@ of \(k\) unknown regression coefficients.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns residual sum of squares \(\left( RSS \right)\).</p>
+    <p>Returns residual sum of squares \(\left( \mathrm{RSS} \right)\).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>epsilonhat = NULL</code>, \(\left( RSS \right)\) is computed with <code>X</code> and <code>y</code> as required arguments
+    <p>If <code>epsilonhat = NULL</code>, \(\left( \mathrm{RSS} \right)\) is computed with <code>X</code> and <code>y</code> as required arguments
 and <code>betahat</code> as an optional argument.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 

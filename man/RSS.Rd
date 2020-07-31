@@ -18,12 +18,12 @@ The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 }
 \value{
-Returns residual sum of squares \eqn{\left( RSS \right)}.
+Returns residual sum of squares \eqn{\left( \mathrm{RSS} \right)}.
 }
 \description{
-Calculates the residual sum of squares \eqn{\left( RSS \right)} using
+Calculates the residual sum of squares \eqn{\left( \mathrm{RSS} \right)} using
 \deqn{
-    RSS = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
+    \mathrm{RSS} = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
     = \sum_{i = 1}^{n} \left( Y_i -
     \left[ \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} +
     \dots + \hat{\beta}_{k} X_{ki} \right] \right)^2 \\
@@ -32,14 +32,14 @@ Calculates the residual sum of squares \eqn{\left( RSS \right)} using
   }
 In matrix form
 \deqn{
-    RSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+    \mathrm{RSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
     = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
     = \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{\prime}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right) .
   }
 Or simply
 \deqn{
-    RSS = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
+    \mathrm{RSS} = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
     = \boldsymbol{\hat{\varepsilon}}^{\prime} \boldsymbol{\hat{\varepsilon}}
   }
 where
@@ -48,17 +48,27 @@ that is, the difference between the observed and predicted value of \eqn{\mathbf
 \eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)}.
 Equivalent computational matrix formula
 \deqn{
-    RSS = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
+    \mathrm{RSS} = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
     \mathbf{y} + \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}}.
   }
 Note that
 \deqn{
-    TSS = ESS + RSS.
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS}.
   }
 }
 \details{
 If \code{betahat = NULL}, \code{betahat} computed using \code{\link[=betahat]{betahat()}}.
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+RSS(
+  X = X,
+  y = y
+)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}

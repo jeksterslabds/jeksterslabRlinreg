@@ -35,6 +35,16 @@ Calculates coefficients using the normal equation.
 When that fails, QR decomposition is used when \code{qr = TRUE}
 or singular value decomposition when \code{qr = FALSE}.
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+betahat(
+  X = X,
+  y = y
+)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear Regression}
 

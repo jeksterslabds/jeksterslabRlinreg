@@ -126,19 +126,19 @@
     <p>Hypothesis Test for Estimates of Regression Coefficients</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nhst</span>(<span class='no'>betahat</span>, <span class='no'>se</span>, <span class='no'>n</span>, <span class='no'>k</span>)</pre>
+    <pre class="usage"><span class='fu'>nhst</span>(<span class='no'>betahat</span>, <span class='no'>sehatbetahat</span>, <span class='no'>n</span>, <span class='no'>k</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>betahat</th>
-      <td><p>Vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
+      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
 The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
 of \(k\) unknown regression coefficients.</p></td>
     </tr>
     <tr>
-      <th>se</th>
+      <th>sehatbetahat</th>
       <td><p>Numeric vector.
 Standard errors of regression coefficients.</p></td>
     </tr>
@@ -154,6 +154,16 @@ Number of regressors including a regressor
 whose value is 1 for each observation on the first column.</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a matrix with the following columns</p><dl'>
+<dt>coef</dt><dd><p>Coefficients.</p></dd>
+<dt>se</dt><dd><p>Standard error.</p></dd>
+<dt>t</dt><dd><p>t-statistic.</p></dd>
+<dt>p</dt><dd><p>p-value.</p></dd>
+
+</dl>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

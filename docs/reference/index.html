@@ -207,6 +207,24 @@
       <tr>
         
         <td>
+          <p><code><a href="dot-intercept.html">.intercept()</a></code> </p>
+        </td>
+        <td><p>Regression Intercept \(\beta_{1}\)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-slopes.html">.slopes()</a></code> </p>
+        </td>
+        <td><p>Regression Slopes \(\boldsymbol{\beta}_{2, \cdots, k}\)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-slopesprime.html">.slopesprime()</a></code> </p>
+        </td>
+        <td><p>Regression Standardized Slopes \(\boldsymbol{\beta}_{2, \cdots, k}^{\prime}\)</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="intercept.html">intercept()</a></code> </p>
         </td>
         <td><p>Regression Intercept \(\beta_{1}\)</p></td>
@@ -474,27 +492,27 @@
       <tr>
         
         <td>
-          <p><code><a href="dot-sigma2epsilonhat.html">.sigma2epsilonhat()</a></code> </p>
+          <p><code><a href="dot-sigma2hatepsilonhat.html">.sigma2hatepsilonhat()</a></code> </p>
         </td>
-        <td><p>Residual Variance \(\hat{\sigma}_{\varepsilon}^{2}\) (from \(RSS\))</p></td>
+        <td><p>Residual Variance \(\hat{\sigma}_{\hat{\varepsilon}}^{2}\) (from \(\mathrm{RSS}\))</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dot-sigma2epsilonhatbiased.html">.sigma2epsilonhatbiased()</a></code> </p>
+          <p><code><a href="dot-sigma2hatepsilonhatbiased.html">.sigma2hatepsilonhatbiased()</a></code> </p>
         </td>
-        <td><p>Residual Variance \(\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}\) (from \(RSS\))</p></td>
+        <td><p>Residual Variance \(\hat{\sigma}_{\hat{\varepsilon} \ \textrm{biased}}^{2}\) (from \(\mathrm{RSS}\))</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sigma2epsilonhat.html">sigma2epsilonhat()</a></code> </p>
+          <p><code><a href="sigma2hatepsilonhat.html">sigma2hatepsilonhat()</a></code> </p>
         </td>
-        <td><p>Residual Variance \(\hat{\sigma}_{\varepsilon}^{2}\)</p></td>
+        <td><p>Residual Variance \(\hat{\sigma}_{\hat{\varepsilon}}^{2}\)</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sigma2epsilonhatbiased.html">sigma2epsilonhatbiased()</a></code> </p>
+          <p><code><a href="sigma2hatepsilonhatbiased.html">sigma2hatepsilonhatbiased()</a></code> </p>
         </td>
-        <td><p>Residual Variance \(\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}\)</p></td>
+        <td><p>Residual Variance \(\hat{\sigma}_{\hat{\varepsilon} \ \textrm{biased}}^{2}\)</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -531,13 +549,13 @@
         <td>
           <p><code><a href="Rbar2.html">Rbar2()</a></code> </p>
         </td>
-        <td><p>Adjusted R-square \(\bar{R}^{2}\)</p></td>
+        <td><p>Adjusted R-squared \(\bar{R}^{2}\)</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="dot-MSE.html">.MSE()</a></code> </p>
         </td>
-        <td><p>Mean Squared Error (from \(RSS\))</p></td>
+        <td><p>Mean Squared Error (from \(\mathrm{RSS}\))</p></td>
       </tr><tr>
         
         <td>
@@ -555,13 +573,13 @@
         <td>
           <p><code><a href="dot-RMSE.html">.RMSE()</a></code> </p>
         </td>
-        <td><p>Root Mean Squared Error (from \(RSS\))</p></td>
+        <td><p>Root Mean Squared Error (from \(\mathrm{RSS}\))</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="dot-Rbar2.html">.Rbar2()</a></code> </p>
         </td>
-        <td><p>Adjusted R-square \(\bar{R}^{2}\) (from \(R^2\))</p></td>
+        <td><p>Adjusted R-squared \(\bar{R}^{2}\) (from \(R^2\))</p></td>
       </tr><tr>
         
         <td>
@@ -620,13 +638,31 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dot-vcovbetahat.html">.vcovbetahat()</a></code> </p>
+          <p><code><a href="dot-sehatbetahat.html">.sehatbetahat()</a></code> </p>
+        </td>
+        <td><p>Standard Errors of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon \ \textrm{unbiased}}^{2}\))</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-sehatbetahatbiased.html">.sehatbetahatbiased()</a></code> </p>
+        </td>
+        <td><p>Standard Errors of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}\))</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-sehatbetahatprimebiased.html">.sehatbetahatprimebiased()</a></code> </p>
+        </td>
+        <td><p>Standard Errors of Standardized Estimates of Regression Coefficients (Biased)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-vcovhatbetahat.html">.vcovhatbetahat()</a></code> </p>
         </td>
         <td><p>Variance-Covariance Matrix of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon}^{2}\))</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dot-vcovbetahatbiased.html">.vcovbetahatbiased()</a></code> </p>
+          <p><code><a href="dot-vcovhatbetahatbiased.html">.vcovhatbetahatbiased()</a></code> </p>
         </td>
         <td><p>Variance-Covariance Matrix of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}\))</p></td>
       </tr><tr>
@@ -638,13 +674,31 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="vcovbetahat.html">vcovbetahat()</a></code> </p>
+          <p><code><a href="sehatbetahat.html">sehatbetahat()</a></code> </p>
+        </td>
+        <td><p>Standard Errors of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon \ \textrm{unbiased}}^{2}\))</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sehatbetahatbiased.html">sehatbetahatbiased()</a></code> </p>
+        </td>
+        <td><p>Standard Errors of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}\))</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sehatbetahatprimebiased.html">sehatbetahatprimebiased()</a></code> </p>
+        </td>
+        <td><p>Standard Errors of Standardized Estimates of Regression Coefficients</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vcovhatbetahat.html">vcovhatbetahat()</a></code> </p>
         </td>
         <td><p>Variance-Covariance Matrix of Estimates of Regression Coefficients</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vcovbetahatbiased.html">vcovbetahatbiased()</a></code> </p>
+          <p><code><a href="vcovhatbetahatbiased.html">vcovhatbetahatbiased()</a></code> </p>
         </td>
         <td><p>Variance-Covariance Matrix of Estimates of Regression Coefficients (from \(\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}\))</p></td>
       </tr>

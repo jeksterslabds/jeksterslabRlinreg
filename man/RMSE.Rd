@@ -21,18 +21,28 @@ on the regressand variable.}
 Returns the root mean squared error.
 }
 \description{
-Calculates the root mean squared error \eqn{\left( RMSE \right)} using
+Calculates the root mean squared error \eqn{\left( \mathrm{RMSE} \right)} using
 \deqn{
-    RMSE = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+    \mathrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
     = \sqrt{\frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
-    = \sqrt{\frac{RSS}{n}} .
+    = \sqrt{\frac{\mathrm{RSS}}{n}} .
   }
 }
 \details{
 If \code{RSS = NULL}, the \code{RSS} vector is computed using \code{\link[=RSS]{RSS()}}
 with \code{X} and \code{y} as required arguments and \code{betahat} as an optional argument.
 If \code{RSS} is provided, \code{X}, and \code{y} are not needed.
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+RMSE(
+  X = X,
+  y = y
+)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{Wikipedia: Root Mean Square Deviation}

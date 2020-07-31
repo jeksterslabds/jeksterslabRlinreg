@@ -28,6 +28,9 @@ and variance-covariance matrix \eqn{\boldsymbol{\Sigma}}.
 }
 \seealso{
 Other parameter functions: 
+\code{\link{.intercept}()},
+\code{\link{.slopesprime}()},
+\code{\link{.slopes}()},
 \code{\link{intercept}()},
 \code{\link{slopesprime}()},
 \code{\link{slopes}()}

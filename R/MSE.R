@@ -1,13 +1,13 @@
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Mean Squared Error (from \eqn{RSS})
+#' @title Mean Squared Error (from \eqn{\mathrm{RSS}})
 #'
-#' @description Calculates the mean squared error \eqn{\left( MSE \right)} using
+#' @description Calculates the mean squared error \eqn{\left( \mathrm{MSE} \right)} using
 #'   \deqn{
-#'     MSE  = \frac{1}{n} \sum_{i = 1}^{n}
+#'     \mathrm{MSE}  = \frac{1}{n} \sum_{i = 1}^{n}
 #'     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
 #'     = \frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
-#'     = \frac{RSS}{n} .
+#'     = \frac{\mathrm{RSS}}{n} .
 #'   }
 #'
 #' @details If `RSS = NULL`, the `RSS` vector is computed using [`RSS()`]
@@ -44,6 +44,15 @@
 #' @keywords model-assessment
 #' @inheritParams .MSE
 #' @inherit .MSE description references return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' MSE(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 MSE <- function(X,
                 y) {
@@ -56,14 +65,14 @@ MSE <- function(X,
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Root Mean Squared Error (from \eqn{RSS})
+#' @title Root Mean Squared Error (from \eqn{\mathrm{RSS}})
 #'
-#' @description Calculates the root mean squared error \eqn{\left( RMSE \right)} using
+#' @description Calculates the root mean squared error \eqn{\left( \mathrm{RMSE} \right)} using
 #'   \deqn{
-#'     RMSE = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+#'     \mathrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
 #'     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
 #'     = \sqrt{\frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
-#'     = \sqrt{\frac{RSS}{n}} .
+#'     = \sqrt{\frac{\mathrm{RSS}}{n}} .
 #'   }
 #'
 #' @family assessment of model quality functions
@@ -96,6 +105,15 @@ MSE <- function(X,
 #' @keywords model-assessment
 #' @inheritParams .RMSE
 #' @inherit .RMSE description details return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' RMSE(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 RMSE <- function(X,
                  y) {

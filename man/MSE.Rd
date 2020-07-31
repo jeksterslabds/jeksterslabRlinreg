@@ -21,13 +21,23 @@ on the regressand variable.}
 Returns the mean squared error.
 }
 \description{
-Calculates the mean squared error \eqn{\left( MSE \right)} using
+Calculates the mean squared error \eqn{\left( \mathrm{MSE} \right)} using
 \deqn{
-    MSE  = \frac{1}{n} \sum_{i = 1}^{n}
+    \mathrm{MSE}  = \frac{1}{n} \sum_{i = 1}^{n}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
     = \frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
-    = \frac{RSS}{n} .
+    = \frac{\mathrm{RSS}}{n} .
   }
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+MSE(
+  X = X,
+  y = y
+)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Mean_squared_error}{Wikipedia: Mean Squared Error}

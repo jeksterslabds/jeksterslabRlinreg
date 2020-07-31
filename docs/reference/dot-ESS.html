@@ -40,16 +40,16 @@
 
 
 <meta property="og:title" content="Explained Sum of Squares (from \(\mathbf{\hat{y}}\) and \(\mathbf{\bar{Y}}\)) — .ESS" />
-<meta property="og:description" content="Calculates the explained sum of squares \(\left( ESS \right)\)
+<meta property="og:description" content="Calculates the explained sum of squares \(\left( \mathrm{ESS} \right)\)
 using
 $$
-    ESS = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
     \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} - \bar{Y} \right)^2
   $$
 In matrix form
 $$
-    ESS = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \mathbf{X} \boldsymbol{\hat{\beta}} - \mathbf{\bar{Y}} \right)^2
   $$
 where
@@ -58,12 +58,12 @@ is an \(n \times 1\) matrix of predicted values of \(\mathbf{y}\),
 and \(\mathbf{\bar{Y}}\) is the mean of \(\mathbf{y}\).
 Equivalent computational matrix formula
 $$
-    ESS = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
+    \mathrm{ESS} = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}} - n \mathbf{\bar{Y}}^{2}.
   $$
 Note that
 $$
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   $$" />
 
 
@@ -147,16 +147,16 @@ $$
     </div>
 
     <div class="ref-description">
-    <p>Calculates the explained sum of squares \(\left( ESS \right)\)
+    <p>Calculates the explained sum of squares \(\left( \mathrm{ESS} \right)\)
 using
 $$
-    ESS = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
     \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} - \bar{Y} \right)^2
   $$
 In matrix form
 $$
-    ESS = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \mathbf{X} \boldsymbol{\hat{\beta}} - \mathbf{\bar{Y}} \right)^2
   $$
 where
@@ -165,12 +165,12 @@ is an \(n \times 1\) matrix of predicted values of \(\mathbf{y}\),
 and \(\mathbf{\bar{Y}}\) is the mean of \(\mathbf{y}\).
 Equivalent computational matrix formula
 $$
-    ESS = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
+    \mathrm{ESS} = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}} - n \mathbf{\bar{Y}}^{2}.
   $$
 Note that
 $$
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   $$</p>
     </div>
 
@@ -206,7 +206,7 @@ on the regressand variable.</p></td>
     </tr>
     <tr>
       <th>betahat</th>
-      <td><p>Vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
+      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
 The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
 of \(k\) unknown regression coefficients.</p></td>
     </tr>
@@ -214,7 +214,7 @@ of \(k\) unknown regression coefficients.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the explained sum of squares \(\left( ESS \right)\).</p>
+    <p>Returns the explained sum of squares \(\left( \mathrm{ESS} \right)\).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>yhat = NULL</code>, it is computed using <code><a href='yhat.html'>yhat()</a></code>

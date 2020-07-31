@@ -109,22 +109,40 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-h.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-intercept.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-model.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sigma2epsilonhat.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sehatbetahat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sigma2epsilonhatbiased.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sehatbetahatbiased.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sehatbetahatprimebiased.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sigma2hatepsilonhat.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sigma2hatepsilonhatbiased.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-slopes.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-slopesprime.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-tepsilonhat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-vcovbetahat.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-vcovhatbetahat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-vcovbetahatbiased.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-vcovhatbetahatbiased.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-yminusyhat.html</loc>
@@ -157,13 +175,22 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/scatter.plot.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sehatbetahat.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sehatbetahatbiased.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sehatbetahatprimebiased.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sigma2epsilon.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sigma2epsilonhat.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sigma2hatepsilonhat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sigma2epsilonhatbiased.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sigma2hatepsilonhatbiased.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/slopes.html</loc>
@@ -175,10 +202,10 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/tepsilonhat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/vcovbetahat.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/vcovhatbetahat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/vcovbetahatbiased.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/vcovhatbetahatbiased.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/yhat.html</loc>
@@ -232,7 +259,7 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-residuals.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-sigma2epsilonhat.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-sigma2hatepsilonhat.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-tepsilonhat.html</loc>

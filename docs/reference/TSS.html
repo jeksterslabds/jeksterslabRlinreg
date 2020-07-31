@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="Total Sum of Squares. — TSS" />
-<meta property="og:description" content="Calculates the total sum of squares \(\left( TSS \right)\) using
+<meta property="og:description" content="Calculates the total sum of squares \(\left( \mathrm{TSS} \right)\) using
 $$
-    TSS = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
+    \mathrm{TSS} = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} Y_{i}^{2} - n \bar{Y}^2
   $$
 In matrix form
 $$
-    TSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
+    \mathrm{TSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
   $$
 Equivalent computational matrix formula
 $$
-    TSS = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
+    \mathrm{TSS} = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
   $$
 Note that
 $$
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   $$" />
 
 
@@ -139,22 +139,22 @@ $$
     </div>
 
     <div class="ref-description">
-    <p>Calculates the total sum of squares \(\left( TSS \right)\) using
+    <p>Calculates the total sum of squares \(\left( \mathrm{TSS} \right)\) using
 $$
-    TSS = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
+    \mathrm{TSS} = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} Y_{i}^{2} - n \bar{Y}^2
   $$
 In matrix form
 $$
-    TSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
+    \mathrm{TSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
   $$
 Equivalent computational matrix formula
 $$
-    TSS = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
+    \mathrm{TSS} = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
   $$
 Note that
 $$
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   $$</p>
     </div>
 
@@ -173,7 +173,7 @@ on the regressand variable.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the total sum of squares \(\left( TSS \right)\).</p>
+    <p>Returns the total sum of squares \(\left( \mathrm{TSS} \right)\).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://en.wikipedia.org/wiki/Residual_sum_of_squares'>Wikipedia: Residual Sum of Squares</a></p>
@@ -188,6 +188,11 @@ on the regressand variable.</p></td>
 <code><a href='ESS.html'>ESS</a>()</code>,
 <code><a href='RSS.html'>RSS</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>TSS</span>(
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt; [1] 80309.82</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

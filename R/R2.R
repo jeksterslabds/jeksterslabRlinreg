@@ -102,6 +102,15 @@
 #' @param fromRSS Logical.
 #'   If `TRUE`, calculates the coefficient of determination from `RSS`.
 #'   If `FALSE`, calculates the coefficient of determination from `ESS`.
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' R2(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 R2 <- function(X,
                y,
@@ -129,7 +138,7 @@ R2 <- function(X,
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Adjusted R-square \eqn{\bar{R}^{2}} (from \eqn{R^2})
+#' @title Adjusted R-squared \eqn{\bar{R}^{2}} (from \eqn{R^2})
 #'
 #' @description Calculates the adjusted coefficient of determination
 #'   \deqn{
@@ -174,12 +183,21 @@ R2 <- function(X,
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Adjusted R-square \eqn{\bar{R}^{2}}
+#' @title Adjusted R-squared \eqn{\bar{R}^{2}}
 #'
 #' @family assessment of model quality functions
 #' @keywords model-assessment
 #' @inheritParams .Rbar2
 #' @inherit .Rbar2 description return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' Rbar2(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 Rbar2 <- function(X,
                   y) {

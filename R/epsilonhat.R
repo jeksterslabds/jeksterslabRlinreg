@@ -90,13 +90,11 @@ My <- function(X,
 #' @family residuals functions
 #' @keywords residuals
 #' @inheritParams betahat
+#' @inheritParams .Xbetahat
 #' @inherit My return references
 #' @param yhat Vector of length `n` or `n` by `1` matrix.
 #'   \eqn{n \times 1} vector of predicted values of \eqn{\mathbf{y}}
 #'   \eqn{\left( \mathbf{\hat{y}} \right)}.
-#' @param betahat Vector of length `k` or `k` by `1` matrix.
-#'   The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
-#'   of \eqn{k} unknown regression coefficients.
 #' @export
 .yminusyhat <- function(y,
                         yhat = NULL,
@@ -125,6 +123,16 @@ My <- function(X,
 #' @keywords residuals
 #' @inheritParams .yminusyhat
 #' @inherit .yminusyhat description return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' epsilonhat <- yminusyhat(
+#'   X = X,
+#'   y = y
+#' )
+#' hist(epsilonhat)
 #' @export
 yminusyhat <- function(X,
                        y) {
@@ -146,6 +154,16 @@ yminusyhat <- function(X,
 #' @keywords residuals
 #' @inheritParams yminusyhat
 #' @inherit yminusyhat description return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' epsilonhat <- epsilonhat(
+#'   X = X,
+#'   y = y
+#' )
+#' hist(epsilonhat)
 #' @export
 epsilonhat <- function(X,
                        y) {

@@ -4,18 +4,18 @@
 \alias{intercept}
 \title{Regression Intercept \eqn{\beta_{1}}}
 \usage{
-intercept(slopes, muy, muX)
+intercept(X, y)
 }
 \arguments{
-\item{slopes}{Numeric vector of length \code{p} or \code{p} by \code{1} matrix.
-\eqn{p \times 1} regression slopes \eqn{\left( \boldsymbol{\beta}_{2, \cdots, k} \right)} .}
+\item{X}{\code{n} by \code{k} numeric matrix.
+The data matrix \eqn{\mathbf{X}}
+(also known as design matrix, model matrix or regressor matrix)
+is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
+which includes a regressor whose value is 1 for each observation on the first column.}
 
-\item{muy}{Numeric.
-Mean of the regressand variable \eqn{\left( \mu_{\mathbf{y}} \right)} .}
-
-\item{muX}{Numeric vector of length \code{p} or \code{p} by \code{1} matrix. \eqn{p \times 1} vector
-of means of the regressors \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
-\eqn{\left( \boldsymbol{\mu}_{\mathbf{X}} \right)} .}
+\item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
+The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
+on the regressand variable.}
 }
 \value{
 Returns the intercept \eqn{\beta_1}
@@ -37,8 +37,21 @@ The intercept \eqn{\beta_1} is given by
     \boldsymbol{\beta}_{2, \cdots, k}^{T} .
   }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+intercept(
+  X = X,
+  y = y
+)
+}
 \seealso{
 Other parameter functions: 
+\code{\link{.intercept}()},
+\code{\link{.slopesprime}()},
+\code{\link{.slopes}()},
 \code{\link{sigma2epsilon}()},
 \code{\link{slopesprime}()},
 \code{\link{slopes}()}

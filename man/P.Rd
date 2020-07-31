@@ -30,6 +30,14 @@ also known as the hat matrix, transforms the \eqn{\mathbf{y}} vector
 to the vector of predicted values
 \eqn{\left( \mathbf{\hat{y}} = \mathbf{Py} \right)}.
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, -ncol(X)]
+P <- P(
+  X = X
+)
+str(P, list.len = 6)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Projection_matrix}{Wikipedia: Projection Matrix}
 }

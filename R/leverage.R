@@ -44,6 +44,14 @@
 #' @keywords projection
 #' @inheritParams .h
 #' @inherit .h description references return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' h <- h(
+#'   X = X
+#' )
+#' hist(h)
 #' @export
 h <- function(X) {
   .h(

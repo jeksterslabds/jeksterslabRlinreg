@@ -24,24 +24,24 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 
-\item{betahat}{Vector of length \code{k} or \code{k} by \code{1} matrix.
+\item{betahat}{Numeric vector of length \code{k} or \code{k} by \code{1} matrix.
 The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
 of \eqn{k} unknown regression coefficients.}
 }
 \value{
-Returns the explained sum of squares \eqn{\left( ESS \right)}.
+Returns the explained sum of squares \eqn{\left( \mathrm{ESS} \right)}.
 }
 \description{
-Calculates the explained sum of squares \eqn{\left( ESS \right)}
+Calculates the explained sum of squares \eqn{\left( \mathrm{ESS} \right)}
 using
 \deqn{
-    ESS = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
     \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} - \bar{Y} \right)^2
   }
 In matrix form
 \deqn{
-    ESS = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
+    \mathrm{ESS} = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
     = \sum_{i = 1}^{n} \left( \mathbf{X} \boldsymbol{\hat{\beta}} - \mathbf{\bar{Y}} \right)^2
   }
 where
@@ -50,12 +50,12 @@ is an \eqn{n \times 1} matrix of predicted values of \eqn{\mathbf{y}},
 and \eqn{\mathbf{\bar{Y}}} is the mean of \eqn{\mathbf{y}}.
 Equivalent computational matrix formula
 \deqn{
-    ESS = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
+    \mathrm{ESS} = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
     \boldsymbol{\hat{\beta}} - n \mathbf{\bar{Y}}^{2}.
   }
 Note that
 \deqn{
-    TSS = ESS + RSS .
+    \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
   }
 }
 \details{

@@ -29,6 +29,16 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 }
+\value{
+Returns a vector with the following elements
+\describe{
+\item{RSS}{Residual sum of squares.}
+\item{MSE}{Mean square error.}
+\item{RMSE}{Root mean square error.}
+\item{R2}{R-squared \eqn{\left( R^2 \right)}.}
+\item{Rbar2}{Adjusted R-squared \eqn{\left( \bar{R}^2 \right)} .}
+}
+}
 \description{
 Model Assessment
 }

@@ -180,7 +180,44 @@ Print correlations.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns descriptive statistics useful in k-variable linear regression model.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>descriptives</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
+)</div><div class='output co'>#&gt; 
+#&gt; Means and Standard Deviations:
+#&gt;                  Mean         SD
+#&gt; wages      12.3658495  7.8963503
+#&gt; gender      0.4972847  0.5001867
+#&gt; race        0.1528317  0.3599648
+#&gt; union       0.1590380  0.3658535
+#&gt; education  13.1450737  2.8138234
+#&gt; experience 18.7897595 11.6628366
+#&gt; age        37.9348332 11.4942777
+#&gt; 
+#&gt; Correlations:
+#&gt;                 wages      gender        race        union    education
+#&gt; wages       1.0000000 -0.22330183 -0.12783381  0.102246656  0.456517980
+#&gt; gender     -0.2233018  1.00000000  0.04327185 -0.088856935 -0.031439159
+#&gt; race       -0.1278338  0.04327185  1.00000000  0.080587911 -0.087061729
+#&gt; union       0.1022467 -0.08885694  0.08058791  1.000000000  0.003966952
+#&gt; education   0.4565180 -0.03143916 -0.08706173  0.003966952  1.000000000
+#&gt; experience  0.1731733 -0.02265681 -0.03912910  0.154319024 -0.180103012
+#&gt; age         0.2874694 -0.03068544 -0.06101581  0.157553168  0.062057953
+#&gt;             experience         age
+#&gt; wages       0.17317330  0.28746938
+#&gt; gender     -0.02265681 -0.03068544
+#&gt; race       -0.03912910 -0.06101581
+#&gt; union       0.15431902  0.15755317
+#&gt; education  -0.18010301  0.06205795
+#&gt; experience  1.00000000  0.97057500
+#&gt; age         0.97057500  1.00000000</div><div class='img'><img src='descriptives-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

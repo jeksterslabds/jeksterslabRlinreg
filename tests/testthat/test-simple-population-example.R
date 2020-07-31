@@ -80,6 +80,15 @@ mutheta <- matrix(
   data = c(muy, mux),
   ncol = 1
 )
+X <- cbind(
+  constant = 1,
+  education = x
+)
+y <- matrix(
+  data = y,
+  ncol = 1
+)
+colnames(y) <- "wages"
 #'
 #'
 #' The `jeksterslabRlinreg` package has functions to derive expectations for regression models.
@@ -239,27 +248,49 @@ knitr::kable(
 #' from the means and the covariances.
 #'
 #+
-result_slopes <- jeksterslabRlinreg::slopes(
+result_slopes <- jeksterslabRlinreg::.slopes(
   SigmaX = sigma2x,
   sigmayX = sigmayx
 )
 result_slopes
-result_intercept <- jeksterslabRlinreg::intercept(
+result_intercept <- jeksterslabRlinreg::.intercept(
   slopes = result_slopes,
   muy = muy,
   muX = mux
 )
 result_intercept
 #'
+#' From raw data
+#+
+result_slopesfromrawdata <- jeksterslabRlinreg::slopes(
+  X = X,
+  y = y
+)
+result_slopesfromrawdata
+result_interceptfromrawdata <- jeksterslabRlinreg::intercept(
+  X = X,
+  y = y
+)
+result_interceptfromrawdata
+#'
 #'
 #' Standardized slopes can also be obtained using `jeksterslabRlinreg::slopesprime()`
 #'
 #+
-result_slopesprime <- jeksterslabRlinreg::slopesprime(
+result_slopesprime <- jeksterslabRlinreg::.slopesprime(
   RX = sqrt(sigma2x),
   ryX = ryx
 )
 result_slopesprime
+#'
+#' From raw data
+#'
+#+
+result_slopesprimefromrawdata <- jeksterslabRlinreg::slopesprime(
+  X = X,
+  y = y
+)
+result_slopesprimefromrawdata
 #'
 #'
 #' The error variance can also be derived with the available information using
@@ -303,6 +334,18 @@ test_that("results_beta", {
   for (i in 1:length(results_beta)) {
     expect_equivalent(
       results_beta[i],
+      beta[i]
+    )
+  }
+})
+test_that("results_betafromrawdata", {
+  results_betafromrawdata <- c(
+    result_interceptfromrawdata,
+    result_slopesfromrawdata
+  )
+  for (i in 1:length(results_betafromrawdata)) {
+    expect_equivalent(
+      results_betafromrawdata[i],
       beta[i]
     )
   }

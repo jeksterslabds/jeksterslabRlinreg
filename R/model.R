@@ -6,6 +6,14 @@
 #' @keywords model-assessment
 #' @inheritParams .R2fromRSS
 #' @inheritParams .Rbar2
+#' @return Returns a vector with the following elements
+#' \describe{
+#'   \item{RSS}{Residual sum of squares.}
+#'   \item{MSE}{Mean square error.}
+#'   \item{RMSE}{Root mean square error.}
+#'   \item{R2}{R-squared \eqn{\left( R^2 \right)}.}
+#'   \item{Rbar2}{Adjusted R-squared \eqn{\left( \bar{R}^2 \right)} .}
+#' }
 #' @export
 .model <- function(RSS = NULL,
                    TSS = NULL,
@@ -64,6 +72,16 @@
 #' @family assessment of model quality functions
 #' @keywords model-assessment
 #' @inheritParams .model
+#' @inherit .model return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' model(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 model <- function(X,
                   y) {

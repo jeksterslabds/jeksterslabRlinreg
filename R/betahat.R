@@ -167,6 +167,15 @@
 #' @param qr Logical.
 #'   If `TRUE`, use QR decomposition when normal equations fail.
 #'   If `FALSE`, use singular value decompositon when normal equations fail.
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' betahat(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 betahat <- function(X,
                     y,

@@ -49,6 +49,16 @@
 #' @keywords predicted
 #' @inheritParams .Py
 #' @inherit .Py description return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' Py <- Py(
+#'   X = X,
+#'   y = y
+#' )
+#' hist(Py)
 #' @export
 Py <- function(X,
                y) {
@@ -113,6 +123,16 @@ Py <- function(X,
 #' @keywords predicted
 #' @inheritParams .Xbetahat
 #' @inherit .Xbetahat description return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' Xbetahat <- Xbetahat(
+#'   X = X,
+#'   y = y
+#' )
+#' hist(Xbetahat)
 #' @export
 Xbetahat <- function(X,
                      y) {
@@ -138,6 +158,16 @@ Xbetahat <- function(X,
 #' @keywords predicted
 #' @inheritParams Xbetahat
 #' @inherit Py return references
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' yhat <- yhat(
+#'   X = X,
+#'   y = y
+#' )
+#' hist(yhat)
 #' @export
 yhat <- function(X,
                  y) {

@@ -22,16 +22,58 @@
 #' @family parameter functions
 #' @keywords parameter
 #' @inheritParams Sigmatheta
+#' @inheritParams betahat
 #' @param sigmayX Numeric vector of length `p` or `p` by `1` matrix.
 #'   \eqn{p \times 1} covariances between the regressand and the regressors
 #'   \eqn{\left( \boldsymbol{\sigma}_{\mathbf{yX}} \right)}.
 #' @return Returns the slopes \eqn{\boldsymbol{\beta}_{2, \cdots, k}}
 #'   of a linear regression model derived from the variance-covariance matrix.
 #' @export
-slopes <- function(SigmaX,
-                   sigmayX) {
+.slopes <- function(SigmaX = NULL,
+                    sigmayX = NULL,
+                    X,
+                    y) {
+  if (is.null(SigmaX) | is.null(sigmayX)) {
+    descriptives <- descriptives(
+      X = X,
+      y = y,
+      plot = FALSE,
+      msd = FALSE,
+      cor = FALSE
+    )
+    SigmaX <- descriptives[["SigmaX"]]
+    sigmayX <- descriptives[["sigmayX"]]
+  }
   drop(
     solve(SigmaX) %*% sigmayX
+  )
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Regression Slopes \eqn{\boldsymbol{\beta}_{2, \cdots, k}}
+#'
+#' @family parameter functions
+#' @keywords parameter
+#' @inheritParams .slopes
+#' @inherit .slopes description details return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' slopes(
+#'   X = X,
+#'   y = y
+#' )
+#' @export
+slopes <- function(X,
+                   y) {
+  .slopes(
+    SigmaX = NULL,
+    sigmayX = NULL,
+    X = X,
+    y = y
   )
 }
 
@@ -58,6 +100,7 @@ slopes <- function(SigmaX,
 #'
 #' @family parameter functions
 #' @keywords parameter
+#' @inheritParams betahat
 #' @param RX `p` by `p` numeric matrix.
 #'   \eqn{p \times p} correlations between the regressors.
 #' @param ryX Numeric vector of length `p` or `p` by `1` matrix.
@@ -66,10 +109,51 @@ slopes <- function(SigmaX,
 #'   \eqn{\boldsymbol{\beta}_{2, \cdots, k}^{\prime}}
 #'   of a linear regression model derived from the correlation matrix.
 #' @export
-slopesprime <- function(RX,
-                        ryX) {
+.slopesprime <- function(RX = NULL,
+                         ryX = NULL,
+                         X,
+                         y) {
+  if (is.null(RX) | is.null(ryX)) {
+    descriptives <- descriptives(
+      X = X,
+      y = y,
+      plot = FALSE,
+      msd = FALSE,
+      cor = FALSE
+    )
+    RX <- descriptives[["RX"]]
+    ryX <- descriptives[["ryX"]]
+  }
   drop(
     solve(RX) %*% ryX
+  )
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Regression Standardized Slopes \eqn{\boldsymbol{\beta}_{2, \cdots, k}^{\prime}}
+#'
+#' @family parameter functions
+#' @keywords parameter
+#' @inheritParams .slopesprime
+#' @inherit .slopesprime description details return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' slopesprime(
+#'   X = X,
+#'   y = y
+#' )
+#' @export
+slopesprime <- function(X,
+                        y) {
+  .slopesprime(
+    RX = NULL,
+    ryX = NULL,
+    X = X,
+    y = y
   )
 }
 
@@ -94,14 +178,66 @@ slopesprime <- function(RX,
 #' @keywords parameter
 #' @inheritParams Sigmatheta
 #' @inheritParams mutheta
+#' @inheritParams betahat
 #' @param muy Numeric.
 #'   Mean of the regressand variable \eqn{\left( \mu_{\mathbf{y}} \right)} .
 #' @return Returns the intercept \eqn{\beta_1}
 #'   of a linear regression model derived from the means
 #'   and the slopes \eqn{\left( \boldsymbol{\beta}_{2, \cdots, k} \right)} .
 #' @export
-intercept <- function(slopes,
-                      muy,
-                      muX) {
-  muy - sum(crossprod(as.vector(muX), as.vector(slopes)))
+.intercept <- function(slopes = NULL,
+                       muy = NULL,
+                       muX = NULL,
+                       X,
+                       y) {
+  if (is.null(slopes) | is.null(muy) | is.null(muX)) {
+    descriptives <- descriptives(
+      X = X,
+      y = y,
+      plot = FALSE,
+      msd = FALSE,
+      cor = FALSE
+    )
+    SigmaX <- descriptives[["SigmaX"]]
+    sigmayX <- descriptives[["sigmayX"]]
+    mu <- descriptives[["mu"]]
+    muy <- mu[1]
+    muX <- mu[-1]
+    slopes <- .slopes(
+      SigmaX = SigmaX,
+      sigmayX = sigmayX
+    )
+  }
+  drop(
+    muy - sum(crossprod(as.vector(muX), as.vector(slopes)))
+  )
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Regression Intercept \eqn{\beta_{1}}
+#'
+#' @family parameter functions
+#' @keywords parameter
+#' @inheritParams .intercept
+#' @inherit .intercept description details return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' intercept(
+#'   X = X,
+#'   y = y
+#' )
+#' @export
+intercept <- function(X,
+                      y) {
+  .intercept(
+    slopes = NULL,
+    muy = NULL,
+    muX = NULL,
+    X = X,
+    y = y
+  )
 }

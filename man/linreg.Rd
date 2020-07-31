@@ -49,6 +49,16 @@ Display summary output.}
 \description{
 Linear Regression
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+linreg(
+  X = X,
+  y = y
+)
+}
 \author{
 Ivan Jacob Agaloos Pesigan
 }

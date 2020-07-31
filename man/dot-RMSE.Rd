@@ -2,7 +2,7 @@
 % Please edit documentation in R/MSE.R
 \name{.RMSE}
 \alias{.RMSE}
-\title{Root Mean Squared Error (from \eqn{RSS})}
+\title{Root Mean Squared Error (from \eqn{\mathrm{RSS}})}
 \usage{
 .RMSE(MSE = NULL, X, y)
 }
@@ -24,12 +24,12 @@ on the regressand variable.}
 Returns the root mean squared error.
 }
 \description{
-Calculates the root mean squared error \eqn{\left( RMSE \right)} using
+Calculates the root mean squared error \eqn{\left( \mathrm{RMSE} \right)} using
 \deqn{
-    RMSE = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+    \mathrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
     = \sqrt{\frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
-    = \sqrt{\frac{RSS}{n}} .
+    = \sqrt{\frac{\mathrm{RSS}}{n}} .
   }
 }
 \details{

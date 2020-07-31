@@ -2,9 +2,9 @@
 #'
 #' @title Residual Sum of Square (from \eqn{\boldsymbol{\hat{\varepsilon}}})
 #'
-#' @description Calculates the residual sum of squares \eqn{\left( RSS \right)} using
+#' @description Calculates the residual sum of squares \eqn{\left( \mathrm{RSS} \right)} using
 #'   \deqn{
-#'     RSS = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
+#'     \mathrm{RSS} = \sum_{i = 1}^{n} \left( Y_i - \hat{Y}_i \right)^2 \\
 #'     = \sum_{i = 1}^{n} \left( Y_i -
 #'     \left[ \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} +
 #'     \dots + \hat{\beta}_{k} X_{ki} \right] \right)^2 \\
@@ -13,14 +13,14 @@
 #'   }
 #'   In matrix form
 #'   \deqn{
-#'     RSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+#'     \mathrm{RSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
 #'     = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
 #'     = \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{\prime}
 #'     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right) .
 #'   }
 #'   Or simply
 #'   \deqn{
-#'     RSS = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
+#'     \mathrm{RSS} = \sum_{i = 1}^{n} \boldsymbol{\hat{\varepsilon}}_{i}^{2}
 #'     = \boldsymbol{\hat{\varepsilon}}^{\prime} \boldsymbol{\hat{\varepsilon}}
 #'   }
 #'   where
@@ -29,16 +29,16 @@
 #'   \eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)}.
 #'   Equivalent computational matrix formula
 #'   \deqn{
-#'     RSS = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
+#'     \mathrm{RSS} = \mathbf{y}^{\prime} \mathbf{y} - 2 \boldsymbol{\hat{\beta}} \mathbf{X}^{\prime}
 #'     \mathbf{y} + \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
 #'     \boldsymbol{\hat{\beta}}.
 #'   }
 #'   Note that
 #'   \deqn{
-#'     TSS = ESS + RSS.
+#'     \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS}.
 #'   }
 #'
-#' @details If `epsilonhat = NULL`, \eqn{\left( RSS \right)} is computed with `X` and `y` as required arguments
+#' @details If `epsilonhat = NULL`, \eqn{\left( \mathrm{RSS} \right)} is computed with `X` and `y` as required arguments
 #'   and `betahat` as an optional argument.
 #'
 #' @family sum of squares functions
@@ -54,7 +54,7 @@
 #'   [Wikipedia: Total Sum of Squares](https://en.wikipedia.org/wiki/Total_sum_of_squares)
 #'
 #'   [Wikipedia: Coefficient of Determination](https://en.wikipedia.org/wiki/Coefficient_of_determination)
-#' @return Returns residual sum of squares \eqn{\left( RSS \right)}.
+#' @return Returns residual sum of squares \eqn{\left( \mathrm{RSS} \right)}.
 #' @export
 .RSS <- function(epsilonhat = NULL,
                  X,
@@ -95,6 +95,15 @@
 #' @keywords SS
 #' @inheritParams .RSS
 #' @inherit .RSS description references return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' RSS(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 RSS <- function(X,
                 y) {
@@ -110,16 +119,16 @@ RSS <- function(X,
 #'
 #' @title Explained Sum of Squares (from \eqn{\mathbf{\hat{y}}} and \eqn{\mathbf{\bar{Y}}})
 #'
-#' @description Calculates the explained sum of squares \eqn{\left( ESS \right)}
+#' @description Calculates the explained sum of squares \eqn{\left( \mathrm{ESS} \right)}
 #'   using
 #'   \deqn{
-#'     ESS = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
+#'     \mathrm{ESS} = \sum_{i = 1}^{n} \left( \hat{Y}_{i} - \bar{Y} \right)^2 \\
 #'     = \sum_{i = 1}^{n} \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
 #'     \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} - \bar{Y} \right)^2
 #'   }
 #'   In matrix form
 #'   \deqn{
-#'     ESS = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
+#'     \mathrm{ESS} = \sum_{i = 1}^{n} \left( \mathbf{\hat{y}} - \mathbf{\bar{Y}} \right)^2 \\
 #'     = \sum_{i = 1}^{n} \left( \mathbf{X} \boldsymbol{\hat{\beta}} - \mathbf{\bar{Y}} \right)^2
 #'   }
 #'   where
@@ -128,12 +137,12 @@ RSS <- function(X,
 #'   and \eqn{\mathbf{\bar{Y}}} is the mean of \eqn{\mathbf{y}}.
 #'   Equivalent computational matrix formula
 #'   \deqn{
-#'     ESS = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
+#'     \mathrm{ESS} = \boldsymbol{\hat{\beta}}^{\prime} \mathbf{X}^{\prime} \mathbf{X}
 #'     \boldsymbol{\hat{\beta}} - n \mathbf{\bar{Y}}^{2}.
 #'   }
 #'   Note that
 #'   \deqn{
-#'     TSS = ESS + RSS .
+#'     \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
 #'   }
 #'
 #' @details If `yhat = NULL`, it is computed using [`yhat()`]
@@ -145,7 +154,8 @@ RSS <- function(X,
 #' @param ybar Numeric.
 #'   Mean of `y`.
 #' @inheritParams .yminusyhat
-#' @return Returns the explained sum of squares \eqn{\left( ESS \right)}.
+#' @inheritParams .Xbetahat
+#' @return Returns the explained sum of squares \eqn{\left( \mathrm{ESS} \right)}.
 #' @export
 .ESS <- function(yhat = NULL,
                  ybar = NULL,
@@ -177,6 +187,15 @@ RSS <- function(X,
 #' @keywords SS
 #' @inheritParams .ESS
 #' @inherit .ESS description references return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' ESS(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 ESS <- function(X,
                 y) {
@@ -193,29 +212,34 @@ ESS <- function(X,
 #'
 #' @title Total Sum of Squares.
 #'
-#' @description Calculates the total sum of squares \eqn{\left( TSS \right)} using
+#' @description Calculates the total sum of squares \eqn{\left( \mathrm{TSS} \right)} using
 #'   \deqn{
-#'     TSS = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
+#'     \mathrm{TSS} = \sum_{i = 1}^{n} \left( Y_i - \bar{Y} \right)^2 \\
 #'     = \sum_{i = 1}^{n} Y_{i}^{2} - n \bar{Y}^2
 #'   }
 #'   In matrix form
 #'   \deqn{
-#'     TSS = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
+#'     \mathrm{TSS} = \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\bar{y}} \right)^2
 #'   }
 #'   Equivalent computational matrix formula
 #'   \deqn{
-#'     TSS = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
+#'     \mathrm{TSS} = \mathbf{y}^{\prime} \mathbf{y} - n \mathbf{\bar{Y}}^{2}.
 #'   }
 #'   Note that
 #'   \deqn{
-#'     TSS = ESS + RSS .
+#'     \mathrm{TSS} = \mathrm{ESS} + \mathrm{RSS} .
 #'   }
 #'
 #' @family sum of squares functions
 #' @keywords SS
 #' @inheritParams RSS
-#' @return Returns the total sum of squares \eqn{\left( TSS \right)}.
+#' @return Returns the total sum of squares \eqn{\left( \mathrm{TSS} \right)}.
 #' @inherit RSS references
+#' @examples
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' TSS(
+#'   y = y
+#' )
 #' @export
 TSS <- function(y) {
   drop(

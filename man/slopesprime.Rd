@@ -4,14 +4,18 @@
 \alias{slopesprime}
 \title{Regression Standardized Slopes \eqn{\boldsymbol{\beta}_{2, \cdots, k}^{\prime}}}
 \usage{
-slopesprime(RX, ryX)
+slopesprime(X, y)
 }
 \arguments{
-\item{RX}{\code{p} by \code{p} numeric matrix.
-\eqn{p \times p} correlations between the regressors.}
+\item{X}{\code{n} by \code{k} numeric matrix.
+The data matrix \eqn{\mathbf{X}}
+(also known as design matrix, model matrix or regressor matrix)
+is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
+which includes a regressor whose value is 1 for each observation on the first column.}
 
-\item{ryX}{Numeric vector of length \code{p} or \code{p} by \code{1} matrix.
-\eqn{p \times 1} correlations between the regressand and the regressors.}
+\item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
+The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
+on the regressand variable.}
 }
 \value{
 Returns the standardized slopes
@@ -39,8 +43,21 @@ is the \eqn{p \times 1} column vector
 of the correlations between the regressand and the regressors.
 }
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+slopesprime(
+  X = X,
+  y = y
+)
+}
 \seealso{
 Other parameter functions: 
+\code{\link{.intercept}()},
+\code{\link{.slopesprime}()},
+\code{\link{.slopes}()},
 \code{\link{intercept}()},
 \code{\link{sigma2epsilon}()},
 \code{\link{slopes}()}

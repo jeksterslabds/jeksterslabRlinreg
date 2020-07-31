@@ -17,8 +17,21 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 }
+\value{
+Returns the ANOVA table.
+}
 \description{
 Analysis of Variance
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+anovatable(
+  X = X,
+  y = y
+)
 }
 \seealso{
 Other hypothesis testing functions: 

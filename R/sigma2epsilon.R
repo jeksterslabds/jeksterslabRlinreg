@@ -8,7 +8,7 @@
 #'
 #' @family parameter functions
 #' @keywords parameter
-#' @inheritParams slopes
+#' @inheritParams .slopes
 #' @inheritParams Sigmatheta
 #' @param sigma2y Numeric.
 #'   Variance of the regressand variable \eqn{\left( \sigma_{y}^{2} \right)}.

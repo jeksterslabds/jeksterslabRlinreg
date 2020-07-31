@@ -11,6 +11,7 @@
 #' @inheritParams .R2fromESS
 #' @inheritParams .Rbar2
 #' @importFrom stats pf
+#' @return Returns the ANOVA table.
 #' @export
 .anovatable <- function(RSS = NULL,
                         ESS = NULL,
@@ -99,7 +100,17 @@
 #'
 #' @family hypothesis testing functions
 #' @keywords inference
-#' @inherit .anovatable
+#' @inheritParams .anovatable
+#' @inherit .anovatable return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' anovatable(
+#'   X = X,
+#'   y = y
+#' )
 #' @export
 anovatable <- function(X,
                        y) {

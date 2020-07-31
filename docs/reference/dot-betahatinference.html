@@ -126,19 +126,19 @@
     <p>Regression Coefficients Hypothesis Test and Confidence Intervals</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.betahatinference</span>(<span class='kw'>betahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>se</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>n</span>, <span class='no'>X</span>, <span class='no'>y</span>)</pre>
+    <pre class="usage"><span class='fu'>.betahatinference</span>(<span class='kw'>betahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sehatbetahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>n</span>, <span class='no'>X</span>, <span class='no'>y</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>betahat</th>
-      <td><p>Vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
+      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
 The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
 of \(k\) unknown regression coefficients.</p></td>
     </tr>
     <tr>
-      <th>se</th>
+      <th>sehatbetahat</th>
       <td><p>Numeric vector.
 Standard errors of regression coefficients.</p></td>
     </tr>
@@ -162,6 +162,22 @@ The vector \(\mathbf{y}\) is an \(n \times 1\) vector of observations
 on the regressand variable.</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns a matrix with the following columns</p><dl'>
+<dt>coef</dt><dd><p>Coefficients.</p></dd>
+<dt>se</dt><dd><p>Standard error.</p></dd>
+<dt>t</dt><dd><p>t-statistic.</p></dd>
+<dt>p</dt><dd><p>p-value.</p></dd>
+<dt>ci_0.05</dt><dd><p>Lower limit 99.99% confidence interval.</p></dd>
+<dt>ci_0.5</dt><dd><p>Lower limit 99% confidence interval.</p></dd>
+<dt>ci_2.5</dt><dd><p>Lower limit 95% confidence interval.</p></dd>
+<dt>ci_97.5</dt><dd><p>Upper limit 95% confidence interval.</p></dd>
+<dt>ci_99.5</dt><dd><p>Upper limit 99% confidence interval.</p></dd>
+<dt>ci_99.95</dt><dd><p>Upper limit 99.99% confidence interval.</p></dd>
+
+</dl>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

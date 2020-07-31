@@ -171,6 +171,13 @@ to the vector of predicted values
 <code><a href='M.html'>M</a>()</code>,
 <code><a href='h.html'>h</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>P</span> <span class='kw'>&lt;-</span> <span class='fu'>P</span>(
+  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>
+)
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>P</span>, <span class='kw'>list.len</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt;  num [1:1289, 1:1289] 1.94e-03 6.81e-04 -5.85e-05 -1.41e-03 4.75e-04 ...</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

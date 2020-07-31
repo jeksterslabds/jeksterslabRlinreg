@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Ordinary Least Squares)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-28</h4>
+            <h4 class="date">2020-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-ols-example.Rmd"><code>vignettes/tests/test-linreg-estimation-ols-example.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-ols-example.Rmd</code></div>
@@ -343,12 +343,12 @@
   <span class="kw">betahat</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahat.html">betahat</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;         expr     min       lq       mean   median        uq      max neval</span>
-<span class="co">#&gt;           lm 894.799 940.7520 1049.27377 983.9200 1099.5605 3235.230   100</span>
-<span class="co">#&gt;  betahatnorm  43.295  48.9440   54.25725  53.0965   57.0800  120.724   100</span>
-<span class="co">#&gt;    betahatqr 150.443 171.5845  252.44705 270.5580  328.3930  359.253   100</span>
-<span class="co">#&gt;   betahatsvd 161.508 173.1245  224.53454 184.4600  239.0625 2432.189   100</span>
-<span class="co">#&gt;      betahat  52.345  61.6325   67.52495  68.4095   71.9725   86.922   100</span></pre></body></html></div>
+<span class="co">#&gt;         expr     min       lq       mean    median        uq      max neval</span>
+<span class="co">#&gt;           lm 913.817 996.5910 1226.08415 1187.5030 1256.5765 3953.110   100</span>
+<span class="co">#&gt;  betahatnorm  42.390  48.1490   58.61197   54.6690   63.5155  145.238   100</span>
+<span class="co">#&gt;    betahatqr 154.826 177.1975  261.54326  245.8255  348.5220  489.500   100</span>
+<span class="co">#&gt;   betahatsvd 162.090 177.6770  224.43257  205.7040  262.8795  413.440   100</span>
+<span class="co">#&gt;      betahat  52.846  62.9435   75.19789   71.0515   82.1425  184.435   100</span></pre></body></html></div>
 <div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test linreg-estimation-ols"</span>)
 <span class="fu">test_that</span>(<span class="st">"results_betahat"</span>, {
   <span class="no">result_lm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_lm</span>))

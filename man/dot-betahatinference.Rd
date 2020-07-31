@@ -4,14 +4,14 @@
 \alias{.betahatinference}
 \title{Regression Coefficients Hypothesis Test and Confidence Intervals}
 \usage{
-.betahatinference(betahat = NULL, se = NULL, n, X, y)
+.betahatinference(betahat = NULL, sehatbetahat = NULL, n, X, y)
 }
 \arguments{
-\item{betahat}{Vector of length \code{k} or \code{k} by \code{1} matrix.
+\item{betahat}{Numeric vector of length \code{k} or \code{k} by \code{1} matrix.
 The vector \eqn{\boldsymbol{\hat{\beta}}} is a \eqn{k \times 1} vector of estimates
 of \eqn{k} unknown regression coefficients.}
 
-\item{se}{Numeric vector.
+\item{sehatbetahat}{Numeric vector.
 Standard errors of regression coefficients.}
 
 \item{n}{Integer.
@@ -26,6 +26,21 @@ which includes a regressor whose value is 1 for each observation on the first co
 \item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
+}
+\value{
+Returns a matrix with the following columns
+\describe{
+\item{coef}{Coefficients.}
+\item{se}{Standard error.}
+\item{t}{t-statistic.}
+\item{p}{p-value.}
+\item{ci_0.05}{Lower limit 99.99\% confidence interval.}
+\item{ci_0.5}{Lower limit 99\% confidence interval.}
+\item{ci_2.5}{Lower limit 95\% confidence interval.}
+\item{ci_97.5}{Upper limit 95\% confidence interval.}
+\item{ci_99.5}{Upper limit 99\% confidence interval.}
+\item{ci_99.95}{Upper limit 99.99\% confidence interval.}
+}
 }
 \description{
 Regression Coefficients Hypothesis Test and Confidence Intervals

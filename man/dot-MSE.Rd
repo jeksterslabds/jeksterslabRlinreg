@@ -2,7 +2,7 @@
 % Please edit documentation in R/MSE.R
 \name{.MSE}
 \alias{.MSE}
-\title{Mean Squared Error (from \eqn{RSS})}
+\title{Mean Squared Error (from \eqn{\mathrm{RSS}})}
 \usage{
 .MSE(RSS = NULL, n, X, y)
 }
@@ -27,12 +27,12 @@ on the regressand variable.}
 Returns the mean squared error.
 }
 \description{
-Calculates the mean squared error \eqn{\left( MSE \right)} using
+Calculates the mean squared error \eqn{\left( \mathrm{MSE} \right)} using
 \deqn{
-    MSE  = \frac{1}{n} \sum_{i = 1}^{n}
+    \mathrm{MSE}  = \frac{1}{n} \sum_{i = 1}^{n}
     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
     = \frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
-    = \frac{RSS}{n} .
+    = \frac{\mathrm{RSS}}{n} .
   }
 }
 \details{

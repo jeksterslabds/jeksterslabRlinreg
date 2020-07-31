@@ -40,6 +40,17 @@ In matrix form
 \details{
 If \code{betahat = NULL}, the \code{betahat} vector is computed using \code{\link[=betahat]{betahat()}}.
 }
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+epsilonhat <- epsilonhat(
+  X = X,
+  y = y
+)
+hist(epsilonhat)
+}
 \references{
 \href{https://en.wikipedia.org/wiki/Errors_and_residuals}{Wikipedia: Errors and Residuals}
 }

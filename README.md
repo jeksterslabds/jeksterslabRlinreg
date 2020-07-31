@@ -1,7 +1,7 @@
 jeksterslabRlinreg
 ================
 Ivan Jacob Agaloos Pesigan
-2020-07-28
+2020-07-31
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -36,19 +36,19 @@ between wages and education. The regressor variable is years of
 education. The regressand variable is hourly wage in US dollars.
 
     #>      constant education
-    #> [1,]        1        11
-    #> [2,]        1         8
-    #> [3,]        1         9
-    #> [4,]        1        10
-    #> [5,]        1        15
-    #> [6,]        1        12
+    #> [1,]        1         7
+    #> [2,]        1        18
+    #> [3,]        1        10
+    #> [4,]        1        12
+    #> [5,]        1         7
+    #> [6,]        1        15
     #>          wages
-    #> [1,]  6.045637
-    #> [2,]  7.337631
-    #> [3,]  4.353645
-    #> [4,] -3.449000
-    #> [5,] 15.772231
-    #> [6,] 10.267500
+    #> [1,]  5.081102
+    #> [2,] 12.105334
+    #> [3,]  9.217860
+    #> [4,]  9.086761
+    #> [5,]  7.776624
+    #> [6,] 24.037017
 
 ### `jeksterslabRlinreg::linreg()`
 
@@ -82,32 +82,40 @@ jeksterslabRlinreg::linreg(
 #> 
 #> Model Assessment:
 #>                   Value
-#> RSS            62426.92
-#> MSE               48.43
-#> RMSE               6.96
-#> R-squared          0.23
-#> Adj. R-squared     0.23
+#> RSS            64936.35
+#> MSE               50.38
+#> RMSE               7.10
+#> R-squared          0.19
+#> Adj. R-squared     0.19
 #> 
 #> ANOVA Table:
-#>         df       SS          MS       F            p
-#> Model    1 18778.38 18778.37701 387.137 1.473016e-75
-#> Error 1287 62426.92    48.50577      NA           NA
-#> Total 1288 81205.30          NA      NA           NA
+#>         df       SS          MS        F            p
+#> Model    1 15655.35 15655.35106 310.2798 2.185821e-62
+#> Error 1287 64936.35    50.45559       NA           NA
+#> Total 1288 80591.70          NA       NA           NA
 #> 
 #> Coefficients:
-#>                coef        se         t            p std. coef
-#> Intercept -5.532713 0.8823929 -6.270124 4.914487e-10 0.0000000
-#> education  1.326519 0.0674188 19.675797 1.473016e-75 0.4808801
+#>                coef        se         t            p
+#> Intercept -3.908522 0.9081290 -4.303929 1.805086e-05
+#> education  1.221423 0.0693409 17.614761 2.185821e-62
+#> 
+#> Standardized Coefficients:
+#>         coef           se            t            p 
+#> 4.407438e-01 2.502128e-02 1.761476e+01 2.185821e-62 
 #> 
 #> Confidence Intervals:
-#>             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95
-#> Intercept -8.442935 -7.808982 -7.263799 -3.801627 -3.256444 -2.622491
-#> education  1.104165  1.152601  1.194256  1.458782  1.500436  1.548873
+#>              ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5   ci_99.95
+#> Intercept -6.9036249 -6.251182 -5.690098 -2.126947 -1.565863 -0.9134199
+#> education  0.9927299  1.042548  1.085390  1.357457  1.400299  1.4501167
+#> 
+#> Confidence Intervals - Standardized Coefficients:
+#>   ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95 
+#> 0.3582211 0.3761976 0.3916569 0.4898308 0.5052901 0.5232666 
 #> 
 #> Means and Standard Deviations:
 #>               Mean       SD
-#> wages     11.40433 7.940251
-#> education 12.76804 2.878444
+#> wages     11.70371 7.910196
+#> education 12.78200 2.854350
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" /><img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />

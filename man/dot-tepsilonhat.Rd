@@ -7,7 +7,7 @@
 .tepsilonhat(
   epsilonhat = NULL,
   h = NULL,
-  sigma2epsilonhat = NULL,
+  sigma2hatepsilonhat = NULL,
   X = NULL,
   y = NULL
 )
@@ -19,7 +19,7 @@
 \item{h}{Numeric vector.
 Leverage.}
 
-\item{sigma2epsilonhat}{Numeric.
+\item{sigma2hatepsilonhat}{Numeric.
 Estimate of error variance.}
 
 \item{X}{\code{n} by \code{k} numeric matrix.
@@ -42,7 +42,7 @@ Calculates studentized residuals using
   }
 }
 \details{
-If \code{epsilonhat}, \code{h}, or \code{sigma2epsilonhat} are \code{NULL},
+If \code{epsilonhat}, \code{h}, or \code{sigma2hatepsilonhat} are \code{NULL},
 they are calculated using \code{X} and \code{y}.
 }
 \references{
