@@ -201,6 +201,9 @@ linreg <- function(X,
   ci <- ci[, -c(1, 2, 3, 4)]
   coefficients <- betahatinference[, c(1, 2, 3, 4)]
   # betahatprimeinference----------------------------------------------------------------------------------
+  varnamesbetahatprimeinference <- colnames(betahatinference)
+  varnamesbetahatprimeinferenceci <- varnamesbetahatprimeinference[-c(1, 2, 3, 4)]
+  varnamesbetahatprimeinferencecoefficients <- varnamesbetahatprimeinference[c(1, 2, 3, 4)]
   if (sehatslopesprimetype == "textbook") {
     sehatslopesprimetouse <- sehatslopesprimetb
   }
@@ -218,12 +221,14 @@ linreg <- function(X,
     nrow = p
   )
   rownames(stdci) <- betahatnames[-1]
+  colnames(stdci) <- varnamesbetahatprimeinferenceci
   stdcoefficients <- slopesprimeinference[, c(1, 2, 3, 4)]
   stdcoefficients <- matrix(
     data = stdcoefficients,
     nrow = p
   )
   rownames(stdcoefficients) <- betahatnames[-1]
+  colnames(stdcoefficients) <- varnamesbetahatprimeinferencecoefficients
   if (print) {
     # display-------------------------------------------------------------------------------------------
     ## model assessment--------------------------------------------------------------------------------
