@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-31</h4>
+            <h4 class="date">2020-08-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-linreg.Rmd"><code>vignettes/tests/test-linreg-estimation-linreg.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-linreg.Rmd</code></div>
@@ -173,6 +173,7 @@
 <span class="co">#&gt; experience  0.1666065 0.01604756 10.382050 2.659960e-24</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Standardized Coefficients:</span>
+<span class="co">#&gt; Textbook standard errors are used.</span>
 <span class="co">#&gt;                   coef         se         t            p</span>
 <span class="co">#&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17</span>
 <span class="co">#&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03</span>
@@ -180,7 +181,7 @@
 <span class="co">#&gt; education   0.48829962 0.02348462 20.792312 5.507605e-83</span>
 <span class="co">#&gt; experience  0.24607631 0.02370209 10.382050 2.659960e-24</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Intervals:</span>
+<span class="co">#&gt; Confidence Intervals - Regression Coefficients:</span>
 <span class="co">#&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95</span>
 <span class="co">#&gt; Intercept  -10.5335348 -9.8037324 -9.1761258 -5.1905507 -4.5629441 -3.8331417</span>
 <span class="co">#&gt; gender      -4.2774257 -4.0154638 -3.7901849 -2.3595660 -2.1342872 -1.8723252</span>
@@ -189,7 +190,7 @@
 <span class="co">#&gt; education    1.1529406  1.2002901  1.2410091  1.4995928  1.5403119  1.5876614</span>
 <span class="co">#&gt; experience   0.1136797  0.1252092  0.1351242  0.1980889  0.2080039  0.2195334</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Intervals - Standardized Coefficients:</span>
+<span class="co">#&gt; Confidence Intervals - Standardized Slopes:</span>
 <span class="co">#&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5</span>
 <span class="co">#&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436</span>
 <span class="co">#&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766</span>
@@ -210,7 +211,19 @@
 <span class="co">#&gt; race        0.1528317  0.3599648</span>
 <span class="co">#&gt; union       0.1590380  0.3658535</span>
 <span class="co">#&gt; education  13.1450737  2.8138234</span>
-<span class="co">#&gt; experience 18.7897595 11.6628366</span></pre></body></html></div>
+<span class="co">#&gt; experience 18.7897595 11.6628366</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span></pre></body></html></div>
 <p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-5-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-5-2.png" width="100%"></p>
 </div>
 <div id="using-biased-standard-errors" class="section level2">
@@ -219,7 +232,7 @@
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-  <span class="kw">unbiased</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+  <span class="kw">sehatbetahattype</span> <span class="kw">=</span> <span class="st">"biased"</span>
 )
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model Assessment:</span>
@@ -247,6 +260,7 @@
 <span class="co">#&gt; experience  0.1666065 0.01601016 10.406297 2.103790e-24</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Standardized Coefficients:</span>
+<span class="co">#&gt; Textbook standard errors are used.</span>
 <span class="co">#&gt;                   coef         se         t            p</span>
 <span class="co">#&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17</span>
 <span class="co">#&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03</span>
@@ -254,7 +268,7 @@
 <span class="co">#&gt; education   0.48829962 0.02348462 20.792312 5.507605e-83</span>
 <span class="co">#&gt; experience  0.24607631 0.02370209 10.382050 2.659960e-24</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Intervals:</span>
+<span class="co">#&gt; Confidence Intervals - Regression Coefficients:</span>
 <span class="co">#&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95</span>
 <span class="co">#&gt; Intercept  -10.5257285 -9.7976266 -9.1714824 -5.1951941 -4.5690499 -3.8409480</span>
 <span class="co">#&gt; gender      -4.2746237 -4.0132721 -3.7885182 -2.3612328 -2.1364788 -1.8751273</span>
@@ -263,7 +277,7 @@
 <span class="co">#&gt; education    1.1534470  1.2006862  1.2413104  1.4992916  1.5399157  1.5871549</span>
 <span class="co">#&gt; experience   0.1138030  0.1253056  0.1351976  0.1980155  0.2079074  0.2194101</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Intervals - Standardized Coefficients:</span>
+<span class="co">#&gt; Confidence Intervals - Standardized Slopes:</span>
 <span class="co">#&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5</span>
 <span class="co">#&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436</span>
 <span class="co">#&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766</span>
@@ -284,7 +298,19 @@
 <span class="co">#&gt; race        0.1528317  0.3599648</span>
 <span class="co">#&gt; union       0.1590380  0.3658535</span>
 <span class="co">#&gt; education  13.1450737  2.8138234</span>
-<span class="co">#&gt; experience 18.7897595 11.6628366</span></pre></body></html></div>
+<span class="co">#&gt; experience 18.7897595 11.6628366</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span></pre></body></html></div>
 <p><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-6-1.png" width="100%"><img src="test-linreg-estimation-linreg_files/figure-html/unnamed-chunk-6-2.png" width="100%"></p>
 </div>
 <div id="lm-function" class="section level2">

@@ -40,14 +40,13 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-betahatinference(
-  X = X,
-  y = y
-)
+betahatinference(X = X, y = y)
 }
 \seealso{
 Other inference functions: 
-\code{\link{.betahatinference}()}
+\code{\link{.betahatinference}()},
+\code{\link{.slopesprimeinference}()},
+\code{\link{slopesprimeinference}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

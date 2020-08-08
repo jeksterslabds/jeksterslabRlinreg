@@ -29,12 +29,12 @@ where
 \deqn{
     \mathbf{P} = \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
   }
-}
-\details{
-If \code{P = NULL}, the \code{P} matrix is computed using \code{\link[=P]{P()}}.
 The residual maker matrix \eqn{\left( \mathbf{M} \right)}
 transforms the \eqn{\mathbf{y}} vector
 to the vector of residuals \eqn{\left( \mathbf{e} = \mathbf{My} \right)} .
+}
+\details{
+If \code{P = NULL}, the \code{P} matrix is computed using \code{\link[=P]{P()}}.
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Projection_matrix}{Wikipedia: Projection Matrix}

@@ -48,10 +48,7 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-slopesprime(
-  X = X,
-  y = y
-)
+slopesprime(X = X, y = y)
 }
 \seealso{
 Other parameter functions: 

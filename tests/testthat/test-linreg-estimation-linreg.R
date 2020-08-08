@@ -80,7 +80,7 @@ linreg(
 linreg(
   X = X,
   y = y,
-  unbiased = FALSE
+  sehatbetahattype = "biased"
 )
 #'
 #' ## `lm()` function

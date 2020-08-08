@@ -47,7 +47,9 @@ Regression Coefficients Hypothesis Test and Confidence Intervals
 }
 \seealso{
 Other inference functions: 
-\code{\link{betahatinference}()}
+\code{\link{.slopesprimeinference}()},
+\code{\link{betahatinference}()},
+\code{\link{slopesprimeinference}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

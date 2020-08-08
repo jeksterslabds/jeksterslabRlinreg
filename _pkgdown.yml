@@ -82,7 +82,8 @@ articles:
   - tests/test-linreg-estimation-MSE
   - tests/test-linreg-estimation-model
   - tests/test-linreg-estimation-sigma2hatepsilonhat
-  - tests/test-linreg-estimation-vcov
+  - tests/test-linreg-estimation-vcovhatbetahat
+  - tests/test-linreg-estimation-sehatbetahat
   - tests/test-linreg-estimation-anovatable
   - tests/test-linreg-estimation-nhst
   - tests/test-linreg-estimation-leverage

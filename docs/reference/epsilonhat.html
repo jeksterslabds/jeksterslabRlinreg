@@ -6,7 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Residuals \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\) — epsilonhat • jeksterslabRlinreg</title>
+<title>Residuals
+\(
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  \) — epsilonhat • jeksterslabRlinreg</title>
 
 
 <!-- jquery -->
@@ -39,16 +43,24 @@
 
 
 
-<meta property="og:title" content="Residuals \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\) — epsilonhat" />
+<meta property="og:title" content="Residuals
+\(
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  \) — epsilonhat" />
 <meta property="og:description" content="Calculates residuals using
 $$
-    \hat{\varepsilon}_{i} = Y_{i} - \hat{Y}_{i} \\
-    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
-    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} - \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
+    \hat{\varepsilon}_{i}
+    = Y_{i} - \hat{Y}_{i} \\
+    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
+      \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
+    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} -
+      \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
   $$
 In matrix form
 $$
-    \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \\
+    \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \\
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   $$" />
 
@@ -127,7 +139,11 @@ $$
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Residuals \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\)</h1>
+    <h1>Residuals
+\(
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  \)</h1>
     <small class="dont-index">Source: <a href='https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/R/epsilonhat.R'><code>R/epsilonhat.R</code></a></small>
     <div class="hidden name"><code>epsilonhat.Rd</code></div>
     </div>
@@ -135,13 +151,17 @@ $$
     <div class="ref-description">
     <p>Calculates residuals using
 $$
-    \hat{\varepsilon}_{i} = Y_{i} - \hat{Y}_{i} \\
-    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
-    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} - \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
+    \hat{\varepsilon}_{i}
+    = Y_{i} - \hat{Y}_{i} \\
+    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
+      \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
+    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} -
+      \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
   $$
 In matrix form
 $$
-    \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \\
+    \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \\
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   $$</p>
     </div>
@@ -174,9 +194,6 @@ on the regressand variable.</p></td>
 that is, the difference between the observed \(\left( \mathbf{y} \right)\)
 and predicted \(\left( \mathbf{\hat{y}} \right)\) values of the regressand variable
 \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\).</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>If <code>betahat = NULL</code>, the <code>betahat</code> vector is computed using <code><a href='betahat.html'>betahat()</a></code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://en.wikipedia.org/wiki/Errors_and_residuals'>Wikipedia: Errors and Residuals</a></p>
@@ -195,10 +212,7 @@ and predicted \(\left( \mathbf{\hat{y}} \right)\) values of the regressand varia
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='no'>epsilonhat</span> <span class='kw'>&lt;-</span> <span class='fu'>epsilonhat</span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
-)
+<span class='no'>epsilonhat</span> <span class='kw'>&lt;-</span> <span class='fu'>epsilonhat</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>epsilonhat</span>)</div><div class='img'><img src='epsilonhat-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

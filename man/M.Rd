@@ -26,6 +26,9 @@ where
 \deqn{
     \mathbf{P} = \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
   }
+The residual maker matrix \eqn{\left( \mathbf{M} \right)}
+transforms the \eqn{\mathbf{y}} vector
+to the vector of residuals \eqn{\left( \mathbf{e} = \mathbf{My} \right)} .
 }
 \examples{
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]

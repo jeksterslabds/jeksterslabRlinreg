@@ -169,6 +169,15 @@ Variance of the regressand variable \(\left( \sigma_{y}^{2} \right)\).</p></td>
 <code><a href='slopesprime.html'>slopesprime</a>()</code>,
 <code><a href='slopes.html'>slopes</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>slopes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.2076475</span>, <span class='fl'>0.4510391</span>)
+<span class='no'>sigma2y</span> <span class='kw'>&lt;-</span> <span class='fl'>1.288163</span>
+<span class='no'>sigmayX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.4661224</span>, <span class='fl'>0.5771429</span>)
+<span class='no'>SigmaX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1.2934694</span>, <span class='fl'>0.4379592</span>, <span class='fl'>0.4379592</span>, <span class='fl'>1.0779592</span>),
+  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>
+)
+<span class='fu'>sigma2epsilon</span>(<span class='kw'>slopes</span> <span class='kw'>=</span> <span class='no'>slopes</span>, <span class='kw'>sigma2y</span> <span class='kw'>=</span> <span class='no'>sigma2y</span>, <span class='kw'>sigmayX</span> <span class='kw'>=</span> <span class='no'>sigmayX</span>, <span class='kw'>SigmaX</span> <span class='kw'>=</span> <span class='no'>SigmaX</span>)</div><div class='output co'>#&gt; [1] 0.9310598</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

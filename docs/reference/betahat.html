@@ -166,13 +166,13 @@ When that fails, QR decomposition is used when <code>qr = TRUE</code>
 or singular value decomposition when <code>qr = FALSE</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://en.wikipedia.org/wiki/Linear_regression'>Wikipedia: Linear Regression</a></p>
-<p><a href='https://en.wikipedia.org/wiki/Ordinary_least_squares'>Wikipedia: Ordinary Least Squares</a></p>
+    <p><a href='https://en.wikipedia.org/wiki/Linear_regression'>Wikipedia: Linear regression</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Ordinary_least_squares'>Wikipedia: Ordinary least squares</a></p>
 <p><a href='https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations'>Wikipedia: Inverting the matrix of the normal equations</a></p>
-<p><a href='https://en.wikipedia.org/wiki/QR_decomposition'>Wikipedia: QR Decomposition</a></p>
-<p><a href='https://en.wikipedia.org/wiki/Singular_value_decomposition'>Wikipedia: Singular Value Decomposition</a></p>
+<p><a href='https://en.wikipedia.org/wiki/QR_decomposition'>Wikipedia: QR decomposition</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Singular_value_decomposition'>Wikipedia: Singular value decomposition</a></p>
 <p><a href='https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods'>Wikipedia: Orthogonal decomposition methods</a></p>
-<p><a href='https://en.wikipedia.org/wiki/Design_matrix'>Wikipedia: Design Matrix</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Design_matrix'>Wikipedia: Design matrix</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other beta-hat functions: 
@@ -185,11 +185,13 @@ or singular value decomposition when <code>qr = FALSE</code>.</p>
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='fu'>betahat</span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
-)</div><div class='output co'>#&gt;   constant     gender       race      union  education experience 
-#&gt; -7.1833382 -3.0748755 -1.5653133  1.0959758  1.3703010  0.1666065 </div></pre>
+<span class='fu'>betahat</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;               betahat
+#&gt; constant   -7.1833382
+#&gt; gender     -3.0748755
+#&gt; race       -1.5653133
+#&gt; union       1.0959758
+#&gt; education   1.3703010
+#&gt; experience  0.1666065</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

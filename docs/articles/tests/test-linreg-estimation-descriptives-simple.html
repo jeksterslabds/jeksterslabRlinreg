@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Descriptives - Simple Regression)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-31</h4>
+            <h4 class="date">2020-08-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-descriptives-simple.Rmd"><code>vignettes/tests/test-linreg-estimation-descriptives-simple.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-descriptives-simple.Rmd</code></div>
@@ -155,15 +155,27 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
 )
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Means and Standard Deviations:</span>
-<span class="co">#&gt;        Mean       SD</span>
-<span class="co">#&gt; y  12.36585 7.896350</span>
-<span class="co">#&gt; X2 13.14507 2.813823</span>
+<span class="co">#&gt; Central Moments:</span>
+<span class="co">#&gt;        Mean       SD   Skewness Kurtosis</span>
+<span class="co">#&gt; y  12.36585 7.896350  1.8502679 4.860048</span>
+<span class="co">#&gt; X2 13.14507 2.813823 -0.2907198 2.993715</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Mardia's Estimate of Multivariate Skewness and Kurtosis:</span>
+<span class="co">#&gt;                 b1           b1.chisq      b1.correction b1.chisq.corrected </span>
+<span class="co">#&gt;       3.925195e+00       8.432628e+02       1.002329e+00       8.452264e+02 </span>
+<span class="co">#&gt;              b1.df               b1.p     b1.p.corrected                 b2 </span>
+<span class="co">#&gt;       4.000000e+00      3.264144e-181      1.225698e-181       1.735584e+01 </span>
+<span class="co">#&gt;               b2.z               b2.p </span>
+<span class="co">#&gt;       4.198742e+01       0.000000e+00 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Correlations:</span>
 <span class="co">#&gt;           y       X2</span>
 <span class="co">#&gt; y  1.000000 0.456518</span>
-<span class="co">#&gt; X2 0.456518 1.000000</span></pre></body></html></div>
+<span class="co">#&gt; X2 0.456518 1.000000</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span></pre></body></html></div>
 <p><img src="test-linreg-estimation-descriptives-simple_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result_X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"X"</span>]])
 <span class="no">result_y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"y"</span>]])

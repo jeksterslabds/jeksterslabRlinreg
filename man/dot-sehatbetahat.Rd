@@ -30,10 +30,10 @@ of \eqn{\widehat{\mathrm{cov}} \left( \boldsymbol{\hat{\beta}} \right)} .
 \seealso{
 Other standard errors of estimates of regression coefficients functions: 
 \code{\link{.sehatbetahatbiased}()},
-\code{\link{.sehatbetahatprimebiased}()},
+\code{\link{.sehatslopesprimetb}()},
 \code{\link{sehatbetahatbiased}()},
-\code{\link{sehatbetahatprimebiased}()},
-\code{\link{sehatbetahat}()}
+\code{\link{sehatbetahat}()},
+\code{\link{sehatslopesprimetb}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

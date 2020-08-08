@@ -27,21 +27,24 @@ on the regressand variable.}
 Returns the mean squared error.
 }
 \description{
-Calculates the mean squared error \eqn{\left( \mathrm{MSE} \right)} using
+Calculates the mean squared error
+\eqn{\left( \mathrm{MSE} \right)} using
 \deqn{
-    \mathrm{MSE}  = \frac{1}{n} \sum_{i = 1}^{n}
-    \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
-    = \frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+    \mathrm{MSE}
+    = \frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
+    = \frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
     = \frac{\mathrm{RSS}}{n} .
   }
 }
 \details{
 If \code{RSS = NULL}, the \code{RSS} vector is computed using \code{\link[=RSS]{RSS()}}
-with \code{X} and \code{y} as required arguments and \code{betahat} as an optional argument.
+with \code{X} and \code{y} as required arguments.
 If \code{RSS} is provided, \code{X}, and \code{y} are not needed.
 }
 \references{
-\href{https://en.wikipedia.org/wiki/Mean_squared_error}{Wikipedia: Mean Squared Error}
+\href{https://en.wikipedia.org/wiki/Mean_squared_error}{Wikipedia: Mean squared error}
 }
 \seealso{
 Other assessment of model quality functions: 

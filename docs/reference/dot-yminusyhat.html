@@ -6,7 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Residuals \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\) — .yminusyhat • jeksterslabRlinreg</title>
+<title>Residuals
+\(
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  \) — .yminusyhat • jeksterslabRlinreg</title>
 
 
 <!-- jquery -->
@@ -39,16 +43,24 @@
 
 
 
-<meta property="og:title" content="Residuals \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\) — .yminusyhat" />
+<meta property="og:title" content="Residuals
+\(
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  \) — .yminusyhat" />
 <meta property="og:description" content="Calculates residuals using
 $$
-    \hat{\varepsilon}_{i} = Y_{i} - \hat{Y}_{i} \\
-    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
-    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} - \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
+    \hat{\varepsilon}_{i}
+    = Y_{i} - \hat{Y}_{i} \\
+    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
+      \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
+    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} -
+      \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
   $$
 In matrix form
 $$
-    \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \\
+    \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \\
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   $$" />
 
@@ -127,7 +139,11 @@ $$
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Residuals \(\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)\)</h1>
+    <h1>Residuals
+\(
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  \)</h1>
     <small class="dont-index">Source: <a href='https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/R/epsilonhat.R'><code>R/epsilonhat.R</code></a></small>
     <div class="hidden name"><code>dot-yminusyhat.Rd</code></div>
     </div>
@@ -135,13 +151,17 @@ $$
     <div class="ref-description">
     <p>Calculates residuals using
 $$
-    \hat{\varepsilon}_{i} = Y_{i} - \hat{Y}_{i} \\
-    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
-    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} - \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
+    \hat{\varepsilon}_{i}
+    = Y_{i} - \hat{Y}_{i} \\
+    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
+      \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
+    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} -
+      \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
   $$
 In matrix form
 $$
-    \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \\
+    \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \\
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   $$</p>
     </div>
@@ -159,7 +179,7 @@ on the regressand variable.</p></td>
     </tr>
     <tr>
       <th>yhat</th>
-      <td><p>Vector of length <code>n</code> or <code>n</code> by <code>1</code> matrix.
+      <td><p>Numeric vector of length <code>n</code> or <code>n</code> by <code>1</code> numeric matrix.
 \(n \times 1\) vector of predicted values of \(\mathbf{y}\)
 \(\left( \mathbf{\hat{y}} \right)\).</p></td>
     </tr>

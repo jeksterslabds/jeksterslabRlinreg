@@ -65,10 +65,7 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-RSS(
-  X = X,
-  y = y
-)
+RSS(X = X, y = y)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}

@@ -21,8 +21,8 @@ on the regressand variable.}
 Returns a vector with the following elements
 \describe{
 \item{RSS}{Residual sum of squares.}
-\item{MSE}{Mean square error.}
-\item{RMSE}{Root mean square error.}
+\item{MSE}{Mean squared error.}
+\item{RMSE}{Root mean squared error.}
 \item{R2}{R-squared \eqn{\left( R^2 \right)}.}
 \item{Rbar2}{Adjusted R-squared \eqn{\left( \bar{R}^2 \right)} .}
 }
@@ -39,6 +39,15 @@ model(
   X = X,
   y = y
 )
+}
+\references{
+\href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}
+
+\href{https://en.wikipedia.org/wiki/Explained_sum_of_squares}{Wikipedia: Explained Sum of Squares}
+
+\href{https://en.wikipedia.org/wiki/Total_sum_of_squares}{Wikipedia: Total Sum of Squares}
+
+\href{https://en.wikipedia.org/wiki/Coefficient_of_determination}{Wikipedia: Coefficient of Determination}
 }
 \seealso{
 Other assessment of model quality functions: 

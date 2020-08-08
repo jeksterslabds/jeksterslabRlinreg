@@ -4,23 +4,28 @@
 \alias{residual.plot}
 \title{Residual Plots}
 \usage{
-residual.plot(yhat, tepsilonhat, epsilonhat, h)
+residual.plot(X, y)
 }
 \arguments{
-\item{yhat}{Vector of length \code{n} or \code{n} by \code{1} matrix.
-\eqn{n \times 1} vector of predicted values of \eqn{\mathbf{y}}
-\eqn{\left( \mathbf{\hat{y}} \right)}.}
+\item{X}{\code{n} by \code{k} numeric matrix.
+The data matrix \eqn{\mathbf{X}}
+(also known as design matrix, model matrix or regressor matrix)
+is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
+which includes a regressor whose value is 1 for each observation on the first column.}
 
-\item{tepsilonhat}{Studentized residuals.}
-
-\item{epsilonhat}{Numeric vector of length \code{n} or \code{n} by 1 matrix.
-\eqn{n \time 1} vector of residuals.}
-
-\item{h}{Numeric vector.
-Leverage.}
+\item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
+The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
+on the regressand variable.}
 }
 \description{
 Residual Plots
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+residual.plot(X = X, y = y)
 }
 \seealso{
 Other plotting functions: 

@@ -10,7 +10,8 @@ linreg(
   varnamesX = NULL,
   varnamey = NULL,
   qr = TRUE,
-  unbiased = TRUE,
+  sehatbetahattype = "unbiased",
+  sehatslopesprimetype = "textbook",
   plot = TRUE,
   print = TRUE
 )
@@ -26,19 +27,23 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 
-\item{varnamesX}{Character vector of length \code{k}.
+\item{varnamesX}{Optional. Character vector of length \code{k}.
 Variable names for matrix \code{X}.}
 
-\item{varnamey}{Character string.
+\item{varnamey}{Optional. Character string.
 Variable name for vector \code{y}.}
 
 \item{qr}{Logical.
 If \code{TRUE}, use QR decomposition when normal equations fail.
 If \code{FALSE}, use singular value decompositon when normal equations fail.}
 
-\item{unbiased}{Logical.
-Use unbiased standard errors for regression coefficients
-hypothesis test.}
+\item{sehatbetahattype}{Character string.
+Standard errors for regression coefficients hypothesis test.
+Options are \code{sehatbetahattype = "unbiased"} and \code{sehatbetahattype = "biased"}.}
+
+\item{sehatslopesprimetype}{Character string.
+Standard errors for standardized regression slopes hypothesis test.
+Options are \code{sehatslopesprimetype = "textbook"} and \code{sehatslopesprimetype = "yuanchan"}.}
 
 \item{plot}{Logical.
 Display plots.}
@@ -54,10 +59,7 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-linreg(
-  X = X,
-  y = y
-)
+linreg(X = X, y = y)
 }
 \author{
 Ivan Jacob Agaloos Pesigan

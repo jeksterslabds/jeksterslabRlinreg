@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Descriptives)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-31</h4>
+            <h4 class="date">2020-08-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-descriptives.Rmd"><code>vignettes/tests/test-linreg-estimation-descriptives.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-descriptives.Rmd</code></div>
@@ -149,14 +149,22 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
 )
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Means and Standard Deviations:</span>
-<span class="co">#&gt;                  Mean         SD</span>
-<span class="co">#&gt; wages      12.3658495  7.8963503</span>
-<span class="co">#&gt; gender      0.4972847  0.5001867</span>
-<span class="co">#&gt; race        0.1528317  0.3599648</span>
-<span class="co">#&gt; union       0.1590380  0.3658535</span>
-<span class="co">#&gt; education  13.1450737  2.8138234</span>
-<span class="co">#&gt; experience 18.7897595 11.6628366</span>
+<span class="co">#&gt; Central Moments:</span>
+<span class="co">#&gt;                  Mean         SD    Skewness   Kurtosis</span>
+<span class="co">#&gt; wages      12.3658495  7.8963503  1.85026794  4.8600481</span>
+<span class="co">#&gt; gender      0.4972847  0.5001867  0.01087395 -2.0029920</span>
+<span class="co">#&gt; race        0.1528317  0.3599648  1.93189913  1.7349237</span>
+<span class="co">#&gt; union       0.1590380  0.3658535  1.86682302  1.4873335</span>
+<span class="co">#&gt; education  13.1450737  2.8138234 -0.29071984  2.9937154</span>
+<span class="co">#&gt; experience 18.7897595 11.6628366  0.37610718 -0.6699994</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Mardia's Estimate of Multivariate Skewness and Kurtosis:</span>
+<span class="co">#&gt;                 b1           b1.chisq      b1.correction b1.chisq.corrected </span>
+<span class="co">#&gt;       1.253254e+01       2.692407e+03       1.002328e+00       2.698674e+03 </span>
+<span class="co">#&gt;              b1.df               b1.p     b1.p.corrected                 b2 </span>
+<span class="co">#&gt;       5.600000e+01       0.000000e+00       0.000000e+00       5.848385e+01 </span>
+<span class="co">#&gt;               b2.z               b2.p </span>
+<span class="co">#&gt;       1.920797e+01       3.174381e-82 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Correlations:</span>
 <span class="co">#&gt;                 wages      gender        race        union    education</span>
@@ -172,7 +180,19 @@
 <span class="co">#&gt; race       -0.03912910</span>
 <span class="co">#&gt; union       0.15431902</span>
 <span class="co">#&gt; education  -0.18010301</span>
-<span class="co">#&gt; experience  1.00000000</span></pre></body></html></div>
+<span class="co">#&gt; experience  1.00000000</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span></pre></body></html></div>
 <p><img src="test-linreg-estimation-descriptives_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result_X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"X"</span>]])
 <span class="no">result_y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"y"</span>]])

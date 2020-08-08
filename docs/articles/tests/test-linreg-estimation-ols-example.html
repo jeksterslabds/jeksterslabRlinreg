@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Tests: The Linear Regression Model (Ordinary Least Squares)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-07-31</h4>
+            <h4 class="date">2020-08-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-ols-example.Rmd"><code>vignettes/tests/test-linreg-estimation-ols-example.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-ols-example.Rmd</code></div>
@@ -170,8 +170,13 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="no">result_inv</span>
-<span class="co">#&gt;   constant     gender       race      union  education experience </span>
-<span class="co">#&gt; -7.1833382 -3.0748755 -1.5653133  1.0959758  1.3703010  0.1666065</span></pre></body></html></div>
+<span class="co">#&gt;               betahat</span>
+<span class="co">#&gt; constant   -7.1833382</span>
+<span class="co">#&gt; gender     -3.0748755</span>
+<span class="co">#&gt; race       -1.5653133</span>
+<span class="co">#&gt; union       1.0959758</span>
+<span class="co">#&gt; education   1.3703010</span>
+<span class="co">#&gt; experience  0.1666065</span></pre></body></html></div>
 </div>
 </div>
 <div id="qr-decomposition" class="section level2">
@@ -232,7 +237,13 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="no">result_qr</span>
-<span class="co">#&gt; [1] -7.1833382 -3.0748755 -1.5653133  1.0959758  1.3703010  0.1666065</span></pre></body></html></div>
+<span class="co">#&gt;         betahat</span>
+<span class="co">#&gt; [1,] -7.1833382</span>
+<span class="co">#&gt; [2,] -3.0748755</span>
+<span class="co">#&gt; [3,] -1.5653133</span>
+<span class="co">#&gt; [4,]  1.0959758</span>
+<span class="co">#&gt; [5,]  1.3703010</span>
+<span class="co">#&gt; [6,]  0.1666065</span></pre></body></html></div>
 </div>
 </div>
 <div id="singular-value-decomposition-svd" class="section level2">
@@ -281,7 +292,13 @@
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="no">result_svd</span>
-<span class="co">#&gt; [1] -7.1833382 -3.0748755 -1.5653133  1.0959758  1.3703010  0.1666065</span></pre></body></html></div>
+<span class="co">#&gt;         betahat</span>
+<span class="co">#&gt; [1,] -7.1833382</span>
+<span class="co">#&gt; [2,] -3.0748755</span>
+<span class="co">#&gt; [3,] -1.5653133</span>
+<span class="co">#&gt; [4,]  1.0959758</span>
+<span class="co">#&gt; [5,]  1.3703010</span>
+<span class="co">#&gt; [6,]  0.1666065</span></pre></body></html></div>
 </div>
 </div>
 <div id="jeksterslabrlinregbetahat" class="section level2">
@@ -343,12 +360,12 @@
   <span class="kw">betahat</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/betahat.html">betahat</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)
 )
 <span class="co">#&gt; Unit: microseconds</span>
-<span class="co">#&gt;         expr     min       lq       mean    median        uq      max neval</span>
-<span class="co">#&gt;           lm 913.817 996.5910 1226.08415 1187.5030 1256.5765 3953.110   100</span>
-<span class="co">#&gt;  betahatnorm  42.390  48.1490   58.61197   54.6690   63.5155  145.238   100</span>
-<span class="co">#&gt;    betahatqr 154.826 177.1975  261.54326  245.8255  348.5220  489.500   100</span>
-<span class="co">#&gt;   betahatsvd 162.090 177.6770  224.43257  205.7040  262.8795  413.440   100</span>
-<span class="co">#&gt;      betahat  52.846  62.9435   75.19789   71.0515   82.1425  184.435   100</span></pre></body></html></div>
+<span class="co">#&gt;         expr     min       lq       mean   median        uq      max neval</span>
+<span class="co">#&gt;           lm 894.181 947.8070 1040.82577 985.0685 1173.6790 1232.211   100</span>
+<span class="co">#&gt;  betahatnorm  44.944  51.4420   57.66227  58.0320   62.3665   88.938   100</span>
+<span class="co">#&gt;    betahatqr 156.936 171.4265  255.48205 179.2905  332.0815 2502.534   100</span>
+<span class="co">#&gt;   betahatsvd 163.478 177.6555  233.24164 199.5590  246.7270 2394.265   100</span>
+<span class="co">#&gt;      betahat  54.134  63.0140   70.87209  71.0225   76.3895  154.973   100</span></pre></body></html></div>
 <div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test linreg-estimation-ols"</span>)
 <span class="fu">test_that</span>(<span class="st">"results_betahat"</span>, {
   <span class="no">result_lm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="no">result_lm</span>))

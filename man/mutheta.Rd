@@ -36,6 +36,11 @@ vector of means of the regressors
 \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}} .
 }
 }
+\examples{
+beta <- c(-12.7128845, 0.2076475, 0.4510391)
+muX <- c(70.18, 3.06)
+mutheta(beta = beta, muX = muX)
+}
 \seealso{
 Other model-implied functions: 
 \code{\link{Sigmatheta}()}

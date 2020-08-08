@@ -42,10 +42,7 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-intercept(
-  X = X,
-  y = y
-)
+intercept(X = X, y = y)
 }
 \seealso{
 Other parameter functions: 

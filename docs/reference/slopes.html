@@ -185,11 +185,12 @@ of the covariances between the regressand and the regressors.</p></li>
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='fu'>slopes</span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
-)</div><div class='output co'>#&gt;     gender       race      union  education experience 
-#&gt; -3.0748755 -1.5653133  1.0959758  1.3703010  0.1666065 </div></pre>
+<span class='fu'>slopes</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;                slopes
+#&gt; gender     -3.0748755
+#&gt; race       -1.5653133
+#&gt; union       1.0959758
+#&gt; education   1.3703010
+#&gt; experience  0.1666065</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

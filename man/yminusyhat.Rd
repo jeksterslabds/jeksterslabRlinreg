@@ -2,7 +2,11 @@
 % Please edit documentation in R/epsilonhat.R
 \name{yminusyhat}
 \alias{yminusyhat}
-\title{Residuals \eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)}}
+\title{Residuals
+\eqn{
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  }}
 \usage{
 yminusyhat(X, y)
 }
@@ -27,13 +31,17 @@ and predicted \eqn{\left( \mathbf{\hat{y}} \right)} values of the regressand var
 \description{
 Calculates residuals using
 \deqn{
-    \hat{\varepsilon}_{i} = Y_{i} - \hat{Y}_{i} \\
-    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
-    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} - \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
+    \hat{\varepsilon}_{i}
+    = Y_{i} - \hat{Y}_{i} \\
+    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
+      \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
+    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} -
+      \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
   }
 In matrix form
 \deqn{
-    \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \\
+    \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \\
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   }
 }
@@ -42,10 +50,7 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-epsilonhat <- yminusyhat(
-  X = X,
-  y = y
-)
+epsilonhat <- yminusyhat(X = X, y = y)
 hist(epsilonhat)
 }
 \references{

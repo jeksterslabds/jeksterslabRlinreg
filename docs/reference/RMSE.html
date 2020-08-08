@@ -40,11 +40,14 @@
 
 
 <meta property="og:title" content="Root Mean Squared Error — RMSE" />
-<meta property="og:description" content="Calculates the root mean squared error \(\left( \mathrm{RMSE} \right)\) using
+<meta property="og:description" content="Calculates the root mean squared error
+\(\left( \mathrm{RMSE} \right)\) using
 $$
-    \mathrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
-    \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
-    = \sqrt{\frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
+    \mathrm{RMSE}
+    = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
+    = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
     = \sqrt{\frac{\mathrm{RSS}}{n}} .
   $$" />
 
@@ -129,11 +132,14 @@ $$
     </div>
 
     <div class="ref-description">
-    <p>Calculates the root mean squared error \(\left( \mathrm{RMSE} \right)\) using
+    <p>Calculates the root mean squared error
+\(\left( \mathrm{RMSE} \right)\) using
 $$
-    \mathrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
-    \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
-    = \sqrt{\frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
+    \mathrm{RMSE}
+    = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
+    = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
     = \sqrt{\frac{\mathrm{RSS}}{n}} .
   $$</p>
     </div>
@@ -162,14 +168,9 @@ on the regressand variable.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns the root mean squared error.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>If <code>RSS = NULL</code>, the <code>RSS</code> vector is computed using <code><a href='RSS.html'>RSS()</a></code>
-with <code>X</code> and <code>y</code> as required arguments and <code>betahat</code> as an optional argument.
-If <code>RSS</code> is provided, <code>X</code>, and <code>y</code> are not needed.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>Wikipedia: Root Mean Square Deviation</a></p>
+    <p><a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>Wikipedia: Root-mean-square deviation</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other assessment of model quality functions: 

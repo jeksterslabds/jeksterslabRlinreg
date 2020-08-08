@@ -126,30 +126,24 @@
     <p>Residual Plots</p>
     </div>
 
-    <pre class="usage"><span class='fu'>residual.plot</span>(<span class='no'>yhat</span>, <span class='no'>tepsilonhat</span>, <span class='no'>epsilonhat</span>, <span class='no'>h</span>)</pre>
+    <pre class="usage"><span class='fu'>residual.plot</span>(<span class='no'>X</span>, <span class='no'>y</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>yhat</th>
-      <td><p>Vector of length <code>n</code> or <code>n</code> by <code>1</code> matrix.
-\(n \times 1\) vector of predicted values of \(\mathbf{y}\)
-\(\left( \mathbf{\hat{y}} \right)\).</p></td>
+      <th>X</th>
+      <td><p><code>n</code> by <code>k</code> numeric matrix.
+The data matrix \(\mathbf{X}\)
+(also known as design matrix, model matrix or regressor matrix)
+is an \(n \times k\) matrix of \(n\) observations of \(k\) regressors,
+which includes a regressor whose value is 1 for each observation on the first column.</p></td>
     </tr>
     <tr>
-      <th>tepsilonhat</th>
-      <td><p>Studentized residuals.</p></td>
-    </tr>
-    <tr>
-      <th>epsilonhat</th>
-      <td><p>Numeric vector of length <code>n</code> or <code>n</code> by 1 matrix.
-\(n \time 1\) vector of residuals.</p></td>
-    </tr>
-    <tr>
-      <th>h</th>
-      <td><p>Numeric vector.
-Leverage.</p></td>
+      <th>y</th>
+      <td><p>Numeric vector of length <code>n</code> or <code>n</code> by <code>1</code> matrix.
+The vector \(\mathbf{y}\) is an \(n \times 1\) vector of observations
+on the regressand variable.</p></td>
     </tr>
     </table>
 
@@ -158,6 +152,12 @@ Leverage.</p></td>
     <div class='dont-index'><p>Other plotting functions: 
 <code><a href='scatter.plot.html'>scatter.plot</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>residual.plot</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='img'><img src='residual.plot-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

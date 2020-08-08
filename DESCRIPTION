@@ -26,9 +26,11 @@ Depends:
 Imports:
 	utils,
 	stats,
+    jeksterslabRplots,
     jeksterslabRdist,
     jeksterslabRmatrix
 Remotes:
+    jeksterslabds/jeksterslabRplots,
     jeksterslabds/jeksterslabRdist,
     jeksterslabds/jeksterslabRdatarepo,
     jeksterslabds/jeksterslabRmatrix

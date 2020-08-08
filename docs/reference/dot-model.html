@@ -171,13 +171,27 @@ on the regressand variable.</p></td>
 
     <p>Returns a vector with the following elements</p><dl'>
 <dt>RSS</dt><dd><p>Residual sum of squares.</p></dd>
-<dt>MSE</dt><dd><p>Mean square error.</p></dd>
-<dt>RMSE</dt><dd><p>Root mean square error.</p></dd>
+<dt>MSE</dt><dd><p>Mean squared error.</p></dd>
+<dt>RMSE</dt><dd><p>Root mean squared error.</p></dd>
 <dt>R2</dt><dd><p>R-squared \(\left( R^2 \right)\).</p></dd>
 <dt>Rbar2</dt><dd><p>Adjusted R-squared \(\left( \bar{R}^2 \right)\) .</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If <code>RSS = NULL</code>, <code>RSS</code> is computed using <code><a href='RSS.html'>RSS()</a></code>
+with <code>X</code> and <code>y</code> as required arguments.
+If <code>RSS</code> is provided, <code>X</code>, and <code>y</code> are not needed.
+If <code>TSS = NULL</code>, <code>TSS</code> is computed using <code><a href='TSS.html'>TSS()</a></code>
+with <code>y</code> as r equired argument.
+If <code>TSS</code> is provided, <code>y</code> is not needed.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p><a href='https://en.wikipedia.org/wiki/Residual_sum_of_squares'>Wikipedia: Residual Sum of Squares</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Explained_sum_of_squares'>Wikipedia: Explained Sum of Squares</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Total_sum_of_squares'>Wikipedia: Total Sum of Squares</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Coefficient_of_determination'>Wikipedia: Coefficient of Determination</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other assessment of model quality functions: 

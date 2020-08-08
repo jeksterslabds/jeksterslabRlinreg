@@ -121,7 +121,7 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sehatbetahatbiased.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sehatbetahatprimebiased.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sehatslopesprimetb.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-sigma2hatepsilonhat.html</loc>
@@ -134,6 +134,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-slopesprime.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-slopesprimeinference.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/dot-tepsilonhat.html</loc>
@@ -181,7 +184,7 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sehatbetahatbiased.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sehatbetahatprimebiased.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sehatslopesprimetb.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/sigma2epsilon.html</loc>
@@ -197,6 +200,9 @@
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/slopesprime.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/slopesprimeinference.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//reference/tepsilonhat.html</loc>
@@ -259,13 +265,16 @@
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-residuals.html</loc>
   </url>
   <url>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-sehatbetahat.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-sigma2hatepsilonhat.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-tepsilonhat.html</loc>
   </url>
   <url>
-    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-vcov.html</loc>
+    <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-linreg-estimation-vcovhatbetahat.html</loc>
   </url>
   <url>
     <loc>https://github.com/jeksterslabds/jeksterslabRlinreg//articles/tests/test-simple-population-example.html</loc>

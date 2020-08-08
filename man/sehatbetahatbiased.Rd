@@ -33,10 +33,10 @@ sehatbetahatbiased(
 \seealso{
 Other standard errors of estimates of regression coefficients functions: 
 \code{\link{.sehatbetahatbiased}()},
-\code{\link{.sehatbetahatprimebiased}()},
 \code{\link{.sehatbetahat}()},
-\code{\link{sehatbetahatprimebiased}()},
-\code{\link{sehatbetahat}()}
+\code{\link{.sehatslopesprimetb}()},
+\code{\link{sehatbetahat}()},
+\code{\link{sehatslopesprimetb}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

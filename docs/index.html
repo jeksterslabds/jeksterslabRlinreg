@@ -79,7 +79,7 @@
 <div id="jeksterslabrlinreg" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#jeksterslabrlinreg" class="anchor"></a>jeksterslabRlinreg</h1></div>
-<p>Ivan Jacob Agaloos Pesigan 2020-07-31</p>
+<p>Ivan Jacob Agaloos Pesigan 2020-08-08</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 <p><a href="https://travis-ci.com/jeksterslabds/jeksterslabRlinreg"><img src="https://travis-ci.com/jeksterslabds/jeksterslabRlinreg.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/jeksterslabds/jeksterslabRlinreg"><img src="https://ci.appveyor.com/api/projects/status/github/jeksterslabds/jeksterslabRlinreg?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/github/jeksterslabds/jeksterslabRlinreg"><img src="https://codecov.io/github/jeksterslabds/jeksterslabRlinreg/branch/master/graphs/badge.svg" alt="codecov"></a> <!-- badges: end --></p>
@@ -99,19 +99,19 @@
 <a href="#data" class="anchor"></a>Data</h3>
 <p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">#&gt;      constant education</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">#&gt; [1,]        1         7</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">#&gt; [2,]        1        18</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">#&gt; [1,]        1        14</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">#&gt; [2,]        1        12</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt; [3,]        1        10</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; [4,]        1        12</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; [5,]        1         7</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; [6,]        1        15</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; [5,]        1        16</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; [6,]        1        13</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt;          wages</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; [1,]  5.081102</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; [2,] 12.105334</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; [3,]  9.217860</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; [4,]  9.086761</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; [5,]  7.776624</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; [6,] 24.037017</span></span></code></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; [1,] 19.591863</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; [2,]  4.463972</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; [3,] 11.532587</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; [4,] 15.778497</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; [5,] 19.621537</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; [6,]  4.316583</span></span></code></pre></div>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
@@ -141,45 +141,7 @@
 <!-- end list --><div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Model Assessment:</span>
-<span class="co">#&gt;                   Value</span>
-<span class="co">#&gt; RSS            64936.35</span>
-<span class="co">#&gt; MSE               50.38</span>
-<span class="co">#&gt; RMSE               7.10</span>
-<span class="co">#&gt; R-squared          0.19</span>
-<span class="co">#&gt; Adj. R-squared     0.19</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ANOVA Table:</span>
-<span class="co">#&gt;         df       SS          MS        F            p</span>
-<span class="co">#&gt; Model    1 15655.35 15655.35106 310.2798 2.185821e-62</span>
-<span class="co">#&gt; Error 1287 64936.35    50.45559       NA           NA</span>
-<span class="co">#&gt; Total 1288 80591.70          NA       NA           NA</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                coef        se         t            p</span>
-<span class="co">#&gt; Intercept -3.908522 0.9081290 -4.303929 1.805086e-05</span>
-<span class="co">#&gt; education  1.221423 0.0693409 17.614761 2.185821e-62</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Standardized Coefficients:</span>
-<span class="co">#&gt;         coef           se            t            p </span>
-<span class="co">#&gt; 4.407438e-01 2.502128e-02 1.761476e+01 2.185821e-62 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Intervals:</span>
-<span class="co">#&gt;              ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5   ci_99.95</span>
-<span class="co">#&gt; Intercept -6.9036249 -6.251182 -5.690098 -2.126947 -1.565863 -0.9134199</span>
-<span class="co">#&gt; education  0.9927299  1.042548  1.085390  1.357457  1.400299  1.4501167</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Intervals - Standardized Coefficients:</span>
-<span class="co">#&gt;   ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95 </span>
-<span class="co">#&gt; 0.3582211 0.3761976 0.3916569 0.4898308 0.5052901 0.5232666 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Means and Standard Deviations:</span>
-<span class="co">#&gt;               Mean       SD</span>
-<span class="co">#&gt; wages     11.70371 7.910196</span>
-<span class="co">#&gt; education 12.78200 2.854350</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"><img src="reference/figures/README-unnamed-chunk-4-2.png" width="100%"></p>
+)</pre></div>
 <p>See <a href="https://jeksterslabds.github.io/jeksterslabRlinreg/index.html">GitHub Pages</a> for package documentation.</p>
 </div>
 </div>

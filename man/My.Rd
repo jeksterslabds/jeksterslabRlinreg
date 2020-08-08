@@ -2,7 +2,8 @@
 % Please edit documentation in R/epsilonhat.R
 \name{My}
 \alias{My}
-\title{Residuals \eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{My} \right)}}
+\title{Residuals
+\eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{My} \right)}}
 \usage{
 My(X, y)
 }
@@ -31,9 +32,18 @@ Calculates residuals using
   }
 where
 \deqn{
-    \mathbf{M} = \mathbf{I} - \mathbf{P} \\
-    = \mathbf{I} - \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
+    \mathbf{M}
+    = \mathbf{I} - \mathbf{P} \\
+    = \mathbf{I} - \mathbf{X}
+      \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
   }
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+My(X = X, y = y)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Errors_and_residuals}{Wikipedia: Errors and Residuals}

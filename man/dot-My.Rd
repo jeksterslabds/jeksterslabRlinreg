@@ -2,7 +2,8 @@
 % Please edit documentation in R/epsilonhat.R
 \name{.My}
 \alias{.My}
-\title{Residuals \eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{My} \right)}}
+\title{Residuals
+\eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{My} \right)}}
 \usage{
 .My(y, M = NULL, X = NULL, P = NULL)
 }
@@ -37,8 +38,10 @@ Calculates residuals using
   }
 where
 \deqn{
-    \mathbf{M} = \mathbf{I} - \mathbf{P} \\
-    = \mathbf{I} - \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
+    \mathbf{M}
+    = \mathbf{I} - \mathbf{P} \\
+    = \mathbf{I} - \mathbf{X}
+      \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
   }
 }
 \details{

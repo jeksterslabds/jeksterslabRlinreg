@@ -40,6 +40,15 @@ for the covariance structure
 variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}.
 }
 }
+\examples{
+slopes <- c(0.207648, 0.451039)
+sigma2epsilon <- 0.9310598
+SigmaX <- matrix(
+  data = c(1.2934694, 0.4379592, 0.4379592, 1.0779592),
+  ncol = 2
+)
+Sigmatheta(slopes = slopes, sigma2epsilon = sigma2epsilon, SigmaX = SigmaX)
+}
 \seealso{
 Other model-implied functions: 
 \code{\link{mutheta}()}

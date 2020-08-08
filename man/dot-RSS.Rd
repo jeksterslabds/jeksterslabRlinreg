@@ -7,8 +7,8 @@
 .RSS(epsilonhat = NULL, X, y, betahat = NULL)
 }
 \arguments{
-\item{epsilonhat}{Numeric vector of length \code{n} or \code{n} by 1 matrix.
-\eqn{n \time 1} vector of residuals.}
+\item{epsilonhat}{Numeric vector of length \code{n} or \code{n} by 1 numeric matrix.
+\eqn{n \times 1} vector of residuals.}
 
 \item{X}{\code{n} by \code{k} numeric matrix.
 The data matrix \eqn{\mathbf{X}}

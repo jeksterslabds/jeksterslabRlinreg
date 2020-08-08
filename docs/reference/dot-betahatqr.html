@@ -176,11 +176,11 @@ of \(k\) unknown regression coefficients
 estimated using ordinary least squares.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://en.wikipedia.org/wiki/Linear_regression'>Wikipedia: Linear Regression</a></p>
-<p><a href='https://en.wikipedia.org/wiki/Ordinary_least_squares'>Wikipedia: Ordinary Least Squares</a></p>
-<p><a href='https://en.wikipedia.org/wiki/QR_decomposition'>Wikipedia: QR Decomposition</a></p>
+    <p><a href='https://en.wikipedia.org/wiki/Linear_regression'>Wikipedia: Linear regression</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Ordinary_least_squares'>Wikipedia: Ordinary least squares</a></p>
+<p><a href='https://en.wikipedia.org/wiki/QR_decomposition'>Wikipedia: QR decomposition</a></p>
 <p><a href='https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods'>Wikipedia: Orthogonal decomposition methods</a></p>
-<p><a href='https://en.wikipedia.org/wiki/Design_matrix'>Wikipedia: Design Matrix</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Design_matrix'>Wikipedia: Design matrix</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other beta-hat functions: 
@@ -188,6 +188,18 @@ estimated using ordinary least squares.</p>
 <code><a href='dot-betahatsvd.html'>.betahatsvd</a>()</code>,
 <code><a href='betahat.html'>betahat</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>.betahatqr</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;         betahat
+#&gt; [1,] -7.1833382
+#&gt; [2,] -3.0748755
+#&gt; [3,] -1.5653133
+#&gt; [4,]  1.0959758
+#&gt; [5,]  1.3703010
+#&gt; [6,]  0.1666065</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

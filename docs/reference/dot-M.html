@@ -48,7 +48,10 @@ $$
 where
 $$
     \mathbf{P} = \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
-  $$" />
+  $$
+The residual maker matrix \(\left( \mathbf{M} \right)\)
+transforms the \(\mathbf{y}\) vector
+to the vector of residuals \(\left( \mathbf{e} = \mathbf{My} \right)\) ." />
 
 
 
@@ -139,7 +142,10 @@ $$
 where
 $$
     \mathbf{P} = \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
-  $$</p>
+  $$
+The residual maker matrix \(\left( \mathbf{M} \right)\)
+transforms the \(\mathbf{y}\) vector
+to the vector of residuals \(\left( \mathbf{e} = \mathbf{My} \right)\) .</p>
     </div>
 
     <pre class="usage"><span class='fu'>.M</span>(<span class='no'>X</span>, <span class='kw'>P</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -167,10 +173,7 @@ The \(n \times n\) projection matrix \(\left( \mathbf{P} \right)\).</p></td>
     <p>Returns the residual maker matrix \(\left( \mathbf{M} \right)\) .</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>P = NULL</code>, the <code>P</code> matrix is computed using <code><a href='P.html'>P()</a></code>.
-The residual maker matrix \(\left( \mathbf{M} \right)\)
-transforms the \(\mathbf{y}\) vector
-to the vector of residuals \(\left( \mathbf{e} = \mathbf{My} \right)\) .</p>
+    <p>If <code>P = NULL</code>, the <code>P</code> matrix is computed using <code><a href='P.html'>P()</a></code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://en.wikipedia.org/wiki/Projection_matrix'>Wikipedia: Projection Matrix</a></p>

@@ -21,11 +21,14 @@ on the regressand variable.}
 Returns the mean squared error.
 }
 \description{
-Calculates the mean squared error \eqn{\left( \mathrm{MSE} \right)} using
+Calculates the mean squared error
+\eqn{\left( \mathrm{MSE} \right)} using
 \deqn{
-    \mathrm{MSE}  = \frac{1}{n} \sum_{i = 1}^{n}
-    \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
-    = \frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+    \mathrm{MSE}
+    = \frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
+    = \frac{1}{n} \sum_{i = 1}^{n}
+      \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
     = \frac{\mathrm{RSS}}{n} .
   }
 }
@@ -40,7 +43,7 @@ MSE(
 )
 }
 \references{
-\href{https://en.wikipedia.org/wiki/Mean_squared_error}{Wikipedia: Mean Squared Error}
+\href{https://en.wikipedia.org/wiki/Mean_squared_error}{Wikipedia: Mean squared error}
 }
 \seealso{
 Other assessment of model quality functions: 

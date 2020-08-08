@@ -13,11 +13,11 @@
 )
 }
 \arguments{
-\item{epsilonhat}{Numeric vector of length \code{n} or \code{n} by 1 matrix.
-\eqn{n \time 1} vector of residuals.}
+\item{epsilonhat}{Numeric vector of length \code{n} or \code{n} by 1 numeric matrix.
+\eqn{n \times 1} vector of residuals.}
 
-\item{h}{Numeric vector.
-Leverage.}
+\item{h}{Numeric vector of length \code{n} or \code{n} by 1 numeric matrix.
+\eqn{n \times 1} vector of leverage values.}
 
 \item{sigma2hatepsilonhat}{Numeric.
 Estimate of error variance.}

@@ -132,7 +132,8 @@
   <span class='kw'>varnamesX</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>varnamey</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>qr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>unbiased</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>sehatbetahattype</span> <span class='kw'>=</span> <span class='st'>"unbiased"</span>,
+  <span class='kw'>sehatslopesprimetype</span> <span class='kw'>=</span> <span class='st'>"textbook"</span>,
   <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
@@ -156,12 +157,12 @@ on the regressand variable.</p></td>
     </tr>
     <tr>
       <th>varnamesX</th>
-      <td><p>Character vector of length <code>k</code>.
+      <td><p>Optional. Character vector of length <code>k</code>.
 Variable names for matrix <code>X</code>.</p></td>
     </tr>
     <tr>
       <th>varnamey</th>
-      <td><p>Character string.
+      <td><p>Optional. Character string.
 Variable name for vector <code>y</code>.</p></td>
     </tr>
     <tr>
@@ -171,10 +172,16 @@ If <code>TRUE</code>, use QR decomposition when normal equations fail.
 If <code>FALSE</code>, use singular value decompositon when normal equations fail.</p></td>
     </tr>
     <tr>
-      <th>unbiased</th>
-      <td><p>Logical.
-Use unbiased standard errors for regression coefficients
-hypothesis test.</p></td>
+      <th>sehatbetahattype</th>
+      <td><p>Character string.
+Standard errors for regression coefficients hypothesis test.
+Options are <code>sehatbetahattype = "unbiased"</code> and <code>sehatbetahattype = "biased"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>sehatslopesprimetype</th>
+      <td><p>Character string.
+Standard errors for standardized regression slopes hypothesis test.
+Options are <code>sehatslopesprimetype = "textbook"</code> and <code>sehatslopesprimetype = "yuanchan"</code>.</p></td>
     </tr>
     <tr>
       <th>plot</th>
@@ -194,10 +201,7 @@ Display summary output.</p></td>
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='fu'>linreg</span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
-)</div><div class='output co'>#&gt; 
+<span class='fu'>linreg</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
 #&gt; Model Assessment:
 #&gt;                   Value
 #&gt; RSS            54342.54
@@ -222,6 +226,7 @@ Display summary output.</p></td>
 #&gt; experience  0.1666065 0.01604756 10.382050 2.659960e-24
 #&gt; 
 #&gt; Standardized Coefficients:
+#&gt; Textbook standard errors are used.
 #&gt;                   coef         se         t            p
 #&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17
 #&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03
@@ -229,7 +234,7 @@ Display summary output.</p></td>
 #&gt; education   0.48829962 0.02348462 20.792312 5.507605e-83
 #&gt; experience  0.24607631 0.02370209 10.382050 2.659960e-24
 #&gt; 
-#&gt; Confidence Intervals:
+#&gt; Confidence Intervals - Regression Coefficients:
 #&gt;                ci_0.05     ci_0.5     ci_2.5    ci_97.5    ci_99.5   ci_99.95
 #&gt; Intercept  -10.5335348 -9.8037324 -9.1761258 -5.1905507 -4.5629441 -3.8331417
 #&gt; gender      -4.2774257 -4.0154638 -3.7901849 -2.3595660 -2.1342872 -1.8723252
@@ -238,7 +243,7 @@ Display summary output.</p></td>
 #&gt; education    1.1529406  1.2002901  1.2410091  1.4995928  1.5403119  1.5876614
 #&gt; experience   0.1136797  0.1252092  0.1351242  0.1980889  0.2080039  0.2195334
 #&gt; 
-#&gt; Confidence Intervals - Standardized Coefficients:
+#&gt; Confidence Intervals - Standardized Slopes:
 #&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5
 #&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436
 #&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766
@@ -259,7 +264,7 @@ Display summary output.</p></td>
 #&gt; race        0.1528317  0.3599648
 #&gt; union       0.1590380  0.3658535
 #&gt; education  13.1450737  2.8138234
-#&gt; experience 18.7897595 11.6628366</div><div class='img'><img src='linreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='linreg-2.png' alt='' width='700' height='433' /></div></pre>
+#&gt; experience 18.7897595 11.6628366</div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='img'><img src='linreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='linreg-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Standard Errors of Standardized Estimates of Regression Coefficients (Biased) — .sehatbetahatprimebiased • jeksterslabRlinreg</title>
+<title>Standardized Regression Slopes Hypothesis Test and Confidence Intervals — slopesprimeinference • jeksterslabRlinreg</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,8 @@
 
 
 
-<meta property="og:title" content="Standard Errors of Standardized Estimates of Regression Coefficients (Biased) — .sehatbetahatprimebiased" />
-<meta property="og:description" content="$$
-    \mathrm{\widehat{se}}_{\hat{\beta}^{\prime}} =
-    \mathrm{\widehat{se}}_{\hat{\beta}} \frac{\hat{\beta}^{\prime}}{\hat{\beta}}
-  $$
-According to Yuan and Chan (2011), this standard error is biased." />
+<meta property="og:title" content="Standardized Regression Slopes Hypothesis Test and Confidence Intervals — slopesprimeinference" />
+<meta property="og:description" content="Standardized Regression Slopes Hypothesis Test and Confidence Intervals" />
 
 
 
@@ -121,48 +117,20 @@ According to Yuan and Chan (2011), this standard error is biased." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Standard Errors of Standardized Estimates of Regression Coefficients (Biased)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/R/sehat.R'><code>R/sehat.R</code></a></small>
-    <div class="hidden name"><code>dot-sehatbetahatprimebiased.Rd</code></div>
+    <h1>Standardized Regression Slopes Hypothesis Test and Confidence Intervals</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/R/betahatinference.R'><code>R/betahatinference.R</code></a></small>
+    <div class="hidden name"><code>slopesprimeinference.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>$$
-    \mathrm{\widehat{se}}_{\hat{\beta}^{\prime}} =
-    \mathrm{\widehat{se}}_{\hat{\beta}} \frac{\hat{\beta}^{\prime}}{\hat{\beta}}
-  $$
-According to Yuan and Chan (2011), this standard error is biased.</p>
+    <p>Standardized Regression Slopes Hypothesis Test and Confidence Intervals</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.sehatbetahatprimebiased</span>(
-  <span class='kw'>betahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sehatbetahat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>betahatprime</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>X</span>,
-  <span class='no'>y</span>
-)</pre>
+    <pre class="usage"><span class='fu'>slopesprimeinference</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>sehatslopesprimetype</span> <span class='kw'>=</span> <span class='st'>"textbook"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>betahat</th>
-      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
-The vector \(\boldsymbol{\hat{\beta}}\) is a \(k \times 1\) vector of estimates
-of \(k\) unknown regression coefficients.</p></td>
-    </tr>
-    <tr>
-      <th>sehatbetahat</th>
-      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
-Standard errors of standardized estimates of regression coefficients.</p></td>
-    </tr>
-    <tr>
-      <th>betahatprime</th>
-      <td><p>Numeric vector of length <code>k</code> or <code>k</code> by <code>1</code> matrix.
-The vector \(\boldsymbol{\hat{\beta}^{\prime}}\) is a \(k \times 1\) vector of standardized estimates
-of \(k\) unknown regression coefficients.
-The first item (intercept) is equal to zero.</p></td>
-    </tr>
     <tr>
       <th>X</th>
       <td><p><code>n</code> by <code>k</code> numeric matrix.
@@ -177,17 +145,38 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \(\mathbf{y}\) is an \(n \times 1\) vector of observations
 on the regressand variable.</p></td>
     </tr>
+    <tr>
+      <th>sehatslopesprimetype</th>
+      <td><p>Character string.
+Standard errors for standardized regression slopes hypothesis test.
+Options are <code>sehatslopesprimetype = "textbook"</code> and <code>sehatslopesprimetype = "yuanchan"</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other standard errors of estimates of regression coefficients functions: 
-<code><a href='dot-sehatbetahatbiased.html'>.sehatbetahatbiased</a>()</code>,
-<code><a href='dot-sehatbetahat.html'>.sehatbetahat</a>()</code>,
-<code><a href='sehatbetahatbiased.html'>sehatbetahatbiased</a>()</code>,
-<code><a href='sehatbetahatprimebiased.html'>sehatbetahatprimebiased</a>()</code>,
-<code><a href='sehatbetahat.html'>sehatbetahat</a>()</code></p></div>
+    <div class='dont-index'><p>Other inference functions: 
+<code><a href='dot-betahatinference.html'>.betahatinference</a>()</code>,
+<code><a href='dot-slopesprimeinference.html'>.slopesprimeinference</a>()</code>,
+<code><a href='betahatinference.html'>betahatinference</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='co'># age is removed</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>slopesprimeinference</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;             coef         se         t            p     ci_0.05       ci_0.5
+#&gt; [1,] -0.19477502 0.02309626 -8.433184 8.939416e-17 -0.27094940 -0.254355676
+#&gt; [2,] -0.07135673 0.02321194 -3.074139 2.155664e-03 -0.14791263 -0.131235792
+#&gt; [3,]  0.05077872 0.02344760  2.165626 3.052356e-02 -0.02655441 -0.009708265
+#&gt; [4,]  0.48829962 0.02348462 20.792312 5.507605e-83  0.41084437  0.427717121
+#&gt; [5,]  0.24607631 0.02370209 10.382050 2.659960e-24  0.16790381  0.184932806
+#&gt;           ci_2.5     ci_97.5     ci_99.5     ci_99.95
+#&gt; [1,] -0.24008560 -0.14946443 -0.13519436 -0.118600632
+#&gt; [2,] -0.11689425 -0.02581921 -0.01147766  0.005199175
+#&gt; [3,]  0.00477888  0.09677855  0.11126570  0.128111846
+#&gt; [4,]  0.44222714  0.53437211  0.54888213  0.565754879
+#&gt; [5,]  0.19957719  0.29257542  0.30721981  0.324248802</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

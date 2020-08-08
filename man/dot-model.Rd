@@ -33,14 +33,31 @@ on the regressand variable.}
 Returns a vector with the following elements
 \describe{
 \item{RSS}{Residual sum of squares.}
-\item{MSE}{Mean square error.}
-\item{RMSE}{Root mean square error.}
+\item{MSE}{Mean squared error.}
+\item{RMSE}{Root mean squared error.}
 \item{R2}{R-squared \eqn{\left( R^2 \right)}.}
 \item{Rbar2}{Adjusted R-squared \eqn{\left( \bar{R}^2 \right)} .}
 }
 }
 \description{
 Model Assessment
+}
+\details{
+If \code{RSS = NULL}, \code{RSS} is computed using \code{\link[=RSS]{RSS()}}
+with \code{X} and \code{y} as required arguments.
+If \code{RSS} is provided, \code{X}, and \code{y} are not needed.
+If \code{TSS = NULL}, \code{TSS} is computed using \code{\link[=TSS]{TSS()}}
+with \code{y} as r equired argument.
+If \code{TSS} is provided, \code{y} is not needed.
+}
+\references{
+\href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}
+
+\href{https://en.wikipedia.org/wiki/Explained_sum_of_squares}{Wikipedia: Explained Sum of Squares}
+
+\href{https://en.wikipedia.org/wiki/Total_sum_of_squares}{Wikipedia: Total Sum of Squares}
+
+\href{https://en.wikipedia.org/wiki/Coefficient_of_determination}{Wikipedia: Coefficient of Determination}
 }
 \seealso{
 Other assessment of model quality functions: 

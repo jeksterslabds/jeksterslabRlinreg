@@ -10,8 +10,9 @@ descriptives(
   varnamesX = NULL,
   varnamey = NULL,
   plot = TRUE,
-  msd = TRUE,
-  cor = TRUE
+  moments = TRUE,
+  cor = TRUE,
+  mardia = TRUE
 )
 }
 \arguments{
@@ -25,20 +26,23 @@ which includes a regressor whose value is 1 for each observation on the first co
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 
-\item{varnamesX}{Character vector of length \code{k}.
+\item{varnamesX}{Optional. Character vector of length \code{k}.
 Variable names for matrix \code{X}.}
 
-\item{varnamey}{Character string.
+\item{varnamey}{Optional. Character string.
 Variable name for vector \code{y}.}
 
 \item{plot}{Logical.
 Display scatter plot matrix.}
 
-\item{msd}{Logical.
-Print means and standard deviations.}
+\item{moments}{Logical.
+Print central moments (means, standard deviations, skewness, and kurtosis).}
 
 \item{cor}{Logical.
 Print correlations.}
+
+\item{mardia}{Logical.
+Estimate Mardia's multivariate skewness and kurtosis.}
 }
 \value{
 Returns descriptive statistics useful in k-variable linear regression model.
@@ -48,11 +52,11 @@ Descriptive Statistics
 }
 \examples{
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-descriptives(
-  X = X,
-  y = y
-)
+out <- descriptives(X = X, y = y)
+str(out)
 }
 \author{
 Ivan Jacob Agaloos Pesigan

@@ -166,17 +166,16 @@ on the regressand variable.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other inference functions: 
-<code><a href='dot-betahatinference.html'>.betahatinference</a>()</code></p></div>
+<code><a href='dot-betahatinference.html'>.betahatinference</a>()</code>,
+<code><a href='dot-slopesprimeinference.html'>.slopesprimeinference</a>()</code>,
+<code><a href='slopesprimeinference.html'>slopesprimeinference</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='fu'>betahatinference</span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>
-)</div><div class='output co'>#&gt;                  coef         se         t            p     ci_0.05     ci_0.5
+<span class='fu'>betahatinference</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;                  coef         se         t            p     ci_0.05     ci_0.5
 #&gt; constant   -7.1833382 1.01578786 -7.071691 2.508276e-12 -10.5335348 -9.8037324
 #&gt; gender     -3.0748755 0.36461621 -8.433184 8.939416e-17  -4.2774257 -4.0154638
 #&gt; race       -1.5653133 0.50918754 -3.074139 2.155664e-03  -3.2446781 -2.8788475

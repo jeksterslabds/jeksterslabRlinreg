@@ -2,7 +2,11 @@
 % Please edit documentation in R/epsilonhat.R
 \name{.yminusyhat}
 \alias{.yminusyhat}
-\title{Residuals \eqn{\left( \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \right)}}
+\title{Residuals
+\eqn{
+    \left( \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \right)
+  }}
 \usage{
 .yminusyhat(y, yhat = NULL, X = NULL, betahat = NULL)
 }
@@ -11,7 +15,7 @@
 The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
 on the regressand variable.}
 
-\item{yhat}{Vector of length \code{n} or \code{n} by \code{1} matrix.
+\item{yhat}{Numeric vector of length \code{n} or \code{n} by \code{1} numeric matrix.
 \eqn{n \times 1} vector of predicted values of \eqn{\mathbf{y}}
 \eqn{\left( \mathbf{\hat{y}} \right)}.}
 
@@ -35,13 +39,17 @@ and predicted \eqn{\left( \mathbf{\hat{y}} \right)} values of the regressand var
 \description{
 Calculates residuals using
 \deqn{
-    \hat{\varepsilon}_{i} = Y_{i} - \hat{Y}_{i} \\
-    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} + \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
-    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} - \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
+    \hat{\varepsilon}_{i}
+    = Y_{i} - \hat{Y}_{i} \\
+    = Y_{i} - \left( \hat{\beta}_{1} + \hat{\beta}_{2} X_{2i} +
+      \hat{\beta}_{3} X_{3i} + \dots + \hat{\beta}_{k} X_{ki} \right) \\
+    = Y_{i} - \hat{\beta}_{1} - \hat{\beta}_{2} X_{2i} -
+      \hat{\beta}_{3} X_{3i} - \dots - \hat{\beta}_{k} X_{ki} .
   }
 In matrix form
 \deqn{
-    \boldsymbol{\hat{\varepsilon}} = \mathbf{y} - \mathbf{\hat{y}} \\
+    \boldsymbol{\hat{\varepsilon}}
+    = \mathbf{y} - \mathbf{\hat{y}} \\
     = \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} .
   }
 }

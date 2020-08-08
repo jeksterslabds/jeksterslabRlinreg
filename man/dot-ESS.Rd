@@ -7,7 +7,7 @@
 .ESS(yhat = NULL, ybar = NULL, X, y, betahat = NULL)
 }
 \arguments{
-\item{yhat}{Vector of length \code{n} or \code{n} by \code{1} matrix.
+\item{yhat}{Numeric vector of length \code{n} or \code{n} by \code{1} numeric matrix.
 \eqn{n \times 1} vector of predicted values of \eqn{\mathbf{y}}
 \eqn{\left( \mathbf{\hat{y}} \right)}.}
 

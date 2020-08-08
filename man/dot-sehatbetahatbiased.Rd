@@ -25,11 +25,11 @@ Standard Errors of Estimates of Regression Coefficients (from \eqn{\hat{\sigma}_
 }
 \seealso{
 Other standard errors of estimates of regression coefficients functions: 
-\code{\link{.sehatbetahatprimebiased}()},
 \code{\link{.sehatbetahat}()},
+\code{\link{.sehatslopesprimetb}()},
 \code{\link{sehatbetahatbiased}()},
-\code{\link{sehatbetahatprimebiased}()},
-\code{\link{sehatbetahat}()}
+\code{\link{sehatbetahat}()},
+\code{\link{sehatslopesprimetb}()}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

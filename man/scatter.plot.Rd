@@ -4,18 +4,35 @@
 \alias{scatter.plot}
 \title{Scatter Plot Matrix}
 \usage{
-scatter.plot(data)
+scatter.plot(X, y)
 }
 \arguments{
-\item{data}{Matrix or data frame.}
+\item{X}{\code{n} by \code{k} numeric matrix.
+The data matrix \eqn{\mathbf{X}}
+(also known as design matrix, model matrix or regressor matrix)
+is an \eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors,
+which includes a regressor whose value is 1 for each observation on the first column.}
+
+\item{y}{Numeric vector of length \code{n} or \code{n} by \code{1} matrix.
+The vector \eqn{\mathbf{y}} is an \eqn{n \times 1} vector of observations
+on the regressand variable.}
 }
 \description{
-Adapted
-from \url{http://www.sthda.com/english/wiki/scatter-plot-matrices-r-base-graphs}
+Scatter Plot Matrix
+}
+\examples{
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+scatter.plot(X = X, y = y)
 }
 \seealso{
 Other plotting functions: 
 \code{\link{residual.plot}()}
+}
+\author{
+Ivan Jacob Agaloos Pesigan
 }
 \concept{plotting functions}
 \keyword{plot}

@@ -40,25 +40,22 @@ X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-betahat(
-  X = X,
-  y = y
-)
+betahat(X = X, y = y)
 }
 \references{
-\href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear Regression}
+\href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear regression}
 
-\href{https://en.wikipedia.org/wiki/Ordinary_least_squares}{Wikipedia: Ordinary Least Squares}
+\href{https://en.wikipedia.org/wiki/Ordinary_least_squares}{Wikipedia: Ordinary least squares}
 
 \href{https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations}{Wikipedia: Inverting the matrix of the normal equations}
 
-\href{https://en.wikipedia.org/wiki/QR_decomposition}{Wikipedia: QR Decomposition}
+\href{https://en.wikipedia.org/wiki/QR_decomposition}{Wikipedia: QR decomposition}
 
-\href{https://en.wikipedia.org/wiki/Singular_value_decomposition}{Wikipedia: Singular Value Decomposition}
+\href{https://en.wikipedia.org/wiki/Singular_value_decomposition}{Wikipedia: Singular value decomposition}
 
 \href{https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods}{Wikipedia: Orthogonal decomposition methods}
 
-\href{https://en.wikipedia.org/wiki/Design_matrix}{Wikipedia: Design Matrix}
+\href{https://en.wikipedia.org/wiki/Design_matrix}{Wikipedia: Design matrix}
 }
 \seealso{
 Other beta-hat functions: 
