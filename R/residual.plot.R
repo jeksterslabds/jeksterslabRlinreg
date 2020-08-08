@@ -4,57 +4,32 @@
 #'
 #' @family plotting functions
 #' @keywords plot
-#' @importFrom stats qqline qqnorm
-#' @inheritParams .yminusyhat
-#' @inheritParams .RSS
-#' @inheritParams .tepsilonhat
-#' @param tepsilonhat
-#'   Studentized residuals.
+#' @inheritParams betahat
+#' @importFrom jeksterslabRplots .residual.plot
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' residual.plot(X = X, y = y)
 #' @export
-residual.plot <- function(yhat,
-                          tepsilonhat,
-                          epsilonhat,
-                          h) {
-  usr <- par("usr")
-  on.exit(par(usr))
-  par(mfrow = c(2, 2))
-  lw1 <- suppressWarnings(loess(epsilonhat ~ yhat))
-  j <- order(yhat)
-  plot(
-    x = yhat,
-    y = epsilonhat,
-    xlab = "Fitted",
-    ylab = "Residuals",
-    main = "Residuals vs. Fitted Values"
+residual.plot <- function(X,
+                          y) {
+  .residual.plot(
+    yhat = yhat(
+      X = X,
+      y = y
+    ),
+    epsilonhat = epsilonhat(
+      X = X,
+      y = y
+    ),
+    tepsilonhat = tepsilonhat(
+      X = X,
+      y = y
+    ),
+    h = h(
+      X = X
+    )
   )
-  lines(yhat[j], lw1$fitted[j], col = "red")
-  qqnorm(
-    epsilonhat,
-    main = "Normal Q-Q Plot of Residuals"
-  )
-  qqline(
-    epsilonhat,
-    col = "red"
-  )
-  sqrtabsstd <- sqrt(abs(tepsilonhat))
-  lw2 <- suppressWarnings(loess(sqrtabsstd ~ yhat))
-  j <- order(yhat)
-  plot(
-    x = yhat,
-    y = sqrtabsstd,
-    xlab = "Fitted",
-    ylab = expression(sqrt(abs(Std. ~ Residuals))),
-    main = "Scale-Location"
-  )
-  lines(yhat[j], lw2$fitted[j], col = "red")
-  lw3 <- suppressWarnings(loess(tepsilonhat ~ h))
-  j <- order(h)
-  plot(
-    x = h,
-    y = tepsilonhat,
-    xlab = "Leverage",
-    ylab = "Std. Residuals",
-    main = "Residuals vs. Leverage"
-  )
-  lines(h[j], lw2$fitted[j], col = "red")
 }
