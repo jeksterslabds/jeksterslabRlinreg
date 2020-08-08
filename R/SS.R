@@ -44,8 +44,8 @@
 #' @family sum of squares functions
 #' @keywords SS
 #' @inheritParams .yminusyhat
-#' @param epsilonhat Numeric vector of length `n` or `n` by 1 matrix.
-#'   \eqn{n \time 1} vector of residuals.
+#' @param epsilonhat Numeric vector of length `n` or `n` by 1 numeric matrix.
+#'   \eqn{n \times 1} vector of residuals.
 #' @references
 #'   [Wikipedia: Residual Sum of Squares](https://en.wikipedia.org/wiki/Residual_sum_of_squares)
 #'
@@ -70,7 +70,7 @@
     return(
       drop(
         unname(
-          crossprod(y) - (2 * (betahat %*% crossprod(X, y))) + (t(betahat) %*% t(X) %*% X %*% betahat)
+          crossprod(y) - (2 * (t(betahat) %*% crossprod(X, y))) + (t(betahat) %*% crossprod(X) %*% betahat)
         )
       )
     )
@@ -100,10 +100,7 @@
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' RSS(
-#'   X = X,
-#'   y = y
-#' )
+#' RSS(X = X, y = y)
 #' @export
 RSS <- function(X,
                 y) {

@@ -45,11 +45,11 @@ P <- function(X) {
 #'   \deqn{
 #'     \mathbf{P} = \mathbf{X} \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1} \mathbf{X}^{T} .
 #'   }
-#'
-#' @details If `P = NULL`, the `P` matrix is computed using [`P()`].
 #'   The residual maker matrix \eqn{\left( \mathbf{M} \right)}
 #'   transforms the \eqn{\mathbf{y}} vector
 #'   to the vector of residuals \eqn{\left( \mathbf{e} = \mathbf{My} \right)} .
+#'
+#' @details If `P = NULL`, the `P` matrix is computed using [`P()`].
 #'
 #' @family projection matrix functions
 #' @keywords projection

@@ -35,13 +35,9 @@
     n <- nrow(X)
   }
   if (is.null(sehatbetahat)) {
-    sehatbetahat <- sqrt(
-      diag(
-        vcovhatbetahat(
-          X = X,
-          y = y
-        )
-      )
+    sehatbetahat <- sehatbetahat(
+      X = X,
+      y = y
     )
     n <- nrow(X)
   }
@@ -77,16 +73,83 @@
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' betahatinference(
-#'   X = X,
-#'   y = y
-#' )
+#' betahatinference(X = X, y = y)
 #' @export
 betahatinference <- function(X,
                              y) {
   .betahatinference(
     betahat = NULL,
     sehatbetahat = NULL,
+    X = X,
+    y = y
+  )
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Standardized Regression Slopes Hypothesis Test and Confidence Intervals
+#'
+#' @family inference functions
+#' @keywords inference
+#' @inheritParams .betahatinference
+#' @inheritParams .sehatslopesprimetb
+#' @param sehatslopesprime Numeric vector of length `p` or `p` by `1` matrix.
+#'   Standard errors of estimates of standardized regression slopes.
+#' @param sehatslopesprimetype Character string.
+#'   Standard errors for standardized regression slopes hypothesis test.
+#'   Options are `sehatslopesprimetype = "textbook"` and `sehatslopesprimetype = "yuanchan"`.
+#' @export
+.slopesprimeinference <- function(slopesprime = NULL,
+                                  sehatslopesprime = NULL,
+                                  sehatslopesprimetype = "textbook",
+                                  n,
+                                  X,
+                                  y) {
+  if (is.null(slopesprime)) {
+    slopesprime <- slopesprime(
+      X = X,
+      y = y
+    )
+    n <- nrow(X)
+  }
+  if (is.null(sehatslopesprime)) {
+    if (sehatslopesprimetype == "textbook") {
+      sehatslopesprime <- sehatslopesprimetb(
+        X = X,
+        y = y
+      )
+    }
+    n <- nrow(X)
+  }
+  out <- .betahatinference(
+    betahat = c(0, slopesprime),
+    sehatbetahat = c(0, sehatslopesprime),
+    n = n
+  )
+  out[-1, ]
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Standardized Regression Slopes Hypothesis Test and Confidence Intervals
+#'
+#' @family inference functions
+#' @keywords inference
+#' @inheritParams .slopesprimeinference
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' slopesprimeinference(X = X, y = y)
+#' @export
+slopesprimeinference <- function(X,
+                                 y,
+                                 sehatslopesprimetype = "textbook") {
+  .slopesprimeinference(
+    slopesprime = NULL,
+    sehatslopesprime = NULL,
+    sehatslopesprimetype = "textbook",
     X = X,
     y = y
   )

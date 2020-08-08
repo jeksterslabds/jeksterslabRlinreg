@@ -30,6 +30,13 @@
 #'   \eqn{p \times p} variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\Sigma}_{\mathbf{X}} \right)}.
 #' @examples
+#' slopes <- c(0.207648, 0.451039)
+#' sigma2epsilon <- 0.9310598
+#' SigmaX <- matrix(
+#'   data = c(1.2934694, 0.4379592, 0.4379592, 1.0779592),
+#'   ncol = 2
+#' )
+#' Sigmatheta(slopes = slopes, sigma2epsilon = sigma2epsilon, SigmaX = SigmaX)
 #' @export
 Sigmatheta <- function(slopes,
                        sigma2epsilon,
@@ -97,6 +104,10 @@ Sigmatheta <- function(slopes,
 #' @param muX Numeric vector of length `p` or `p` by `1` matrix. \eqn{p \times 1} vector
 #'   of means of the regressors \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\mu}_{\mathbf{X}} \right)} .
+#' @examples
+#' beta <- c(-12.7128845, 0.2076475, 0.4510391)
+#' muX <- c(70.18, 3.06)
+#' mutheta(beta = beta, muX = muX)
 #' @export
 mutheta <- function(beta,
                     muX) {

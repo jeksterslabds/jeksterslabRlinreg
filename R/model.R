@@ -2,15 +2,27 @@
 #'
 #' @title Model Assessment
 #'
+#' @details If `RSS = NULL`, `RSS` is computed using [`RSS()`]
+#'   with `X` and `y` as required arguments.
+#'   If `RSS` is provided, `X`, and `y` are not needed.
+#'   If `TSS = NULL`, `TSS` is computed using [`TSS()`]
+#'   with `y` as r equired argument.
+#'   If `TSS` is provided, `y` is not needed.
+#'
 #' @family assessment of model quality functions
 #' @keywords model-assessment
 #' @inheritParams .R2fromRSS
 #' @inheritParams .Rbar2
+#' @inherit RSS references
+#' @inherit MSE references
+#' @inherit RMSE references
+#' @inherit R2 references
+#' @inherit Rbar2 references
 #' @return Returns a vector with the following elements
 #' \describe{
 #'   \item{RSS}{Residual sum of squares.}
-#'   \item{MSE}{Mean square error.}
-#'   \item{RMSE}{Root mean square error.}
+#'   \item{MSE}{Mean squared error.}
+#'   \item{RMSE}{Root mean squared error.}
 #'   \item{R2}{R-squared \eqn{\left( R^2 \right)}.}
 #'   \item{Rbar2}{Adjusted R-squared \eqn{\left( \bar{R}^2 \right)} .}
 #' }
@@ -72,7 +84,7 @@
 #' @family assessment of model quality functions
 #' @keywords model-assessment
 #' @inheritParams .model
-#' @inherit .model return
+#' @inherit .model return references
 #' @examples
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed

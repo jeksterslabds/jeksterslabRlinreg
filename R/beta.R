@@ -38,15 +38,15 @@
       X = X,
       y = y,
       plot = FALSE,
-      msd = FALSE,
+      moments = FALSE,
       cor = FALSE
     )
     SigmaX <- descriptives[["SigmaX"]]
     sigmayX <- descriptives[["sigmayX"]]
   }
-  drop(
-    solve(SigmaX) %*% sigmayX
-  )
+  out <- solve(SigmaX) %*% sigmayX
+  colnames(out) <- "slopes"
+  out
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
@@ -62,10 +62,7 @@
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' slopes(
-#'   X = X,
-#'   y = y
-#' )
+#' slopes(X = X, y = y)
 #' @export
 slopes <- function(X,
                    y) {
@@ -118,15 +115,15 @@ slopes <- function(X,
       X = X,
       y = y,
       plot = FALSE,
-      msd = FALSE,
+      moments = FALSE,
       cor = FALSE
     )
     RX <- descriptives[["RX"]]
     ryX <- descriptives[["ryX"]]
   }
-  drop(
-    solve(RX) %*% ryX
-  )
+  out <- solve(RX) %*% ryX
+  colnames(out) <- "std. slopes"
+  out
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
@@ -142,10 +139,7 @@ slopes <- function(X,
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' slopesprime(
-#'   X = X,
-#'   y = y
-#' )
+#' slopesprime(X = X, y = y)
 #' @export
 slopesprime <- function(X,
                         y) {
@@ -195,7 +189,7 @@ slopesprime <- function(X,
       X = X,
       y = y,
       plot = FALSE,
-      msd = FALSE,
+      moments = FALSE,
       cor = FALSE
     )
     SigmaX <- descriptives[["SigmaX"]]
@@ -226,10 +220,7 @@ slopesprime <- function(X,
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' intercept(
-#'   X = X,
-#'   y = y
-#' )
+#' intercept(X = X, y = y)
 #' @export
 intercept <- function(X,
                       y) {

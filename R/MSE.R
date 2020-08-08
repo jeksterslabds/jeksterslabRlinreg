@@ -2,16 +2,19 @@
 #'
 #' @title Mean Squared Error (from \eqn{\mathrm{RSS}})
 #'
-#' @description Calculates the mean squared error \eqn{\left( \mathrm{MSE} \right)} using
+#' @description Calculates the mean squared error
+#'   \eqn{\left( \mathrm{MSE} \right)} using
 #'   \deqn{
-#'     \mathrm{MSE}  = \frac{1}{n} \sum_{i = 1}^{n}
-#'     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
-#'     = \frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
+#'     \mathrm{MSE}
+#'     = \frac{1}{n} \sum_{i = 1}^{n}
+#'       \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2} \\
+#'     = \frac{1}{n} \sum_{i = 1}^{n}
+#'       \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2} \\
 #'     = \frac{\mathrm{RSS}}{n} .
 #'   }
 #'
 #' @details If `RSS = NULL`, the `RSS` vector is computed using [`RSS()`]
-#'   with `X` and `y` as required arguments and `betahat` as an optional argument.
+#'   with `X` and `y` as required arguments.
 #'   If `RSS` is provided, `X`, and `y` are not needed.
 #'
 #' @family assessment of model quality functions
@@ -20,7 +23,7 @@
 #' @inheritParams .R2fromRSS
 #' @return Returns the mean squared error.
 #' @references
-#' [Wikipedia: Mean Squared Error](https://en.wikipedia.org/wiki/Mean_squared_error)
+#' [Wikipedia: Mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error)
 #' @export
 .MSE <- function(RSS = NULL,
                  n,
@@ -67,13 +70,20 @@ MSE <- function(X,
 #'
 #' @title Root Mean Squared Error (from \eqn{\mathrm{RSS}})
 #'
-#' @description Calculates the root mean squared error \eqn{\left( \mathrm{RMSE} \right)} using
+#' @description Calculates the root mean squared error
+#'   \eqn{\left( \mathrm{RMSE} \right)} using
 #'   \deqn{
-#'     \mathrm{RMSE} = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
-#'     \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
-#'     = \sqrt{\frac{1}{n} \sum_{i = 1}^{n} \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
+#'     \mathrm{RMSE}
+#'     = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+#'       \left( \mathbf{y} - \mathbf{X} \boldsymbol{\hat{\beta}} \right)^{2}} \\
+#'     = \sqrt{\frac{1}{n} \sum_{i = 1}^{n}
+#'       \left( \mathbf{y} - \mathbf{\hat{y}} \right)^{2}} \\
 #'     = \sqrt{\frac{\mathrm{RSS}}{n}} .
 #'   }
+#'
+#' @details If `MSE = NULL`, `MSE` is computed using [`MSE()`]
+#'   with `X` and `y` as required arguments.
+#'   If `MSE` is provided, `X`, and `y` are not needed.
 #'
 #' @family assessment of model quality functions
 #' @keywords model-assessment
@@ -83,7 +93,7 @@ MSE <- function(X,
 #'   Mean square error.
 #' @return Returns the root mean squared error.
 #' @references
-#' [Wikipedia: Root Mean Square Deviation](https://en.wikipedia.org/wiki/Root-mean-square_deviation)
+#' [Wikipedia: Root-mean-square deviation](https://en.wikipedia.org/wiki/Root-mean-square_deviation)
 #' @export
 .RMSE <- function(MSE = NULL,
                   X,
@@ -104,7 +114,7 @@ MSE <- function(X,
 #' @family assessment of model quality functions
 #' @keywords model-assessment
 #' @inheritParams .RMSE
-#' @inherit .RMSE description details return references
+#' @inherit .RMSE description return references
 #' @examples
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed

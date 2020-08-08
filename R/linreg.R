@@ -5,9 +5,10 @@
 #' @keywords linreg
 #' @inheritParams betahat
 #' @inheritParams descriptives
-#' @param unbiased Logical.
-#'   Use unbiased standard errors for regression coefficients
-#'   hypothesis test.
+#' @inheritParams  .slopesprimeinference
+#' @param sehatbetahattype Character string.
+#'   Standard errors for regression coefficients hypothesis test.
+#'   Options are `sehatbetahattype = "unbiased"` and `sehatbetahattype = "biased"`.
 #' @importFrom graphics par abline
 #' @importFrom stats qqnorm qqline cor cov
 #' @param plot Logical.
@@ -19,27 +20,27 @@
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' linreg(
-#'   X = X,
-#'   y = y
-#' )
+#' linreg(X = X, y = y)
 #' @export
 linreg <- function(X,
                    y,
                    varnamesX = NULL,
                    varnamey = NULL,
                    qr = TRUE,
-                   unbiased = TRUE,
+                   sehatbetahattype = "unbiased",
+                   sehatslopesprimetype = "textbook",
                    plot = TRUE,
                    print = TRUE) {
+  # descriptives--------------------------------------------------------------------------
   descriptives <- descriptives(
     X = X,
     y = y,
     varnamesX = varnamesX,
     varnamey = varnamey,
     plot = FALSE,
-    msd = FALSE,
-    cor = FALSE
+    moments = FALSE,
+    cor = FALSE,
+    mardia = TRUE
   )
   X <- descriptives[["X"]]
   y <- descriptives[["y"]]
@@ -62,38 +63,42 @@ linreg <- function(X,
   )
   h <- .h(P = P)
   # betahat---------------------------------------------------------------------------
-  betahat <- betahat(
-    X = X,
-    y = y,
-    qr = qr
+  betahat <- as.vector(
+    betahat(
+      X = X,
+      y = y,
+      qr = qr
+    )
   )
-  betahat <- as.vector(betahat)
   names(betahat) <- betahatnames
+  slopes <- betahat[-1]
   # betahat prime-----------------------------------------------------------------------------
-  betahatprime <- .slopesprime(
+  slopesprime <- .slopesprime(
     RX = RX,
     ryX = ryX
   )
+  slopesprime <- as.vector(slopesprime)
   betahatprime <- as.vector(
     c(
       0,
-      betahatprime
+      slopesprime
     )
   )
   names(betahatprime) <- betahatnames
-  # yhat -----------------------------------------------------------------------------
+  names(slopesprime) <- varnamesX[-1]
+  # yhat-----------------------------------------------------------------------------
   yhat <- .Xbetahat(
     X = X,
     betahat = betahat
   )
   # yhat <- .Py(y = y, P = P)
-  # epsilonhat -----------------------------------------------------------------------------
+  # epsilonhat-----------------------------------------------------------------------------
   epsilonhat <- .yminusyhat(
     y = y,
     yhat = yhat
   )
   # epsilonhat <- .My(y = y, M = M)
-  # SS -----------------------------------------------------------------------------
+  # SS-----------------------------------------------------------------------------
   RSS <- .RSS(
     epsilonhat = epsilonhat
   )
@@ -102,7 +107,7 @@ linreg <- function(X,
     ybar = ybar
   )
   TSS <- RSS + ESS
-  # sigma2hatepsilonhat -----------------------------------------------------------------------------
+  # sigma2hatepsilonhat-----------------------------------------------------------------------------
   sigma2hatepsilonhat <- .sigma2hatepsilonhat(
     RSS = RSS,
     n = n,
@@ -112,13 +117,13 @@ linreg <- function(X,
     RSS = RSS,
     n = n
   )
-  # studentized residuals ---------------------------------------------------------------------------------------
+  # studentized residuals---------------------------------------------------------------------------------------
   tepsilonhat <- .tepsilonhat(
     epsilonhat = epsilonhat,
     h = h,
     sigma2hatepsilonhat = sigma2hatepsilonhat
   )
-  # R2 -----------------------------------------------------------------------------
+  # R2-----------------------------------------------------------------------------
   R2 <- .R2fromRSS(
     RSS = RSS,
     TSS = TSS
@@ -128,22 +133,23 @@ linreg <- function(X,
     n = n,
     k = k
   )
-  # mse ----------------------------------------------------------------------------------------
+  # mse---------------------------------------------------------------------------------------
   MSE <- .MSE(
     RSS = RSS,
     n = n
   )
-  # rmse ----------------------------------------------------------------------------------
+  # rmse----------------------------------------------------------------------------------
   RMSE <- .RMSE(
     MSE = MSE
   )
-  # inference -----------------------------------------------------------------------------
+  # anovatable-----------------------------------------------------------------------------
   anovatable <- .anovatable(
     RSS = RSS,
     ESS = ESS,
     n = n,
     k = k
   )
+  # vcovhat-----------------------------------------------------------------------------
   vcovhatbetahat <- .vcovhatbetahat(
     sigma2hatepsilonhat = sigma2hatepsilonhat,
     X = X
@@ -156,19 +162,32 @@ linreg <- function(X,
   )
   colnames(vcovhatbetahatbiased) <- betahatnames
   rownames(vcovhatbetahatbiased) <- betahatnames
-  sehatbetahat <- .sehatbetahat(vcovhatbetahat = vcovhatbetahat)
-  names(sehatbetahat) <- betahatnames
-  sehatbetahatbiased <- .sehatbetahatbiased(vcovhatbetahatbiased = vcovhatbetahatbiased)
-  names(sehatbetahatbiased) <- betahatnames
-  sehatbetahatprimebiased <- .sehatbetahatprimebiased(
-    betahat = betahat,
-    sehatbetahat = sehatbetahat,
-    betahatprime = betahatprime
+  # sehat-----------------------------------------------------------------------------
+  sehatbetahat <- as.vector(
+    .sehatbetahat(
+      vcovhatbetahat = vcovhatbetahat
+    )
   )
-  names(sehatbetahatprimebiased) <- betahatnames
-  if (unbiased) {
+  names(sehatbetahat) <- betahatnames
+  sehatbetahatbiased <- as.vector(
+    .sehatbetahatbiased(
+      vcovhatbetahatbiased = vcovhatbetahatbiased
+    )
+  )
+  names(sehatbetahatbiased) <- betahatnames
+  sehatslopesprimetb <- as.vector(
+    .sehatslopesprimetb(
+      slopes = slopes,
+      sehatslopes = sehatbetahat[-1],
+      slopesprime = slopesprime
+    )
+  )
+  names(sehatslopesprimetb) <- betahatnames[-1]
+  # betahatinference----------------------------------------------------------------------------------
+  if (sehatbetahattype == "unbiased") {
     sehatbetahattouse <- sehatbetahat
-  } else {
+  }
+  if (sehatbetahattype == "biased") {
     sehatbetahattouse <- sehatbetahatbiased
   }
   betahatinference <- .betahatinference(
@@ -180,20 +199,23 @@ linreg <- function(X,
   ci <- betahatinference
   ci <- ci[, -c(1, 2, 3, 4)]
   coefficients <- betahatinference[, c(1, 2, 3, 4)]
-  betahatprimeinference <- .betahatinference(
-    betahat = betahatprime,
-    sehatbetahat = sehatbetahatprimebiased,
+  # betahatprimeinference----------------------------------------------------------------------------------
+  if (sehatslopesprimetype == "textbook") {
+    sehatslopesprimetouse <- sehatslopesprimetb
+  }
+  slopesprimeinference <- .slopesprimeinference(
+    slopesprime = slopesprime,
+    sehatslopesprime = sehatslopesprimetouse,
+    sehatslopesprimetype = sehatslopesprimetype,
     n = n
   )
-  rownames(betahatprimeinference) <- betahatnames
-  stdci <- betahatprimeinference
+  rownames(slopesprimeinference) <- betahatnames[-1]
+  stdci <- slopesprimeinference
   stdci <- stdci[, -c(1, 2, 3, 4)]
-  stdci <- stdci[2:length(betahatnames), ]
-  stdcoefficients <- betahatprimeinference[, c(1, 2, 3, 4)]
-  stdcoefficients <- stdcoefficients[2:length(betahatnames), ]
+  stdcoefficients <- slopesprimeinference[, c(1, 2, 3, 4)]
   if (print) {
-    # display -------------------------------------------------------------------------------------------
-    ## model assessment --------------------------------------------------------------------------------
+    # display-------------------------------------------------------------------------------------------
+    ## model assessment--------------------------------------------------------------------------------
     model <- matrix(
       data = round(
         c(
@@ -226,22 +248,25 @@ linreg <- function(X,
     )
     ## coefficients--------------------------------------------------------------------------------------
     cat("\nCoefficients:\n")
-    if (!unbiased) {
+    if (sehatbetahattype == "biased") {
       cat("Biased standard errors are used.\n")
     }
     print(
       coefficients
     )
     cat("\nStandardized Coefficients:\n")
+    if (sehatslopesprimetype == "textbook") {
+      cat("Textbook standard errors are used.\n")
+    }
     print(
       stdcoefficients
     )
-    ## confidence intervals --------------------------------------------------------------------------------------
-    cat("\nConfidence Intervals:\n")
+    ## confidence intervals--------------------------------------------------------------------------------------
+    cat("\nConfidence Intervals - Regression Coefficients:\n")
     print(
       ci
     )
-    cat("\nConfidence Intervals - Standardized Coefficients:\n")
+    cat("\nConfidence Intervals - Standardized Slopes:\n")
     print(
       stdci
     )
@@ -262,9 +287,10 @@ linreg <- function(X,
   ## plots--------------------------------------------------------------------------------------
   if (plot) {
     scatter.plot(
-      data = data
+      X = X,
+      y = y
     )
-    residual.plot(
+    .residual.plot(
       yhat = yhat,
       tepsilonhat = tepsilonhat,
       epsilonhat = epsilonhat,
@@ -276,7 +302,9 @@ linreg <- function(X,
     M = M,
     h = h,
     betahat = betahat,
+    slopes = slopes,
     betahatprime = betahatprime,
+    slopesprime = slopesprime,
     yhat = yhat,
     epsilonhat = epsilonhat,
     tepsilonhat = tepsilonhat,
@@ -290,19 +318,20 @@ linreg <- function(X,
     MSmodel = anovatable["Model", "MS"],
     MSerror = anovatable["Error", "MS"],
     F = anovatable["Model", "F"],
-    pf = anovatable["Model", "p"],
+    F.p = anovatable["Model", "p"],
     MSE = MSE,
     RMSE = RMSE,
     vcovhatbetahat = vcovhatbetahat,
     vcovhatbetahatbiased = vcovhatbetahatbiased,
     sehatbetahat = sehatbetahat,
     sehatbetahatbiased = sehatbetahatbiased,
-    sehatbetahatprimebiased = sehatbetahatprimebiased,
+    sehatslopesprimetb = sehatslopesprimetb,
     t = betahatinference[, "t"],
-    pt = betahatinference[, "p"],
+    t.p = betahatinference[, "p"],
     coefficients = coefficients,
     stdcoefficients = stdcoefficients,
-    ci = ci
+    ci = ci,
+    stdci = stdci
   )
   invisible(
     c(

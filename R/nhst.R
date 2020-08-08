@@ -18,16 +18,18 @@ nhst <- function(betahat,
                  n,
                  k) {
   df <- n - k
-  tstatistic <- betahat / sehatbetahat
+  tstatistic <- as.vector(betahat) / as.vector(sehatbetahat)
   p <- 2 * pt(
     q = -abs(tstatistic),
     df = df,
     lower.tail = TRUE
   )
-  cbind(
+  out <- cbind(
     coef = betahat,
     se = sehatbetahat,
     t = tstatistic,
     p = p
   )
+  colnames(out) <- c("coef", "se", "t", "p")
+  out
 }

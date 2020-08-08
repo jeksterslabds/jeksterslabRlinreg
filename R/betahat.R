@@ -14,13 +14,13 @@
 #'   Also know as the normal equation.
 #'
 #' @references
-#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#'   [Wikipedia: Linear regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
-#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+#'   [Wikipedia: Ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #'
 #'   [Wikipedia: Inverting the matrix of the normal equations](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations)
 #'
-#'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'   [Wikipedia: Design matrix](https://en.wikipedia.org/wiki/Design_matrix)
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
@@ -36,15 +36,21 @@
 #'   a \eqn{k \times 1} vector of estimates
 #'   of \eqn{k} unknown regression coefficients
 #'   estimated using ordinary least squares.
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' .betahatnorm(X = X, y = y)
 #' @export
 .betahatnorm <- function(X,
                          y) {
-  drop(
-    solve(
-      crossprod(X),
-      crossprod(X, y)
-    )
+  out <- solve(
+    crossprod(X),
+    crossprod(X, y)
   )
+  colnames(out) <- "betahat"
+  out
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
@@ -64,33 +70,39 @@
 #'   }
 #'
 #' @references
-#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#'   [Wikipedia: Linear regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
-#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+#'   [Wikipedia: Ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #'
-#'   [Wikipedia: QR Decomposition](https://en.wikipedia.org/wiki/QR_decomposition)
+#'   [Wikipedia: QR decomposition](https://en.wikipedia.org/wiki/QR_decomposition)
 #'
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #'
-#'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'   [Wikipedia: Design matrix](https://en.wikipedia.org/wiki/Design_matrix)
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
 #' @inheritParams .betahatnorm
 #' @inherit .betahatnorm return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' .betahatqr(X = X, y = y)
 #' @export
 .betahatqr <- function(X,
                        y) {
   Xqr <- qr(X)
-  drop(
-    backsolve(
-      qr.R(Xqr),
-      crossprod(
-        qr.Q(Xqr),
-        y
-      )
+  out <- backsolve(
+    qr.R(Xqr),
+    crossprod(
+      qr.Q(Xqr),
+      y
     )
   )
+  colnames(out) <- "betahat"
+  out
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
@@ -112,27 +124,33 @@
 #'   where the superscript \eqn{+} indicates the pseudoinverse.
 #'
 #' @references
-#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#'   [Wikipedia: Linear regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
-#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+#'   [Wikipedia: Ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #'
-#'   [Wikipedia: Singular Value Decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)
+#'   [Wikipedia: Singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)
 #'
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #'
-#'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'   [Wikipedia: Design matrix](https://en.wikipedia.org/wiki/Design_matrix)
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
 #' @inheritParams .betahatnorm
 #' @inherit .betahatnorm return
+#' @examples
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' .betahatsvd(X = X, y = y)
 #' @export
 .betahatsvd <- function(X,
                         y) {
   Xsvd <- svd(X)
-  drop(
-    Xsvd$v %*% ((1 / Xsvd$d) * crossprod(Xsvd$u, y))
-  )
+  out <- Xsvd$v %*% ((1 / Xsvd$d) * crossprod(Xsvd$u, y))
+  colnames(out) <- "betahat"
+  out
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
@@ -146,19 +164,19 @@
 #'   or singular value decomposition when `qr = FALSE`.
 #'
 #' @references
-#'   [Wikipedia: Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+#'   [Wikipedia: Linear regression](https://en.wikipedia.org/wiki/Linear_regression)
 #'
-#'   [Wikipedia: Ordinary Least Squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+#'   [Wikipedia: Ordinary least squares](https://en.wikipedia.org/wiki/Ordinary_least_squares)
 #'
 #'   [Wikipedia: Inverting the matrix of the normal equations](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Inverting_the_matrix_of_the_normal_equations)
 #'
-#'   [Wikipedia: QR Decomposition](https://en.wikipedia.org/wiki/QR_decomposition)
+#'   [Wikipedia: QR decomposition](https://en.wikipedia.org/wiki/QR_decomposition)
 #'
-#'   [Wikipedia: Singular Value Decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)
+#'   [Wikipedia: Singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)
 #'
 #'   [Wikipedia: Orthogonal decomposition methods](https://en.wikipedia.org/wiki/Numerical_methods_for_linear_least_squares#Orthogonal_decomposition_methods)
 #'
-#'   [Wikipedia: Design Matrix](https://en.wikipedia.org/wiki/Design_matrix)
+#'   [Wikipedia: Design matrix](https://en.wikipedia.org/wiki/Design_matrix)
 #'
 #' @family beta-hat functions
 #' @keywords beta-hat-ols
@@ -172,10 +190,7 @@
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' betahat(
-#'   X = X,
-#'   y = y
-#' )
+#' betahat(X = X, y = y)
 #' @export
 betahat <- function(X,
                     y,

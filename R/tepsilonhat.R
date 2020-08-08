@@ -15,8 +15,8 @@
 #' @inheritParams .RSS
 #' @inheritParams .vcovhatbetahat
 #' @inherit .h references
-#' @param h Numeric vector.
-#'   Leverage.
+#' @param h Numeric vector of length `n` or `n` by 1 numeric matrix.
+#'   \eqn{n \times 1} vector of leverage values.
 #' @return Returns studentized residuals.
 #' @export
 .tepsilonhat <- function(epsilonhat = NULL,

@@ -37,7 +37,7 @@ ci <- function(betahat,
     ncol = length(tcritical)
   )
   for (i in seq_along(tcritical)) {
-    ci[, i] <- betahat + (tcritical[i] * sehatbetahat)
+    ci[, i] <- as.vector(betahat) + (tcritical[i] * as.vector(sehatbetahat))
   }
   colnames(ci) <- paste0(
     "ci_",
