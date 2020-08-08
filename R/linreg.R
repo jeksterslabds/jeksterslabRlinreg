@@ -52,6 +52,7 @@ linreg <- function(X,
   ybar <- descriptives[["muhaty"]]
   n <- descriptives[["n"]]
   k <- descriptives[["k"]]
+  p <- descriptives[["p"]]
   mu <- descriptives[["mu"]]
   sigma <- descriptives[["sigma"]]
   data <- descriptives[["data"]]
@@ -212,7 +213,17 @@ linreg <- function(X,
   rownames(slopesprimeinference) <- betahatnames[-1]
   stdci <- slopesprimeinference
   stdci <- stdci[, -c(1, 2, 3, 4)]
+  stdci <- matrix(
+    data = stdci,
+    nrow = p
+  )
+  rownames(stdci) <- betahatnames[-1]
   stdcoefficients <- slopesprimeinference[, c(1, 2, 3, 4)]
+  stdcoefficients <- matrix(
+    data = stdcoefficients,
+    nrow = p
+  )
+  rownames(stdcoefficients) <- betahatnames[-1]
   if (print) {
     # display-------------------------------------------------------------------------------------------
     ## model assessment--------------------------------------------------------------------------------

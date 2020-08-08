@@ -129,14 +129,14 @@
 <td align="left"><code>beta1</code></td>
 <td align="left">Intercept</td>
 <td align="left"><span class="math inline">\(\beta_1\)</span></td>
-<td align="right">-2.798321</td>
+<td align="right">-2.700757</td>
 </tr>
 <tr class="even">
 <td align="left"><code>mux</code></td>
 <td align="left">Mean of <span class="math inline">\(x\)</span>
 </td>
 <td align="left"><span class="math inline">\(\mu_x\)</span></td>
-<td align="right">13.086283</td>
+<td align="right">13.125057</td>
 </tr>
 </tbody>
 </table>
@@ -153,25 +153,25 @@
 <td align="left"><code>beta2</code></td>
 <td align="left">Slope</td>
 <td align="left"><span class="math inline">\(\beta_2\)</span></td>
-<td align="right">1.143986</td>
+<td align="right">1.158204</td>
 </tr>
 <tr class="even">
 <td align="left"><code>sigma2epsilon</code></td>
 <td align="left">Variance of <span class="math inline">\(\varepsilon\)</span>
 </td>
 <td align="left"><span class="math inline">\(\sigma_{\varepsilon}^{2}\)</span></td>
-<td align="right">49.038604</td>
+<td align="right">51.043774</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>sigma2x</code></td>
 <td align="left">Variance of <span class="math inline">\(x\)</span>
 </td>
 <td align="left"><span class="math inline">\(\sigma_{x}^{2}\)</span></td>
-<td align="right">8.130127</td>
+<td align="right">7.983514</td>
 </tr>
 </tbody>
 </table>
-<p>There are times when the intercept does not lend to a meaningful interpretation. A negative wage corresponding to zero years of education does not really make a lot of sense. The value that is interesting in this case is the slope. The slope represents 1.1439861 US dollar increase in hourly wages given 1 additional year of education.</p>
+<p>There are times when the intercept does not lend to a meaningful interpretation. A negative wage corresponding to zero years of education does not really make a lot of sense. The value that is interesting in this case is the slope. The slope represents 1.1582039 US dollar increase in hourly wages given 1 additional year of education.</p>
 <p>The expected values are derived using <code><a href="../../reference/mutheta.html">jeksterslabRlinreg::mutheta()</a></code>.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">result_mutheta</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/mutheta.html">mutheta</a></span>(
   <span class="kw">beta</span> <span class="kw">=</span> <span class="no">beta</span>,
@@ -186,11 +186,11 @@
 <tbody>
 <tr class="odd">
 <td align="left">y</td>
-<td align="right">12.17220</td>
+<td align="right">12.50073</td>
 </tr>
 <tr class="even">
 <td align="left">x</td>
-<td align="right">13.08628</td>
+<td align="right">13.12506</td>
 </tr>
 </tbody>
 </table>
@@ -210,13 +210,13 @@
 <tbody>
 <tr class="odd">
 <td align="left">y</td>
-<td align="right">59.678535</td>
-<td align="right">9.300752</td>
+<td align="right">61.753150</td>
+<td align="right">9.246538</td>
 </tr>
 <tr class="even">
 <td align="left">x</td>
-<td align="right">9.300752</td>
-<td align="right">8.130127</td>
+<td align="right">9.246538</td>
+<td align="right">7.983514</td>
 </tr>
 </tbody>
 </table>
@@ -228,14 +228,14 @@
 )
 <span class="no">result_slopes</span>
 <span class="co">#&gt;        slopes</span>
-<span class="co">#&gt; [1,] 1.143986</span>
+<span class="co">#&gt; [1,] 1.158204</span>
 <span class="no">result_intercept</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/dot-intercept.html">.intercept</a></span>(
   <span class="kw">slopes</span> <span class="kw">=</span> <span class="no">result_slopes</span>,
   <span class="kw">muy</span> <span class="kw">=</span> <span class="no">muy</span>,
   <span class="kw">muX</span> <span class="kw">=</span> <span class="no">mux</span>
 )
 <span class="no">result_intercept</span>
-<span class="co">#&gt; [1] -2.798321</span></pre></body></html></div>
+<span class="co">#&gt; [1] -2.700757</span></pre></body></html></div>
 <p>From raw data</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result_slopesfromrawdata</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/slopes.html">slopes</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
@@ -243,14 +243,14 @@
 )
 <span class="no">result_slopesfromrawdata</span>
 <span class="co">#&gt;        slopes</span>
-<span class="co">#&gt; [1,] 1.143986</span>
+<span class="co">#&gt; [1,] 1.158204</span>
 <span class="no">result_interceptfromrawdata</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/intercept.html">intercept</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
 )
 <span class="no">result_interceptfromrawdata</span>
 <span class="co">#&gt;     wages </span>
-<span class="co">#&gt; -2.798321</span></pre></body></html></div>
+<span class="co">#&gt; -2.700757</span></pre></body></html></div>
 <p>Standardized slopes can also be obtained using <code><a href="../../reference/slopesprime.html">jeksterslabRlinreg::slopesprime()</a></code></p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">result_slopesprime</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/dot-slopesprime.html">.slopesprime</a></span>(
   <span class="kw">RX</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">sigma2x</span>),
@@ -258,7 +258,7 @@
 )
 <span class="no">result_slopesprime</span>
 <span class="co">#&gt;      std. slopes</span>
-<span class="co">#&gt; [1,]   0.1480852</span></pre></body></html></div>
+<span class="co">#&gt; [1,]   0.1473857</span></pre></body></html></div>
 <p>From raw data</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">result_slopesprimefromrawdata</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/slopesprime.html">slopesprime</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
@@ -266,7 +266,7 @@
 )
 <span class="no">result_slopesprimefromrawdata</span>
 <span class="co">#&gt;      std. slopes</span>
-<span class="co">#&gt; [1,]   0.4222409</span></pre></body></html></div>
+<span class="co">#&gt; [1,]   0.4164401</span></pre></body></html></div>
 <p>The error variance can also be derived with the available information using <code>jeksterslabRlinreg::sigma2()</code> .</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">result_sigma2epsilon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sigma2epsilon.html">sigma2epsilon</a></span>(
   <span class="kw">slopes</span> <span class="kw">=</span> <span class="no">beta2</span>,
@@ -275,8 +275,8 @@
   <span class="kw">SigmaX</span> <span class="kw">=</span> <span class="no">sigma2x</span>
 )
 <span class="no">result_sigma2epsilon</span>
-<span class="co">#&gt;         </span>
-<span class="co">#&gt; 49.0386</span></pre></body></html></div>
+<span class="co">#&gt;          </span>
+<span class="co">#&gt; 51.04377</span></pre></body></html></div>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test simple-regression-ram"</span>)
 <span class="fu">test_that</span>(<span class="st">"result_mutheta"</span>, {
   <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">result_mutheta</span>)) {

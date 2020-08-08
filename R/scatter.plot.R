@@ -17,7 +17,7 @@ scatter.plot <- function(X,
                          y) {
   data <- cbind(
     y,
-    X
+    X[, -1]
   )
   .scatter.plot(data = data)
 }
