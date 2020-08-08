@@ -126,7 +126,16 @@ betahatinference <- function(X,
     sehatbetahat = c(0, sehatslopesprime),
     n = n
   )
-  out[-1, ]
+  # for cases when the model is a simple linear regression
+  k <- nrow(out)
+  p <- k - 1
+  varnames <- colnames(out)
+  out <- matrix(
+    out[-1, ],
+    nrow = p
+  )
+  colnames(out) <- varnames
+  out
 }
 
 #' @author Ivan Jacob Agaloos Pesigan
