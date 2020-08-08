@@ -100,18 +100,18 @@
 <p>In this hypothetical example, we are interested in the association between wages and education. The regressor variable is years of education. The regressand variable is hourly wage in US dollars.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">#&gt;      constant education</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">#&gt; [1,]        1        14</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">#&gt; [2,]        1        12</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt; [3,]        1        10</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; [4,]        1        12</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; [5,]        1        16</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; [6,]        1        13</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">#&gt; [2,]        1        10</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">#&gt; [3,]        1        16</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">#&gt; [4,]        1        11</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">#&gt; [5,]        1         6</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#&gt; [6,]        1        15</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt;          wages</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; [1,] 19.591863</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; [2,]  4.463972</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; [3,] 11.532587</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; [4,] 15.778497</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; [5,] 19.621537</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; [6,]  4.316583</span></span></code></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; [1,] 26.126806</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; [2,]  0.524498</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt; [3,] 22.291331</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; [4,] 10.053006</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt; [5,] 11.510471</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt; [6,]  9.472775</span></span></code></pre></div>
 </div>
 <div id="jeksterslabrlinreglinreg" class="section level3">
 <h3 class="hasAnchor">
@@ -141,7 +141,50 @@
 <!-- end list --><div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="reference/linreg.html">linreg</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)</pre></div>
+)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model Assessment:</span>
+<span class="co">#&gt;                   Value</span>
+<span class="co">#&gt; RSS            63634.05</span>
+<span class="co">#&gt; MSE               49.37</span>
+<span class="co">#&gt; RMSE               7.03</span>
+<span class="co">#&gt; R-squared          0.22</span>
+<span class="co">#&gt; Adj. R-squared     0.22</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ANOVA Table:</span>
+<span class="co">#&gt;         df       SS         MS        F            p</span>
+<span class="co">#&gt; Model    1 17578.95 17578.9476 355.5346 3.223801e-70</span>
+<span class="co">#&gt; Error 1287 63634.05    49.4437       NA           NA</span>
+<span class="co">#&gt; Total 1288 81212.99         NA       NA           NA</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                coef         se         t            p</span>
+<span class="co">#&gt; Intercept -3.948075 0.86444579 -4.567174 5.417175e-06</span>
+<span class="co">#&gt; education  1.261570 0.06690681 18.855625 3.223801e-70</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Standardized Coefficients:</span>
+<span class="co">#&gt; Textbook standard errors are used.</span>
+<span class="co">#&gt;         coef           se            t            p </span>
+<span class="co">#&gt; 4.652471e-01 2.467418e-02 1.885563e+01 3.223801e-70 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence Intervals - Regression Coefficients:</span>
+<span class="co">#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95</span>
+<span class="co">#&gt; Intercept -6.799106 -6.178046 -5.643952 -2.252197 -1.718103 -1.097044</span>
+<span class="co">#&gt; education  1.040904  1.088973  1.130311  1.392828  1.434166  1.482235</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Confidence Intervals - Standardized Slopes:</span>
+<span class="co">#&gt;   ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95 </span>
+<span class="co">#&gt; 0.3838691 0.4015962 0.4168411 0.5136531 0.5288980 0.5466251 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Means and Standard Deviations:</span>
+<span class="co">#&gt;               Mean       SD</span>
+<span class="co">#&gt; wages     11.92774 7.940628</span>
+<span class="co">#&gt; education 12.58417 2.928379</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
+<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"><img src="reference/figures/README-unnamed-chunk-4-2.png" width="100%"></p>
 <p>See <a href="https://jeksterslabds.github.io/jeksterslabRlinreg/index.html">GitHub Pages</a> for package documentation.</p>
 </div>
 </div>
