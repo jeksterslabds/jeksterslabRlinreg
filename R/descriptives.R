@@ -3,36 +3,41 @@
 #' @title Descriptive Statistics
 #'
 #' @keywords descriptives
-#' @importFrom stats cov cor
+#' @importFrom stats cov cor cor.test
+#' @importFrom jeksterslabRdist skew kurt mardia
 #' @inheritParams betahat
 #' @param plot Logical.
 #'   Display scatter plot matrix.
-#' @param varnamesX Character vector of length `k`.
+#' @param varnamesX Optional. Character vector of length `k`.
 #'   Variable names for matrix `X`.
-#' @param varnamey Character string.
+#' @param varnamey Optional. Character string.
 #'   Variable name for vector `y`.
-#' @param msd Logical.
-#'   Print means and standard deviations.
+#' @param moments Logical.
+#'   Print central moments (means, standard deviations, skewness, and kurtosis).
 #' @param cor Logical.
 #'   Print correlations.
+#' @param mardia Logical.
+#'   Estimate Mardia's multivariate skewness and kurtosis.
 #' @return Returns descriptive statistics useful in k-variable linear regression model.
 #' @examples
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' descriptives(
-#'   X = X,
-#'   y = y
-#' )
+#' out <- descriptives(X = X, y = y)
+#' str(out)
 #' @export
 descriptives <- function(X,
                          y,
                          varnamesX = NULL,
                          varnamey = NULL,
                          plot = TRUE,
-                         msd = TRUE,
-                         cor = TRUE) {
+                         moments = TRUE,
+                         cor = TRUE,
+                         mardia = TRUE) {
   n <- nrow(X)
   k <- ncol(X)
+  p <- k - 1
   df1 <- k - 1
   df2 <- n - k
   if (is.null(varnamesX)) {
@@ -120,26 +125,60 @@ descriptives <- function(X,
   names(sigma) <- c(varnamey, varnamesX[-1])
   sigmay <- sigma[1]
   sigmaX <- sigma[-1]
-  if (msd) {
+  skew <- as.vector(
+    apply(
+      X = data,
+      MARGIN = 2,
+      FUN = skew
+    )
+  )
+  names(skew) <- c(varnamey, varnamesX[-1])
+  kurt <- as.vector(
+    apply(
+      X = data,
+      MARGIN = 2,
+      FUN = kurt
+    )
+  )
+  names(kurt) <- c(varnamey, varnamesX[-1])
+  if (mardia) {
+    mardiaout <- mardia(data)
+  } else {
+    mardiaout <- NA
+  }
+  if (moments) {
     meanandsd <- cbind(
       mu,
-      sigma
+      sigma,
+      skew,
+      kurt
     )
     colnames(meanandsd) <- c(
       "Mean",
-      "SD"
+      "SD",
+      "Skewness",
+      "Kurtosis"
     )
-    cat("\nMeans and Standard Deviations:\n")
+    cat("\nCentral Moments:\n")
     print(
       meanandsd
     )
+    if (mardia) {
+      cat("\nMardia's Estimate of Multivariate Skewness and Kurtosis:\n")
+      print(
+        mardiaout
+      )
+    }
   }
   if (cor) {
     cat("\nCorrelations:\n")
     print(R)
   }
   if (plot) {
-    scatter.plot(data)
+    scatter.plot(
+      X = X,
+      y = y
+    )
   }
   invisible(
     list(
@@ -148,6 +187,7 @@ descriptives <- function(X,
       data = data,
       n = n,
       k = k,
+      p = p,
       df1 = df1,
       df2 = df2,
       muhatX = muhatX,
@@ -165,7 +205,10 @@ descriptives <- function(X,
       sigmaX = sigmaX,
       sigmay = sigmay,
       sigma2 = sigma2,
-      sigma = sigma
+      sigma = sigma,
+      skew = skew,
+      kurt = kurt,
+      mardia = mardiaout
     )
   )
 }
