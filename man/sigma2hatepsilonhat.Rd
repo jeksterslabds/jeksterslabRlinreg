@@ -38,14 +38,17 @@ and \eqn{k} is the number of regressors
 including a regressor whose value is 1 for each observation on the first column.
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+sigma2hatepsilonhat(X = X, y = y)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-sigma2hatepsilonhat(
-  X = X,
-  y = y
-)
+sigma2hatepsilonhat(X = X, y = y)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Linear_regression}{Wikipedia: Linear Regression}

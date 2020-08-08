@@ -103,14 +103,17 @@
 #'   If `TRUE`, calculates the coefficient of determination from `RSS`.
 #'   If `FALSE`, calculates the coefficient of determination from `ESS`.
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' R2(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' R2(
-#'   X = X,
-#'   y = y
-#' )
+#' R2(X = X, y = y)
 #' @export
 R2 <- function(X,
                y,
@@ -190,14 +193,17 @@ R2 <- function(X,
 #' @inheritParams .Rbar2
 #' @inherit .Rbar2 description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' Rbar2(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' Rbar2(
-#'   X = X,
-#'   y = y
-#' )
+#' Rbar2(X = X, y = y)
 #' @export
 Rbar2 <- function(X,
                   y) {

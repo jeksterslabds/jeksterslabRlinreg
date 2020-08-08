@@ -1,10 +1,10 @@
 #' ---
-#' title: "Tests: The Linear Regression Model"
+#' title: "Tests: The Linear Regression Model (Plots)"
 #' author: "Ivan Jacob Agaloos Pesigan"
 #' date: "`r Sys.Date()`"
 #' output: rmarkdown::html_vignette
 #' vignette: >
-#'   %\VignetteIndexEntry{Tests: The Linear Regression Model}
+#'   %\VignetteIndexEntry{Tests: The Linear Regression Model (Plots)}
 #'   %\VignetteEngine{knitr::rmarkdown}
 #'   %\VignetteEncoding{UTF-8}
 #' ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 #'
 #'
-# The Linear Regression Model {#linreg-estimation-linreg-example}
+# The Linear Regression Model (Plots) {#linreg-plots}
 #'
 #+ echo = FALSE
 library(testthat)

@@ -71,6 +71,16 @@ sigma <- sqrt(sigma2)
 output <- descriptives(
   X = X,
   y = y,
+  mardia = TRUE
+)
+# for coverage
+descriptives(
+  X = X,
+  y = y,
+  plot = FALSE,
+  moments = FALSE,
+  cor = FALSE,
+  mardia = FALSE
 )
 result_X <- as.vector(output[["X"]])
 result_y <- as.vector(output[["y"]])

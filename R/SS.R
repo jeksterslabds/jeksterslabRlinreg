@@ -96,10 +96,16 @@
 #' @inheritParams .RSS
 #' @inherit .RSS description references return
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' RSS(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' RSS(X = X, y = y)
 #' @export
 RSS <- function(X,
@@ -185,14 +191,17 @@ RSS <- function(X,
 #' @inheritParams .ESS
 #' @inherit .ESS description references return
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' ESS(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' ESS(
-#'   X = X,
-#'   y = y
-#' )
+#' ESS(X = X, y = y)
 #' @export
 ESS <- function(X,
                 y) {
@@ -234,9 +243,7 @@ ESS <- function(X,
 #' @inherit RSS references
 #' @examples
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' TSS(
-#'   y = y
-#' )
+#' TSS(y = y)
 #' @export
 TSS <- function(y) {
   drop(

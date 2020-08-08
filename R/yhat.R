@@ -50,14 +50,18 @@
 #' @inheritParams .Py
 #' @inherit .Py description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' Py <- Py(X = X, y = y)
+#' hist(Py)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' Py <- Py(
-#'   X = X,
-#'   y = y
-#' )
+#' Py <- Py(X = X, y = y)
 #' hist(Py)
 #' @export
 Py <- function(X,
@@ -124,14 +128,18 @@ Py <- function(X,
 #' @inheritParams .Xbetahat
 #' @inherit .Xbetahat description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' Xbetahat <- Xbetahat(X = X, y = y)
+#' hist(Xbetahat)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' Xbetahat <- Xbetahat(
-#'   X = X,
-#'   y = y
-#' )
+#' Xbetahat <- Xbetahat(X = X, y = y)
 #' hist(Xbetahat)
 #' @export
 Xbetahat <- function(X,
@@ -159,14 +167,18 @@ Xbetahat <- function(X,
 #' @inheritParams Xbetahat
 #' @inherit Py return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' yhat <- yhat(X = X, y = y)
+#' hist(yhat)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' yhat <- yhat(
-#'   X = X,
-#'   y = y
-#' )
+#' yhat <- yhat(X = X, y = y)
 #' hist(yhat)
 #' @export
 yhat <- function(X,

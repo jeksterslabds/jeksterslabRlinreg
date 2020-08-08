@@ -73,14 +73,17 @@
 #' @inheritParams .vcovhatbetahat
 #' @inherit .vcovhatbetahat return description references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' vcovhatbetahat(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' vcovhatbetahat(
-#'   X = X,
-#'   y = y
-#' )
+#' vcovhatbetahat(X = X, y = y)
 #' @export
 vcovhatbetahat <- function(X,
                            y) {
@@ -100,14 +103,17 @@ vcovhatbetahat <- function(X,
 #' @inheritParams .vcovhatbetahatbiased
 #' @inherit .vcovhatbetahatbiased return description references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' vcovhatbetahatbiased(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' vcovhatbetahatbiased(
-#'   X = X,
-#'   y = y
-#' )
+#' vcovhatbetahatbiased(X = X, y = y)
 #' @export
 vcovhatbetahatbiased <- function(X,
                                  y) {

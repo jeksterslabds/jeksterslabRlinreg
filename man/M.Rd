@@ -31,11 +31,17 @@ transforms the \eqn{\mathbf{y}} vector
 to the vector of residuals \eqn{\left( \mathbf{e} = \mathbf{My} \right)} .
 }
 \examples{
+# Simple regression------------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+M <- M(X = X)
+str(M, list.len = 6)
+
+# Multiple regression----------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
-M <- M(
-  X = X
-)
+M <- M(X = X)
 str(M, list.len = 6)
 }
 \references{

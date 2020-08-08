@@ -36,10 +36,16 @@ Estimates coefficients of a linear regression model using
 Also know as the normal equation.
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+.betahatnorm(X = X, y = y)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 .betahatnorm(X = X, y = y)
 }
 \references{

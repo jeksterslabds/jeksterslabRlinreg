@@ -72,6 +72,7 @@ articles:
   desc: Other tests.
   contents:
   - tests/test-linreg-estimation-descriptives-simple
+  - tests/test-linreg-plot
   - tests/test-linreg-estimation-descriptives
   - tests/test-linreg-estimation-ols-example
   - tests/test-linreg-estimation-projection

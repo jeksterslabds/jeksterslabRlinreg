@@ -34,14 +34,18 @@ where
   }
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+Xbetahat <- Xbetahat(X = X, y = y)
+hist(Xbetahat)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-Xbetahat <- Xbetahat(
-  X = X,
-  y = y
-)
+Xbetahat <- Xbetahat(X = X, y = y)
 hist(Xbetahat)
 }
 \references{

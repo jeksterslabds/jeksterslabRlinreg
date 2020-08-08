@@ -25,14 +25,17 @@ Returns the estimated standard errors of the estimated regression coefficients.
 of \eqn{\widehat{\mathrm{cov}} \left( \boldsymbol{\hat{\beta}} \right)} .
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+sehatbetahat(X = X, y = y)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-sehatbetahat(
-  X = X,
-  y = y
-)
+sehatbetahat(X = X, y = y)
 }
 \seealso{
 Other standard errors of estimates of regression coefficients functions: 

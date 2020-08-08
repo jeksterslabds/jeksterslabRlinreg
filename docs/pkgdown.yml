@@ -21,8 +21,9 @@ articles:
   test-linreg-estimation-sigma2hatepsilonhat: tests/test-linreg-estimation-sigma2hatepsilonhat.html
   test-linreg-estimation-tepsilonhat: tests/test-linreg-estimation-tepsilonhat.html
   test-linreg-estimation-vcovhatbetahat: tests/test-linreg-estimation-vcovhatbetahat.html
+  test-linreg-plot: tests/test-linreg-plot.html
   test-simple-population-example: tests/test-simple-population-example.html
-last_built: 2020-08-08T10:31Z
+last_built: 2020-08-08T11:44Z
 urls:
   reference: https://github.com/jeksterslabds/jeksterslabRlinreg//reference
   article: https://github.com/jeksterslabds/jeksterslabRlinreg//articles

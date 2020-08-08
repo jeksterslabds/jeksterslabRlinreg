@@ -21,11 +21,17 @@
 #' @references
 #'   [Wikipedia: Projection Matrix](https://en.wikipedia.org/wiki/Projection_matrix)
 #' @examples
+#' # Simple regression------------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' P <- P(X = X)
+#' str(P, list.len = 6)
+#'
+#' # Multiple regression----------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
 #' X <- X[, -ncol(X)]
-#' P <- P(
-#'   X = X
-#' )
+#' P <- P(X = X)
 #' str(P, list.len = 6)
 #' @export
 P <- function(X) {
@@ -77,11 +83,17 @@ P <- function(X) {
 #' @inheritParams .M
 #' @inherit .M description return references
 #' @examples
+#' # Simple regression------------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' M <- M(X = X)
+#' str(M, list.len = 6)
+#'
+#' # Multiple regression----------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
 #' X <- X[, -ncol(X)]
-#' M <- M(
-#'   X = X
-#' )
+#' M <- M(X = X)
 #' str(M, list.len = 6)
 #' @export
 M <- function(X) {

@@ -43,14 +43,17 @@
 #' @inheritParams .sehatbetahat
 #' @inherit .sehatbetahat
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' sehatbetahat(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' sehatbetahat(
-#'   X = X,
-#'   y = y
-#' )
+#' sehatbetahat(X = X, y = y)
 #' @export
 sehatbetahat <- function(X,
                          y) {
@@ -101,14 +104,17 @@ sehatbetahat <- function(X,
 #' @inheritParams .sehatbetahatbiased
 #' @inherit .sehatbetahatbiased
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' sehatbetahatbiased(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' sehatbetahatbiased(
-#'   X = X,
-#'   y = y
-#' )
+#' sehatbetahatbiased(X = X, y = y)
 #' @export
 sehatbetahatbiased <- function(X,
                                y) {
@@ -185,10 +191,16 @@ sehatbetahatbiased <- function(X,
 #' @inheritParams .sehatslopesprimetb
 #' @inherit .sehatslopesprimetb description
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' sehatslopesprimetb(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' sehatslopesprimetb(X = X, y = y)
 #' @export
 sehatslopesprimetb <- function(X,

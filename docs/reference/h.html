@@ -180,13 +180,17 @@ which includes a regressor whose value is 1 for each observation on the first co
 <code><a href='P.html'>P</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+    <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
+<span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>h</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>h</span>)</div><div class='img'><img src='h-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Multiple regression----------------------------------------------</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>h</span>(
-  <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>h</span>)</div><div class='img'><img src='h-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>h</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>h</span>)</div><div class='img'><img src='h-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

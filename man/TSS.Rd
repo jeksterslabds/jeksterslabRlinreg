@@ -35,9 +35,7 @@ Note that
 }
 \examples{
 y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-TSS(
-  y = y
-)
+TSS(y = y)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Residual_sum_of_squares}{Wikipedia: Residual Sum of Squares}

@@ -197,10 +197,52 @@ Display summary output.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+    <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='fu'>linreg</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
+#&gt; Model Assessment:
+#&gt;                   Value
+#&gt; RSS            73673.13
+#&gt; MSE               57.16
+#&gt; RMSE               7.56
+#&gt; R-squared          0.08
+#&gt; Adj. R-squared     0.08
+#&gt; 
+#&gt; ANOVA Table:
+#&gt;         df        SS         MS        F            p
+#&gt; Model    1  6636.695 6636.69500 115.9368 6.019852e-26
+#&gt; Error 1287 73673.129   57.24408       NA           NA
+#&gt; Total 1288 80309.824         NA       NA           NA
+#&gt; 
+#&gt; Coefficients:
+#&gt;               coef         se         t            p
+#&gt; Intercept 4.874251 0.72698105  6.704784 3.011026e-11
+#&gt; age       0.197486 0.01834111 10.767395 6.019852e-26
+#&gt; 
+#&gt; Standardized Coefficients:
+#&gt; Textbook standard errors are used.
+#&gt;          coef         se        t            p
+#&gt; age 0.2874694 0.02669814 10.76739 6.019852e-26
+#&gt; 
+#&gt; Confidence Intervals - Regression Coefficients:
+#&gt;             ci_0.05    ci_0.5    ci_2.5   ci_97.5   ci_99.5  ci_99.95
+#&gt; Intercept 2.4765930 2.9988909 3.4480531 6.3004490 6.7496112 7.2719091
+#&gt; age       0.1369951 0.1501723 0.1615042 0.2334678 0.2447997 0.2579769
+#&gt; 
+#&gt; Confidence Intervals - Standardized Slopes:
+#&gt;       ci_0.05    ci_0.5    ci_2.5  ci_97.5   ci_99.5  ci_99.95
+#&gt; age 0.1994162 0.2185974 0.2350927 0.339846 0.3563414 0.3755226
+#&gt; 
+#&gt; Means and Standard Deviations:
+#&gt;           Mean       SD
+#&gt; wages 12.36585  7.89635
+#&gt; age   37.93483 11.49428</div><div class='img'><img src='linreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='linreg-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Multiple regression----------------------------------------------</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
 <span class='fu'>linreg</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
 #&gt; Model Assessment:
 #&gt;                   Value
@@ -227,7 +269,7 @@ Display summary output.</p></td>
 #&gt; 
 #&gt; Standardized Coefficients:
 #&gt; Textbook standard errors are used.
-#&gt;                   [,1]       [,2]      [,3]         [,4]
+#&gt;                   coef         se         t            p
 #&gt; gender     -0.19477502 0.02309626 -8.433184 8.939416e-17
 #&gt; race       -0.07135673 0.02321194 -3.074139 2.155664e-03
 #&gt; union       0.05077872 0.02344760  2.165626 3.052356e-02
@@ -244,13 +286,13 @@ Display summary output.</p></td>
 #&gt; experience   0.1136797  0.1252092  0.1351242  0.1980889  0.2080039  0.2195334
 #&gt; 
 #&gt; Confidence Intervals - Standardized Slopes:
-#&gt;                   [,1]         [,2]        [,3]        [,4]        [,5]
+#&gt;                ci_0.05       ci_0.5      ci_2.5     ci_97.5     ci_99.5
 #&gt; gender     -0.27094940 -0.254355676 -0.24008560 -0.14946443 -0.13519436
 #&gt; race       -0.14791263 -0.131235792 -0.11689425 -0.02581921 -0.01147766
 #&gt; union      -0.02655441 -0.009708265  0.00477888  0.09677855  0.11126570
 #&gt; education   0.41084437  0.427717121  0.44222714  0.53437211  0.54888213
 #&gt; experience  0.16790381  0.184932806  0.19957719  0.29257542  0.30721981
-#&gt;                    [,6]
+#&gt;                ci_99.95
 #&gt; gender     -0.118600632
 #&gt; race        0.005199175
 #&gt; union       0.128111846
@@ -264,7 +306,7 @@ Display summary output.</p></td>
 #&gt; race        0.1528317  0.3599648
 #&gt; union       0.1590380  0.3658535
 #&gt; education  13.1450737  2.8138234
-#&gt; experience 18.7897595 11.6628366</div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='img'><img src='linreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='linreg-2.png' alt='' width='700' height='433' /></div></pre>
+#&gt; experience 18.7897595 11.6628366</div><div class='img'><img src='linreg-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='linreg-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

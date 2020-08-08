@@ -61,11 +61,19 @@
 #' @inheritParams .My
 #' @inherit .My description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' My <- My(X = X, y = y)
+#' hist(My)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' My(X = X, y = y)
+#' My <- My(X = X, y = y)
+#' hist(My)
 #' @export
 My <- function(X,
                y) {
@@ -146,10 +154,17 @@ My <- function(X,
 #' @inheritParams .yminusyhat
 #' @inherit .yminusyhat description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' epsilonhat <- yminusyhat(X = X, y = y)
+#' hist(epsilonhat)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' epsilonhat <- yminusyhat(X = X, y = y)
 #' hist(epsilonhat)
 #' @export
@@ -176,10 +191,17 @@ yminusyhat <- function(X,
 #' @inheritParams yminusyhat
 #' @inherit yminusyhat description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' epsilonhat <- epsilonhat(X = X, y = y)
+#' hist(epsilonhat)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' epsilonhat <- epsilonhat(X = X, y = y)
 #' hist(epsilonhat)
 #' @export

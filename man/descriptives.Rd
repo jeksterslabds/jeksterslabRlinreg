@@ -51,10 +51,17 @@ Returns descriptive statistics useful in k-variable linear regression model.
 Descriptive Statistics
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+out <- descriptives(X = X, y = y)
+str(out)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 out <- descriptives(X = X, y = y)
 str(out)
 }

@@ -25,10 +25,16 @@ on the regressand variable.}
 According to Yuan and Chan (2011), this standard error is biased.
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+sehatslopesprimetb(X = X, y = y)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 sehatslopesprimetb(X = X, y = y)
 }
 \seealso{

@@ -32,12 +32,17 @@ is the projection matrix (or hat matrix) \eqn{\mathbf{P}}
 and \eqn{h_{ii}} is the diagonal of \eqn{\mathbf{P}}.
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+h <- h(X = X)
+hist(h)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-h <- h(
-  X = X
-)
+h <- h(X = X)
 hist(h)
 }
 \references{

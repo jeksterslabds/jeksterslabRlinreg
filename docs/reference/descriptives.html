@@ -191,10 +191,90 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
     <p>Returns descriptive statistics useful in k-variable linear regression model.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+    <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
+<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>descriptives</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
+#&gt; Central Moments:
+#&gt;           Mean       SD  Skewness   Kurtosis
+#&gt; wages 12.36585  7.89635 1.8502679  4.8600481
+#&gt; age   37.93483 11.49428 0.2698983 -0.7668824
+#&gt; 
+#&gt; Mardia's Estimate of Multivariate Skewness and Kurtosis:
+#&gt;                 b1           b1.chisq      b1.correction b1.chisq.corrected 
+#&gt;       3.875204e+00       8.325230e+02       1.002329e+00       8.344616e+02 
+#&gt;              b1.df               b1.p     b1.p.corrected                 b2 
+#&gt;       4.000000e+00      6.923720e-179      2.632596e-179       1.264530e+01 
+#&gt;               b2.z               b2.p 
+#&gt;       2.084732e+01       1.611861e-96 
+#&gt; 
+#&gt; Correlations:
+#&gt;           wages       age
+#&gt; wages 1.0000000 0.2874694
+#&gt; age   0.2874694 1.0000000</div><div class='img'><img src='descriptives-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; List of 27
+#&gt;  $ X      : num [1:1289, 1:2] 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;   ..- attr(*, "dimnames")=List of 2
+#&gt;   .. ..$ : NULL
+#&gt;   .. ..$ : chr [1:2] "constant" "age"
+#&gt;  $ y      : num [1:1289, 1] 11.6 5 12 7 21.1 ...
+#&gt;   ..- attr(*, "dimnames")=List of 2
+#&gt;   .. ..$ : NULL
+#&gt;   .. ..$ : chr "wages"
+#&gt;  $ data   : num [1:1289, 1:2] 11.6 5 12 7 21.1 ...
+#&gt;   ..- attr(*, "dimnames")=List of 2
+#&gt;   .. ..$ : NULL
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;  $ n      : int 1289
+#&gt;  $ k      : int 2
+#&gt;  $ p      : num 1
+#&gt;  $ df1    : num 1
+#&gt;  $ df2    : int 1287
+#&gt;  $ muhatX : Named num 37.9
+#&gt;   ..- attr(*, "names")= chr "age"
+#&gt;  $ muhaty : Named num 12.4
+#&gt;   ..- attr(*, "names")= chr "wages"
+#&gt;  $ mu     : Named num [1:2] 12.4 37.9
+#&gt;   ..- attr(*, "names")= chr [1:2] "wages" "age"
+#&gt;  $ R      : num [1:2, 1:2] 1 0.287 0.287 1
+#&gt;   ..- attr(*, "dimnames")=List of 2
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;  $ R.p    : num [1:2, 1:2] NA 6.02e-26 6.02e-26 NA
+#&gt;   ..- attr(*, "dimnames")=List of 2
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;  $ RX     : num 1
+#&gt;  $ ryX    : Named num 0.287
+#&gt;   ..- attr(*, "names")= chr "age"
+#&gt;  $ Sigma  : num [1:2, 1:2] 62.4 26.1 26.1 132.1
+#&gt;   ..- attr(*, "dimnames")=List of 2
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;   .. ..$ : chr [1:2] "wages" "age"
+#&gt;  $ SigmaX : num 132
+#&gt;  $ sigmayX: Named num 26.1
+#&gt;   ..- attr(*, "names")= chr "age"
+#&gt;  $ sigma2X: num 132
+#&gt;  $ sigma2y: Named num 62.4
+#&gt;   ..- attr(*, "names")= chr "wages"
+#&gt;  $ sigmaX : Named num 11.5
+#&gt;   ..- attr(*, "names")= chr "age"
+#&gt;  $ sigmay : Named num 7.9
+#&gt;   ..- attr(*, "names")= chr "wages"
+#&gt;  $ sigma2 : Named num [1:2] 62.4 132.1
+#&gt;   ..- attr(*, "names")= chr [1:2] "wages" "age"
+#&gt;  $ sigma  : Named num [1:2] 7.9 11.5
+#&gt;   ..- attr(*, "names")= chr [1:2] "wages" "age"
+#&gt;  $ skew   : Named num [1:2] 1.85 0.27
+#&gt;   ..- attr(*, "names")= chr [1:2] "wages" "age"
+#&gt;  $ kurt   : Named num [1:2] 4.86 -0.767
+#&gt;   ..- attr(*, "names")= chr [1:2] "wages" "age"
+#&gt;  $ mardia : Named num [1:10] 3.88 832.52 1 834.46 4 ...
+#&gt;   ..- attr(*, "names")= chr [1:10] "b1" "b1.chisq" "b1.correction" "b1.chisq.corrected" ...</div><div class='input'>
+<span class='co'># Multiple regression----------------------------------------------</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
 <span class='co'># age is removed</span>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
 <span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>descriptives</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
 #&gt; Central Moments:
 #&gt;                  Mean         SD    Skewness   Kurtosis
@@ -227,7 +307,7 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 #&gt; race       -0.03912910
 #&gt; union       0.15431902
 #&gt; education  -0.18010301
-#&gt; experience  1.00000000</div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the standard deviation is zero</span></div><div class='img'><img src='descriptives-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; List of 27
+#&gt; experience  1.00000000</div><div class='img'><img src='descriptives-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; List of 27
 #&gt;  $ X      : num [1:1289, 1:6] 1 1 1 1 1 1 1 1 1 1 ...
 #&gt;   ..- attr(*, "dimnames")=List of 2
 #&gt;   .. ..$ : NULL

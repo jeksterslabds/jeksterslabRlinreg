@@ -31,11 +31,17 @@ to the vector of predicted values
 \eqn{\left( \mathbf{\hat{y}} = \mathbf{Py} \right)}.
 }
 \examples{
+# Simple regression------------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+P <- P(X = X)
+str(P, list.len = 6)
+
+# Multiple regression----------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
 X <- X[, -ncol(X)]
-P <- P(
-  X = X
-)
+P <- P(X = X)
 str(P, list.len = 6)
 }
 \references{

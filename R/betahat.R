@@ -37,10 +37,16 @@
 #'   of \eqn{k} unknown regression coefficients
 #'   estimated using ordinary least squares.
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' .betahatnorm(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' .betahatnorm(X = X, y = y)
 #' @export
 .betahatnorm <- function(X,
@@ -85,10 +91,16 @@
 #' @inheritParams .betahatnorm
 #' @inherit .betahatnorm return
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' .betahatqr(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' .betahatqr(X = X, y = y)
 #' @export
 .betahatqr <- function(X,
@@ -139,10 +151,16 @@
 #' @inheritParams .betahatnorm
 #' @inherit .betahatnorm return
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' .betahatsvd(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' .betahatsvd(X = X, y = y)
 #' @export
 .betahatsvd <- function(X,
@@ -186,10 +204,16 @@
 #'   If `TRUE`, use QR decomposition when normal equations fail.
 #'   If `FALSE`, use singular value decompositon when normal equations fail.
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' betahat(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 #' betahat(X = X, y = y)
 #' @export
 betahat <- function(X,

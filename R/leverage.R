@@ -45,12 +45,17 @@
 #' @inheritParams .h
 #' @inherit .h description references return
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' h <- h(X = X)
+#' hist(h)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' h <- h(
-#'   X = X
-#' )
+#' h <- h(X = X)
 #' hist(h)
 #' @export
 h <- function(X) {

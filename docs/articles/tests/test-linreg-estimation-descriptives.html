@@ -147,6 +147,7 @@
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">output</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/descriptives.html">descriptives</a></span>(
   <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
+  <span class="kw">mardia</span> <span class="kw">=</span> <span class="fl">TRUE</span>
 )
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Central Moments:</span>
@@ -180,11 +181,18 @@
 <span class="co">#&gt; race       -0.03912910</span>
 <span class="co">#&gt; union       0.15431902</span>
 <span class="co">#&gt; education  -0.18010301</span>
-<span class="co">#&gt; experience  1.00000000</span>
-<span class="co">#&gt; Warning in cor(x = x, y = y): the standard deviation is zero</span>
-<span class="co">#&gt; Warning in cor(x, y): the standard deviation is zero</span></pre></body></html></div>
+<span class="co">#&gt; experience  1.00000000</span></pre></body></html></div>
 <p><img src="test-linreg-estimation-descriptives_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result_X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"X"</span>]])
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># for coverage</span>
+<span class="fu"><a href="../../reference/descriptives.html">descriptives</a></span>(
+  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
+  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
+  <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
+  <span class="kw">moments</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
+  <span class="kw">cor</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
+  <span class="kw">mardia</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+)
+<span class="no">result_X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"X"</span>]])
 <span class="no">result_y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"y"</span>]])
 <span class="no">result_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"data"</span>]])
 <span class="no">result_n</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">output</span><span class="kw">[[</span><span class="st">"n"</span>]])

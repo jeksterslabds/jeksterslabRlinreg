@@ -102,14 +102,17 @@
 #' @inheritParams .sigma2hatepsilonhat
 #' @inherit .sigma2hatepsilonhat return description references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' sigma2hatepsilonhat(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' sigma2hatepsilonhat(
-#'   X = X,
-#'   y = y
-#' )
+#' sigma2hatepsilonhat(X = X, y = y)
 #' @export
 sigma2hatepsilonhat <- function(X,
                                 y) {
@@ -131,14 +134,17 @@ sigma2hatepsilonhat <- function(X,
 #' @inheritParams .sigma2hatepsilonhatbiased
 #' @inherit .sigma2hatepsilonhatbiased return description references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' sigma2hatepsilonhatbiased(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' sigma2hatepsilonhatbiased(
-#'   X = X,
-#'   y = y
-#' )
+#' sigma2hatepsilonhatbiased(X = X, y = y)
 #' @export
 sigma2hatepsilonhatbiased <- function(X,
                                       y) {

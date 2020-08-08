@@ -33,14 +33,17 @@ Calculates the root mean squared error
   }
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+RMSE(X = X, y = y)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-RMSE(
-  X = X,
-  y = y
-)
+RMSE(X = X, y = y)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{Wikipedia: Root-mean-square deviation}

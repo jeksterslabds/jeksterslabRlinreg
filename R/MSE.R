@@ -48,14 +48,17 @@
 #' @inheritParams .MSE
 #' @inherit .MSE description references return
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' MSE(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' MSE(
-#'   X = X,
-#'   y = y
-#' )
+#' MSE(X = X, y = y)
 #' @export
 MSE <- function(X,
                 y) {
@@ -116,14 +119,17 @@ MSE <- function(X,
 #' @inheritParams .RMSE
 #' @inherit .RMSE description return references
 #' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' RMSE(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' RMSE(
-#'   X = X,
-#'   y = y
-#' )
+#' RMSE(X = X, y = y)
 #' @export
 RMSE <- function(X,
                  y) {

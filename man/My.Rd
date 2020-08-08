@@ -39,11 +39,19 @@ where
   }
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+My <- My(X = X, y = y)
+hist(My)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-My(X = X, y = y)
+My <- My(X = X, y = y)
+hist(My)
 }
 \references{
 \href{https://en.wikipedia.org/wiki/Errors_and_residuals}{Wikipedia: Errors and Residuals}

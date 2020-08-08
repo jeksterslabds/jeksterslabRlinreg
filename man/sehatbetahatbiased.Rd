@@ -21,14 +21,17 @@ on the regressand variable.}
 Standard Errors of Estimates of Regression Coefficients (from \eqn{\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}})
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+sehatbetahatbiased(X = X, y = y)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-sehatbetahatbiased(
-  X = X,
-  y = y
-)
+sehatbetahatbiased(X = X, y = y)
 }
 \seealso{
 Other standard errors of estimates of regression coefficients functions: 

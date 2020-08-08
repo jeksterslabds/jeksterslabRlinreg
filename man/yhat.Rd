@@ -29,14 +29,18 @@ that is, the predicted value of \eqn{\mathbf{y}} given \eqn{\mathbf{X}} using
   }
 }
 \examples{
+# Simple regression------------------------------------------------
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+X <- X[, c(1, ncol(X))]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+yhat <- yhat(X = X, y = y)
+hist(yhat)
+
+# Multiple regression----------------------------------------------
 X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 # age is removed
 X <- X[, -ncol(X)]
-y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-yhat <- yhat(
-  X = X,
-  y = y
-)
+yhat <- yhat(X = X, y = y)
 hist(yhat)
 }
 \references{
