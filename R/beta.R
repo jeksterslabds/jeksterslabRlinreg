@@ -39,10 +39,11 @@
       y = y,
       plot = FALSE,
       moments = FALSE,
-      cor = FALSE
+      cor = FALSE,
+      mardia = FALSE
     )
-    SigmaX <- descriptives[["SigmaX"]]
-    sigmayX <- descriptives[["sigmayX"]]
+    SigmaX <- descriptives[["SigmaXhat"]]
+    sigmayX <- descriptives[["sigmayXhat"]]
   }
   out <- solve(SigmaX) %*% sigmayX
   colnames(out) <- "slopes"
@@ -122,10 +123,11 @@ slopes <- function(X,
       y = y,
       plot = FALSE,
       moments = FALSE,
-      cor = FALSE
+      cor = FALSE,
+      mardia = FALSE
     )
-    RX <- descriptives[["RX"]]
-    ryX <- descriptives[["ryX"]]
+    RX <- descriptives[["RXhat"]]
+    ryX <- descriptives[["ryXhat"]]
   }
   out <- solve(RX) %*% ryX
   colnames(out) <- "std. slopes"
@@ -202,13 +204,14 @@ slopesprime <- function(X,
       y = y,
       plot = FALSE,
       moments = FALSE,
-      cor = FALSE
+      cor = FALSE,
+      mardia = FALSE
     )
-    SigmaX <- descriptives[["SigmaX"]]
-    sigmayX <- descriptives[["sigmayX"]]
-    mu <- descriptives[["mu"]]
-    muy <- mu[1]
-    muX <- mu[-1]
+    SigmaX <- descriptives[["SigmaXhat"]]
+    sigmayX <- descriptives[["sigmayXhat"]]
+    muhat <- descriptives[["muhat"]]
+    muy <- muhat[1]
+    muX <- muhat[-1]
     slopes <- .slopes(
       SigmaX = SigmaX,
       sigmayX = sigmayX
