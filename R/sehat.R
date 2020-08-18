@@ -184,7 +184,7 @@ sehatbetahatbiased <- function(X,
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Standard Errors of Standardized Estimates of Regression Coefficients
+#' @title Standard Errors of Standardized Estimates of Regression Coefficients (Textbook)
 #'
 #' @family standard errors of estimates of regression coefficients functions
 #' @keywords inference
@@ -211,5 +211,152 @@ sehatslopesprimetb <- function(X,
     slopesprime = NULL,
     X = X,
     y = y
+  )
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Standard Errors of Standardized Estimates of Regression Coefficients (Yuan and Chan (2011))
+#'
+#' @family standard errors of estimates of regression coefficients functions
+#' @keywords inference
+#' @inheritParams .sehatslopesprimetb
+#' @inheritParams .vcovhatbetahat
+#' @inheritParams betahat
+#' @param SigmaXhat `p` by `p` numeric matrix.
+#'   Estimated \eqn{p \times p} variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
+#'   \eqn{\left( \boldsymbol{\hat{\Sigma}}_{\mathbf{X}} \right)}.
+#' @param sigma2yhat Numeric.
+#'   Estimated variance of the regressand \eqn{\left( \hat{\sigma}_{y} \right)}
+#' @param sigmayXhat Numeric vector of length `p` or `p` by `1` matrix.
+#'   Estimated \eqn{p \times 1} covariances between the regressand and the regressors
+#'   \eqn{\left( \boldsymbol{\sigma}_{\mathbf{yX}} \right)}.
+#' @param adjust Logical.
+#'   Use \eqn{n - 3} adjustment for small samples.
+#' @param n Integer.
+#'   Sample size.
+#' @examples
+#' slopes <- c(-3.0748755, -1.5653133, 1.0959758, 1.3703010, 0.1666065)
+#' SigmaXhat <- matrix(
+#'   data = c(
+#'     0.25018672, 0.00779108, -0.01626038, -0.04424864, -0.13217068,
+#'     0.00779108, 0.12957466, 0.01061297, -0.08818286, -0.16427222,
+#'     -0.016260378, 0.010612975, 0.133848763, 0.004083767, 0.658462191,
+#'     -0.044248635, -0.088182856, 0.004083767, 7.917601877, -5.910469742,
+#'     -0.1321707, -0.1642722, 0.6584622, -5.9104697, 136.0217584
+#'   ),
+#'   ncol = 5
+#' )
+#' sigma2hatepsilonhat <- 42.35584
+#' sigma2yhat <- 62.35235
+#' sigmayXhat <- c(-0.8819639, -0.3633559, 0.2953811, 10.1433433, 15.9481950)
+#' n <- 1289
+#' .sehatslopesprimedelta(
+#'   slopes = slopes, sigma2hatepsilonhat = sigma2hatepsilonhat,
+#'   SigmaXhat = SigmaXhat, sigma2yhat = sigma2yhat, sigmayXhat = sigmayXhat, n = n
+#' )
+#' @export
+.sehatslopesprimedelta <- function(slopes,
+                                   sigma2hatepsilonhat,
+                                   SigmaXhat,
+                                   sigmayXhat,
+                                   sigma2yhat,
+                                   adjust = FALSE,
+                                   n,
+                                   X,
+                                   y) {
+  if (is.null(sigma2hatepsilonhat)) {
+    sigma2hatepsilonhat <- sigma2hatepsilonhat(
+      X = X,
+      y = y
+    )
+    n <- nrow(X)
+  }
+  if (is.null(slopes) | is.null(SigmaXhat) | is.null(sigmayXhat) | is.null(sigma2yhat)) {
+    descriptives <- descriptives(
+      X = X,
+      y = y,
+      plot = FALSE,
+      moments = FALSE,
+      cor = FALSE,
+      mardia = FALSE
+    )
+    SigmaXhat <- descriptives[["SigmaXhat"]]
+    sigmayXhat <- descriptives[["sigmayXhat"]]
+    sigma2yhat <- descriptives[["sigma2yhat"]]
+    slopes <- as.vector(
+      .slopes(
+        SigmaX = SigmaXhat,
+        sigmayX = sigmayXhat
+      )
+    )
+    n <- nrow(X)
+  }
+  if (adjust) {
+    n <- n - 3
+  }
+  slopes <- as.vector(slopes)
+  sigma2Xhat <- diag(SigmaXhat)
+  diagSigmaXhatinverse <- diag(solve(SigmaXhat))
+  term <- drop(
+    t(slopes) %*% SigmaXhat %*% slopes
+  )
+  out <- rep(x = NA, times = length(slopes))
+  for (i in seq_along(out)) {
+    out[i] <- sqrt(
+      (
+        sigma2Xhat[i] * diagSigmaXhatinverse[i] * sigma2hatepsilonhat
+      ) / (
+        n * sigma2yhat
+      ) + (
+        slopes[i]^2 * (
+          (sigma2Xhat[i] * term) - (sigma2Xhat[i] * sigma2hatepsilonhat) - sigmayXhat[i]^2
+        )
+      ) / (
+        n * sigma2yhat^2
+      )
+    )
+  }
+  out <- matrix(
+    data = out,
+    ncol = 1
+  )
+  colnames(out) <- "sehatslopesprime"
+  out
+}
+
+#' @author Ivan Jacob Agaloos Pesigan
+#'
+#' @title Standard Errors of Standardized Estimates of Regression Coefficients (Yuan and Chan (2011))
+#'
+#' @family standard errors of estimates of regression coefficients functions
+#' @keywords inference
+#' @inheritParams .sehatslopesprimedelta
+#' @inheritParams betahat
+#' @examples
+#' # Simple regression------------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' X <- X[, c(1, ncol(X))]
+#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+#' sehatslopesprimedelta(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
+#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+#' # age is removed
+#' X <- X[, -ncol(X)]
+#' sehatslopesprimedelta(X = X, y = y)
+#' @export
+sehatslopesprimedelta <- function(X,
+                                  y,
+                                  adjust = FALSE) {
+  .sehatslopesprimedelta(
+    slopes = NULL,
+    sigma2hatepsilonhat = NULL,
+    SigmaXhat = NULL,
+    sigmayXhat = NULL,
+    sigma2yhat = NULL,
+    X = X,
+    y = y,
+    adjust = adjust
   )
 }
