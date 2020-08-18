@@ -1,0 +1,275 @@
+---
+title: "Tests: The Linear Regression Model (Descriptives - Simple Regression)"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tests: The Linear Regression Model (Descriptives - Simple Regression)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+
+
+
+```{r }
+# The Linear Regression Model: Descriptives - Simple Regression {#linreg-estimation-descriptives-simple-example}
+```
+
+
+
+```{r echo = FALSE}
+library(testthat)
+library(jeksterslabRlinreg)
+```
+
+
+## Data
+
+See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
+
+
+```{r }
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, "education"]
+X <- unname(
+  cbind(
+    1,
+    X
+  )
+)
+y <- unname(
+  jeksterslabRdatarepo::wages.matrix[["y"]]
+)
+head(X)
+head(y)
+```
+
+
+
+```{r }
+data <- X[, -1]
+data <- cbind(
+  y,
+  data
+)
+n <- nrow(X)
+k <- ncol(X)
+df1 <- k - 1
+df2 <- n - k
+muhatX <- as.vector(colMeans(X))
+muhatX <- muhatX[-1]
+muhaty <- mean(y)
+muhat <- c(muhaty, muhatX)
+Rhat <- as.vector(cor(data))
+RXhat <- 1
+ryXhat <- cor(data)
+ryXhat <- ryXhat[1, 2]
+Sigmahat <- as.vector(cov(data))
+SigmaXhat <- as.vector(var(X[, -1]))
+sigmayXhat <- cov(data)
+sigmayXhat <- sigmayXhat[1, 2]
+sigma2Xhat <- var(X[, -1])
+sigma2yhat <- var(y)
+sigma2hat <- c(sigma2yhat, sigma2Xhat)
+sigmahat <- sqrt(sigma2hat)
+```
+
+
+## Descriptive Statistics
+
+
+```{r }
+output <- descriptives(
+  X = X,
+  y = y,
+)
+result_X <- as.vector(output[["X"]])
+result_y <- as.vector(output[["y"]])
+result_data <- as.vector(output[["data"]])
+result_n <- as.vector(output[["n"]])
+result_k <- as.vector(output[["k"]])
+result_df1 <- as.vector(output[["df1"]])
+result_df2 <- as.vector(output[["df2"]])
+result_muhatX <- as.vector(output[["muhatX"]])
+result_muhaty <- as.vector(output[["muhaty"]])
+result_muhat <- as.vector(output[["muhat"]])
+result_Rhat <- as.vector(output[["Rhat"]])
+result_RXhat <- as.vector(output[["RXhat"]])
+result_ryXhat <- as.vector(output[["ryXhat"]])
+result_Sigmahat <- as.vector(output[["Sigmahat"]])
+result_SigmaXhat <- as.vector(output[["SigmaXhat"]])
+result_sigmayXhat <- as.vector(output[["sigmayXhat"]])
+result_sigma2Xhat <- as.vector(output[["sigma2Xhat"]])
+result_sigma2yhat <- as.vector(output[["sigma2yhat"]])
+result_sigma2hat <- as.vector(output[["sigma2hat"]])
+result_sigmahat <- as.vector(output[["sigmahat"]])
+```
+
+
+
+
+```{r }
+context("Test linreg-estimation-descriptives")
+test_that("X", {
+  X_vector <- as.vector(X)
+  for (i in 1:length(result_X)) {
+    expect_equivalent(
+      result_X[i],
+      X_vector[i]
+    )
+  }
+})
+test_that("y", {
+  y_vector <- as.vector(y)
+  for (i in 1:length(result_y)) {
+    expect_equivalent(
+      result_y[i],
+      y_vector[i]
+    )
+  }
+})
+test_that("data", {
+  data_vector <- as.vector(data)
+  for (i in 1:length(result_data)) {
+    expect_equivalent(
+      result_data[i],
+      data_vector[i]
+    )
+  }
+})
+test_that("n", {
+  expect_equivalent(
+    n,
+    result_n
+  )
+})
+test_that("k", {
+  expect_equivalent(
+    k,
+    result_k
+  )
+})
+test_that("df1", {
+  expect_equivalent(
+    df1,
+    result_df1
+  )
+})
+test_that("df2", {
+  expect_equivalent(
+    df2,
+    result_df2
+  )
+})
+test_that("muhatX", {
+  for (i in 1:length(result_muhatX)) {
+    expect_equivalent(
+      muhatX[i],
+      result_muhatX[i]
+    )
+  }
+})
+test_that("muhaty", {
+  expect_equivalent(
+    muhaty,
+    result_muhaty
+  )
+})
+test_that("muhat", {
+  for (i in 1:length(result_muhat)) {
+    expect_equivalent(
+      muhat[i],
+      result_muhat[i]
+    )
+  }
+})
+test_that("Rhat", {
+  for (i in 1:length(result_Rhat)) {
+    expect_equivalent(
+      Rhat[i],
+      result_Rhat[i]
+    )
+  }
+})
+test_that("RXhat", {
+  expect_equivalent(
+    RXhat,
+    result_RXhat
+  )
+})
+test_that("ryXhat", {
+  for (i in 1:length(result_ryXhat)) {
+    expect_equivalent(
+      ryXhat[i],
+      result_ryXhat[i]
+    )
+  }
+})
+test_that("Sigmahat", {
+  for (i in 1:length(result_Sigmahat)) {
+    expect_equivalent(
+      Sigmahat[i],
+      result_Sigmahat[i]
+    )
+  }
+})
+test_that("SigmaXhat", {
+  for (i in 1:length(result_SigmaXhat)) {
+    expect_equivalent(
+      SigmaXhat[i],
+      result_SigmaXhat[i]
+    )
+  }
+})
+test_that("sigmayXhat", {
+  for (i in 1:length(result_sigmayXhat)) {
+    expect_equivalent(
+      sigmayXhat[i],
+      result_sigmayXhat[i]
+    )
+  }
+})
+test_that("sigma2Xhat", {
+  for (i in 1:length(result_sigma2Xhat)) {
+    expect_equivalent(
+      sigma2Xhat[i],
+      result_sigma2Xhat[i]
+    )
+  }
+})
+test_that("sigma2yhat", {
+  expect_equivalent(
+    sigma2yhat,
+    result_sigma2yhat
+  )
+})
+test_that("sigma2hat", {
+  for (i in 1:length(result_sigma2hat)) {
+    expect_equivalent(
+      sigma2hat[i],
+      result_sigma2hat[i]
+    )
+  }
+})
+test_that("sigmahat", {
+  for (i in 1:length(result_sigmahat)) {
+    expect_equivalent(
+      sigmahat[i],
+      result_sigmahat[i]
+    )
+  }
+})
+```
+
