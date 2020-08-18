@@ -1,0 +1,186 @@
+---
+title: "Tests: The Linear Regression Model (Sum of Squares)"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tests: The Linear Regression Model (Sum of Squares)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+
+
+
+```{r }
+# The Linear Regression Model: Sum of Squares {#linreg-estimation-SS-example}
+```
+
+
+
+```{r echo = FALSE}
+library(testthat)
+library(jeksterslabRlinreg)
+```
+
+
+## Data
+
+See `jeksterslabRdatarepo::wages.matrix()` for the data set used in this example.
+
+
+```{r }
+X <- jeksterslabRdatarepo::wages.matrix[["X"]]
+# age is removed
+X <- X[, -ncol(X)]
+y <- jeksterslabRdatarepo::wages.matrix[["y"]]
+head(X)
+head(y)
+```
+
+
+## Residual Sum of Squares
+
+
+```{r }
+epsilonhat <- epsilonhat(
+  X = X,
+  y = y
+)
+betahat <- betahat(
+  X = X,
+  y = y
+)
+result_RSS1 <- .RSS(
+  epsilonhat = epsilonhat
+)
+result_RSS2 <- .RSS(
+  X = X,
+  y = y
+)
+result_RSS3 <- .RSS(
+  X = X,
+  y = y,
+  betahat = betahat
+)
+result_RSS4 <- RSS(
+  X = X,
+  y = y
+)
+```
+
+
+## Explained Sum of Squares
+
+
+```{r }
+yhat <- yhat(
+  X = X,
+  y = y
+)
+ybar <- mean(y)
+result_ESS1 <- .ESS(
+  yhat = yhat,
+  ybar = ybar
+)
+result_ESS2 <- .ESS(
+  yhat = yhat,
+  y = y
+)
+result_ESS3 <- .ESS(
+  ybar = ybar,
+  X = X,
+  y = y,
+  betahat = NULL
+)
+result_ESS4 <- .ESS(
+  ybar = ybar,
+  X = X,
+  y = y,
+  betahat = betahat
+)
+result_ESS5 <- .ESS(
+  X = X,
+  y = y,
+  betahat = betahat
+)
+result_ESS6 <- .ESS(
+  X = X,
+  y = y
+)
+result_ESS7 <- ESS(
+  X = X,
+  y = y
+)
+```
+
+
+## Total Sum of Squares
+
+
+```{r }
+result_TSS <- TSS(
+  y = y
+)
+```
+
+
+## `lm()` function
+
+
+```{r }
+lmobj <- lm(
+  wages ~ gender + race + union + education + experience,
+  data = jeksterslabRdatarepo::wages
+)
+lm_anova <- anova(lmobj)
+lm_RSS <- lm_anova["Residuals", "Sum Sq"]
+lm_TSS <- sum(lm_anova[["Sum Sq"]])
+lm_ESS <- lm_TSS - lm_RSS
+```
+
+
+
+
+```{r }
+result_RSS <- c(
+  result_RSS1, result_RSS2, result_RSS3, result_RSS4
+)
+result_ESS <- c(
+  result_ESS1, result_ESS2, result_ESS3, result_ESS4, result_ESS5, result_ESS6, result_ESS7
+)
+context("Test linreg-estimation-SS.")
+test_that("RSS", {
+  for (i in seq_along(result_RSS)) {
+    expect_equivalent(
+      lm_RSS,
+      result_RSS[i]
+    )
+  }
+})
+test_that("ESS", {
+  for (i in seq_along(result_RSS)) {
+    expect_equivalent(
+      lm_ESS,
+      result_ESS[i]
+    )
+  }
+})
+test_that("TSS", {
+  expect_equivalent(
+    lm_TSS,
+    result_TSS
+  )
+})
+```
+
