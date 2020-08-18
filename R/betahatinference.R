@@ -103,11 +103,16 @@ betahatinference <- function(X,
 #'   Standard errors of estimates of standardized regression slopes.
 #' @param sehatslopesprimetype Character string.
 #'   Standard errors for standardized regression slopes hypothesis test.
-#'   Options are `sehatslopesprimetype = "textbook"` and `sehatslopesprimetype = "yuanchan"`.
+#'   Options are `sehatslopesprimetype = "textbook"` and `sehatslopesprimetype = "delta"`.
+#' @param adjust Logical.
+#'   If `sehatslopesprimetype = "delta"` and `adjust = TRUE`,
+#'   uses `n - 3` to adjust `sehatslopesprime` for bias.
+#'   This adjustment is recommended for small sample sizes.
 #' @export
 .slopesprimeinference <- function(slopesprime = NULL,
                                   sehatslopesprime = NULL,
                                   sehatslopesprimetype = "textbook",
+                                  adjust = FALSE,
                                   n,
                                   X,
                                   y) {
@@ -123,6 +128,13 @@ betahatinference <- function(X,
       sehatslopesprime <- sehatslopesprimetb(
         X = X,
         y = y
+      )
+    }
+    if (sehatslopesprimetype == "delta") {
+      sehatslopesprime <- sehatslopesprimedelta(
+        X = X,
+        y = y,
+        adjust = adjust
       )
     }
     n <- nrow(X)
@@ -170,7 +182,7 @@ slopesprimeinference <- function(X,
   .slopesprimeinference(
     slopesprime = NULL,
     sehatslopesprime = NULL,
-    sehatslopesprimetype = "textbook",
+    sehatslopesprimetype = sehatslopesprimetype,
     X = X,
     y = y
   )
