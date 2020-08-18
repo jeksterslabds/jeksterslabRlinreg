@@ -49,21 +49,21 @@ df2 <- n - k
 muhatX <- as.vector(colMeans(X))
 muhatX <- muhatX[-1]
 muhaty <- mean(y)
-mu <- c(muhaty, muhatX)
-R <- as.vector(cor(data))
-RX <- as.vector(cor(X[, -1]))
-ryX <- cor(data)
-ryX <- as.vector(ryX[, 1])
-ryX <- ryX[-1]
-Sigma <- as.vector(cov(data))
-SigmaX <- as.vector(cov(X[, -1]))
-sigmayX <- cov(data)
-sigmayX <- as.vector(sigmayX[, 1])
-sigmayX <- sigmayX[-1]
-sigma2X <- as.vector(diag(cov(X[, -1])))
-sigma2y <- as.vector(var(y))
-sigma2 <- c(sigma2y, sigma2X)
-sigma <- sqrt(sigma2)
+muhat <- c(muhaty, muhatX)
+Rhat <- as.vector(cor(data))
+RXhat <- as.vector(cor(X[, -1]))
+ryXhat <- cor(data)
+ryXhat <- as.vector(ryXhat[, 1])
+ryXhat <- ryXhat[-1]
+Sigmahat <- as.vector(cov(data))
+SigmaXhat <- as.vector(cov(X[, -1]))
+sigmayXhat <- cov(data)
+sigmayXhat <- as.vector(sigmayXhat[, 1])
+sigmayXhat <- sigmayXhat[-1]
+sigma2Xhat <- as.vector(diag(cov(X[, -1])))
+sigma2yhat <- as.vector(var(y))
+sigma2hat <- c(sigma2yhat, sigma2Xhat)
+sigmahat <- sqrt(sigma2hat)
 #'
 #' ## Descriptive Statistics
 #'
@@ -91,17 +91,17 @@ result_df1 <- as.vector(output[["df1"]])
 result_df2 <- as.vector(output[["df2"]])
 result_muhatX <- as.vector(output[["muhatX"]])
 result_muhaty <- as.vector(output[["muhaty"]])
-result_mu <- as.vector(output[["mu"]])
-result_R <- as.vector(output[["R"]])
-result_RX <- as.vector(output[["RX"]])
-result_ryX <- as.vector(output[["ryX"]])
-result_Sigma <- as.vector(output[["Sigma"]])
-result_SigmaX <- as.vector(output[["SigmaX"]])
-result_sigmayX <- as.vector(output[["sigmayX"]])
-result_sigma2X <- as.vector(output[["sigma2X"]])
-result_sigma2y <- as.vector(output[["sigma2y"]])
-result_sigma2 <- as.vector(output[["sigma2"]])
-result_sigma <- as.vector(output[["sigma"]])
+result_muhat <- as.vector(output[["muhat"]])
+result_Rhat <- as.vector(output[["Rhat"]])
+result_RXhat <- as.vector(output[["RXhat"]])
+result_ryXhat <- as.vector(output[["ryXhat"]])
+result_Sigmahat <- as.vector(output[["Sigmahat"]])
+result_SigmaXhat <- as.vector(output[["SigmaXhat"]])
+result_sigmayXhat <- as.vector(output[["sigmayXhat"]])
+result_sigma2Xhat <- as.vector(output[["sigma2Xhat"]])
+result_sigma2yhat <- as.vector(output[["sigma2yhat"]])
+result_sigma2hat <- as.vector(output[["sigma2hat"]])
+result_sigmahat <- as.vector(output[["sigmahat"]])
 #'
 #'
 #+
@@ -171,89 +171,89 @@ test_that("muhaty", {
     result_muhaty
   )
 })
-test_that("mu", {
-  for (i in 1:length(result_mu)) {
+test_that("muhat", {
+  for (i in 1:length(result_muhat)) {
     expect_equivalent(
-      mu[i],
-      result_mu[i]
+      muhat[i],
+      result_muhat[i]
     )
   }
 })
-test_that("R", {
-  for (i in 1:length(result_R)) {
+test_that("Rhat", {
+  for (i in 1:length(result_Rhat)) {
     expect_equivalent(
-      R[i],
-      result_R[i]
+      Rhat[i],
+      result_Rhat[i]
     )
   }
 })
-test_that("RX", {
-  for (i in 1:length(result_RX)) {
+test_that("RXhat", {
+  for (i in 1:length(result_RXhat)) {
     expect_equivalent(
-      RX[i],
-      result_RX[i]
+      RXhat[i],
+      result_RXhat[i]
     )
   }
 })
-test_that("ryX", {
-  for (i in 1:length(result_ryX)) {
+test_that("ryXhat", {
+  for (i in 1:length(result_ryXhat)) {
     expect_equivalent(
-      ryX[i],
-      result_ryX[i]
+      ryXhat[i],
+      result_ryXhat[i]
     )
   }
 })
-test_that("Sigma", {
-  for (i in 1:length(result_Sigma)) {
+test_that("Sigmahat", {
+  for (i in 1:length(result_Sigmahat)) {
     expect_equivalent(
-      Sigma[i],
-      result_Sigma[i]
+      Sigmahat[i],
+      result_Sigmahat[i]
     )
   }
 })
-test_that("SigmaX", {
-  for (i in 1:length(result_SigmaX)) {
+test_that("SigmaXhat", {
+  for (i in 1:length(result_SigmaXhat)) {
     expect_equivalent(
-      SigmaX[i],
-      result_SigmaX[i]
+      SigmaXhat[i],
+      result_SigmaXhat[i]
     )
   }
 })
-test_that("sigmayX", {
-  for (i in 1:length(result_sigmayX)) {
+test_that("sigmayXhat", {
+  for (i in 1:length(result_sigmayXhat)) {
     expect_equivalent(
-      sigmayX[i],
-      result_sigmayX[i]
+      sigmayXhat[i],
+      result_sigmayXhat[i]
     )
   }
 })
-test_that("sigma2X", {
-  for (i in 1:length(result_sigma2X)) {
+test_that("sigma2Xhat", {
+  for (i in 1:length(result_sigma2Xhat)) {
     expect_equivalent(
-      sigma2X[i],
-      result_sigma2X[i]
+      sigma2Xhat[i],
+      result_sigma2Xhat[i]
     )
   }
 })
-test_that("sigma2y", {
+test_that("sigma2yhat", {
   expect_equivalent(
-    sigma2y,
-    result_sigma2y
+    sigma2yhat,
+    result_sigma2yhat
   )
 })
-test_that("sigma2", {
-  for (i in 1:length(result_sigma2)) {
+test_that("sigma2hat", {
+  for (i in 1:length(result_sigma2hat)) {
     expect_equivalent(
-      sigma2[i],
-      result_sigma2[i]
+      sigma2hat[i],
+      result_sigma2hat[i]
     )
   }
 })
-test_that("sigma", {
-  for (i in 1:length(result_sigma)) {
+test_that("sigmahat", {
+  for (i in 1:length(result_sigmahat)) {
     expect_equivalent(
-      sigma[i],
-      result_sigma[i]
+      sigmahat[i],
+      result_sigmahat[i]
     )
   }
 })
