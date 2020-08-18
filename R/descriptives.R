@@ -79,8 +79,8 @@ descriptives <- function(X,
     data
   )
   colnames(data) <- c(varnamey, varnamesX[-1])
-  R <- cor(data)
-  R.p <- matrix(
+  Rhat <- cor(data)
+  Rhat.p <- matrix(
     data = NA,
     ncol = ncol(data),
     nrow = ncol(data)
@@ -91,74 +91,74 @@ descriptives <- function(X,
         data[, i],
         data[, j]
       )
-      R.p[i, j] <- out$p.value
+      Rhat.p[i, j] <- out$p.value
     }
   }
-  colnames(R.p) <- c(varnamey, varnamesX[-1])
-  rownames(R.p) <- c(varnamey, varnamesX[-1])
-  diag(R.p) <- rep(x = NA, length = nrow(R.p))
-  if (nrow(R) > 2) {
-    RX <- R[2:k, 2:k]
+  colnames(Rhat.p) <- c(varnamey, varnamesX[-1])
+  rownames(Rhat.p) <- c(varnamey, varnamesX[-1])
+  diag(Rhat.p) <- rep(x = NA, length = nrow(Rhat.p))
+  if (nrow(Rhat) > 2) {
+    RXhat <- Rhat[2:k, 2:k]
   } else {
-    RX <- R[2, 2]
+    RXhat <- Rhat[2, 2]
   }
-  ryX <- as.vector(R[, 1])
-  ryX <- ryX[-1]
-  names(ryX) <- varnamesX[-1]
-  Sigma <- cov(data)
-  if (nrow(Sigma) > 2) {
-    SigmaX <- Sigma[2:k, 2:k]
-    sigma2X <- diag(SigmaX)
+  ryXhat <- as.vector(Rhat[, 1])
+  ryXhat <- ryXhat[-1]
+  names(ryXhat) <- varnamesX[-1]
+  Sigmahat <- cov(data)
+  if (nrow(Sigmahat) > 2) {
+    SigmaXhat <- Sigmahat[2:k, 2:k]
+    sigma2Xhat <- diag(SigmaXhat)
   } else {
-    SigmaX <- Sigma[2, 2]
-    sigma2X <- SigmaX
+    SigmaXhat <- Sigmahat[2, 2]
+    sigma2Xhat <- SigmaXhat
   }
-  sigmayX <- as.vector(Sigma[, 1])
-  sigma2y <- sigmayX[1]
-  names(sigma2y) <- varnamey
-  sigmayX <- sigmayX[-1]
-  names(sigmayX) <- varnamesX[-1]
-  mu <- c(
+  sigmayXhat <- as.vector(Sigmahat[, 1])
+  sigma2yhat <- sigmayXhat[1]
+  names(sigma2yhat) <- varnamey
+  sigmayXhat <- sigmayXhat[-1]
+  names(sigmayXhat) <- varnamesX[-1]
+  muhat <- c(
     muhaty,
     muhatX
   )
-  names(mu) <- c(varnamey, varnamesX[-1])
-  sigma2 <- c(
-    sigma2y,
-    sigma2X
+  names(muhat) <- c(varnamey, varnamesX[-1])
+  sigma2hat <- c(
+    sigma2yhat,
+    sigma2Xhat
   )
-  names(sigma2) <- c(varnamey, varnamesX[-1])
-  sigma <- sqrt(sigma2)
-  names(sigma) <- c(varnamey, varnamesX[-1])
-  sigmay <- sigma[1]
-  sigmaX <- sigma[-1]
-  skew <- as.vector(
+  names(sigma2hat) <- c(varnamey, varnamesX[-1])
+  sigmahat <- sqrt(sigma2hat)
+  names(sigmahat) <- c(varnamey, varnamesX[-1])
+  sigmayhat <- sigmahat[1]
+  sigmaXhat <- sigmahat[-1]
+  skewhat <- as.vector(
     apply(
       X = data,
       MARGIN = 2,
       FUN = skew
     )
   )
-  names(skew) <- c(varnamey, varnamesX[-1])
-  kurt <- as.vector(
+  names(skewhat) <- c(varnamey, varnamesX[-1])
+  kurthat <- as.vector(
     apply(
       X = data,
       MARGIN = 2,
       FUN = kurt
     )
   )
-  names(kurt) <- c(varnamey, varnamesX[-1])
+  names(kurthat) <- c(varnamey, varnamesX[-1])
   if (mardia) {
-    mardiaout <- mardia(data)
+    mardiahat <- mardia(data)
   } else {
-    mardiaout <- NA
+    mardiahat <- NA
   }
   if (moments) {
     meanandsd <- cbind(
-      mu,
-      sigma,
-      skew,
-      kurt
+      muhat,
+      sigmahat,
+      skewhat,
+      kurthat
     )
     colnames(meanandsd) <- c(
       "Mean",
@@ -173,13 +173,13 @@ descriptives <- function(X,
     if (mardia) {
       cat("\nMardia's Estimate of Multivariate Skewness and Kurtosis:\n")
       print(
-        mardiaout
+        mardiahat
       )
     }
   }
   if (cor) {
     cat("\nCorrelations:\n")
-    print(R)
+    print(Rhat)
   }
   if (plot) {
     scatter.plot(
@@ -199,23 +199,23 @@ descriptives <- function(X,
       df2 = df2,
       muhatX = muhatX,
       muhaty = muhaty,
-      mu = mu,
-      R = R,
-      R.p = R.p,
-      RX = RX,
-      ryX = ryX,
-      Sigma = Sigma,
-      SigmaX = SigmaX,
-      sigmayX = sigmayX,
-      sigma2X = sigma2X,
-      sigma2y = sigma2y,
-      sigmaX = sigmaX,
-      sigmay = sigmay,
-      sigma2 = sigma2,
-      sigma = sigma,
-      skew = skew,
-      kurt = kurt,
-      mardia = mardiaout
+      muhat = muhat,
+      Rhat = Rhat,
+      Rhat.p = Rhat.p,
+      RXhat = RXhat,
+      ryXhat = ryXhat,
+      Sigmahat = Sigmahat,
+      SigmaXhat = SigmaXhat,
+      sigmayXhat = sigmayXhat,
+      sigma2Xhat = sigma2Xhat,
+      sigma2yhat = sigma2yhat,
+      sigmaXhat = sigmaXhat,
+      sigmayhat = sigmayhat,
+      sigma2hat = sigma2hat,
+      sigmahat = sigmahat,
+      skewhat = skewhat,
+      kurthat = kurthat,
+      mardiahat = mardiahat
     )
   )
 }
