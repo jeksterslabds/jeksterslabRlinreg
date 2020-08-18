@@ -27,6 +27,10 @@
 #' # age is removed
 #' X <- X[, -ncol(X)]
 #' linreg(X = X, y = y)
+#'
+#' # Multiple regression----------------------------------------------
+#' # delta standard errors for standardized coefficients
+#' linreg(X = X, y = y, sehatslopesprimetype = "delta")
 #' @export
 linreg <- function(X,
                    y,
@@ -298,6 +302,9 @@ linreg <- function(X,
     cat("\nStandardized Coefficients:\n")
     if (sehatslopesprimetype == "textbook") {
       cat("Textbook standard errors are used.\n")
+    }
+    if (sehatslopesprimetype == "delta") {
+      cat("Yuan and Chan 2011 standard errors are used.\n")
     }
     print(
       stdcoefficients
