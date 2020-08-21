@@ -5,7 +5,7 @@
 #' @keywords linreg
 #' @inheritParams betahat
 #' @inheritParams descriptives
-#' @inheritParams .slopesprimeinference
+#' @inheritParams .slopeshatprimeinference
 #' @param sehatbetahattype Character string.
 #'   Standard errors for regression coefficients hypothesis test.
 #'   Options are `sehatbetahattype = "unbiased"` and `sehatbetahattype = "biased"`.
@@ -30,7 +30,7 @@
 #'
 #' # Multiple regression----------------------------------------------
 #' # delta standard errors for standardized coefficients
-#' linreg(X = X, y = y, sehatslopesprimetype = "delta")
+#' linreg(X = X, y = y, sehatslopeshatprimetype = "delta")
 #' @export
 linreg <- function(X,
                    y,
@@ -38,7 +38,7 @@ linreg <- function(X,
                    varnamey = NULL,
                    qr = TRUE,
                    sehatbetahattype = "unbiased",
-                   sehatslopesprimetype = "textbook",
+                   sehatslopeshatprimetype = "delta",
                    adjust = FALSE,
                    plot = TRUE,
                    print = TRUE) {
@@ -86,21 +86,21 @@ linreg <- function(X,
     )
   )
   names(betahat) <- betahatnames
-  slopes <- betahat[-1]
+  slopeshat <- betahat[-1]
   # betahat prime-----------------------------------------------------------------------------
-  slopesprime <- .slopesprime(
-    RX = RXhat,
-    ryX = ryXhat
+  slopeshatprime <- .slopeshatprime(
+    RXhat = RXhat,
+    ryXhat = ryXhat
   )
-  slopesprime <- as.vector(slopesprime)
+  slopeshatprime <- as.vector(slopeshatprime)
   betahatprime <- as.vector(
     c(
       0,
-      slopesprime
+      slopeshatprime
     )
   )
   names(betahatprime) <- betahatnames
-  names(slopesprime) <- varnamesX[-1]
+  names(slopeshatprime) <- varnamesX[-1]
   # yhat-----------------------------------------------------------------------------
   yhat <- .Xbetahat(
     X = X,
@@ -190,17 +190,17 @@ linreg <- function(X,
     )
   )
   names(sehatbetahatbiased) <- betahatnames
-  sehatslopesprimetb <- as.vector(
-    .sehatslopesprimetb(
-      slopes = slopes,
-      sehatslopes = sehatbetahat[-1],
-      slopesprime = slopesprime
+  sehatslopeshatprimetb <- as.vector(
+    .sehatslopeshatprimetb(
+      slopeshat = slopeshat,
+      sehatslopeshat = sehatbetahat[-1],
+      slopeshatprime = slopeshatprime
     )
   )
-  names(sehatslopesprimetb) <- betahatnames[-1]
-  sehatslopesprimedelta <- as.vector(
-    .sehatslopesprimedelta(
-      slopes = slopes,
+  names(sehatslopeshatprimetb) <- betahatnames[-1]
+  sehatslopeshatprimedelta <- as.vector(
+    .sehatslopeshatprimedelta(
+      slopeshat = slopeshat,
       sigma2hatepsilonhat = sigma2hatepsilonhat,
       SigmaXhat = SigmaXhat,
       sigmayXhat = sigmayXhat,
@@ -209,7 +209,7 @@ linreg <- function(X,
       n = n
     )
   )
-  names(sehatslopesprimedelta) <- betahatnames[-1]
+  names(sehatslopeshatprimedelta) <- betahatnames[-1]
   # betahatinference----------------------------------------------------------------------------------
   if (sehatbetahattype == "unbiased") {
     sehatbetahattouse <- sehatbetahat
@@ -230,20 +230,20 @@ linreg <- function(X,
   varnamesbetahatprimeinference <- colnames(betahatinference)
   varnamesbetahatprimeinferenceci <- varnamesbetahatprimeinference[-c(1, 2, 3, 4)]
   varnamesbetahatprimeinferencecoefficients <- varnamesbetahatprimeinference[c(1, 2, 3, 4)]
-  if (sehatslopesprimetype == "textbook") {
-    sehatslopesprimetouse <- sehatslopesprimetb
+  if (sehatslopeshatprimetype == "textbook") {
+    sehatslopeshatprimetouse <- sehatslopeshatprimetb
   }
-  if (sehatslopesprimetype == "delta") {
-    sehatslopesprimetouse <- sehatslopesprimedelta
+  if (sehatslopeshatprimetype == "delta") {
+    sehatslopeshatprimetouse <- sehatslopeshatprimedelta
   }
-  slopesprimeinference <- .slopesprimeinference(
-    slopesprime = slopesprime,
-    sehatslopesprime = sehatslopesprimetouse,
-    sehatslopesprimetype = sehatslopesprimetype,
+  slopeshatprimeinference <- .slopeshatprimeinference(
+    slopeshatprime = slopeshatprime,
+    sehatslopeshatprime = sehatslopeshatprimetouse,
+    sehatslopeshatprimetype = sehatslopeshatprimetype,
     n = n
   )
-  rownames(slopesprimeinference) <- betahatnames[-1]
-  stdci <- slopesprimeinference
+  rownames(slopeshatprimeinference) <- betahatnames[-1]
+  stdci <- slopeshatprimeinference
   stdci <- stdci[, -c(1, 2, 3, 4)]
   stdci <- matrix(
     data = stdci,
@@ -251,7 +251,7 @@ linreg <- function(X,
   )
   rownames(stdci) <- betahatnames[-1]
   colnames(stdci) <- varnamesbetahatprimeinferenceci
-  stdcoefficients <- slopesprimeinference[, c(1, 2, 3, 4)]
+  stdcoefficients <- slopeshatprimeinference[, c(1, 2, 3, 4)]
   stdcoefficients <- matrix(
     data = stdcoefficients,
     nrow = p
@@ -300,10 +300,10 @@ linreg <- function(X,
       coefficients
     )
     cat("\nStandardized Coefficients:\n")
-    if (sehatslopesprimetype == "textbook") {
+    if (sehatslopeshatprimetype == "textbook") {
       cat("Textbook standard errors are used.\n")
     }
-    if (sehatslopesprimetype == "delta") {
+    if (sehatslopeshatprimetype == "delta") {
       cat("Yuan and Chan 2011 standard errors are used.\n")
     }
     print(
@@ -350,9 +350,9 @@ linreg <- function(X,
     M = M,
     h = h,
     betahat = betahat,
-    slopes = slopes,
+    slopeshat = slopeshat,
     betahatprime = betahatprime,
-    slopesprime = slopesprime,
+    slopeshatprime = slopeshatprime,
     yhat = yhat,
     epsilonhat = epsilonhat,
     tepsilonhat = tepsilonhat,
@@ -373,8 +373,8 @@ linreg <- function(X,
     vcovhatbetahatbiased = vcovhatbetahatbiased,
     sehatbetahat = sehatbetahat,
     sehatbetahatbiased = sehatbetahatbiased,
-    sehatslopesprimetb = sehatslopesprimetb,
-    sehatslopesprimedelta = sehatslopesprimedelta,
+    sehatslopeshatprimetb = sehatslopeshatprimetb,
+    sehatslopeshatprimedelta = sehatslopeshatprimedelta,
     t = betahatinference[, "t"],
     t.p = betahatinference[, "p"],
     coefficients = coefficients,
