@@ -18,7 +18,36 @@
 #'   Print correlations.
 #' @param mardia Logical.
 #'   Estimate Mardia's multivariate skewness and kurtosis.
-#' @return Returns descriptive statistics useful in k-variable linear regression model.
+#' @return Returns a list with the following elements:
+#'   \describe{
+#'     \item{X}{\eqn{n \times k} matrix of \eqn{n} observations of \eqn{k} regressors, which includes a regressor whose value is 1 for each observation on the first column.}
+#'     \item{y}{\eqn{n \times 1} matrix of observations on the regressand variable.}
+#'     \item{data}{\eqn{n \times k} matrix with the following columns \eqn{y, X_2, X_3, \cdots, X_k}.}
+#'     \item{n}{Sample size.}
+#'     \item{k}{Number of regressors which includes a regressor whose value is 1 for each observation on the first column.}
+#'     \item{p}{Number of partial regression coefficients are slopes.}
+#'     \item{df1}{Degrees of freedom 1.}
+#'     \item{df2}{Degrees of freedom 2.}
+#'     \item{muhatX}{Vector of length \eqn{p} of estimated means of \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\mu}}_{\mathbf{X}} = \left\{ \hat{\mu}_{X_2}, \hat{\mu}_{X_3}, \cdots, \hat{\mu}_{X_k} \right\} \right)}.}
+#'     \item{muhaty}{Estimated mean of the regressand variable \eqn{\left( \hat{\mu}_y \right)}}
+#'     \item{muhat}{Vector of length \eqn{p} of estimated means of the regressand variable \eqn{y} and \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\mu}} = \left\{ \hat{\mu}_{y}, \hat{\mu}_{X_2}, \hat{\mu}_{X_3}, \cdots, \hat{\mu}_{X_k} \right\} \right)}.}
+#'     \item{Rhat}{\eqn{k \times k} matrix of estimated correlations \eqn{\left( \boldsymbol{\hat{R}}_{y, X_{2, 3, \cdots, k}} \right)}.}
+#'     \item{Rhat.p}{\eqn{k \times k} \eqn{p}-values associated with the estimated correlation matrix.}
+#'     \item{RXhat}{\eqn{p \times p} matrix of estimated correlations between regressor variables \eqn{\left( \boldsymbol{\hat{R}}_{X_{2, 3, \cdots, k}} \right)}.}
+#'     \item{ryXhat}{Vector of length \eqn{p} of estimated correlations between the regressand variables and the regressor variables \eqn{\left( \boldsymbol{\hat{r}}_{y, X_{2, 3, \cdots, k}} = \left\{ \hat{r}_{y, X_2}, \hat{r}_{y, X_3}, \cdots, \hat{r}_{y, X_k} \right\} \right)}.}
+#'     \item{Sigmahat}{\eqn{k \times k} matrix of estimated covariances \eqn{\left( \boldsymbol{\hat{\Sigma}}_{y, X_{2, 3, \cdots, k}} \right)}.}
+#'     \item{SigmaXhat}{\eqn{p \times p} matrix of estimated covariances between regressor variables \eqn{\left( \boldsymbol{\hat{\Sigma}}_{X_{2, 3, \cdots, k}} \right)}.}
+#'     \item{sigmayXhat}{Vector of length \eqn{p} of estimated covariances between the regressand variables and the regressor variables \eqn{\left( \boldsymbol{\hat{\sigma}}_{y, X_{2, 3, \cdots, k}} = \left\{ \hat{\sigma}_{y, X_2}, \hat{\sigma}_{y, X_3}, \cdots, \hat{\sigma}_{y, X_k} \right\} \right)}.}
+#'     \item{sigma2Xhat}{Vector of length \eqn{p} of estimated variances of \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\sigma}}_{X_{2, 3, \cdots, k}}^{2} = \left\{ \hat{\sigma}_{X_2}^{2}, \hat{\sigma}_{X_2}^{2}, \cdots \hat{\sigma}_{X_k}^{2} \right\} \right)}.}
+#'     \item{sigma2yhat}{Estimated variance of \eqn{y} \eqn{\left( \hat{\sigma}_{y}^{2} \right)}.}
+#'     \item{sigmaXhat}{Vector of length \eqn{p} of estimated standard deviation of \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\sigma}}_{X_{2, 3, \cdots, k}} = \left\{ \hat{\sigma}_{X_2}, \hat{\sigma}_{X_2}, \cdots \hat{\sigma}_{X_k} \right\} \right)}.}
+#'     \item{sigmayhat}{Estimated standard deviation of \eqn{y} \eqn{\left( \hat{\sigma}_{y} \right)}.}
+#'     \item{sigma2hat}{Vector of length \eqn{k} of estimated variances of the regressand variable \eqn{y} and \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\sigma}}_{y, X_{2, 3, \cdots, k}}^{2} = \left\{ \hat{\sigma}_{y}^{2}, \hat{\sigma}_{X_2}^{2}, \hat{\sigma}_{X_2}^{2}, \cdots \hat{\sigma}_{X_k}^{2} \right\} \right)}.}
+#'     \item{sigmahat}{Vector of length \eqn{k} of estimated standard deviations of the regressand variable \eqn{y} and \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\sigma}}_{y, X_{2, 3, \cdots, k}} = \left\{ \hat{\sigma}_{y}, \hat{\sigma}_{X_2}, \hat{\sigma}_{X_2}, \cdots \hat{\sigma}_{X_k} \right\} \right)}.}
+#'     \item{skewhat}{Vector of length \eqn{k} of estimated skewness of the regressand variable \eqn{y} and \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\gamma}}_{1} = \left\{ \hat{\gamma}_{1y}, \hat{\gamma}_{1X_{2}}, \hat{\gamma}_{1X_{3}}, \cdots, \hat{\gamma}_{1X_{k}} \right\} \right)} .}
+#'     \item{kurthat}{Vector of length \eqn{k} of estimated excess kurtosis of the regressand variable \eqn{y} and \eqn{X_2, X_3, \cdots, X_k} \eqn{\left( \boldsymbol{\hat{\gamma}}_{2} = \left\{ \hat{\gamma}_{2y}, \hat{\gamma}_{2X_{2}}, \hat{\gamma}_{2X_{3}}, \cdots, \hat{\gamma}_{2X_{k}} \right\} \right)} .}
+#'     \item{mardiahat}{Vector is estimates of Mardia's multivariate skewness and kurtosis and their associated test statistics and \eqn{p}-values.}
+#'   }
 #' @examples
 #' # Simple regression------------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
@@ -100,7 +129,7 @@ descriptives <- function(X,
   if (nrow(Rhat) > 2) {
     RXhat <- Rhat[2:k, 2:k]
   } else {
-    RXhat <- Rhat[2, 2]
+    RXhat <- Rhat[2, 2, drop = FALSE]
   }
   ryXhat <- as.vector(Rhat[, 1])
   ryXhat <- ryXhat[-1]
@@ -110,7 +139,7 @@ descriptives <- function(X,
     SigmaXhat <- Sigmahat[2:k, 2:k]
     sigma2Xhat <- diag(SigmaXhat)
   } else {
-    SigmaXhat <- Sigmahat[2, 2]
+    SigmaXhat <- Sigmahat[2, 2, drop = FALSE]
     sigma2Xhat <- SigmaXhat
   }
   sigmayXhat <- as.vector(Sigmahat[, 1])
