@@ -9,10 +9,10 @@
 #'
 #' @details The following are the parameters of a linear regression model
 #'   for the covariance structure
-#'   - \eqn{\boldsymbol{\beta}_{2, \cdots, k}} - \eqn{p \times 1} regression slopes,
-#'   - \eqn{\sigma_{\varepsilon}^{2}} - variance of the error term
+#'   - \eqn{\boldsymbol{\beta}_{2, \cdots, k}} is the \eqn{p \times 1} column vector of regression slopes,
+#'   - \eqn{\sigma_{\varepsilon}^{2}} is the variance of the error term
 #'     \eqn{\varepsilon}, and
-#'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}} - \eqn{p \times p}
+#'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}} is the \eqn{p \times p} matrix of
 #'     variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}.
 #'
 #' @return Returns the model-implied variance-covariance matrix
@@ -23,11 +23,11 @@
 #' @family model-implied functions
 #' @keywords model-implied
 #' @param slopes Numeric vector of length `p` or `p` by `1` matrix.
-#'   \eqn{p \times 1} regression slopes \eqn{\left( \boldsymbol{\beta}_{2, \cdots, k} \right)} .
+#'   \eqn{p \times 1} column vector of regression slopes \eqn{\left( \boldsymbol{\beta}_{2, 3, \cdots, k} = \left\{ \beta_2, \beta_3, \cdots, \beta_k \right\} \right)} .
 #' @param sigma2epsilon Numeric.
 #'   Variance of the error term \eqn{\varepsilon} \eqn{\left( \sigma_{\varepsilon}^{2} \right)}.
 #' @param SigmaX `p` by `p` numeric matrix.
-#'   \eqn{p \times p} variances and covariances of \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
+#'   \eqn{p \times p} matrix of variances and covariances between regressor variables \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\Sigma}_{\mathbf{X}} \right)}.
 #' @examples
 #' slopes <- c(0.207648, 0.451039)
@@ -87,9 +87,8 @@ Sigmatheta <- function(slopes,
 #'
 #' @details The following are the parameters of a linear regression model
 #'   for the mean structure
-#'   - \eqn{\boldsymbol{\beta}} - \eqn{k \times k} regression coefficients and
-#'   - \eqn{\boldsymbol{\mu}_{\mathbf{X}}} - \eqn{p \times 1}
-#'     vector of means of the regressors
+#'   - \eqn{\boldsymbol{\beta}} is the \eqn{k \times 1} column vector of regression coefficients, and
+#'   - \eqn{\boldsymbol{\mu}_{\mathbf{X}}} is the \eqn{p \times 1} column vector of means of the regressors
 #'     \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}} .
 #'
 #' @return Returns the model-implied mean vector
@@ -100,8 +99,8 @@ Sigmatheta <- function(slopes,
 #' @family model-implied functions
 #' @keywords model-implied
 #' @param beta Numeric vector of length `k` or `k` by `1` matrix.
-#'   \eqn{k \times 1} regression coefficients \eqn{\left( \boldsymbol{\beta} \right)}.
-#' @param muX Numeric vector of length `p` or `p` by `1` matrix. \eqn{p \times 1} vector
+#'   \eqn{k \times 1} vector of regression coefficients \eqn{\left( \boldsymbol{\beta} \right)}.
+#' @param muX Numeric vector of length `p` or `p` by `1` matrix. \eqn{p \times 1} column vector
 #'   of means of the regressors \eqn{{X}_{2}, {X}_{3}, \cdots, {X}_{k}}
 #'   \eqn{\left( \boldsymbol{\mu}_{\mathbf{X}} \right)} .
 #' @examples
