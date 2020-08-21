@@ -6,26 +6,29 @@
 #'   of a linear regression model (\eqn{\boldsymbol{\beta}} minus the intercept)
 #'   as a function of covariances.
 #'
-#' @details The linear regression slopes is given by
+#' @details The linear regression slopes are calculated using
 #'   \deqn{
 #'     \boldsymbol{\beta}_{2, \cdots, k} =
-#'     \mathrm{V}_{\mathbf{X}}^{T} \mathrm{v}_{\mathbf{yX}}
+#'     \boldsymbol{\Sigma}_{\mathbf{X}}^{T} \boldsymbol{\sigma}_{\mathbf{y}, \mathbf{X}}
 #'   }
 #'
 #'   where
 #'   - \eqn{\boldsymbol{\Sigma}_{\mathbf{X}}}
-#'     is the \eqn{p \times p} covariance matrix of the regressor variables and
-#'   - \eqn{\boldsymbol{\sigma}_{\mathbf{yX}}}
+#'     is the \eqn{p \times p} covariance matrix of the regressor variables \eqn{X_2, X_3, \cdots, X_k} and
+#'   - \eqn{\boldsymbol{\sigma}_{\mathbf{y}, \mathbf{X}}}
 #'     is the \eqn{p \times 1} column vector
-#'     of the covariances between the regressand and the regressors.
+#'     of the covariances between the regressand \eqn{y} variable
+#'     and regressor variables \eqn{X_2, X_3, \cdots, X_k}
 #'
 #' @family parameter functions
 #' @keywords parameter
 #' @inheritParams Sigmatheta
 #' @inheritParams betahat
 #' @param sigmayX Numeric vector of length `p` or `p` by `1` matrix.
-#'   \eqn{p \times 1} covariances between the regressand and the regressors
-#'   \eqn{\left( \boldsymbol{\sigma}_{\mathbf{yX}} \right)}.
+#'   \eqn{p \times 1} vector of covariances between the regressand \eqn{y} variable
+#'   and regressor variables \eqn{X_2, X_3, \cdots, X_k}
+#'   \eqn{\left( \boldsymbol{\sigma}_{\mathbf{y}, \mathbf{X}}
+#'     = \left\{ \sigma_{y, X_2}, \sigma_{y, X_3}, \cdots, \sigma_{y, X_k} \right\}^{T} \right)}.
 #' @return Returns the slopes \eqn{\boldsymbol{\beta}_{2, \cdots, k}}
 #'   of a linear regression model derived from the variance-covariance matrix.
 #' @export
@@ -58,18 +61,6 @@
 #' @keywords parameter
 #' @inheritParams .slopes
 #' @inherit .slopes description details return
-#' @examples
-#' # Simple regression------------------------------------------------
-#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
-#' X <- X[, c(1, ncol(X))]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' slopes(X = X, y = y)
-#'
-#' # Multiple regression----------------------------------------------
-#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
-#' # age is removed
-#' X <- X[, -ncol(X)]
-#' slopes(X = X, y = y)
 #' @export
 slopes <- function(X,
                    y) {
@@ -89,26 +80,30 @@ slopes <- function(X,
 #'   \eqn{\boldsymbol{\beta}_{2, \cdots, k}^{\prime}} of a linear regression model
 #'   as a function of correlations.
 #'
-#' @details The linear regression standardized slopes is given by
+#' @details The linear regression standardized slopes are calculated using
 #'   \deqn{
 #'     \boldsymbol{\beta}_{2, \cdots, k}^{\prime} =
-#'     \mathrm{R}_{\mathbf{X}}^{T} \mathrm{r}_{\mathbf{yX}}
+#'     \mathbf{R}_{\mathbf{X}}^{T} \mathbf{r}_{\mathbf{y}, \mathbf{X}}
 #'   }
 #'
 #'   where
 #'   - \eqn{\mathbf{R}_{\mathbf{X}}}
-#'     is the \eqn{p \times p} correlation matrix of the regressor variables and
-#'   - \eqn{\mathbf{r}_{\mathbf{yX}}}
+#'     is the \eqn{p \times p} correlation matrix of the regressor variables \eqn{X_2, X_3, \cdots, X_k} and
+#'   - \eqn{\mathbf{r}_{\mathbf{y}, \mathbf{X}}}
 #'     is the \eqn{p \times 1} column vector
-#'     of the correlations between the regressand and the regressors.
+#'     of the correlations between the regressand \eqn{y} variable
+#'     and regressor variables \eqn{X_2, X_3, \cdots, X_k}
 #'
 #' @family parameter functions
 #' @keywords parameter
 #' @inheritParams betahat
 #' @param RX `p` by `p` numeric matrix.
-#'   \eqn{p \times p} correlations between the regressors.
+#'   \eqn{p \times p} matrix of correlations between the regressor variables \eqn{X_2, X_3, \cdots, X_k}
+#'   \eqn{\left( \mathbf{R}_{\mathbf{X}} \right)}.
 #' @param ryX Numeric vector of length `p` or `p` by `1` matrix.
-#'   \eqn{p \times 1} correlations between the regressand and the regressors.
+#'   \eqn{p \times 1} vector of correlations between the regressand variable \eqn{y} and the regressor variables \eqn{X_2, X_3, \cdots, X_k}
+#'   \eqn{\left( \mathbf{r}_{\mathbf{y}, \mathbf{X}}
+#'     = \left\{ r_{y, X_2}, r_{y, X_3}, \cdots, r_{y, X_k} \right\}^{T} \right)}.
 #' @return Returns the standardized slopes
 #'   \eqn{\boldsymbol{\beta}_{2, \cdots, k}^{\prime}}
 #'   of a linear regression model derived from the correlation matrix.
@@ -130,7 +125,7 @@ slopes <- function(X,
     ryX <- descriptives[["ryXhat"]]
   }
   out <- solve(RX) %*% ryX
-  colnames(out) <- "std. slopes"
+  colnames(out) <- "std.slopes"
   out
 }
 
@@ -142,18 +137,6 @@ slopes <- function(X,
 #' @keywords parameter
 #' @inheritParams .slopesprime
 #' @inherit .slopesprime description details return
-#' @examples
-#' # Simple regression------------------------------------------------
-#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
-#' X <- X[, c(1, ncol(X))]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' slopesprime(X = X, y = y)
-#'
-#' # Multiple regression----------------------------------------------
-#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
-#' # age is removed
-#' X <- X[, -ncol(X)]
-#' slopesprime(X = X, y = y)
 #' @export
 slopesprime <- function(X,
                         y) {
@@ -230,18 +213,6 @@ slopesprime <- function(X,
 #' @keywords parameter
 #' @inheritParams .intercept
 #' @inherit .intercept description details return
-#' @examples
-#' # Simple regression------------------------------------------------
-#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
-#' X <- X[, c(1, ncol(X))]
-#' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' intercept(X = X, y = y)
-#'
-#' # Multiple regression----------------------------------------------
-#' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
-#' # age is removed
-#' X <- X[, -ncol(X)]
-#' intercept(X = X, y = y)
 #' @export
 intercept <- function(X,
                       y) {
