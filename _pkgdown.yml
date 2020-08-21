@@ -46,15 +46,22 @@ reference:
   desc:  Assessment of model quality.
 - contents:
   - has_keyword("model-assessment")
+- title: Sampling variances and covariances
+  desc:  Sampling variances and covariances of estimated regression coefficients.
+- contents:
+  - has_keyword("vcov")
+- title: Standard errors
+  desc:  Standard errors of estimated regression coefficients.
+- contents:
+  - has_keyword("se")
 - title: Hypothesis Testing
-  desc:  Hypothesis testing.
+  desc:  Hypothesis testing and confidence intervals.
 - contents:
   - has_keyword("inference")
 - title: Plotting Functions
   desc:  Plotting functions.
 - contents:
   - has_keyword("plot")
-
 articles:
 - title: jeksterslabRlinreg Package
   desc: Installation and the basics.
@@ -75,6 +82,7 @@ articles:
   - tests/test-linreg-plot
   - tests/test-linreg-estimation-descriptives
   - tests/test-linreg-estimation-ols-example
+  - tests/test-linreg-estimation-betahat_matrix
   - tests/test-linreg-estimation-projection
   - tests/test-linreg-estimation-predicted
   - tests/test-linreg-estimation-residuals

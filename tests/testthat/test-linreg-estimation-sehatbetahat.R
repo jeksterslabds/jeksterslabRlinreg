@@ -77,11 +77,11 @@ result_sehatbetahatbiased3 <- sehatbetahatbiased(
 #' ## Standard Errors of Scaled Estimates of Regression Coefficients (textbook)
 #'
 #+
-slopes <- slopes(
+slopeshat <- slopeshat(
   X = X,
   y = y
 )
-slopesprime <- slopesprime(
+slopeshatprime <- slopeshatprime(
   X = X,
   y = y
 )
@@ -91,35 +91,35 @@ sehatbetahat <- as.vector(
     y = y
   )
 )
-sehatslopes <- sehatbetahat[-1]
-result_sehatslopesprimetb1 <- .sehatslopesprimetb(
-  slopes = slopes,
-  sehatslopes = sehatslopes,
-  slopesprime = slopesprime
+sehatslopeshat <- sehatbetahat[-1]
+result_sehatslopeshatprimetb1 <- .sehatslopeshatprimetb(
+  slopeshat = slopeshat,
+  sehatslopeshat = sehatslopeshat,
+  slopeshatprime = slopeshatprime
 )
-result_sehatslopesprimetb2 <- .sehatslopesprimetb(
-  sehatslopes = sehatslopes,
-  slopesprime = slopesprime,
+result_sehatslopeshatprimetb2 <- .sehatslopeshatprimetb(
+  sehatslopeshat = sehatslopeshat,
+  slopeshatprime = slopeshatprime,
   X = X,
   y = y
 )
-result_sehatslopesprimetb3 <- .sehatslopesprimetb(
-  slopes = slopes,
-  slopesprime = slopesprime,
+result_sehatslopeshatprimetb3 <- .sehatslopeshatprimetb(
+  slopeshat = slopeshat,
+  slopeshatprime = slopeshatprime,
   X = X,
   y = y
 )
-result_sehatslopesprimetb4 <- .sehatslopesprimetb(
-  sehatslopes = sehatslopes,
-  slopesprime = slopesprime,
+result_sehatslopeshatprimetb4 <- .sehatslopeshatprimetb(
+  sehatslopeshat = sehatslopeshat,
+  slopeshatprime = slopeshatprime,
   X = X,
   y = y
 )
-result_sehatslopesprimetb5 <- .sehatslopesprimetb(
+result_sehatslopeshatprimetb5 <- .sehatslopeshatprimetb(
   X = X,
   y = y
 )
-result_sehatslopesprimetb6 <- sehatslopesprimetb(
+result_sehatslopeshatprimetb6 <- sehatslopeshatprimetb(
   X = X,
   y = y
 )
@@ -187,36 +187,36 @@ test_that("biased", {
 })
 #'
 #+ testthat_scaled
-result_sehatslopesprimetb1 <- as.vector(result_sehatslopesprimetb1)
-result_sehatslopesprimetb2 <- as.vector(result_sehatslopesprimetb2)
-result_sehatslopesprimetb3 <- as.vector(result_sehatslopesprimetb3)
-result_sehatslopesprimetb4 <- as.vector(result_sehatslopesprimetb4)
-result_sehatslopesprimetb5 <- as.vector(result_sehatslopesprimetb5)
-result_sehatslopesprimetb6 <- as.vector(result_sehatslopesprimetb6)
-test_that("sehatslopesprimetb", {
+result_sehatslopeshatprimetb1 <- as.vector(result_sehatslopeshatprimetb1)
+result_sehatslopeshatprimetb2 <- as.vector(result_sehatslopeshatprimetb2)
+result_sehatslopeshatprimetb3 <- as.vector(result_sehatslopeshatprimetb3)
+result_sehatslopeshatprimetb4 <- as.vector(result_sehatslopeshatprimetb4)
+result_sehatslopeshatprimetb5 <- as.vector(result_sehatslopeshatprimetb5)
+result_sehatslopeshatprimetb6 <- as.vector(result_sehatslopeshatprimetb6)
+test_that("sehatslopeshatprimetb", {
   for (i in 1:length(lmscaled_se)) {
     expect_equivalent(
-      result_sehatslopesprimetb1[i],
+      result_sehatslopeshatprimetb1[i],
       lmscaled_se[i]
     )
     expect_equivalent(
-      result_sehatslopesprimetb2[i],
+      result_sehatslopeshatprimetb2[i],
       lmscaled_se[i]
     )
     expect_equivalent(
-      result_sehatslopesprimetb3[i],
+      result_sehatslopeshatprimetb3[i],
       lmscaled_se[i]
     )
     expect_equivalent(
-      result_sehatslopesprimetb4[i],
+      result_sehatslopeshatprimetb4[i],
       lmscaled_se[i]
     )
     expect_equivalent(
-      result_sehatslopesprimetb5[i],
+      result_sehatslopeshatprimetb5[i],
       lmscaled_se[i]
     )
     expect_equivalent(
-      result_sehatslopesprimetb6[i],
+      result_sehatslopeshatprimetb6[i],
       lmscaled_se[i]
     )
   }

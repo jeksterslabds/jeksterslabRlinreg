@@ -36,7 +36,7 @@ y <- jeksterslabRdatarepo::wages.matrix[["y"]]
 head(X)
 head(y)
 #'
-#' ## `jeksterslabRlinreg::linreg()`
+#' ## Original Data
 #'
 #+
 n <- nrow(X)
@@ -61,42 +61,42 @@ result2 <- betahatinference(
 )
 
 #'
-#' ## `jeksterslabRlinreg::linreg()` - scaled data
+#' ## Scaled Data
 #'
 #+
-slopesprime <- slopesprime(
+slopeshatprime <- slopeshatprime(
   X = X,
   y = y
 )
-sehatslopesprimetb <- sehatslopesprimetb(
+sehatslopeshatprimetb <- sehatslopeshatprimetb(
   X = X,
   y = y
 )
-results1_scaled <- .slopesprimeinference(
-  slopesprime = slopesprime,
-  sehatslopesprime = sehatslopesprimetb,
+results1_scaled <- .slopeshatprimeinference(
+  slopeshatprime = slopeshatprime,
+  sehatslopeshatprime = sehatslopeshatprimetb,
   n = n
 )
-results2_scaled <- .slopesprimeinference(
-  sehatslopesprime = sehatslopesprimetb,
+results2_scaled <- .slopeshatprimeinference(
+  sehatslopeshatprime = sehatslopeshatprimetb,
   X = X,
   y = y
 )
-results3_scaled <- .slopesprimeinference(
-  slopesprime = slopesprime,
-  sehatslopesprimetype = "textbook",
+results3_scaled <- .slopeshatprimeinference(
+  slopeshatprime = slopeshatprime,
+  sehatslopeshatprimetype = "textbook",
   X = X,
   y = y
 )
-results3_scaled <- .slopesprimeinference(
+results3_scaled <- .slopeshatprimeinference(
   X = X,
   y = y,
-  sehatslopesprimetype = "textbook"
+  sehatslopeshatprimetype = "textbook"
 )
-results4_scaled <- slopesprimeinference(
+results4_scaled <- slopeshatprimeinference(
   X = X,
   y = y,
-  sehatslopesprimetype = "textbook"
+  sehatslopeshatprimetype = "textbook"
 )
 #'
 #' ## `lm()` function

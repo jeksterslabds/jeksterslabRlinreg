@@ -101,7 +101,7 @@ The output includes the following:
 - Scatterplot matrix
 - Residual plots
 
-```{r}
+```{r, eval = FALSE}
 jeksterslabRlinreg::linreg(
   X = X,
   y = y
