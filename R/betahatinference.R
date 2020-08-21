@@ -98,40 +98,40 @@ betahatinference <- function(X,
 #' @family inference functions
 #' @keywords inference
 #' @inheritParams .betahatinference
-#' @inheritParams .sehatslopesprimetb
-#' @param sehatslopesprime Numeric vector of length `p` or `p` by `1` matrix.
+#' @inheritParams .sehatslopeshatprimetb
+#' @param sehatslopeshatprime Numeric vector of length `p` or `p` by `1` matrix.
 #'   Standard errors of estimates of standardized regression slopes.
-#' @param sehatslopesprimetype Character string.
+#' @param sehatslopeshatprimetype Character string.
 #'   Standard errors for standardized regression slopes hypothesis test.
-#'   Options are `sehatslopesprimetype = "textbook"` and `sehatslopesprimetype = "delta"`.
+#'   Options are `sehatslopeshatprimetype = "textbook"` and `sehatslopeshatprimetype = "delta"`.
 #' @param adjust Logical.
-#'   If `sehatslopesprimetype = "delta"` and `adjust = TRUE`,
-#'   uses `n - 3` to adjust `sehatslopesprime` for bias.
+#'   If `sehatslopeshatprimetype = "delta"` and `adjust = TRUE`,
+#'   uses `n - 3` to adjust `sehatslopeshatprime` for bias.
 #'   This adjustment is recommended for small sample sizes.
 #' @export
-.slopesprimeinference <- function(slopesprime = NULL,
-                                  sehatslopesprime = NULL,
-                                  sehatslopesprimetype = "textbook",
-                                  adjust = FALSE,
-                                  n,
-                                  X,
-                                  y) {
-  if (is.null(slopesprime)) {
-    slopesprime <- slopesprime(
+.slopeshatprimeinference <- function(slopeshatprime = NULL,
+                                     sehatslopeshatprime = NULL,
+                                     sehatslopeshatprimetype = "textbook",
+                                     adjust = FALSE,
+                                     n,
+                                     X,
+                                     y) {
+  if (is.null(slopeshatprime)) {
+    slopeshatprime <- slopeshatprime(
       X = X,
       y = y
     )
     n <- nrow(X)
   }
-  if (is.null(sehatslopesprime)) {
-    if (sehatslopesprimetype == "textbook") {
-      sehatslopesprime <- sehatslopesprimetb(
+  if (is.null(sehatslopeshatprime)) {
+    if (sehatslopeshatprimetype == "textbook") {
+      sehatslopeshatprime <- sehatslopeshatprimetb(
         X = X,
         y = y
       )
     }
-    if (sehatslopesprimetype == "delta") {
-      sehatslopesprime <- sehatslopesprimedelta(
+    if (sehatslopeshatprimetype == "delta") {
+      sehatslopeshatprime <- sehatslopeshatprimedelta(
         X = X,
         y = y,
         adjust = adjust
@@ -140,8 +140,8 @@ betahatinference <- function(X,
     n <- nrow(X)
   }
   out <- .betahatinference(
-    betahat = c(0, slopesprime),
-    sehatbetahat = c(0, sehatslopesprime),
+    betahat = c(0, slopeshatprime),
+    sehatbetahat = c(0, sehatslopeshatprime),
     n = n
   )
   # for cases when the model is a simple linear regression
@@ -162,27 +162,27 @@ betahatinference <- function(X,
 #'
 #' @family inference functions
 #' @keywords inference
-#' @inheritParams .slopesprimeinference
+#' @inheritParams .slopeshatprimeinference
 #' @examples
 #' # Simple regression------------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' X <- X[, c(1, ncol(X))]
 #' y <- jeksterslabRdatarepo::wages.matrix[["y"]]
-#' slopesprimeinference(X = X, y = y)
+#' slopeshatprimeinference(X = X, y = y)
 #'
 #' # Multiple regression----------------------------------------------
 #' X <- jeksterslabRdatarepo::wages.matrix[["X"]]
 #' # age is removed
 #' X <- X[, -ncol(X)]
-#' slopesprimeinference(X = X, y = y)
+#' slopeshatprimeinference(X = X, y = y)
 #' @export
-slopesprimeinference <- function(X,
-                                 y,
-                                 sehatslopesprimetype = "textbook") {
-  .slopesprimeinference(
-    slopesprime = NULL,
-    sehatslopesprime = NULL,
-    sehatslopesprimetype = sehatslopesprimetype,
+slopeshatprimeinference <- function(X,
+                                    y,
+                                    sehatslopeshatprimetype = "textbook") {
+  .slopeshatprimeinference(
+    slopeshatprime = NULL,
+    sehatslopeshatprime = NULL,
+    sehatslopeshatprimetype = sehatslopeshatprimetype,
     X = X,
     y = y
   )
