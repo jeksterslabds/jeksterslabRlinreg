@@ -17,7 +17,7 @@
 #'   using [`sigma2hatepsilonhat()`].
 #'
 #' @family variance-covariance of estimates of regression coefficients functions
-#' @keywords inference
+#' @keywords vcov
 #' @param sigma2hatepsilonhat Numeric.
 #'   Estimate of error variance.
 #' @inheritParams sigma2hatepsilonhat
@@ -44,7 +44,7 @@
 #' @title Variance-Covariance Matrix of Estimates of Regression Coefficients (from \eqn{\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}})
 #'
 #' @family variance-covariance of estimates of regression coefficients functions
-#' @keywords inference
+#' @keywords vcov
 #' @param sigma2hatepsilonhatbiased Numeric.
 #'   Biased estimate of error variance.
 #' @inheritParams sigma2hatepsilonhatbiased
@@ -69,7 +69,7 @@
 #' @title Variance-Covariance Matrix of Estimates of Regression Coefficients
 #'
 #' @family variance-covariance of estimates of regression coefficients functions
-#' @keywords inference
+#' @keywords vcov
 #' @inheritParams .vcovhatbetahat
 #' @inherit .vcovhatbetahat return description references
 #' @examples
@@ -99,7 +99,7 @@ vcovhatbetahat <- function(X,
 #' @title Variance-Covariance Matrix of Estimates of Regression Coefficients (from \eqn{\hat{\sigma}_{\varepsilon \ \textrm{biased}}^{2}})
 #'
 #' @family variance-covariance of estimates of regression coefficients functions
-#' @keywords inference
+#' @keywords vcov
 #' @inheritParams .vcovhatbetahatbiased
 #' @inherit .vcovhatbetahatbiased return description references
 #' @examples
