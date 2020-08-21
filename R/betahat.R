@@ -1,6 +1,6 @@
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Regression Coefficients
+#' @title Estimates of Regression Coefficients
 #'   \eqn{
 #'     \boldsymbol{\hat{\beta}} = \left( \mathbf{X}^{T} \mathbf{X} \right)^{-1}
 #'     \left( \mathbf{X}^{T} \mathbf{y} \right)
@@ -61,7 +61,7 @@
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Regression Coefficients
+#' @title Estimates of Regression Coefficients
 #'   \eqn{\boldsymbol{\hat{\beta}}} - QR Decomposition
 #'
 #' @description Estimates coefficients of a linear regression model
@@ -119,7 +119,7 @@
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Regression Coefficients
+#' @title Estimates of Regression Coefficients
 #'   \eqn{\boldsymbol{\hat{\beta}}} - Singular Value Decomposition
 #'
 #' @description Estimates coefficients of a linear regression model
@@ -173,7 +173,7 @@
 
 #' @author Ivan Jacob Agaloos Pesigan
 #'
-#' @title Regression Coefficients \eqn{\boldsymbol{\hat{\beta}}}
+#' @title Estimates of Regression Coefficients \eqn{\boldsymbol{\hat{\beta}}}
 #'
 #' @description Estimates coefficients of a linear regression model.
 #'
