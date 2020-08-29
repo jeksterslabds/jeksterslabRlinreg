@@ -227,7 +227,7 @@ sehatslopeshatprimetb <- function(X,
 #'     \mathbf{\widehat{se}}_{\boldsymbol{\hat{\beta}}_{\text{p}}^{\prime}} =
 #'     \sqrt{
 #'       \frac{\hat{\sigma}_{X_{p}}^{2} \hat{c}_{p} \hat{\sigma}_{\hat{\varepsilon}}^{2}}{n \hat{\sigma}_{y}^{2}} +
-#'     \frac{\hat{\beta}_{p}
+#'     \frac{\hat{\beta}_{p}^{2}
 #'       \left[
 #'         \hat{\sigma}_{X_{p}}^{2}
 #'         \left( \boldsymbol{\hat{\beta}}^{T} \boldsymbol{\hat{\Sigma}}_{X} \boldsymbol{\hat{\beta}} \right) -
