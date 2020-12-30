@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +100,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@
     <p>Regression Coefficients Hypothesis Test and Confidence Intervals</p>
     </div>
 
-    <pre class="usage"><span class='fu'>betahatinference</span>(<span class='no'>X</span>, <span class='no'>y</span>)</pre>
+    <pre class="usage"><span class='fu'>betahatinference</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,7 +149,7 @@ on the regressand variable.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a matrix with the following columns</p><dl'>
+    <p>Returns a matrix with the following columns</p><dl>
 <dt>coef</dt><dd><p>Coefficients.</p></dd>
 <dt>se</dt><dd><p>Standard error.</p></dd>
 <dt>t</dt><dd><p>t-statistic.</p></dd>
@@ -166,26 +166,31 @@ on the regressand variable.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other inference functions: 
-<code><a href='dot-betahatinference.html'>.betahatinference</a>()</code>,
-<code><a href='dot-slopeshatprimeinference.html'>.slopeshatprimeinference</a>()</code>,
+<code><a href='.betahatinference.html'>.betahatinference</a>()</code>,
+<code><a href='.slopeshatprimeinference.html'>.slopeshatprimeinference</a>()</code>,
 <code><a href='slopeshatprimeinference.html'>slopeshatprimeinference</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ivan Jacob Agaloos Pesigan</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='fu'>betahatinference</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;              coef         se         t            p   ci_0.05    ci_0.5
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"y"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='fu'>betahatinference</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;              coef         se         t            p   ci_0.05    ci_0.5
 #&gt; constant 4.874251 0.72698105  6.704784 3.011026e-11 2.4765930 2.9988909
 #&gt; age      0.197486 0.01834111 10.767395 6.019852e-26 0.1369951 0.1501723
 #&gt;             ci_2.5   ci_97.5   ci_99.5  ci_99.95
 #&gt; constant 3.4480531 6.3004490 6.7496112 7.2719091
 #&gt; age      0.1615042 0.2334678 0.2447997 0.2579769</div><div class='input'>
 <span class='co'># Multiple regression----------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
 <span class='co'># age is removed</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='fu'>betahatinference</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;                  coef         se         t            p     ci_0.05     ci_0.5
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>]</span>
+<span class='fu'>betahatinference</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                  coef         se         t            p     ci_0.05     ci_0.5
 #&gt; constant   -7.1833382 1.01578786 -7.071691 2.508276e-12 -10.5335348 -9.8037324
 #&gt; gender     -3.0748755 0.36461621 -8.433184 8.939416e-17  -4.2774257 -4.0154638
 #&gt; race       -1.5653133 0.50918754 -3.074139 2.155664e-03  -3.2446781 -2.8788475
@@ -214,7 +219,7 @@ on the regressand variable.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

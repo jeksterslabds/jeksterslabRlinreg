@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -59,7 +59,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -73,13 +73,13 @@
 
       
 
-      </header><script src="test-linreg-estimation-betahat_matrix_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><script src="test-linreg-estimation-betahat_matrix_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tests: Estimates of Regression Coefficients from summary matrices</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-08-29</h4>
+            <h4 class="date">2020-12-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-betahat_matrix.Rmd"><code>vignettes/tests/test-linreg-estimation-betahat_matrix.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-betahat_matrix.Rmd</code></div>
@@ -88,16 +88,18 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"># Estimates of Regression Coefficients from summary matrices {#linreg-estimation-betahat_matrix}</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Estimates of Regression Coefficients from summary matrices {#linreg-estimation-betahat_matrix}</span></code></pre></div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
 <p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="op">[[</span><span class="st">"X"</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># age is removed</span>
-<span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)
+<span class="va">X</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">]</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="op">[[</span><span class="st">"y"</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>
 <span class="co">#&gt;      constant gender race union education experience</span>
 <span class="co">#&gt; [1,]        1      1    0     0        12         20</span>
 <span class="co">#&gt; [2,]        1      0    0     0         9          9</span>
@@ -105,135 +107,141 @@
 <span class="co">#&gt; [4,]        1      0    1     1        14         38</span>
 <span class="co">#&gt; [5,]        1      1    1     0        16         19</span>
 <span class="co">#&gt; [6,]        1      1    0     0        12          4</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">y</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt;      wages</span>
 <span class="co">#&gt; [1,] 11.55</span>
 <span class="co">#&gt; [2,]  5.00</span>
 <span class="co">#&gt; [3,] 12.00</span>
 <span class="co">#&gt; [4,]  7.00</span>
 <span class="co">#&gt; [5,] 21.15</span>
-<span class="co">#&gt; [6,]  6.92</span></pre></body></html></div>
+<span class="co">#&gt; [6,]  6.92</span></code></pre></div>
 </div>
 <div id="unstandardized" class="section level2">
 <h2 class="hasAnchor">
 <a href="#unstandardized" class="anchor"></a>Unstandardized</h2>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">data</span> <span class="kw">&lt;-</span> <span class="no">X</span>
-<span class="no">data</span>[, <span class="fl">1</span>] <span class="kw">&lt;-</span> <span class="no">y</span>
-<span class="no">Sigmahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span>(<span class="no">data</span>)
-<span class="no">SigmaXhat</span> <span class="kw">&lt;-</span> <span class="no">Sigmahat</span>[-<span class="fl">1</span>, -<span class="fl">1</span>]
-<span class="no">sigmayX</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">Sigmahat</span>[, <span class="fl">1</span>])
-<span class="no">sigmayX</span> <span class="kw">&lt;-</span> <span class="no">sigmayX</span>[-<span class="fl">1</span>]
-<span class="no">result1_slopes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-slopeshat.html">.slopeshat</a></span>(
-  <span class="kw">SigmaXhat</span> <span class="kw">=</span> <span class="no">SigmaXhat</span>,
-  <span class="kw">sigmayX</span> <span class="kw">=</span> <span class="no">sigmayX</span>
-)
-<span class="no">result2_slopes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-slopeshat.html">.slopeshat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result3_slopes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/slopeshat.html">slopeshat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result1_intercept</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-intercepthat.html">.intercepthat</a></span>(
-  <span class="kw">slopeshat</span> <span class="kw">=</span> <span class="no">result1_slopes</span>,
-  <span class="kw">muyhat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">y</span>),
-  <span class="kw">muXhat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span>(<span class="no">X</span>[, -<span class="fl">1</span>])
-)
-<span class="no">result2_intercept</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-intercepthat.html">.intercepthat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result3_intercept</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-intercepthat.html">.intercepthat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result1_betahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">result1_intercept</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result1_slopes</span>))
-<span class="no">result2_betahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">result2_intercept</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result2_slopes</span>))
-<span class="no">result3_betahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">result3_intercept</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result3_slopes</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">X</span>
+<span class="va">data</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span>
+<span class="va">Sigmahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+<span class="va">SigmaXhat</span> <span class="op">&lt;-</span> <span class="va">Sigmahat</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">sigmayX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">Sigmahat</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="va">sigmayX</span> <span class="op">&lt;-</span> <span class="va">sigmayX</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">result1_slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.slopeshat.html">.slopeshat</a></span><span class="op">(</span>
+  SigmaXhat <span class="op">=</span> <span class="va">SigmaXhat</span>,
+  sigmayX <span class="op">=</span> <span class="va">sigmayX</span>
+<span class="op">)</span>
+<span class="va">result2_slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.slopeshat.html">.slopeshat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result3_slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/slopeshat.html">slopeshat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result1_intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.intercepthat.html">.intercepthat</a></span><span class="op">(</span>
+  slopeshat <span class="op">=</span> <span class="va">result1_slopes</span>,
+  muyhat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>,
+  muXhat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">X</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">result2_intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.intercepthat.html">.intercepthat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result3_intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.intercepthat.html">.intercepthat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result1_betahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">result1_intercept</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result1_slopes</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result2_betahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">result2_intercept</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result2_slopes</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result3_betahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">result3_intercept</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result3_slopes</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="standardized" class="section level2">
 <h2 class="hasAnchor">
 <a href="#standardized" class="anchor"></a>Standardized</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">Rhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">data</span>)
-<span class="no">RXhat</span> <span class="kw">&lt;-</span> <span class="no">Rhat</span>[-<span class="fl">1</span>, -<span class="fl">1</span>]
-<span class="no">ryXhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">Rhat</span>[, <span class="fl">1</span>])
-<span class="no">ryXhat</span> <span class="kw">&lt;-</span> <span class="no">ryXhat</span>[-<span class="fl">1</span>]
-<span class="no">result1_std.slopes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-slopeshatprime.html">.slopeshatprime</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result2_std.slopes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-slopeshatprime.html">.slopeshatprime</a></span>(
-  <span class="kw">RXhat</span> <span class="kw">=</span> <span class="no">RXhat</span>,
-  <span class="kw">ryXhat</span> <span class="kw">=</span> <span class="no">ryXhat</span>
-)
-<span class="no">result3_std.slopes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/slopeshatprime.html">slopeshatprime</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result1_betahatprime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result1_std.slopes</span>))
-<span class="no">result2_betahatprime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result2_std.slopes</span>))
-<span class="no">result3_betahatprime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result3_std.slopes</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Rhat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+<span class="va">RXhat</span> <span class="op">&lt;-</span> <span class="va">Rhat</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">ryXhat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">Rhat</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="va">ryXhat</span> <span class="op">&lt;-</span> <span class="va">ryXhat</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">result1_std.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.slopeshatprime.html">.slopeshatprime</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result2_std.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.slopeshatprime.html">.slopeshatprime</a></span><span class="op">(</span>
+  RXhat <span class="op">=</span> <span class="va">RXhat</span>,
+  ryXhat <span class="op">=</span> <span class="va">ryXhat</span>
+<span class="op">)</span>
+<span class="va">result3_std.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/slopeshatprime.html">slopeshatprime</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result1_betahatprime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result1_std.slopes</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result2_betahatprime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result2_std.slopes</span><span class="op">)</span><span class="op">)</span>
+<span class="va">result3_betahatprime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result3_std.slopes</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="lm-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lm-function" class="anchor"></a><code>lm()</code> function</h2>
 <p>The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function is the default option for fitting a linear model in <code>R</code>.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
-  <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
-  <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
-)
-<span class="no">lmscaledobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
-  <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
-  <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>))
-)
-<span class="no">lm_betahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span>(<span class="no">lmobj</span>)
-<span class="no">lm_betahatprime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span>(<span class="no">lmscaledobj</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test Coefficients"</span>)
-<span class="fu">test_that</span>(<span class="st">"unstandardized."</span>, {
-  <span class="fu">expect_equivalent</span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">lm_betahat</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result1_betahat</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result2_betahat</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result3_betahat</span>)
-  )
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result1_betahat</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_betahat</span>[<span class="no">i</span>],
-      <span class="no">result1_betahat</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_betahat</span>[<span class="no">i</span>],
-      <span class="no">result2_betahat</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_betahat</span>[<span class="no">i</span>],
-      <span class="no">result3_betahat</span>[<span class="no">i</span>]
-    )
-  }
-})
-<span class="fu">test_that</span>(<span class="st">"standardized."</span>, {
-  <span class="fu">expect_equivalent</span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">lm_betahatprime</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result1_betahatprime</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result2_betahatprime</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">result3_betahatprime</span>)
-  )
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result1_betahatprime</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_betahatprime</span>[<span class="no">i</span>],
-      <span class="no">result1_betahatprime</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_betahatprime</span>[<span class="no">i</span>],
-      <span class="no">result2_betahatprime</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_betahatprime</span>[<span class="no">i</span>],
-      <span class="no">result3_betahatprime</span>[<span class="no">i</span>]
-    )
-  }
-})</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lmobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">wages</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">race</span> <span class="op">+</span> <span class="va">union</span> <span class="op">+</span> <span class="va">education</span> <span class="op">+</span> <span class="va">experience</span>,
+  data <span class="op">=</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
+<span class="op">)</span>
+<span class="va">lmscaledobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">wages</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">race</span> <span class="op">+</span> <span class="va">union</span> <span class="op">+</span> <span class="va">education</span> <span class="op">+</span> <span class="va">experience</span>,
+  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">lm_betahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lmobj</span><span class="op">)</span>
+<span class="va">lm_betahatprime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lmscaledobj</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">context</span><span class="op">(</span><span class="st">"Test Coefficients"</span><span class="op">)</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"unstandardized."</span>, <span class="op">{</span>
+  <span class="fu">expect_equivalent</span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lm_betahat</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result1_betahat</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result2_betahat</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result3_betahat</span><span class="op">)</span>
+  <span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">result1_betahat</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_betahat</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">result1_betahat</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_betahat</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">result2_betahat</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_betahat</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">result3_betahat</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🥳</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"standardized."</span>, <span class="op">{</span>
+  <span class="fu">expect_equivalent</span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lm_betahatprime</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result1_betahatprime</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result2_betahatprime</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">result3_betahatprime</span><span class="op">)</span>
+  <span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">result1_betahatprime</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_betahatprime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">result1_betahatprime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_betahatprime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">result2_betahatprime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_betahatprime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">result3_betahatprime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🎉</span></code></pre></div>
 </div>
   </div>
 
@@ -252,7 +260,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

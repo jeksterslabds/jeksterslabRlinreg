@@ -1,7 +1,7 @@
 jeksterslabRlinreg
 ================
 Ivan Jacob Agaloos Pesigan
-2020-08-29
+2020-12-31
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -16,17 +16,17 @@ status](https://ci.appveyor.com/api/projects/status/github/jeksterslabds/jekster
 `jeksterslabRlinreg` is a collection of functions that I find useful in
 studying linear regression concepts and methods.
 
-Installation
-------------
+## Installation
 
 You can install the released version of `jeksterslabRlinreg` from
 [GitHub](https://github.com/jeksterslabds/jeksterslabRlinreg) with:
 
-    library(devtools)
-    install_github("jeksterslabds/jeksterslabRlinreg")
+``` r
+library(devtools)
+install_github("jeksterslabds/jeksterslabRlinreg")
+```
 
-Example
--------
+## Example
 
 ### Data
 
@@ -35,19 +35,19 @@ between wages and education. The regressor variable is years of
 education. The regressand variable is hourly wage in US dollars.
 
     #>      constant education
-    #> [1,]        1         7
-    #> [2,]        1        14
+    #> [1,]        1        16
+    #> [2,]        1         8
     #> [3,]        1        15
-    #> [4,]        1        13
-    #> [5,]        1        15
-    #> [6,]        1         8
-    #>           wages
-    #> [1,]  0.5469977
-    #> [2,] 20.4037125
-    #> [3,] 30.6881340
-    #> [4,] 13.6174883
-    #> [5,] 18.5998624
-    #> [6,]  6.5390001
+    #> [4,]        1        14
+    #> [5,]        1        13
+    #> [6,]        1        13
+    #>          wages
+    #> [1,] 12.745092
+    #> [2,] 13.927995
+    #> [3,] 19.848912
+    #> [4,]  9.619895
+    #> [5,]  9.272206
+    #> [6,] 11.652715
 
 ### `jeksterslabRlinreg::linreg()`
 
@@ -71,12 +71,12 @@ The output includes the following:
 -   Scatterplot matrix
 -   Residual plots
 
-<!-- -->
-
-    jeksterslabRlinreg::linreg(
-      X = X,
-      y = y
-    )
+``` r
+jeksterslabRlinreg::linreg(
+  X = X,
+  y = y
+)
+```
 
 See [GitHub
 Pages](https://jeksterslabds.github.io/jeksterslabRlinreg/index.html)

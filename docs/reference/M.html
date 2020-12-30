@@ -91,7 +91,7 @@ to the vector of residuals \(\left( \mathbf{e} = \mathbf{My} \right)\) ." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,7 +111,7 @@ to the vector of residuals \(\left( \mathbf{e} = \mathbf{My} \right)\) ." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -148,7 +148,7 @@ transforms the \(\mathbf{y}\) vector
 to the vector of residuals \(\left( \mathbf{e} = \mathbf{My} \right)\) .</p>
     </div>
 
-    <pre class="usage"><span class='fu'>M</span>(<span class='no'>X</span>)</pre>
+    <pre class="usage"><span class='fu'>M</span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,23 +172,28 @@ which includes a regressor whose value is 1 for each observation on the first co
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other projection matrix functions: 
-<code><a href='dot-M.html'>.M</a>()</code>,
-<code><a href='dot-h.html'>.h</a>()</code>,
+<code><a href='.M.html'>.M</a>()</code>,
+<code><a href='.h.html'>.h</a>()</code>,
 <code><a href='P.html'>P</a>()</code>,
 <code><a href='h.html'>h</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ivan Jacob Agaloos Pesigan</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
-<span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fu'>M</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>M</span>, <span class='kw'>list.len</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt;  num [1:1289, 1:1289] 0.999224 -0.00077 -0.000775 -0.000783 -0.000777 ...</div><div class='input'>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>M</span> <span class='op'>&lt;-</span> <span class='fu'>M</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>M</span>, list.len <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  num [1:1289, 1:1289] 0.999224 -0.00077 -0.000775 -0.000783 -0.000777 ...</div><div class='input'>
 <span class='co'># Multiple regression----------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
 <span class='co'># age is removed</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fu'>M</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>M</span>, <span class='kw'>list.len</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt;  num [1:1289, 1:1289] 9.98e-01 -6.81e-04 5.85e-05 1.41e-03 -4.75e-04 ...</div></pre>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>M</span> <span class='op'>&lt;-</span> <span class='fu'>M</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>M</span>, list.len <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  num [1:1289, 1:1289] 9.98e-01 -6.81e-04 5.85e-05 1.41e-03 -4.75e-04 ...</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -204,7 +209,7 @@ which includes a regressor whose value is 1 for each observation on the first co
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

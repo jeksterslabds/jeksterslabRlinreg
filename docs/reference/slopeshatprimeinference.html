@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +100,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +126,7 @@
     <p>Standardized Regression Slopes Hypothesis Test and Confidence Intervals</p>
     </div>
 
-    <pre class="usage"><span class='fu'>slopeshatprimeinference</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>sehatslopeshatprimetype</span> <span class='kw'>=</span> <span class='st'>"textbook"</span>)</pre>
+    <pre class="usage"><span class='fu'>slopeshatprimeinference</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, sehatslopeshatprimetype <span class='op'>=</span> <span class='st'>"textbook"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,24 +156,29 @@ Options are <code>sehatslopeshatprimetype = "textbook"</code> and <code>sehatslo
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other inference functions: 
-<code><a href='dot-betahatinference.html'>.betahatinference</a>()</code>,
-<code><a href='dot-slopeshatprimeinference.html'>.slopeshatprimeinference</a>()</code>,
+<code><a href='.betahatinference.html'>.betahatinference</a>()</code>,
+<code><a href='.slopeshatprimeinference.html'>.slopeshatprimeinference</a>()</code>,
 <code><a href='betahatinference.html'>betahatinference</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ivan Jacob Agaloos Pesigan</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='fu'>slopeshatprimeinference</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;           coef         se        t            p   ci_0.05    ci_0.5    ci_2.5
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"y"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='fu'>slopeshatprimeinference</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;           coef         se        t            p   ci_0.05    ci_0.5    ci_2.5
 #&gt; [1,] 0.2874694 0.02669814 10.76739 6.019852e-26 0.1994162 0.2185974 0.2350927
 #&gt;       ci_97.5   ci_99.5  ci_99.95
 #&gt; [1,] 0.339846 0.3563414 0.3755226</div><div class='input'>
 <span class='co'># Multiple regression----------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
 <span class='co'># age is removed</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='fu'>slopeshatprimeinference</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt;             coef         se         t            p     ci_0.05       ci_0.5
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>]</span>
+<span class='fu'>slopeshatprimeinference</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             coef         se         t            p     ci_0.05       ci_0.5
 #&gt; [1,] -0.19477502 0.02309626 -8.433184 8.939416e-17 -0.27094940 -0.254355676
 #&gt; [2,] -0.07135673 0.02321194 -3.074139 2.155664e-03 -0.14791263 -0.131235792
 #&gt; [3,]  0.05077872 0.02344760  2.165626 3.052356e-02 -0.02655441 -0.009708265
@@ -200,7 +205,7 @@ Options are <code>sehatslopeshatprimetype = "textbook"</code> and <code>sehatslo
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -59,7 +59,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -73,13 +73,13 @@
 
       
 
-      </header><script src="test-linreg-estimation-sehatbetahat_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><script src="test-linreg-estimation-sehatbetahat_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tests: The Linear Regression Model (Standard Errors of Estimates of Regression Coefficients)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-08-29</h4>
+            <h4 class="date">2020-12-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-sehatbetahat.Rmd"><code>vignettes/tests/test-linreg-estimation-sehatbetahat.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-sehatbetahat.Rmd</code></div>
@@ -88,16 +88,18 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"># The Linear Regression Model: Standard Errors of Estimates of Regression Coefficients {#linreg-estimation-se-example}</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The Linear Regression Model: Standard Errors of Estimates of Regression Coefficients {#linreg-estimation-se-example}</span></code></pre></div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
 <p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="op">[[</span><span class="st">"X"</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># age is removed</span>
-<span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)
+<span class="va">X</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">]</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="op">[[</span><span class="st">"y"</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>
 <span class="co">#&gt;      constant gender race union education experience</span>
 <span class="co">#&gt; [1,]        1      1    0     0        12         20</span>
 <span class="co">#&gt; [2,]        1      0    0     0         9          9</span>
@@ -105,194 +107,204 @@
 <span class="co">#&gt; [4,]        1      0    1     1        14         38</span>
 <span class="co">#&gt; [5,]        1      1    1     0        16         19</span>
 <span class="co">#&gt; [6,]        1      1    0     0        12          4</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">y</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt;      wages</span>
 <span class="co">#&gt; [1,] 11.55</span>
 <span class="co">#&gt; [2,]  5.00</span>
 <span class="co">#&gt; [3,] 12.00</span>
 <span class="co">#&gt; [4,]  7.00</span>
 <span class="co">#&gt; [5,] 21.15</span>
-<span class="co">#&gt; [6,]  6.92</span></pre></body></html></div>
+<span class="co">#&gt; [6,]  6.92</span></code></pre></div>
 </div>
 <div id="standard-errors-of-estimates-of-regression-coefficients" class="section level2">
 <h2 class="hasAnchor">
 <a href="#standard-errors-of-estimates-of-regression-coefficients" class="anchor"></a>Standard Errors of Estimates of Regression Coefficients</h2>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">vcovhatbetahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/vcovhatbetahat.html">vcovhatbetahat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">vcovhatbetahatbiased</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/vcovhatbetahatbiased.html">vcovhatbetahatbiased</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatbetahat1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatbetahat.html">.sehatbetahat</a></span>(
-  <span class="kw">vcovhatbetahat</span> <span class="kw">=</span> <span class="no">vcovhatbetahat</span>
-)
-<span class="no">result_sehatbetahat2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatbetahat.html">.sehatbetahat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatbetahat3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sehatbetahat.html">sehatbetahat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vcovhatbetahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/vcovhatbetahat.html">vcovhatbetahat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">vcovhatbetahatbiased</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/vcovhatbetahatbiased.html">vcovhatbetahatbiased</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatbetahat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatbetahat.html">.sehatbetahat</a></span><span class="op">(</span>
+  vcovhatbetahat <span class="op">=</span> <span class="va">vcovhatbetahat</span>
+<span class="op">)</span>
+<span class="va">result_sehatbetahat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatbetahat.html">.sehatbetahat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatbetahat3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sehatbetahat.html">sehatbetahat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="biased-standard-errors-of-estimates-of-regression-coefficients" class="section level2">
 <h2 class="hasAnchor">
 <a href="#biased-standard-errors-of-estimates-of-regression-coefficients" class="anchor"></a>Biased Standard Errors of Estimates of Regression Coefficients</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">result_sehatbetahatbiased1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatbetahatbiased.html">.sehatbetahatbiased</a></span>(
-  <span class="kw">vcovhatbetahatbiased</span> <span class="kw">=</span> <span class="no">vcovhatbetahatbiased</span>
-)
-<span class="no">result_sehatbetahatbiased2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatbetahatbiased.html">.sehatbetahatbiased</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatbetahatbiased3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sehatbetahatbiased.html">sehatbetahatbiased</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_sehatbetahatbiased1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatbetahatbiased.html">.sehatbetahatbiased</a></span><span class="op">(</span>
+  vcovhatbetahatbiased <span class="op">=</span> <span class="va">vcovhatbetahatbiased</span>
+<span class="op">)</span>
+<span class="va">result_sehatbetahatbiased2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatbetahatbiased.html">.sehatbetahatbiased</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatbetahatbiased3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sehatbetahatbiased.html">sehatbetahatbiased</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="standard-errors-of-scaled-estimates-of-regression-coefficients-textbook" class="section level2">
 <h2 class="hasAnchor">
 <a href="#standard-errors-of-scaled-estimates-of-regression-coefficients-textbook" class="anchor"></a>Standard Errors of Scaled Estimates of Regression Coefficients (textbook)</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">slopeshat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/slopeshat.html">slopeshat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">slopeshatprime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/slopeshatprime.html">slopeshatprime</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">sehatbetahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(
-  <span class="fu"><a href="../../reference/sehatbetahat.html">sehatbetahat</a></span>(
-    <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-    <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-  )
-)
-<span class="no">sehatslopeshat</span> <span class="kw">&lt;-</span> <span class="no">sehatbetahat</span>[-<span class="fl">1</span>]
-<span class="no">result_sehatslopeshatprimetb1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span>(
-  <span class="kw">slopeshat</span> <span class="kw">=</span> <span class="no">slopeshat</span>,
-  <span class="kw">sehatslopeshat</span> <span class="kw">=</span> <span class="no">sehatslopeshat</span>,
-  <span class="kw">slopeshatprime</span> <span class="kw">=</span> <span class="no">slopeshatprime</span>
-)
-<span class="no">result_sehatslopeshatprimetb2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span>(
-  <span class="kw">sehatslopeshat</span> <span class="kw">=</span> <span class="no">sehatslopeshat</span>,
-  <span class="kw">slopeshatprime</span> <span class="kw">=</span> <span class="no">slopeshatprime</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatslopeshatprimetb3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span>(
-  <span class="kw">slopeshat</span> <span class="kw">=</span> <span class="no">slopeshat</span>,
-  <span class="kw">slopeshatprime</span> <span class="kw">=</span> <span class="no">slopeshatprime</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatslopeshatprimetb4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span>(
-  <span class="kw">sehatslopeshat</span> <span class="kw">=</span> <span class="no">sehatslopeshat</span>,
-  <span class="kw">slopeshatprime</span> <span class="kw">=</span> <span class="no">slopeshatprime</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatslopeshatprimetb5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_sehatslopeshatprimetb6</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sehatslopeshatprimetb.html">sehatslopeshatprimetb</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">slopeshat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/slopeshat.html">slopeshat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">slopeshatprime</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/slopeshatprime.html">slopeshatprime</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">sehatbetahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span>
+  <span class="fu"><a href="../../reference/sehatbetahat.html">sehatbetahat</a></span><span class="op">(</span>
+    X <span class="op">=</span> <span class="va">X</span>,
+    y <span class="op">=</span> <span class="va">y</span>
+  <span class="op">)</span>
+<span class="op">)</span>
+<span class="va">sehatslopeshat</span> <span class="op">&lt;-</span> <span class="va">sehatbetahat</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">result_sehatslopeshatprimetb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span><span class="op">(</span>
+  slopeshat <span class="op">=</span> <span class="va">slopeshat</span>,
+  sehatslopeshat <span class="op">=</span> <span class="va">sehatslopeshat</span>,
+  slopeshatprime <span class="op">=</span> <span class="va">slopeshatprime</span>
+<span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span><span class="op">(</span>
+  sehatslopeshat <span class="op">=</span> <span class="va">sehatslopeshat</span>,
+  slopeshatprime <span class="op">=</span> <span class="va">slopeshatprime</span>,
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span><span class="op">(</span>
+  slopeshat <span class="op">=</span> <span class="va">slopeshat</span>,
+  slopeshatprime <span class="op">=</span> <span class="va">slopeshatprime</span>,
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span><span class="op">(</span>
+  sehatslopeshat <span class="op">=</span> <span class="va">sehatslopeshat</span>,
+  slopeshatprime <span class="op">=</span> <span class="va">slopeshatprime</span>,
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.sehatslopeshatprimetb.html">.sehatslopeshatprimetb</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sehatslopeshatprimetb.html">sehatslopeshatprimetb</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="lm-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lm-function" class="anchor"></a><code>lm()</code> function</h2>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
-  <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
-  <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
-)
-<span class="no">lm_se</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/vcov.html">vcov</a></span>(<span class="no">lmobj</span>))))</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lmobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">wages</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">race</span> <span class="op">+</span> <span class="va">union</span> <span class="op">+</span> <span class="va">education</span> <span class="op">+</span> <span class="va">experience</span>,
+  data <span class="op">=</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
+<span class="op">)</span>
+<span class="va">lm_se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html">vcov</a></span><span class="op">(</span><span class="va">lmobj</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="lm-function---scaled-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lm-function---scaled-data" class="anchor"></a><code>lm()</code> function - scaled data</h2>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">lmscaledobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
-  <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
-  <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>))
-)
-<span class="no">lmscaled_se</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lmscaledobj</span>)<span class="kw">[[</span><span class="st">"coefficients"</span>]][, <span class="st">"Std. Error"</span>])
-<span class="no">lmscaled_se</span> <span class="kw">&lt;-</span> <span class="no">lmscaled_se</span>[-<span class="fl">1</span>]</pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">result_sehatbetahat1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatbetahat1</span>)
-<span class="no">result_sehatbetahat2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatbetahat2</span>)
-<span class="no">result_sehatbetahat3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatbetahat3</span>)
-<span class="no">result_sehatbetahatbiased1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatbetahatbiased1</span>)
-<span class="no">result_sehatbetahatbiased2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatbetahatbiased2</span>)
-<span class="no">result_sehatbetahatbiased3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatbetahatbiased3</span>)
-<span class="fu">context</span>(<span class="st">"Test linreg-estimation-vcov"</span>)
-<span class="fu">test_that</span>(<span class="st">"unbiased"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">lm_se</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatbetahat1</span>[<span class="no">i</span>],
-      <span class="no">lm_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatbetahat2</span>[<span class="no">i</span>],
-      <span class="no">lm_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatbetahat3</span>[<span class="no">i</span>],
-      <span class="no">lm_se</span>[<span class="no">i</span>]
-    )
-  }
-})
-<span class="fu">test_that</span>(<span class="st">"biased"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">lm_se</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">result_sehatbetahatbiased1</span>[<span class="no">i</span>], <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>),
-      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">lm_se</span>[<span class="no">i</span>], <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>)
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">result_sehatbetahatbiased2</span>[<span class="no">i</span>], <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>),
-      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">lm_se</span>[<span class="no">i</span>], <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>)
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">result_sehatbetahatbiased3</span>[<span class="no">i</span>], <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>),
-      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">lm_se</span>[<span class="no">i</span>], <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">1</span>)
-    )
-  }
-})</pre></body></html></div>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">result_sehatslopeshatprimetb1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatslopeshatprimetb1</span>)
-<span class="no">result_sehatslopeshatprimetb2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatslopeshatprimetb2</span>)
-<span class="no">result_sehatslopeshatprimetb3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatslopeshatprimetb3</span>)
-<span class="no">result_sehatslopeshatprimetb4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatslopeshatprimetb4</span>)
-<span class="no">result_sehatslopeshatprimetb5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatslopeshatprimetb5</span>)
-<span class="no">result_sehatslopeshatprimetb6</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(<span class="no">result_sehatslopeshatprimetb6</span>)
-<span class="fu">test_that</span>(<span class="st">"sehatslopeshatprimetb"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">lmscaled_se</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatslopeshatprimetb1</span>[<span class="no">i</span>],
-      <span class="no">lmscaled_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatslopeshatprimetb2</span>[<span class="no">i</span>],
-      <span class="no">lmscaled_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatslopeshatprimetb3</span>[<span class="no">i</span>],
-      <span class="no">lmscaled_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatslopeshatprimetb4</span>[<span class="no">i</span>],
-      <span class="no">lmscaled_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatslopeshatprimetb5</span>[<span class="no">i</span>],
-      <span class="no">lmscaled_se</span>[<span class="no">i</span>]
-    )
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_sehatslopeshatprimetb6</span>[<span class="no">i</span>],
-      <span class="no">lmscaled_se</span>[<span class="no">i</span>]
-    )
-  }
-})</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lmscaledobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">wages</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">race</span> <span class="op">+</span> <span class="va">union</span> <span class="op">+</span> <span class="va">education</span> <span class="op">+</span> <span class="va">experience</span>,
+  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">lmscaled_se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lmscaledobj</span><span class="op">)</span><span class="op">[[</span><span class="st">"coefficients"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span>, <span class="st">"Std. Error"</span><span class="op">]</span><span class="op">)</span>
+<span class="va">lmscaled_se</span> <span class="op">&lt;-</span> <span class="va">lmscaled_se</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_sehatbetahat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatbetahat1</span><span class="op">)</span>
+<span class="va">result_sehatbetahat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatbetahat2</span><span class="op">)</span>
+<span class="va">result_sehatbetahat3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatbetahat3</span><span class="op">)</span>
+<span class="va">result_sehatbetahatbiased1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatbetahatbiased1</span><span class="op">)</span>
+<span class="va">result_sehatbetahatbiased2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatbetahatbiased2</span><span class="op">)</span>
+<span class="va">result_sehatbetahatbiased3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatbetahatbiased3</span><span class="op">)</span>
+<span class="fu">context</span><span class="op">(</span><span class="st">"Test linreg-estimation-vcov"</span><span class="op">)</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"unbiased"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lm_se</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatbetahat1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lm_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatbetahat2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lm_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatbetahat3</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lm_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 😸</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"biased"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lm_se</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">result_sehatbetahatbiased1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">lm_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">result_sehatbetahatbiased2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">lm_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">result_sehatbetahatbiased3</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+      <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">lm_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🌈</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_sehatslopeshatprimetb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatslopeshatprimetb1</span><span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatslopeshatprimetb2</span><span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatslopeshatprimetb3</span><span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatslopeshatprimetb4</span><span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatslopeshatprimetb5</span><span class="op">)</span>
+<span class="va">result_sehatslopeshatprimetb6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">result_sehatslopeshatprimetb6</span><span class="op">)</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"sehatslopeshatprimetb"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">lmscaled_se</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatslopeshatprimetb1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lmscaled_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatslopeshatprimetb2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lmscaled_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatslopeshatprimetb3</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lmscaled_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatslopeshatprimetb4</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lmscaled_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatslopeshatprimetb5</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lmscaled_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_sehatslopeshatprimetb6</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">lmscaled_se</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🥇</span></code></pre></div>
 </div>
   </div>
 
@@ -311,7 +323,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

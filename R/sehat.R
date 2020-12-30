@@ -318,6 +318,7 @@ sehatslopeshatprimetb <- function(X,
   if (adjust) {
     n <- n - 3
   }
+  SigmaXhat <- as.matrix(SigmaXhat) # makes sure that it is a matrix even if it is a vector of length 1
   slopeshat <- as.vector(slopeshat)
   sigma2Xhat <- diag(SigmaXhat)
   diagSigmaXhatinverse <- diag(solve(SigmaXhat))

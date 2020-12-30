@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +100,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,17 +126,17 @@
     <p>Standard Errors of Standardized Estimates of Regression Coefficients (Yuan and Chan (2011))</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.sehatslopeshatprimedelta</span>(
-  <span class='no'>slopeshat</span>,
-  <span class='no'>sigma2hatepsilonhat</span>,
-  <span class='no'>SigmaXhat</span>,
-  <span class='no'>sigmayXhat</span>,
-  <span class='no'>sigma2yhat</span>,
-  <span class='kw'>adjust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>n</span>,
-  <span class='no'>X</span>,
-  <span class='no'>y</span>
-)</pre>
+    <pre class="usage"><span class='fu'>.sehatslopeshatprimedelta</span><span class='op'>(</span>
+  <span class='va'>slopeshat</span>,
+  <span class='va'>sigma2hatepsilonhat</span>,
+  <span class='va'>SigmaXhat</span>,
+  <span class='va'>sigmayXhat</span>,
+  <span class='va'>sigma2yhat</span>,
+  adjust <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>n</span>,
+  <span class='va'>X</span>,
+  <span class='va'>y</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,34 +235,38 @@ Biases and Standard Errors of Standardized Regression Coefficients.
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other standard errors of estimates of regression coefficients functions: 
-<code><a href='dot-sehatbetahatbiased.html'>.sehatbetahatbiased</a>()</code>,
-<code><a href='dot-sehatbetahat.html'>.sehatbetahat</a>()</code>,
-<code><a href='dot-sehatslopeshatprimetb.html'>.sehatslopeshatprimetb</a>()</code>,
+<code><a href='.sehatbetahatbiased.html'>.sehatbetahatbiased</a>()</code>,
+<code><a href='.sehatbetahat.html'>.sehatbetahat</a>()</code>,
+<code><a href='.sehatslopeshatprimetb.html'>.sehatslopeshatprimetb</a>()</code>,
 <code><a href='sehatbetahatbiased.html'>sehatbetahatbiased</a>()</code>,
 <code><a href='sehatbetahat.html'>sehatbetahat</a>()</code>,
 <code><a href='sehatslopeshatprimedelta.html'>sehatslopeshatprimedelta</a>()</code>,
 <code><a href='sehatslopeshatprimetb.html'>sehatslopeshatprimetb</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ivan Jacob Agaloos Pesigan</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>slopes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>3.0748755</span>, -<span class='fl'>1.5653133</span>, <span class='fl'>1.0959758</span>, <span class='fl'>1.3703010</span>, <span class='fl'>0.1666065</span>)
-<span class='no'>SigmaXhat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
-    <span class='fl'>0.25018672</span>, <span class='fl'>0.00779108</span>, -<span class='fl'>0.01626038</span>, -<span class='fl'>0.04424864</span>, -<span class='fl'>0.13217068</span>,
-    <span class='fl'>0.00779108</span>, <span class='fl'>0.12957466</span>, <span class='fl'>0.01061297</span>, -<span class='fl'>0.08818286</span>, -<span class='fl'>0.16427222</span>,
-    -<span class='fl'>0.016260378</span>, <span class='fl'>0.010612975</span>, <span class='fl'>0.133848763</span>, <span class='fl'>0.004083767</span>, <span class='fl'>0.658462191</span>,
-    -<span class='fl'>0.044248635</span>, -<span class='fl'>0.088182856</span>, <span class='fl'>0.004083767</span>, <span class='fl'>7.917601877</span>, -<span class='fl'>5.910469742</span>,
-    -<span class='fl'>0.1321707</span>, -<span class='fl'>0.1642722</span>, <span class='fl'>0.6584622</span>, -<span class='fl'>5.9104697</span>, <span class='fl'>136.0217584</span>
-  ),
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>
-)
-<span class='no'>sigma2hatepsilonhat</span> <span class='kw'>&lt;-</span> <span class='fl'>42.35584</span>
-<span class='no'>sigma2yhat</span> <span class='kw'>&lt;-</span> <span class='fl'>62.35235</span>
-<span class='no'>sigmayXhat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.8819639</span>, -<span class='fl'>0.3633559</span>, <span class='fl'>0.2953811</span>, <span class='fl'>10.1433433</span>, <span class='fl'>15.9481950</span>)
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>1289</span>
-<span class='fu'>.sehatslopeshatprimedelta</span>(
-  <span class='kw'>slopes</span> <span class='kw'>=</span> <span class='no'>slopes</span>, <span class='kw'>sigma2hatepsilonhat</span> <span class='kw'>=</span> <span class='no'>sigma2hatepsilonhat</span>,
-  <span class='kw'>SigmaXhat</span> <span class='kw'>=</span> <span class='no'>SigmaXhat</span>, <span class='kw'>sigma2yhat</span> <span class='kw'>=</span> <span class='no'>sigma2yhat</span>, <span class='kw'>sigmayXhat</span> <span class='kw'>=</span> <span class='no'>sigmayXhat</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='no'>n</span>
-)</div><div class='output co'>#&gt;      sehatslopeshatprime
+    <pre class="examples"><div class='input'><span class='va'>slopes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3.0748755</span>, <span class='op'>-</span><span class='fl'>1.5653133</span>, <span class='fl'>1.0959758</span>, <span class='fl'>1.3703010</span>, <span class='fl'>0.1666065</span><span class='op'>)</span>
+<span class='va'>SigmaXhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <span class='fl'>0.25018672</span>, <span class='fl'>0.00779108</span>, <span class='op'>-</span><span class='fl'>0.01626038</span>, <span class='op'>-</span><span class='fl'>0.04424864</span>, <span class='op'>-</span><span class='fl'>0.13217068</span>,
+    <span class='fl'>0.00779108</span>, <span class='fl'>0.12957466</span>, <span class='fl'>0.01061297</span>, <span class='op'>-</span><span class='fl'>0.08818286</span>, <span class='op'>-</span><span class='fl'>0.16427222</span>,
+    <span class='op'>-</span><span class='fl'>0.016260378</span>, <span class='fl'>0.010612975</span>, <span class='fl'>0.133848763</span>, <span class='fl'>0.004083767</span>, <span class='fl'>0.658462191</span>,
+    <span class='op'>-</span><span class='fl'>0.044248635</span>, <span class='op'>-</span><span class='fl'>0.088182856</span>, <span class='fl'>0.004083767</span>, <span class='fl'>7.917601877</span>, <span class='op'>-</span><span class='fl'>5.910469742</span>,
+    <span class='op'>-</span><span class='fl'>0.1321707</span>, <span class='op'>-</span><span class='fl'>0.1642722</span>, <span class='fl'>0.6584622</span>, <span class='op'>-</span><span class='fl'>5.9104697</span>, <span class='fl'>136.0217584</span>
+  <span class='op'>)</span>,
+  ncol <span class='op'>=</span> <span class='fl'>5</span>
+<span class='op'>)</span>
+<span class='va'>sigma2hatepsilonhat</span> <span class='op'>&lt;-</span> <span class='fl'>42.35584</span>
+<span class='va'>sigma2yhat</span> <span class='op'>&lt;-</span> <span class='fl'>62.35235</span>
+<span class='va'>sigmayXhat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.8819639</span>, <span class='op'>-</span><span class='fl'>0.3633559</span>, <span class='fl'>0.2953811</span>, <span class='fl'>10.1433433</span>, <span class='fl'>15.9481950</span><span class='op'>)</span>
+<span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fl'>1289</span>
+<span class='fu'>.sehatslopeshatprimedelta</span><span class='op'>(</span>
+  slopes <span class='op'>=</span> <span class='va'>slopes</span>, sigma2hatepsilonhat <span class='op'>=</span> <span class='va'>sigma2hatepsilonhat</span>,
+  SigmaXhat <span class='op'>=</span> <span class='va'>SigmaXhat</span>, sigma2yhat <span class='op'>=</span> <span class='va'>sigma2yhat</span>, sigmayXhat <span class='op'>=</span> <span class='va'>sigmayXhat</span>, n <span class='op'>=</span> <span class='va'>n</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt;      sehatslopeshatprime
 #&gt; [1,]          0.02282716
 #&gt; [2,]          0.02317122
 #&gt; [3,]          0.02342286
@@ -283,7 +287,7 @@ Biases and Standard Errors of Standardized Regression Coefficients.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

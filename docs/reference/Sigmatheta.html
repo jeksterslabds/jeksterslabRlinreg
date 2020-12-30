@@ -84,7 +84,7 @@ from parameters of a \(k\)-variable linear regression model." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -104,7 +104,7 @@ from parameters of a \(k\)-variable linear regression model." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,7 +133,7 @@ from parameters of a \(k\)-variable linear regression model." />
 from parameters of a \(k\)-variable linear regression model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Sigmatheta</span>(<span class='no'>slopes</span>, <span class='no'>sigma2epsilon</span>, <span class='no'>SigmaX</span>)</pre>
+    <pre class="usage"><span class='fu'>Sigmatheta</span><span class='op'>(</span><span class='va'>slopes</span>, <span class='va'>sigma2epsilon</span>, <span class='va'>SigmaX</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,15 +177,19 @@ variances and covariances of \({X}_{2}, {X}_{3}, \cdots, {X}_{k}\).</p></li>
 
     <div class='dont-index'><p>Other model-implied functions: 
 <code><a href='mutheta.html'>mutheta</a>()</code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ivan Jacob Agaloos Pesigan</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>slopes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.207648</span>, <span class='fl'>0.451039</span>)
-<span class='no'>sigma2epsilon</span> <span class='kw'>&lt;-</span> <span class='fl'>0.9310598</span>
-<span class='no'>SigmaX</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1.2934694</span>, <span class='fl'>0.4379592</span>, <span class='fl'>0.4379592</span>, <span class='fl'>1.0779592</span>),
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>
-)
-<span class='fu'>Sigmatheta</span>(<span class='kw'>slopes</span> <span class='kw'>=</span> <span class='no'>slopes</span>, <span class='kw'>sigma2epsilon</span> <span class='kw'>=</span> <span class='no'>sigma2epsilon</span>, <span class='kw'>SigmaX</span> <span class='kw'>=</span> <span class='no'>SigmaX</span>)</div><div class='output co'>#&gt;           [,1]      [,2]      [,3]
+    <pre class="examples"><div class='input'><span class='va'>slopes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.207648</span>, <span class='fl'>0.451039</span><span class='op'>)</span>
+<span class='va'>sigma2epsilon</span> <span class='op'>&lt;-</span> <span class='fl'>0.9310598</span>
+<span class='va'>SigmaX</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.2934694</span>, <span class='fl'>0.4379592</span>, <span class='fl'>0.4379592</span>, <span class='fl'>1.0779592</span><span class='op'>)</span>,
+  ncol <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span>
+<span class='fu'>Sigmatheta</span><span class='op'>(</span>slopes <span class='op'>=</span> <span class='va'>slopes</span>, sigma2epsilon <span class='op'>=</span> <span class='va'>sigma2epsilon</span>, SigmaX <span class='op'>=</span> <span class='va'>SigmaX</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;           [,1]      [,2]      [,3]
 #&gt; [1,] 1.2471452 0.4661230 0.4862016
 #&gt; [2,] 0.2685863 1.2934694 0.0000000
 #&gt; [3,] 0.5771430 0.4379592 1.0779592</div></pre>
@@ -204,7 +208,7 @@ variances and covariances of \({X}_{2}, {X}_{3}, \cdots, {X}_{k}\).</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -59,7 +59,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -73,13 +73,13 @@
 
       
 
-      </header><script src="test-simple-population-example_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><script src="test-simple-population-example_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tests: The Simple Linear Regression Model</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-08-29</h4>
+            <h4 class="date">2020-12-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-simple-population-example.Rmd"><code>vignettes/tests/test-simple-population-example.Rmd</code></a></small>
       <div class="hidden name"><code>test-simple-population-example.Rmd</code></div>
@@ -88,7 +88,8 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"># The Simple Linear Regression Model: The Population Regression Model Example {#simple-population-example}</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The Simple Linear Regression Model: The Population Regression Model Example {#simple-population-example}</span></code></pre></div>
 <p>The <code>jeksterslabRlinreg</code> package has functions to derive expectations for regression models.</p>
 <ul>
 <li>
@@ -129,14 +130,14 @@
 <td align="left"><code>beta1</code></td>
 <td align="left">Intercept</td>
 <td align="left"><span class="math inline">\(\beta_1\)</span></td>
-<td align="right">-5.890746</td>
+<td align="right">-4.119577</td>
 </tr>
 <tr class="even">
 <td align="left"><code>mux</code></td>
 <td align="left">Mean of <span class="math inline">\(x\)</span>
 </td>
 <td align="left"><span class="math inline">\(\mu_x\)</span></td>
-<td align="right">12.990001</td>
+<td align="right">13.137516</td>
 </tr>
 </tbody>
 </table>
@@ -153,30 +154,31 @@
 <td align="left"><code>beta2</code></td>
 <td align="left">Slope</td>
 <td align="left"><span class="math inline">\(\beta_2\)</span></td>
-<td align="right">1.378967</td>
+<td align="right">1.249177</td>
 </tr>
 <tr class="even">
 <td align="left"><code>sigma2epsilon</code></td>
 <td align="left">Variance of <span class="math inline">\(\varepsilon\)</span>
 </td>
 <td align="left"><span class="math inline">\(\sigma_{\varepsilon}^{2}\)</span></td>
-<td align="right">49.652867</td>
+<td align="right">50.442669</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>sigma2x</code></td>
 <td align="left">Variance of <span class="math inline">\(x\)</span>
 </td>
 <td align="left"><span class="math inline">\(\sigma_{x}^{2}\)</span></td>
-<td align="right">7.330517</td>
+<td align="right">8.185725</td>
 </tr>
 </tbody>
 </table>
-<p>There are times when the intercept does not lend to a meaningful interpretation. A negative wage corresponding to zero years of education does not really make a lot of sense. The value that is interesting in this case is the slope. The slope represents 1.3789666 US dollar increase in hourly wages given 1 additional year of education.</p>
+<p>There are times when the intercept does not lend to a meaningful interpretation. A negative wage corresponding to zero years of education does not really make a lot of sense. The value that is interesting in this case is the slope. The slope represents 1.2491767 US dollar increase in hourly wages given 1 additional year of education.</p>
 <p>The expected values are derived using <code><a href="../../reference/mutheta.html">jeksterslabRlinreg::mutheta()</a></code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">result_mutheta</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/mutheta.html">mutheta</a></span>(
-  <span class="kw">beta</span> <span class="kw">=</span> <span class="no">beta</span>,
-  <span class="kw">muX</span> <span class="kw">=</span> <span class="no">mux</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_mutheta</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/mutheta.html">mutheta</a></span><span class="op">(</span>
+  beta <span class="op">=</span> <span class="va">beta</span>,
+  muX <span class="op">=</span> <span class="va">mux</span>
+<span class="op">)</span></code></pre></div>
 <table class="table">
 <caption>Expected Values</caption>
 <thead><tr class="header">
@@ -186,20 +188,21 @@
 <tbody>
 <tr class="odd">
 <td align="left">y</td>
-<td align="right">12.02203</td>
+<td align="right">12.29150</td>
 </tr>
 <tr class="even">
 <td align="left">x</td>
-<td align="right">12.99000</td>
+<td align="right">13.13752</td>
 </tr>
 </tbody>
 </table>
 <p>The covariance expectations are derive using <code><a href="../../reference/Sigmatheta.html">jeksterslabRlinreg::Sigmatheta()</a></code>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">result_Sigmatheta</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/Sigmatheta.html">Sigmatheta</a></span>(
-  <span class="kw">slopes</span> <span class="kw">=</span> <span class="no">beta2</span>,
-  <span class="kw">sigma2epsilon</span> <span class="kw">=</span> <span class="no">sigma2epsilon</span>,
-  <span class="kw">SigmaX</span> <span class="kw">=</span> <span class="no">sigma2x</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_Sigmatheta</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/Sigmatheta.html">Sigmatheta</a></span><span class="op">(</span>
+  slopes <span class="op">=</span> <span class="va">beta2</span>,
+  sigma2epsilon <span class="op">=</span> <span class="va">sigma2epsilon</span>,
+  SigmaX <span class="op">=</span> <span class="va">sigma2x</span>
+<span class="op">)</span></code></pre></div>
 <table class="table">
 <caption>Covariance Expectations</caption>
 <thead><tr class="header">
@@ -210,116 +213,126 @@
 <tbody>
 <tr class="odd">
 <td align="left">y</td>
-<td align="right">63.59220</td>
-<td align="right">10.108538</td>
+<td align="right">63.21602</td>
+<td align="right">10.225417</td>
 </tr>
 <tr class="even">
 <td align="left">x</td>
-<td align="right">10.10854</td>
-<td align="right">7.330517</td>
+<td align="right">10.22542</td>
+<td align="right">8.185725</td>
 </tr>
 </tbody>
 </table>
 <p>The inverse, that is, deriving the parameters from the expectations can also be done using functions from the <code>jeksterslabRlinreg</code> package.</p>
 <p>The regression coefficients can be derived using <code><a href="../../reference/intercept.html">jeksterslabRlinreg::intercept()</a></code>, and <code><a href="../../reference/slopes.html">jeksterslabRlinreg::slopes()</a></code> from the means and the covariances.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">result_slopes</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/dot-slopes.html">.slopes</a></span>(
-  <span class="kw">SigmaX</span> <span class="kw">=</span> <span class="no">sigma2x</span>,
-  <span class="kw">sigmayX</span> <span class="kw">=</span> <span class="no">sigmayx</span>
-)
-<span class="no">result_slopes</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_slopes</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/.slopes.html">.slopes</a></span><span class="op">(</span>
+  SigmaX <span class="op">=</span> <span class="va">sigma2x</span>,
+  sigmayX <span class="op">=</span> <span class="va">sigmayx</span>
+<span class="op">)</span>
+<span class="va">result_slopes</span>
 <span class="co">#&gt;        slopes</span>
-<span class="co">#&gt; [1,] 1.378967</span>
-<span class="no">result_intercept</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/dot-intercept.html">.intercept</a></span>(
-  <span class="kw">slopes</span> <span class="kw">=</span> <span class="no">result_slopes</span>,
-  <span class="kw">muy</span> <span class="kw">=</span> <span class="no">muy</span>,
-  <span class="kw">muX</span> <span class="kw">=</span> <span class="no">mux</span>
-)
-<span class="no">result_intercept</span>
-<span class="co">#&gt; [1] -5.890746</span></pre></body></html></div>
+<span class="co">#&gt; [1,] 1.249177</span>
+<span class="va">result_intercept</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/.intercept.html">.intercept</a></span><span class="op">(</span>
+  slopes <span class="op">=</span> <span class="va">result_slopes</span>,
+  muy <span class="op">=</span> <span class="va">muy</span>,
+  muX <span class="op">=</span> <span class="va">mux</span>
+<span class="op">)</span>
+<span class="va">result_intercept</span>
+<span class="co">#&gt; [1] -4.119577</span></code></pre></div>
 <p>From raw data</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">result_slopesfromrawdata</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/slopes.html">slopes</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_slopesfromrawdata</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_slopesfromrawdata</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/slopes.html">slopes</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_slopesfromrawdata</span>
 <span class="co">#&gt;             slopes</span>
-<span class="co">#&gt; education 1.378967</span>
-<span class="no">result_interceptfromrawdata</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/intercept.html">intercept</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_interceptfromrawdata</span>
+<span class="co">#&gt; education 1.249177</span>
+<span class="va">result_interceptfromrawdata</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/intercept.html">intercept</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_interceptfromrawdata</span>
 <span class="co">#&gt;     wages </span>
-<span class="co">#&gt; -5.890746</span></pre></body></html></div>
+<span class="co">#&gt; -4.119577</span></code></pre></div>
 <p>Standardized slopes can also be obtained using <code><a href="../../reference/slopesprime.html">jeksterslabRlinreg::slopesprime()</a></code></p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">result_slopesprime</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/dot-slopesprime.html">.slopesprime</a></span>(
-  <span class="kw">RX</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="no">sigma2x</span>),
-  <span class="kw">ryX</span> <span class="kw">=</span> <span class="no">ryx</span>
-)
-<span class="no">result_slopesprime</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_slopesprime</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/.slopesprime.html">.slopesprime</a></span><span class="op">(</span>
+  RX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2x</span><span class="op">)</span>,
+  ryX <span class="op">=</span> <span class="va">ryx</span>
+<span class="op">)</span>
+<span class="va">result_slopesprime</span>
 <span class="co">#&gt;      std.slopes</span>
-<span class="co">#&gt; [1,]  0.1729226</span></pre></body></html></div>
+<span class="co">#&gt; [1,]  0.1571123</span></code></pre></div>
 <p>From raw data</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">result_slopesprimefromrawdata</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRlinreg</span><span class="kw ns">::</span><span class="fu"><a href="../../reference/slopesprime.html">slopesprime</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_slopesprimefromrawdata</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_slopesprimefromrawdata</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRlinreg</span><span class="fu">::</span><span class="fu"><a href="../../reference/slopesprime.html">slopesprime</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_slopesprimefromrawdata</span>
 <span class="co">#&gt;           std.slopes</span>
-<span class="co">#&gt; education  0.4681867</span></pre></body></html></div>
+<span class="co">#&gt; education  0.4495095</span></code></pre></div>
 <p>The error variance can also be derived with the available information using <code>jeksterslabRlinreg::sigma2()</code> .</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">result_sigma2epsilon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sigma2epsilon.html">sigma2epsilon</a></span>(
-  <span class="kw">slopes</span> <span class="kw">=</span> <span class="no">beta2</span>,
-  <span class="kw">sigma2y</span> <span class="kw">=</span> <span class="no">sigma2y</span>,
-  <span class="kw">sigmayX</span> <span class="kw">=</span> <span class="no">sigmayx</span>,
-  <span class="kw">SigmaX</span> <span class="kw">=</span> <span class="no">sigma2x</span>
-)
-<span class="no">result_sigma2epsilon</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_sigma2epsilon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sigma2epsilon.html">sigma2epsilon</a></span><span class="op">(</span>
+  slopes <span class="op">=</span> <span class="va">beta2</span>,
+  sigma2y <span class="op">=</span> <span class="va">sigma2y</span>,
+  sigmayX <span class="op">=</span> <span class="va">sigmayx</span>,
+  SigmaX <span class="op">=</span> <span class="va">sigma2x</span>
+<span class="op">)</span>
+<span class="va">result_sigma2epsilon</span>
 <span class="co">#&gt;          </span>
-<span class="co">#&gt; 49.65287</span></pre></body></html></div>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">"Test simple-regression-ram"</span>)
-<span class="fu">test_that</span>(<span class="st">"result_mutheta"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">result_mutheta</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">result_mutheta</span>[<span class="no">i</span>, <span class="fl">1</span>],
-      <span class="no">mutheta</span>[<span class="no">i</span>, <span class="fl">1</span>]
-    )
-  }
-})
-<span class="fu">test_that</span>(<span class="st">"result_Sigmatheta"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">result_Sigmatheta</span>)) {
-    <span class="kw">for</span> (<span class="no">j</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">result_Sigmatheta</span>)) {
-      <span class="fu">expect_equivalent</span>(
-        <span class="no">result_Sigmatheta</span>[<span class="no">i</span>, <span class="no">j</span>],
-        <span class="no">Sigmatheta</span>[<span class="no">i</span>, <span class="no">j</span>]
-      )
-    }
-  }
-})
-<span class="fu">test_that</span>(<span class="st">"results_beta"</span>, {
-  <span class="no">results_beta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-    <span class="no">result_intercept</span>,
-    <span class="no">result_slopes</span>
-  )
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">results_beta</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">results_beta</span>[<span class="no">i</span>],
-      <span class="no">beta</span>[<span class="no">i</span>]
-    )
-  }
-})
-<span class="fu">test_that</span>(<span class="st">"results_betafromrawdata"</span>, {
-  <span class="no">results_betafromrawdata</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-    <span class="no">result_interceptfromrawdata</span>,
-    <span class="no">result_slopesfromrawdata</span>
-  )
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">results_betafromrawdata</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">results_betafromrawdata</span>[<span class="no">i</span>],
-      <span class="no">beta</span>[<span class="no">i</span>]
-    )
-  }
-})</pre></body></html></div>
+<span class="co">#&gt; 50.44267</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">context</span><span class="op">(</span><span class="st">"Test simple-regression-ram"</span><span class="op">)</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"result_mutheta"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">result_mutheta</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">result_mutheta</span><span class="op">[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">]</span>,
+      <span class="va">mutheta</span><span class="op">[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🥳</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"result_Sigmatheta"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">result_Sigmatheta</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">result_Sigmatheta</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu">expect_equivalent</span><span class="op">(</span>
+        <span class="va">result_Sigmatheta</span><span class="op">[</span><span class="va">i</span>, <span class="va">j</span><span class="op">]</span>,
+        <span class="va">Sigmatheta</span><span class="op">[</span><span class="va">i</span>, <span class="va">j</span><span class="op">]</span>
+      <span class="op">)</span>
+    <span class="op">}</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🌈</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"results_beta"</span>, <span class="op">{</span>
+  <span class="va">results_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="va">result_intercept</span>,
+    <span class="va">result_slopes</span>
+  <span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">results_beta</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">results_beta</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">beta</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🥇</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"results_betafromrawdata"</span>, <span class="op">{</span>
+  <span class="va">results_betafromrawdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="va">result_interceptfromrawdata</span>,
+    <span class="va">result_slopesfromrawdata</span>
+  <span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">results_betafromrawdata</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">results_betafromrawdata</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+      <span class="va">beta</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 😀</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -335,7 +348,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -248,3 +248,7 @@ descriptives <- function(X,
     )
   )
 }
+
+A <- function(X) {
+  crossprod(X) / dim(X)[[1]]
+}

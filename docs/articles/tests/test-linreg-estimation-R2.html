@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -59,7 +59,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -73,13 +73,13 @@
 
       
 
-      </header><script src="test-linreg-estimation-R2_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><script src="test-linreg-estimation-R2_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tests: The Linear Regression Model (Coefficient of Determination)</h1>
                         <h4 class="author">Ivan Jacob Agaloos Pesigan</h4>
             
-            <h4 class="date">2020-08-29</h4>
+            <h4 class="date">2020-12-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/blob/master/vignettes/tests/test-linreg-estimation-R2.Rmd"><code>vignettes/tests/test-linreg-estimation-R2.Rmd</code></a></small>
       <div class="hidden name"><code>test-linreg-estimation-R2.Rmd</code></div>
@@ -88,16 +88,18 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"># The Linear Regression Model: Coefficient of Determination {#linreg-estimation-R2-example}</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The Linear Regression Model: Coefficient of Determination {#linreg-estimation-R2-example}</span></code></pre></div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
 <p>See <code><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">jeksterslabRdatarepo::wages.matrix()</a></code> for the data set used in this example.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">X</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"X"</span>]]
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="op">[[</span><span class="st">"X"</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># age is removed</span>
-<span class="no">X</span> <span class="kw">&lt;-</span> <span class="no">X</span>[, -<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)]
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="kw">[[</span><span class="st">"y"</span>]]
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">X</span>)
+<span class="va">X</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">]</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html">wages.matrix</a></span><span class="op">[[</span><span class="st">"y"</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>
 <span class="co">#&gt;      constant gender race union education experience</span>
 <span class="co">#&gt; [1,]        1      1    0     0        12         20</span>
 <span class="co">#&gt; [2,]        1      0    0     0         9          9</span>
@@ -105,163 +107,169 @@
 <span class="co">#&gt; [4,]        1      0    1     1        14         38</span>
 <span class="co">#&gt; [5,]        1      1    1     0        16         19</span>
 <span class="co">#&gt; [6,]        1      1    0     0        12          4</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">y</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
 <span class="co">#&gt;      wages</span>
 <span class="co">#&gt; [1,] 11.55</span>
 <span class="co">#&gt; [2,]  5.00</span>
 <span class="co">#&gt; [3,] 12.00</span>
 <span class="co">#&gt; [4,]  7.00</span>
 <span class="co">#&gt; [5,] 21.15</span>
-<span class="co">#&gt; [6,]  6.92</span></pre></body></html></div>
+<span class="co">#&gt; [6,]  6.92</span></code></pre></div>
 </div>
 <div id="r2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#r2" class="anchor"></a><span class="math inline">\(R^{2}\)</span>
 </h2>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">RSS</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/RSS.html">RSS</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">ESS</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/ESS.html">ESS</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">TSS</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/TSS.html">TSS</a></span>(
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">epsilonhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/epsilonhat.html">epsilonhat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">betahat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/betahat.html">betahat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">yhat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/yhat.html">yhat</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">ybar</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">y</span>)
-<span class="no">R2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/R2.html">R2</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">n</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">X</span>)
-<span class="no">k</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">X</span>)
-<span class="no">result_R21</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromRSS.html">.R2fromRSS</a></span>(
-  <span class="kw">RSS</span> <span class="kw">=</span> <span class="no">RSS</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_R22</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromRSS.html">.R2fromRSS</a></span>(
-  <span class="kw">TSS</span> <span class="kw">=</span> <span class="no">TSS</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_R23</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromRSS.html">.R2fromRSS</a></span>(
-  <span class="kw">RSS</span> <span class="kw">=</span> <span class="no">RSS</span>,
-  <span class="kw">TSS</span> <span class="kw">=</span> <span class="no">TSS</span>
-)
-<span class="no">result_R24</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromRSS.html">.R2fromRSS</a></span>(
-  <span class="kw">RSS</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-  <span class="kw">TSS</span> <span class="kw">=</span> <span class="kw">NULL</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">RSS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/RSS.html">RSS</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">ESS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/ESS.html">ESS</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">TSS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/TSS.html">TSS</a></span><span class="op">(</span>
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">epsilonhat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/epsilonhat.html">epsilonhat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">betahat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/betahat.html">betahat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">yhat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/yhat.html">yhat</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">ybar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>
+<span class="va">R2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/R2.html">R2</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>
+<span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>
+<span class="va">result_R21</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromRSS.html">.R2fromRSS</a></span><span class="op">(</span>
+  RSS <span class="op">=</span> <span class="va">RSS</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_R22</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromRSS.html">.R2fromRSS</a></span><span class="op">(</span>
+  TSS <span class="op">=</span> <span class="va">TSS</span>,
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_R23</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromRSS.html">.R2fromRSS</a></span><span class="op">(</span>
+  RSS <span class="op">=</span> <span class="va">RSS</span>,
+  TSS <span class="op">=</span> <span class="va">TSS</span>
+<span class="op">)</span>
+<span class="va">result_R24</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromRSS.html">.R2fromRSS</a></span><span class="op">(</span>
+  RSS <span class="op">=</span> <span class="cn">NULL</span>,
+  TSS <span class="op">=</span> <span class="cn">NULL</span>,
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
 
 
 
 
-<span class="no">result_R25</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromESS.html">.R2fromESS</a></span>(
-  <span class="kw">ESS</span> <span class="kw">=</span> <span class="no">ESS</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_R26</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromESS.html">.R2fromESS</a></span>(
-  <span class="kw">TSS</span> <span class="kw">=</span> <span class="no">TSS</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_R27</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromESS.html">.R2fromESS</a></span>(
-  <span class="kw">ESS</span> <span class="kw">=</span> <span class="no">ESS</span>,
-  <span class="kw">TSS</span> <span class="kw">=</span> <span class="no">TSS</span>
-)
-<span class="no">result_R28</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-R2fromESS.html">.R2fromESS</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_R29</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/R2.html">R2</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-  <span class="kw">fromRSS</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-)
-<span class="no">result_R210</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/R2.html">R2</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-  <span class="kw">fromRSS</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)</pre></body></html></div>
+<span class="va">result_R25</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromESS.html">.R2fromESS</a></span><span class="op">(</span>
+  ESS <span class="op">=</span> <span class="va">ESS</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_R26</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromESS.html">.R2fromESS</a></span><span class="op">(</span>
+  TSS <span class="op">=</span> <span class="va">TSS</span>,
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_R27</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromESS.html">.R2fromESS</a></span><span class="op">(</span>
+  ESS <span class="op">=</span> <span class="va">ESS</span>,
+  TSS <span class="op">=</span> <span class="va">TSS</span>
+<span class="op">)</span>
+<span class="va">result_R28</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.R2fromESS.html">.R2fromESS</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_R29</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/R2.html">R2</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>,
+  fromRSS <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+<span class="va">result_R210</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/R2.html">R2</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>,
+  fromRSS <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="barr2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#barr2" class="anchor"></a><span class="math inline">\(\bar{R}^{2}\)</span>
 </h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">result_Rbar21</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-Rbar2.html">.Rbar2</a></span>(
-  <span class="kw">R2</span> <span class="kw">=</span> <span class="no">R2</span>,
-  <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
-  <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>
-)
-<span class="no">result_Rbar22</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-Rbar2.html">.Rbar2</a></span>(
-  <span class="kw">R2</span> <span class="kw">=</span> <span class="no">R2</span>,
-  <span class="kw">n</span> <span class="kw">=</span> <span class="no">n</span>,
-  <span class="kw">k</span> <span class="kw">=</span> <span class="no">k</span>,
-  <span class="kw">fromRSS</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)
-<span class="no">result_Rbar23</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-Rbar2.html">.Rbar2</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)
-<span class="no">result_Rbar24</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/dot-Rbar2.html">.Rbar2</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>,
-  <span class="kw">fromRSS</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)
-<span class="no">result_Rbar25</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/Rbar2.html">Rbar2</a></span>(
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>,
-  <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_Rbar21</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.Rbar2.html">.Rbar2</a></span><span class="op">(</span>
+  R2 <span class="op">=</span> <span class="va">R2</span>,
+  n <span class="op">=</span> <span class="va">n</span>,
+  k <span class="op">=</span> <span class="va">k</span>
+<span class="op">)</span>
+<span class="va">result_Rbar22</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.Rbar2.html">.Rbar2</a></span><span class="op">(</span>
+  R2 <span class="op">=</span> <span class="va">R2</span>,
+  n <span class="op">=</span> <span class="va">n</span>,
+  k <span class="op">=</span> <span class="va">k</span>,
+  fromRSS <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
+<span class="va">result_Rbar23</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.Rbar2.html">.Rbar2</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span>
+<span class="va">result_Rbar24</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/.Rbar2.html">.Rbar2</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>,
+  fromRSS <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
+<span class="va">result_Rbar25</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/Rbar2.html">Rbar2</a></span><span class="op">(</span>
+  X <span class="op">=</span> <span class="va">X</span>,
+  y <span class="op">=</span> <span class="va">y</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="lm-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lm-function" class="anchor"></a><code>lm()</code> function</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">lmobj</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(
-  <span class="no">wages</span> ~ <span class="no">gender</span> + <span class="no">race</span> + <span class="no">union</span> + <span class="no">education</span> + <span class="no">experience</span>,
-  <span class="kw">data</span> <span class="kw">=</span> <span class="kw pkg">jeksterslabRdatarepo</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
-)
-<span class="no">lm_R2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lmobj</span>)$<span class="no">r.squared</span>
-<span class="no">lm_Rbar2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">lmobj</span>)$<span class="no">adj.r.squared</span></pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">result_R2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-  <span class="no">result_R21</span>, <span class="no">result_R22</span>, <span class="no">result_R23</span>, <span class="no">result_R24</span>, <span class="no">result_R25</span>,
-  <span class="no">result_R26</span>, <span class="no">result_R27</span>, <span class="no">result_R28</span>, <span class="no">result_R29</span>, <span class="no">result_R210</span>
-)
-<span class="no">result_Rbar2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-  <span class="no">result_Rbar21</span>, <span class="no">result_Rbar22</span>, <span class="no">result_Rbar23</span>,
-  <span class="no">result_Rbar24</span>, <span class="no">result_Rbar25</span>
-)
-<span class="fu">context</span>(<span class="st">"Test linreg-estimation-R2."</span>)
-<span class="fu">test_that</span>(<span class="st">"R2"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_R2</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_R2</span>,
-      <span class="no">result_R2</span>[<span class="no">i</span>]
-    )
-  }
-})
-<span class="fu">test_that</span>(<span class="st">"Rbar2"</span>, {
-  <span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">result_Rbar2</span>)) {
-    <span class="fu">expect_equivalent</span>(
-      <span class="no">lm_Rbar2</span>,
-      <span class="no">result_Rbar2</span>[<span class="no">i</span>]
-    )
-  }
-})</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lmobj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">wages</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">race</span> <span class="op">+</span> <span class="va">union</span> <span class="op">+</span> <span class="va">education</span> <span class="op">+</span> <span class="va">experience</span>,
+  data <span class="op">=</span> <span class="fu">jeksterslabRdatarepo</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.html">wages</a></span>
+<span class="op">)</span>
+<span class="va">lm_R2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lmobj</span><span class="op">)</span><span class="op">$</span><span class="va">r.squared</span>
+<span class="va">lm_Rbar2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lmobj</span><span class="op">)</span><span class="op">$</span><span class="va">adj.r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result_R2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="va">result_R21</span>, <span class="va">result_R22</span>, <span class="va">result_R23</span>, <span class="va">result_R24</span>, <span class="va">result_R25</span>,
+  <span class="va">result_R26</span>, <span class="va">result_R27</span>, <span class="va">result_R28</span>, <span class="va">result_R29</span>, <span class="va">result_R210</span>
+<span class="op">)</span>
+<span class="va">result_Rbar2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="va">result_Rbar21</span>, <span class="va">result_Rbar22</span>, <span class="va">result_Rbar23</span>,
+  <span class="va">result_Rbar24</span>, <span class="va">result_Rbar25</span>
+<span class="op">)</span>
+<span class="fu">context</span><span class="op">(</span><span class="st">"Test linreg-estimation-R2."</span><span class="op">)</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"R2"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">result_R2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_R2</span>,
+      <span class="va">result_R2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🌈</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"Rbar2"</span>, <span class="op">{</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">result_Rbar2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span>
+      <span class="va">lm_Rbar2</span>,
+      <span class="va">result_Rbar2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+    <span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; Test passed 🎉</span></code></pre></div>
 </div>
   </div>
 
@@ -280,7 +288,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

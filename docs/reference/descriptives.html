@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +100,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jeksterslabds/jeksterslabRlinreg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,16 +126,16 @@
     <p>Descriptive Statistics</p>
     </div>
 
-    <pre class="usage"><span class='fu'>descriptives</span>(
-  <span class='no'>X</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>varnamesX</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>varnamey</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>moments</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cor</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>mardia</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>descriptives</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>y</span>,
+  varnamesX <span class='op'>=</span> <span class='cn'>NULL</span>,
+  varnamey <span class='op'>=</span> <span class='cn'>NULL</span>,
+  plot <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  moments <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  cor <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  mardia <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,7 +188,7 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a list with the following elements:</p><dl'>
+    <p>Returns a list with the following elements:</p><dl>
 <dt>X</dt><dd><p>\(n \times k\) matrix of \(n\) observations of \(k\) regressors, which includes a regressor whose value is 1 for each observation on the first column.</p></dd>
 <dt>y</dt><dd><p>\(n \times 1\) matrix of observations on the regressand variable.</p></dd>
 <dt>data</dt><dd><p>\(n \times k\) matrix with the following columns \(y, X_2, X_3, \cdots, X_k\).</p></dd>
@@ -219,13 +219,17 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 
 </dl>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ivan Jacob Agaloos Pesigan</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Simple regression------------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>))]
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"y"</span>]]
-<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>descriptives</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"y"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>descriptives</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Central Moments:
 #&gt;           Mean       SD  Skewness   Kurtosis
 #&gt; wages 12.36585  7.89635 1.8502679  4.8600481
@@ -242,7 +246,8 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 #&gt; Correlations:
 #&gt;           wages       age
 #&gt; wages 1.0000000 0.2874694
-#&gt; age   0.2874694 1.0000000</div><div class='img'><img src='descriptives-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; List of 27
+#&gt; age   0.2874694 1.0000000</div><div class='img'><img src='descriptives-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>out</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 27
 #&gt;  $ X         : num [1:1289, 1:2] 1 1 1 1 1 1 1 1 1 1 ...
 #&gt;   ..- attr(*, "dimnames")=List of 2
 #&gt;   .. ..$ : NULL
@@ -311,10 +316,11 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 #&gt;  $ mardiahat : Named num [1:10] 3.88 832.52 1 834.46 4 ...
 #&gt;   ..- attr(*, "names")= chr [1:10] "b1" "b1.chisq" "b1.correction" "b1.chisq.corrected" ...</div><div class='input'>
 <span class='co'># Multiple regression----------------------------------------------</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jeksterslabRdatarepo</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='kw'>[[</span><span class='st'>"X"</span>]]
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>jeksterslabRdatarepo</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/jeksterslabRdatarepo/man/wages.matrix.html'>wages.matrix</a></span><span class='op'>[[</span><span class='st'>"X"</span><span class='op'>]</span><span class='op'>]</span>
 <span class='co'># age is removed</span>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='no'>X</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)]
-<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'>descriptives</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)</div><div class='output co'>#&gt; 
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='va'>X</span><span class='op'>[</span>, <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>descriptives</span><span class='op'>(</span>X <span class='op'>=</span> <span class='va'>X</span>, y <span class='op'>=</span> <span class='va'>y</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Central Moments:
 #&gt;                  Mean         SD    Skewness   Kurtosis
 #&gt; wages      12.3658495  7.8963503  1.85026794  4.8600481
@@ -346,7 +352,8 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 #&gt; race       -0.03912910
 #&gt; union       0.15431902
 #&gt; education  -0.18010301
-#&gt; experience  1.00000000</div><div class='img'><img src='descriptives-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>out</span>)</div><div class='output co'>#&gt; List of 27
+#&gt; experience  1.00000000</div><div class='img'><img src='descriptives-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>out</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 27
 #&gt;  $ X         : num [1:1289, 1:6] 1 1 1 1 1 1 1 1 1 1 ...
 #&gt;   ..- attr(*, "dimnames")=List of 2
 #&gt;   .. ..$ : NULL
@@ -427,7 +434,7 @@ Estimate Mardia's multivariate skewness and kurtosis.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
